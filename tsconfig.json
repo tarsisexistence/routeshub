@@ -16,6 +16,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "routeshub": [
+        "dist/routeshub"
+      ],
+      "routeshub/*": [
+        "dist/routeshub/*"
+      ]
+    }
   }
 }
