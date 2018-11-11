@@ -1,6 +1,14 @@
 {
   "name": "routeshub",
+  "description": "A minimal unit to simplify your routes business",
   "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maktarsis/routeshub.git"
+  },
+  "bugs": "https://github.com/maktarsis/routeshub/issues",
+  "homepage": "https://github.com/maktarsis/routeshub/blob/master/README.md",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +16,6 @@
     "test": "ng test",
     "lint": "ng lint"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~7.0.0",
     "@angular/common": "~7.0.0",
@@ -47,6 +54,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "lint-staged": "^8.0.4",
     "ng-packagr": "^4.2.0",
+    "prettier": "^1.15.2",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tsickle": ">=0.29.0",
@@ -54,5 +62,18 @@
     "tslint": "~5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "typescript": "~3.1.1"
-  }
+  },
+  "keywords": [
+    "angular",
+    "routes",
+    "routes state",
+    "routes entity",
+    "routes hub",
+    "routing",
+    "compodoc",
+    "state",
+    "store",
+    "typescript",
+    "javascript"
+  ]
 }
