@@ -1,19 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-routeshub',
+  selector: 'rh-root',
   template: `
-    <p>
-      routeshub works!
-    </p>
+    <p>routeshub works!</p>
   `,
   styles: []
 })
 export class RouteshubComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  public ngOnInit(): void {}
 }

@@ -3,8 +3,7 @@ import { RouteshubComponent } from './routeshub.component';
 
 @NgModule({
   declarations: [RouteshubComponent],
-  imports: [
-  ],
+  imports: [],
   exports: [RouteshubComponent]
 })
-export class RouteshubModule { }
+export class RouteshubModule {}
