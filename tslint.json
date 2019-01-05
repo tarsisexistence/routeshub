@@ -61,6 +61,7 @@
       "spaces"
     ],
     "interface-over-type-literal": true,
+    "interface-name": false,
     "jsdoc-format": true,
     "label-position": true,
     "max-line-length": [
@@ -122,7 +123,8 @@
       "ignore-params"
     ],
     "no-misused-new": true,
-    "no-non-null-assertion": true,
+    "no-null-keyword": false,
+    "no-non-null-assertion": false,
     "no-shadowed-variable": true,
     "no-submodule-imports": false,
     "no-string-literal": false,
@@ -149,10 +151,7 @@
     "no-dynamic-delete": true,
     "no-output-on-prefix": true,
     "no-implicit-dependencies": false,
-    "no-invalid-this": [
-      true,
-      "check-function-in-method"
-    ],
+    "no-invalid-this": false,
     "no-invalid-template-strings": true,
     "no-input-rename": true,
     "no-output-rename": true,
@@ -194,7 +193,7 @@
     ],
     "prefer-conditional-expression": true,
     "prefer-const": true,
-    "prefer-method-signature": true,
+    "prefer-method-signature": false,
     "prefer-object-spread": true,
     "prefer-template": true,
     "prefer-while": true,
@@ -220,7 +219,7 @@
         "constructor": "never"
       }
     ],
-    "space-within-parens": 1,
+    "space-within-parens": [true, 0],
     "trailing-comma": [
       true,
       {
