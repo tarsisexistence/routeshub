@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+/* tslint:disable:i18n */
 @Component({
   selector: 'rh-root',
   template: `
