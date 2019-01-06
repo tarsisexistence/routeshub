@@ -1,8 +1,12 @@
 <nz-header>
   <div class="logo"></div>
-  <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-    <li nz-menu-item>nav 1</li>
-    <li nz-menu-item>nav 2</li>
-    <li nz-menu-item>nav 3</li>
+  <ul class="menu"
+      nz-menu
+      [nzTheme]="'dark'"
+      [nzMode]="'horizontal'">
+    <li nz-menu-item [routerLink]="['about']">About</li>
+    <li nz-menu-item [routerLink]="['automobiles']">Automobiles</li>
+    <li nz-menu-item [routerLink]="['bikes']">Bikes</li>
+    <li nz-menu-item [routerLink]="['bolids']">Bolids</li>
   </ul>
 </nz-header>
