@@ -149,6 +149,7 @@
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-dynamic-delete": true,
+    "no-object-literal-type-assertion": false,
     "no-output-on-prefix": true,
     "no-implicit-dependencies": false,
     "no-invalid-this": false,
