@@ -39,8 +39,8 @@
       }
     },
     "integration": {
-      "root": "./integration",
-      "sourceRoot": "./integration/src",
+      "root": "",
+      "sourceRoot": "integration",
       "projectType": "application",
       "prefix": "integration",
       "schematics": {
@@ -60,10 +60,16 @@
             "tsConfig": "integration/tsconfig.app.json",
             "assets": [
               "integration/favicon.ico",
-              "integration/assets"
+              "integration/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "integration/styles.scss"
+              "integration/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },
@@ -119,12 +125,18 @@
             "tsConfig": "integration/tsconfig.spec.json",
             "karmaConfig": "integration/karma.conf.js",
             "styles": [
-              "integration/styles.scss"
+              "integration/styles.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [],
             "assets": [
               "integration/favicon.ico",
-              "integration/assets"
+              "integration/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ]
           }
         },
@@ -143,5 +155,5 @@
       }
     }
   },
-  "defaultProject": "routeshub"
+  "defaultProject": "integration"
 }
