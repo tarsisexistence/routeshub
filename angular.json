@@ -42,7 +42,7 @@
       "root": "",
       "sourceRoot": "integration",
       "projectType": "application",
-      "prefix": "integration",
+      "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss",
