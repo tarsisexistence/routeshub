@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
   "description": "A minimal unit to simplify your routes business",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",

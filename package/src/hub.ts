@@ -1,4 +1,4 @@
-import { entitify } from './';
+import { entitify } from '.';
 
 import { Entities, Entity, Routes, Structure } from './interfaces';
 

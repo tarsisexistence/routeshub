@@ -1,5 +1,5 @@
 import { indexer } from './indexer';
-import { Entity, Routes, StateParams, Structure } from '../';
+import { Entity, Routes, StateParams, Structure } from '..';
 
 export function entitify<T>(
   parentEntity: Structure | null,
