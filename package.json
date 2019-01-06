@@ -14,7 +14,13 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint"
+    "// - SNYK - //": "section for https://app.snyk.io",
+    "snyk:test": "snyk test",
+    "snyk:wizard": "snyk wizard",
+    "// - LINTERS, FORMATTERS - //": "section for linters and formatters",
+    "lint": "ng lint",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier"
   },
   "dependencies": {
     "@angular/animations": "7.1.4",
@@ -56,6 +62,7 @@
     "ng-packagr": "4.4.5",
     "prettier": "1.15.3",
     "protractor": "5.4.2",
+    "snyk": "^1.120.1",
     "ts-node": "7.0.1",
     "tsickle": "0.34.0",
     "tslib": "1.9.3",
