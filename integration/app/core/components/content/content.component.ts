@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-content',
@@ -6,8 +6,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContentComponent implements OnInit {
-  constructor() {}
-
-  public ngOnInit(): void {}
+export class ContentComponent {
+  @Input() public vehicles: string[];
 }
