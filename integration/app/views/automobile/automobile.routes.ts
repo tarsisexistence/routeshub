@@ -1,11 +1,14 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutomobileComponent } from './containers/automobile/automobile.component';
+
+import { AutomobileComponent } from './automobile.component';
+import { VehiclesResolver } from '../../routing/vehicles.resolver';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AutomobileComponent
+    component: AutomobileComponent,
+    resolve: { vehicles: VehiclesResolver }
   }
 ];
 

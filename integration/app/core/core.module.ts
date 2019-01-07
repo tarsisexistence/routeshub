@@ -8,11 +8,11 @@ import en from '@angular/common/locales/en';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
-import { routing } from './routing/routes';
+import { VehiclesResolver } from '../routing/vehicles.resolver';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ContentComponent } from './containers/content/content.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { ContentComponent } from './components/content/content.component';
+import { ViewComponent } from './containers/view/view.component';
 
 registerLocaleData(en);
 
@@ -20,7 +20,7 @@ const components = [
   HeaderComponent,
   FooterComponent,
   ContentComponent,
-  BreadcrumbsComponent
+  ViewComponent
 ];
 
 @NgModule({
@@ -30,11 +30,10 @@ const components = [
     HttpClientModule,
     BrowserAnimationsModule,
     RouterModule,
-    routing,
     NgZorroAntdModule
   ],
   exports: components,
   declarations: components,
-  providers: [{ provide: NZ_I18N, useValue: en_US }]
+  providers: [VehiclesResolver, { provide: NZ_I18N, useValue: en_US }]
 })
 export class CoreModule {}
