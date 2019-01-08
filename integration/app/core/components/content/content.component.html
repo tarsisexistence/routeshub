@@ -1,11 +1,10 @@
 <nz-content class="content">
-  <nz-breadcrumb class="breadcrumbs">
-    <nz-breadcrumb-item *ngFor="let vehicle of vehicles">
-      {{ vehicle}}
-    </nz-breadcrumb-item>
-  </nz-breadcrumb>
-
-
+  <div class="breadcrumbs">
+    <div *ngFor="let vehicle of vehicles; let index = index">
+      <span class="divider" *ngIf="index !== 0">/</span>
+      <span>{{ vehicle }}</span>
+    </div>
+  </div>
 
   <router-outlet></router-outlet>
 </nz-content>

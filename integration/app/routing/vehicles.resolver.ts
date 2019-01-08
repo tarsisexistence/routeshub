@@ -27,7 +27,7 @@ export class VehiclesResolver implements Resolve<string[] | Vehicle[]> {
     }
 
     const types = vehicles[vehicle].reduce(
-      (acc, item) => [...acc, item.name],
+      (acc, item) => [...acc, item.brand],
       []
     );
 

@@ -3,5 +3,10 @@
 }
 
 .breadcrumbs {
+  display: flex;
   margin: 16px 0;
+}
+
+.divider {
+  margin: 0 3px;
 }
