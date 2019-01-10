@@ -1,17 +1,21 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { VehiclesResolver } from './vehicles.resolver';
-import { AppComponent } from '../app.component';
 import { ViewComponent } from '../core/containers/view/view.component';
-
+import { TREE } from './hub';
+console.log({ TREE });
 export const routes: Routes = [
   {
-    path: '',
+    path: TREE.app.root.path,
     component: ViewComponent,
     resolve: { types: VehiclesResolver },
     runGuardsAndResolvers: 'always',
     children: [
-      { path: '', redirectTo: 'about', pathMatch: 'full' },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'about'
+      },
       {
         path: 'about',
         pathMatch: 'full',

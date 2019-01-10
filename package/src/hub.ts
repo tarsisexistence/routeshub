@@ -1,6 +1,6 @@
-import { entitify } from '.';
+import { entitify } from './utils';
 
-import { Entities, Entity, Routes, Structure } from './interfaces';
+import { Entities, Entity, Route, Routes, Structure } from './interfaces';
 
 export class Hub<C> {
   public get entity(): Entities<C> {

@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
 import { ViewComponent } from './containers/view/view.component';
+import { Hub } from '../../../package';
+import { Tree } from '../routing/hub';
 
 registerLocaleData(en);
 
@@ -37,3 +39,5 @@ const components = [
   providers: [VehiclesResolver, { provide: NZ_I18N, useValue: en_US }]
 })
 export class CoreModule {}
+
+export const hub = Hub.inject<Tree>();

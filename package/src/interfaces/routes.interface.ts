@@ -8,7 +8,7 @@ export interface Route {
 }
 
 export interface BaseRoute {
-  root?: any;
+  root: Route;
 }
 
 export type Routes<T> = { [key in keyof T]: Route };
