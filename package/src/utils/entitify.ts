@@ -5,27 +5,38 @@ export function entitify<T>(
   parentEntity: Structure | null,
   routes: Routes<any>
 ): Entity<T> {
-  return Object.keys(routes).reduce((acc: any, route: string): Entity<T> => {
-    const { path, lazyPath } = routes[route];
+  return Object.keys(routes).reduce((acc: any, routeName: string): Entity<
+    T
+  > => {
+    const { path, children, lazyPath } = routes[routeName];
+    const id = indexer();
+    const parentId = parentEntity !== null ? parentEntity.id : null;
+    const state =
+      parentEntity !== null
+        ? setNotEmptyPath(parentEntity.state, path)
+        : setNotEmptyPath(['/'], path);
+
+    const route = {
+      id,
+      parentId,
+      state,
+      stateFn,
+      path,
+      lazyPath,
+      route: routeName
+    };
 
     return {
       ...acc,
-      [route]: {
-        id: indexer(),
-        parentId: parentEntity !== null ? parentEntity.id : null,
-        state:
-          parentEntity !== null ? [...parentEntity.state, path] : ['/', path],
-        stateFn,
-        path,
-        lazyPath,
-        route
+      [routeName]: {
+        ...route,
+        children: children !== undefined ? entitify(route, children) : null
       }
     };
   }, {});
 }
 
 function stateFn(params?: StateParams, ...rest: StateParams[]): string[] {
-  // TODO: memoize
   if (!params) {
     return;
   }
@@ -60,3 +71,7 @@ const reduceParams = (
     }),
     params
   );
+
+function setNotEmptyPath(state: string[], path: string): string[] {
+  return path !== '' ? [...state, path] : state;
+}

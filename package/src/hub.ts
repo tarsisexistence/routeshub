@@ -1,6 +1,6 @@
 import { entitify } from './utils';
 
-import { Entities, Entity, Route, Routes, Structure } from './interfaces';
+import { Entities, Entity, Routes, Structure } from './interfaces';
 
 export class Hub<C> {
   public get entity(): Entities<C> {
@@ -17,7 +17,10 @@ export class Hub<C> {
     return Hub.inject['instance'];
   }
 
-  public createRoot<T>(routes: Routes<T>): Entity<T> {
+  public createRoot<T, Cr = {}>(
+    routes: Routes<T>,
+    route: string
+  ): Entity<T & Cr> {
     if (this._entity) {
       throw new Error('Routeshub is already declared');
     }
@@ -25,9 +28,9 @@ export class Hub<C> {
     const rootEntity = entitify<T>(null, routes);
 
     this.initEntity();
-    this.updateEntity('app', rootEntity);
+    this.updateEntity(route, rootEntity);
 
-    return rootEntity as Entity<T>;
+    return this._entity[route] as Entity<T & Cr>;
   }
 
   public createFeature<T>(
@@ -40,16 +43,30 @@ export class Hub<C> {
     return featureEntity;
   }
 
-  public getEntity(): Entities<C> {
+  public getRecords(): Entities<C> {
     return this.entity;
+  }
+
+  public getEntity<E>(route: string): Entity<E> {
+    return this.entity[route];
   }
 
   private initEntity(): void {
     this._entity = {} as Entities<C>;
   }
 
-  private updateEntity<T>(route: string, entity: T): void {
+  private updateEntity<T>(branch: string, routes: T): void {
+    const children = Object.keys(routes).reduce((acc, routeName) => {
+      if (!routes[routeName].children) {
+        return acc;
+      }
+
+      return { ...acc, ...routes[routeName].children };
+    }, {});
+    const hasChildren = Object.keys(children).length > 0;
     // tslint:disable-next-line
-    this._entity = Object.assign({}, this._entity, { [route]: entity });
+    this._entity = Object.assign({}, this._entity, {
+      [branch]: hasChildren ? children : routes
+    });
   }
 }
