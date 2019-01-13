@@ -3,6 +3,6 @@ import { bikeBranch, BikeBranch } from '../branches';
 import { appSlice } from './app.slice';
 
 export const bikeSlice = hub.createFeature<BikeBranch>(
-  appSlice.root,
+  appSlice.bike,
   bikeBranch
 );

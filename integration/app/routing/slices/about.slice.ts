@@ -5,6 +5,6 @@ import { aboutBranch, AboutBranch } from '../branches';
 import { appSlice } from './app.slice';
 
 export const aboutSlice = hub.createFeature<AboutBranch>(
-  appSlice.root,
+  appSlice.about,
   aboutBranch
 );
