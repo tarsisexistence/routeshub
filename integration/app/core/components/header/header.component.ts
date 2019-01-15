@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
+import {
+  aboutSlice,
+  automobileSlice,
+  bikeSlice,
+  bolidSlice
+} from '../../../routes/slices';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,7 +14,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  public slices: any;
 
-  public ngOnInit(): void {}
+  public ngOnInit(): void {
+    this.slices = {
+      aboutSlice,
+      automobileSlice,
+      bikeSlice,
+      bolidSlice
+    };
+  }
 }

@@ -1,6 +1,3 @@
-/* tslint:disable:file-name-casing */
-export * from './rh/routeshub.service';
-export * from './rh/routeshub.component';
-export * from './rh/routeshub.module';
-
+// tslint:disable:file-name-casing
 export * from './hub';
+export * from './interfaces';

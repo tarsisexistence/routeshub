@@ -1,4 +1,4 @@
-import { StateParams } from '..';
+import { StateParams } from '../interfaces';
 
 export interface Structure {
   id: number;

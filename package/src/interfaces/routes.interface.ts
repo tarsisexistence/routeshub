@@ -1,14 +1,14 @@
-export interface Route {
+export interface Route<Cr = {}> {
   path: string;
   id?: number;
   component?: any;
-  children?: Routes<any>;
+  children?: Routes<Cr>;
   lazyPath?: string;
   state?: string[];
 }
 
 export interface BaseRoute {
-  root?: any;
+  root: Route;
 }
 
-export type Routes<T> = { [key in keyof T]: Route };
+export type Routes<T, Cr = {}> = { [key in keyof T]: Route<Cr> };
