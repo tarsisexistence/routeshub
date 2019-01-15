@@ -2,8 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BikeComponent } from './bike.component';
-import { VehiclesResolver } from '../../routes/resolvers/vehicles.resolver';
-import { bikeBranch } from '../../routes/branches';
+import { VehiclesResolver } from '../../routing/resolvers/vehicles.resolver';
+import { bikeBranch } from '../../routing/branches';
 
 export const routes: Routes = [
   {

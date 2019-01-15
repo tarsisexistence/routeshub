@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './about.component';
-import { aboutBranch } from '../../routes/branches';
+import { aboutBranch } from '../../routing/branches';
 
 export const routes: Routes = [
   {

@@ -3,12 +3,11 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import en from '@angular/common/locales/en';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
-import { VehiclesResolver } from '../routes/resolvers/vehicles.resolver';
+import { RoutingModule } from '../routing/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
@@ -29,11 +28,11 @@ const components = [
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    RouterModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    RoutingModule
   ],
-  exports: components,
   declarations: components,
-  providers: [VehiclesResolver, { provide: NZ_I18N, useValue: en_US }]
+  exports: [RoutingModule, ...components],
+  providers: [{ provide: NZ_I18N, useValue: en_US }]
 })
 export class CoreModule {}

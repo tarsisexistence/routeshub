@@ -1,8 +1,9 @@
-import { ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { ViewComponent } from '../core/containers/view/view.component';
+
 import { tree } from './tree';
+import { ViewComponent } from '../core/containers/view/view.component';
+import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { appBranch } from './branches';
 
 export const routes: Routes = [
@@ -47,3 +48,10 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
   onSameUrlNavigation: 'reload',
   scrollPositionRestoration: 'top'
 });
+
+@NgModule({
+  imports: [routing],
+  exports: [RouterModule],
+  providers: [VehiclesResolver]
+})
+export class RoutingModule {}

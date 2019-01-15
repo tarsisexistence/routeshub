@@ -5,7 +5,7 @@ import {
   automobileSlice,
   bikeSlice,
   bolidSlice
-} from '../../../routes/slices';
+} from '../../../routing/slices';
 
 @Component({
   selector: 'app-header',
