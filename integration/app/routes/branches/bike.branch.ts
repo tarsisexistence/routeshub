@@ -1,7 +1,7 @@
 import { BaseRoute, Routes } from '../../../../package';
 
 export const bike = {
-  path: 'bike',
+  path: 'bikes',
   lazyPath: 'app/views/bike/bike.module#BikeModule'
 };
 

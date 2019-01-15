@@ -1,4 +1,5 @@
-import { hub } from '../../core/core.module';
+import { hub } from '../';
+
 import { appBranch, AppBranch, AppRootBranch } from '../branches';
 
 const route = 'app';

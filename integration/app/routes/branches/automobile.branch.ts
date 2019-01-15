@@ -1,7 +1,7 @@
 import { BaseRoute, Routes } from '../../../../package';
 
 export const automobile = {
-  path: 'automobile',
+  path: 'automobiles',
   lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
 };
 

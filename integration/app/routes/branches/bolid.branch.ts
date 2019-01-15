@@ -1,7 +1,7 @@
 import { BaseRoute, Routes } from '../../../../package';
 
 export const bolid = {
-  path: 'bolid',
+  path: 'bolids',
   lazyPath: 'app/views/bolid/bolid.module#BolidModule'
 };
 

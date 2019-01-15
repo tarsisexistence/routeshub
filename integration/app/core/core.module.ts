@@ -8,13 +8,11 @@ import en from '@angular/common/locales/en';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
-import { VehiclesResolver } from '../routing/vehicles.resolver';
+import { VehiclesResolver } from '../routes/resolvers/vehicles.resolver';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
 import { ViewComponent } from './containers/view/view.component';
-import { Hub } from '../../../package';
-import { Tree } from '../routing/hub';
 
 registerLocaleData(en);
 
@@ -39,5 +37,3 @@ const components = [
   providers: [VehiclesResolver, { provide: NZ_I18N, useValue: en_US }]
 })
 export class CoreModule {}
-
-export const hub = Hub.inject<Tree>();
