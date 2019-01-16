@@ -1,3 +1,5 @@
-// tslint:disable:file-name-casing
-export * from './hub';
+// TODO: specify interfaces
 export * from './interfaces';
+
+export { createRoot } from './createRoot';
+export { createFeature } from './createFeature';

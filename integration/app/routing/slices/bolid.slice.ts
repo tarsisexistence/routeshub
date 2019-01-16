@@ -1,10 +1,9 @@
-import { Entity } from '../../../../package';
-import { hub } from '../';
+import { createFeature, Entity } from '../../../../package';
 
 import { bolidBranch, BolidBranch } from '../branches';
 import { appSlice } from './app.slice';
 
-export const bolidSlice: Entity<BolidBranch> = hub.createFeature<BolidBranch>(
+export const bolidSlice: Entity<BolidBranch> = createFeature<BolidBranch>(
   appSlice.bolid,
   bolidBranch
 );

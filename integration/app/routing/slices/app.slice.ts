@@ -1,9 +1,4 @@
-import { hub } from '../';
-
+import { createRoot } from '../../../../package';
 import { appBranch, AppBranch, AppRootBranch } from '../branches';
 
-const route = 'app';
-export const appSlice = hub.createRoot<AppBranch, AppRootBranch>(
-  appBranch,
-  route
-);
+export const appSlice = createRoot<AppBranch, AppRootBranch>(appBranch, 'app');
