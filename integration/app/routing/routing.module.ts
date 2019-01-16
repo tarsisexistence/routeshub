@@ -1,10 +1,10 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { tree } from './tree';
 import { ViewComponent } from '../core/containers/view/view.component';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { appBranch } from './branches';
+import { tree } from './tree';
 
 export const routes: Routes = [
   {

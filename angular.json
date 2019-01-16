@@ -56,7 +56,6 @@
             "outputPath": "dist/integration",
             "index": "integration/index.html",
             "main": "integration/main.ts",
-            "polyfills": "integration/polyfills.ts",
             "tsConfig": "integration/tsconfig.app.json",
             "assets": [
               "integration/favicon.ico",
@@ -121,7 +120,6 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "integration/test.ts",
-            "polyfills": "integration/polyfills.ts",
             "tsConfig": "integration/tsconfig.spec.json",
             "karmaConfig": "integration/karma.conf.js",
             "styles": [
