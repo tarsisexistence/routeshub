@@ -8,13 +8,15 @@ import {
   BolidBranch
 } from './branches';
 
-import { aboutSlice as about } from './slices/about.slice';
-import { appSlice as app } from './slices/app.slice';
-import { automobileSlice as automobile } from './slices/automobile.slice';
-import { bikeSlice as bike } from './slices/bike.slice';
-import { bolidSlice as bolid } from './slices/bolid.slice';
+import {
+  aboutSlice as about,
+  appSlice as app,
+  automobileSlice as automobile,
+  bikeSlice as bike,
+  bolidSlice as bolid
+} from './slices';
 
-export interface Tree {
+export interface Hub {
   app: Entity<AppBranch>;
   about: Entity<AboutBranch>;
   automobile: Entity<AutomobileBranch>;
@@ -22,7 +24,7 @@ export interface Tree {
   bolid: Entity<BolidBranch>;
 }
 
-export const tree: Entities<Tree> = {
+export const hub: Entities<Hub> = {
   app,
   about,
   automobile,
