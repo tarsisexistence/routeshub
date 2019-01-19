@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,4 +35,14 @@ const components = [
   exports: [RoutingModule, ...components],
   providers: [{ provide: NZ_I18N, useValue: en_US }]
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor(
+    @Optional()
+    @SkipSelf()
+    core: CoreModule
+  ) {
+    if (core) {
+      throw new Error(`Core module must not be imported twice!`);
+    }
+  }
+}
