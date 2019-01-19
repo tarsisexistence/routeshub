@@ -1,4 +1,4 @@
-import { BaseRoute, Route, Routes } from '../../../../dist/routeshub';
+import { BaseRoute, Route, Routes } from 'routeshub';
 
 import { about } from './about.route';
 import { automobile } from './automobile.route';

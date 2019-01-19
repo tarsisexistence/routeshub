@@ -20,10 +20,16 @@
     ],
     "paths": {
       "routeshub": [
-        "dist/routeshub"
+        "../dist/routeshub"
       ],
-      "routeshub/*": [
-        "dist/routeshub/*"
+      "~app/*": [
+        "app/*"
+      ],
+      "~assets/*": [
+        "assets/*"
+      ],
+      "~env/*": [
+        "environments/*"
       ]
     }
   }

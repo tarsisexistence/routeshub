@@ -1,4 +1,4 @@
-import { createRoot } from '../../../../dist/routeshub';
+import { createRoot } from 'routeshub';
 
 import { AppChildrenRoute, appRoute, AppRoute } from '../routes';
 

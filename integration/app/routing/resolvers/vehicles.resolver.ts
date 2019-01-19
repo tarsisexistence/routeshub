@@ -7,8 +7,8 @@ import {
 
 import { Observable, of } from 'rxjs';
 
-import { vehicles } from '../../../assets/data/vehicles';
-import { Vehicle } from '../../core/interfaces/vehicle';
+import { vehicles } from '~assets/data/vehicles';
+import { Vehicle } from '~app/core/interfaces/vehicle';
 
 @Injectable()
 export class VehiclesResolver implements Resolve<string[] | Vehicle[]> {

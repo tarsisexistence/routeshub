@@ -1,4 +1,4 @@
-import { BaseRoute, Routes } from '../../../../dist/routeshub';
+import { BaseRoute, Routes } from 'routeshub';
 
 export const bike = {
   path: 'bikes',

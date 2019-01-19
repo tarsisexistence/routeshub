@@ -1,4 +1,4 @@
-import { createFeature, Entity } from '../../../../dist/routeshub';
+import { createFeature, Entity } from 'routeshub';
 
 import { aboutRoute, AboutRoute } from '../routes';
 import { appSlice } from './app.slice';
