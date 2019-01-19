@@ -3,21 +3,17 @@
   "description": "A minimal unit to simplify your routes business",
   "version": "0.0.1",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/maktarsis/routeshub.git"
-  },
-  "bugs": "https://github.com/maktarsis/routeshub/issues",
-  "homepage": "https://github.com/maktarsis/routeshub/blob/master/README.md",
+  "author": "Max Tarsis (https://github.com/maktarsis)",
   "scripts": {
+    "// - NG - //": "------------------------------",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "// - SNYK - //": "section for https://app.snyk.io",
+    "// - SNYK - //": "------------------------------",
     "snyk:test": "snyk test",
     "snyk:wizard": "snyk wizard",
-    "// - LINTERS, FORMATTERS - //": "section for linters and formatters",
+    "// - LINTERS, FORMATTERS - //": "------------------------------",
     "lint": "ng lint",
     "lint-staged": "lint-staged",
     "prettier": "prettier"
@@ -70,18 +66,5 @@
     "tslint": "5.12.1",
     "tslint-config-prettier": "1.17.0",
     "typescript": "3.1.6"
-  },
-  "keywords": [
-    "angular",
-    "routes",
-    "routes state",
-    "routes entity",
-    "routes hub",
-    "routing",
-    "compodoc",
-    "state",
-    "store",
-    "typescript",
-    "javascript"
-  ]
+  }
 }

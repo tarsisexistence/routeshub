@@ -1,7 +1,32 @@
 {
   "name": "routeshub",
+  "description": "A minimal unit to simplify your routes business",
   "version": "0.0.1",
+  "author": "Max Tarsis (https://github.com/maktarsis)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maktarsis/routeshub.git"
+  },
+  "homepage": "https://github.com/maktarsis/routeshub/blob/master/README.md",
+  "bugs": "https://github.com/maktarsis/routeshub/issues",
+  "license": "MIT",
   "peerDependencies": {
     "rxjs": "~6.3.3"
-  }
+  },
+  "keywords": [
+    "angular",
+    "angular routing",
+    "angular routes",
+    "routing",
+    "routes",
+    "routeshub",
+    "routes hub",
+    "routes state",
+    "routes store",
+    "state",
+    "store",
+    "typescript",
+    "javascript",
+    "rxjs"
+  ]
 }
