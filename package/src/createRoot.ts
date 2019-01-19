@@ -2,9 +2,10 @@ import { Entity, Routes } from './interfaces';
 import { entitify } from './utils';
 import { state, updateState } from './state';
 
+// TODO: could we provide fully dynamic route name?
 export function createRoot<T, C = {}>(
   routes: Routes<T>,
-  route: string
+  route: string = 'app'
 ): Entity<T & C> {
   if (state.value !== null) {
     throw new Error('Routeshub is already declared');
