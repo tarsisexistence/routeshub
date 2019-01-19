@@ -5,9 +5,9 @@ export const bolid = {
   lazyPath: 'app/views/bolid/bolid.module#BolidModule'
 };
 
-export type BolidBranch = BaseRoute;
+export type BolidRoute = BaseRoute;
 
-export const bolidBranch: Routes<BolidBranch> = {
+export const bolidRoute: Routes<BolidRoute> = {
   root: {
     path: ''
   }

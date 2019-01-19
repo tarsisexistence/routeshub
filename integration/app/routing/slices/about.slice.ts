@@ -1,9 +1,9 @@
 import { createFeature, Entity } from '../../../../package';
 
-import { aboutBranch, AboutBranch } from '../branches';
+import { aboutRoute, AboutRoute } from '../routes';
 import { appSlice } from './app.slice';
 
-export const aboutSlice: Entity<AboutBranch> = createFeature<AboutBranch>(
+export const aboutSlice: Entity<AboutRoute> = createFeature<AboutRoute>(
   appSlice.about,
-  aboutBranch
+  aboutRoute
 );

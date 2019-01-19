@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { hub } from './hub';
-import { appBranch } from './branches';
+import { appRoute } from './routes';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { ViewComponent } from '../core/containers/view/view.component';
 
@@ -13,28 +13,28 @@ export const routes: Routes = [
     runGuardsAndResolvers: 'always',
     children: [
       {
-        path: appBranch.root.path,
-        redirectTo: appBranch.root.children.about.path,
+        path: appRoute.root.path,
+        redirectTo: appRoute.root.children.about.path,
         pathMatch: 'full'
       },
       {
-        path: appBranch.root.children.about.path,
-        loadChildren: appBranch.root.children.about.lazyPath,
+        path: appRoute.root.children.about.path,
+        loadChildren: appRoute.root.children.about.lazyPath,
         pathMatch: 'full'
       },
       {
-        path: appBranch.root.children.automobile.path,
-        loadChildren: appBranch.root.children.automobile.lazyPath,
+        path: appRoute.root.children.automobile.path,
+        loadChildren: appRoute.root.children.automobile.lazyPath,
         pathMatch: 'full'
       },
       {
-        path: appBranch.root.children.bike.path,
-        loadChildren: appBranch.root.children.bike.lazyPath,
+        path: appRoute.root.children.bike.path,
+        loadChildren: appRoute.root.children.bike.lazyPath,
         pathMatch: 'full'
       },
       {
-        path: appBranch.root.children.bolid.path,
-        loadChildren: appBranch.root.children.bolid.lazyPath,
+        path: appRoute.root.children.bolid.path,
+        loadChildren: appRoute.root.children.bolid.lazyPath,
         pathMatch: 'full'
       }
     ]

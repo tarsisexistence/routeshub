@@ -5,9 +5,9 @@ export const automobile = {
   lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
 };
 
-export type AutomobileBranch = BaseRoute;
+export type AutomobileRoute = BaseRoute;
 
-export const automobileBranch: Routes<AutomobileBranch> = {
+export const automobileRoute: Routes<AutomobileRoute> = {
   root: {
     path: ''
   }

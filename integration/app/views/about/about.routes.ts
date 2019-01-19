@@ -2,11 +2,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './about.component';
-import { aboutBranch } from '../../routing/branches';
+import { aboutRoute } from '../../routing/routes';
 
 export const routes: Routes = [
   {
-    path: aboutBranch.root.path,
+    path: aboutRoute.root.path,
     component: AboutComponent
   }
 ];

@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BolidComponent } from './bolid.component';
 import { VehiclesResolver } from '../../routing/resolvers/vehicles.resolver';
-import { bolidBranch } from '../../routing/branches';
+import { bolidRoute } from '../../routing/routes';
 
 export const routes: Routes = [
   {
-    path: bolidBranch.root.path,
+    path: bolidRoute.root.path,
     component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }
   }

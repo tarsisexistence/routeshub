@@ -5,9 +5,9 @@ export const bike = {
   lazyPath: 'app/views/bike/bike.module#BikeModule'
 };
 
-export type BikeBranch = BaseRoute;
+export type BikeRoute = BaseRoute;
 
-export const bikeBranch: Routes<BikeBranch> = {
+export const bikeRoute: Routes<BikeRoute> = {
   root: {
     path: ''
   }

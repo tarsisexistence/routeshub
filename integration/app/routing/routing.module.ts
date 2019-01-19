@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { routes } from './routes';
+import { routes } from './app.routes';
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
   enableTracing: false,

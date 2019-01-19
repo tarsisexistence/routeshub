@@ -1,8 +1,8 @@
 import { createFeature, Entity } from '../../../../package';
 
-import { automobileBranch, AutomobileBranch } from '../branches';
+import { automobileRoute, AutomobileRoute } from '../routes';
 import { appSlice } from './app.slice';
 
-export const automobileSlice: Entity<AutomobileBranch> = createFeature<
-  AutomobileBranch
->(appSlice.automobile, automobileBranch);
+export const automobileSlice: Entity<AutomobileRoute> = createFeature<
+  AutomobileRoute
+>(appSlice.automobile, automobileRoute);

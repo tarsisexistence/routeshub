@@ -1,13 +1,14 @@
 import { Entities, Entity } from '../../../package';
 
+// knot ? unit ?
 import {
-  AboutBranch,
-  AppBranch,
-  AppChildrenBranch,
-  AutomobileBranch,
-  BikeBranch,
-  BolidBranch
-} from './branches';
+  AboutRoute,
+  AppChildrenRoute,
+  AppRoute,
+  AutomobileRoute,
+  BikeRoute,
+  BolidRoute
+} from './routes';
 
 import {
   aboutSlice as about,
@@ -18,11 +19,11 @@ import {
 } from './slices';
 
 export interface Hub {
-  app: Entity<AppBranch, AppChildrenBranch>;
-  about: Entity<AboutBranch>;
-  automobile: Entity<AutomobileBranch>;
-  bike: Entity<BikeBranch>;
-  bolid: Entity<BolidBranch>;
+  app: Entity<AppRoute, AppChildrenRoute>;
+  about: Entity<AboutRoute>;
+  automobile: Entity<AutomobileRoute>;
+  bike: Entity<BikeRoute>;
+  bolid: Entity<BolidRoute>;
 }
 
 export const hub: Entities<Hub> = {
