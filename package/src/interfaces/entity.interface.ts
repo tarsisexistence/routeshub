@@ -10,6 +10,6 @@ export interface Structure {
   stateFn: (params?: StateParams, ...restParams: StateParams[]) => string[];
 }
 
-export type Entity<T, Ch = {}> = { [key in keyof (T & Ch)]: Structure };
+export type Entity<T, C = {}> = { [key in keyof (T & C)]: Structure };
 
 export type Entities<T> = { [key in keyof T]: T[key] };
