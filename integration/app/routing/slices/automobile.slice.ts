@@ -1,4 +1,4 @@
-import { createFeature, Entity } from '../../../../package';
+import { createFeature, Entity } from '../../../../dist/routeshub';
 
 import { automobileRoute, AutomobileRoute } from '../routes';
 import { appSlice } from './app.slice';

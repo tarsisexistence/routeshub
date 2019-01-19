@@ -1,4 +1,4 @@
-import { BaseRoute, Routes } from '../../../../package';
+import { BaseRoute, Routes } from '../../../../dist/routeshub';
 
 export const bolid = {
   path: 'bolids',

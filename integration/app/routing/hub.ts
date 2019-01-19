@@ -1,4 +1,4 @@
-import { Entities, Entity } from '../../../package';
+import { Entities, Entity } from '../../../dist/routeshub';
 
 import {
   AboutRoute,

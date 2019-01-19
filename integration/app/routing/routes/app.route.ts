@@ -1,4 +1,4 @@
-import { BaseRoute, Route, Routes } from '../../../../package';
+import { BaseRoute, Route, Routes } from '../../../../dist/routeshub';
 
 import { about } from './about.route';
 import { automobile } from './automobile.route';
@@ -12,6 +12,8 @@ export interface AppChildrenRoute extends BaseRoute {
   bolid: Route;
 }
 
+export type AppRoute = BaseRoute;
+
 const appChildrenRoute: Routes<AppChildrenRoute> = {
   root: { path: '' },
   about,
@@ -19,8 +21,6 @@ const appChildrenRoute: Routes<AppChildrenRoute> = {
   bike,
   bolid
 };
-
-export type AppRoute = BaseRoute;
 
 export const appRoute: Routes<AppRoute, AppChildrenRoute> = {
   root: {
