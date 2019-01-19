@@ -1,6 +1,5 @@
 import { Entities, Entity } from '../../../package';
 
-// knot ? unit ?
 import {
   AboutRoute,
   AppChildrenRoute,
