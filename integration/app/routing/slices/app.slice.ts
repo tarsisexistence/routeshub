@@ -1,4 +1,7 @@
 import { createRoot } from '../../../../package';
-import { appBranch, AppBranch, AppRootBranch } from '../branches';
+import { appBranch, AppBranch, AppChildrenBranch } from '../branches';
 
-export const appSlice = createRoot<AppBranch, AppRootBranch>(appBranch, 'app');
+export const appSlice = createRoot<AppBranch, AppChildrenBranch>(
+  appBranch,
+  'app'
+);

@@ -5,14 +5,14 @@ import { automobile } from './automobile.branch';
 import { bike } from './bike.branch';
 import { bolid } from './bolid.branch';
 
-export interface AppRootBranch extends BaseRoute {
+export interface AppChildrenBranch extends BaseRoute {
   about: Route;
   automobile: Route;
   bike: Route;
   bolid: Route;
 }
 
-const appRootChildren: Routes<AppRootBranch> = {
+const appChildrenBranch: Routes<AppChildrenBranch> = {
   root: { path: '' },
   about,
   automobile,
@@ -22,9 +22,9 @@ const appRootChildren: Routes<AppRootBranch> = {
 
 export type AppBranch = BaseRoute;
 
-export const appBranch: Routes<AppBranch, AppRootBranch> = {
+export const appBranch: Routes<AppBranch, AppChildrenBranch> = {
   root: {
     path: '',
-    children: appRootChildren
+    children: appChildrenBranch
   }
 };

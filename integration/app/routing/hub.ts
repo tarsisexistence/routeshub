@@ -3,7 +3,7 @@ import { Entities, Entity } from '../../../package';
 import {
   AboutBranch,
   AppBranch,
-  AppRootBranch,
+  AppChildrenBranch,
   AutomobileBranch,
   BikeBranch,
   BolidBranch
@@ -18,7 +18,7 @@ import {
 } from './slices';
 
 export interface Hub {
-  app: Entity<AppBranch, AppRootBranch>;
+  app: Entity<AppBranch, AppChildrenBranch>;
   about: Entity<AboutBranch>;
   automobile: Entity<AutomobileBranch>;
   bike: Entity<BikeBranch>;
