@@ -1,4 +1,4 @@
-import { Entity, Routes } from './interfaces';
+import { Entity, Routes, State } from './interfaces';
 import { entitify } from './utils';
 import { state, updateState } from './state';
 
@@ -11,10 +11,13 @@ export function createRoot<T, C = {}>(
     throw new Error('Routeshub is already declared');
   }
 
-  const rootEntity = entitify<T>(null, routes);
-  const newRoutesState = updateState(routeName, rootEntity);
+  const root: Entity<T> = entitify<T, C>(null, routes);
+  const initialRoutesState: State<Entity<T, C | {}>> = updateState<T>(
+    routeName,
+    root
+  );
 
-  state.next(newRoutesState);
+  state.next(initialRoutesState);
 
   return state.value[routeName];
 }

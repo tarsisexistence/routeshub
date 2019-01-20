@@ -1,14 +1,17 @@
-import { Entity, Routes, Structure } from './interfaces';
+import { Entity, Routes, State, Structure } from './interfaces';
 import { entitify } from './utils';
 import { state, updateState } from './state';
 
-export function createFeature<T>(
+export function createFeature<T, C = {}>(
   parentRoute: Structure,
   routes: Routes<T>
-): Entity<T> {
-  const featureEntity = entitify<T>(parentRoute, routes);
-  const updatedRoutesState = updateState(parentRoute.routeName, featureEntity);
-  state.next(updatedRoutesState);
+): Entity<T & C> {
+  const featureEntity: Entity<T> = entitify<T, C>(parentRoute, routes);
+  const updatedRouteState: State<Entity<T, C | {}>> = updateState<T>(
+    parentRoute.routeName,
+    featureEntity
+  );
+  state.next(updatedRouteState);
 
-  return featureEntity;
+  return state.value[parentRoute.routeName];
 }

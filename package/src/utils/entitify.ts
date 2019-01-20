@@ -1,9 +1,9 @@
 import { indexer } from './indexer';
 import { Entity, Params, Routes, Structure } from '../interfaces';
 
-export function entitify<T>(
+export function entitify<T, C = {}>(
   parentEntity: Structure | null,
-  routes: Routes<any>
+  routes: Routes<T, C | {}>
 ): Entity<T> {
   return Object.keys(routes).reduce((acc: any, routeName: string): Entity<
     T

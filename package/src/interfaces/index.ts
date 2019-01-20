@@ -1,4 +1,4 @@
-export { Structure, Params } from './common.interfaces';
+export { Structure, Params, State } from './common.interfaces';
 
 export { Entity, Entities } from './entity.interfaces';
 
