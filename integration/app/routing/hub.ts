@@ -1,4 +1,4 @@
-import { Entities, Entity } from 'routeshub';
+import { Entities } from 'routeshub';
 
 import {
   AboutRoute,
@@ -18,11 +18,11 @@ import {
 } from './slices';
 
 export interface Hub {
-  app: Entity<AppRoute, AppChildrenRoute>;
-  about: Entity<AboutRoute>;
-  automobile: Entity<AutomobileRoute>;
-  bike: Entity<BikeRoute>;
-  bolid: Entity<BolidRoute>;
+  app: AppRoute & AppChildrenRoute;
+  about: AboutRoute;
+  automobile: AutomobileRoute;
+  bike: BikeRoute;
+  bolid: BolidRoute;
 }
 
 export const hub: Entities<Hub> = {
