@@ -1,3 +1,7 @@
+export interface BaseRoute {
+  root: Route;
+}
+
 export interface Route<C = {}> {
   path: string;
   id?: number;
@@ -5,10 +9,6 @@ export interface Route<C = {}> {
   children?: Routes<C>;
   lazyPath?: string;
   state?: string[];
-}
-
-export interface BaseRoute {
-  root: Route;
 }
 
 export type Routes<T, C = {}> = { [key in keyof T]: Route<C> };

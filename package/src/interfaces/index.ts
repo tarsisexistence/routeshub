@@ -1,5 +1,5 @@
-export { BaseRoute, Routes, Route } from './routes.interface';
+export { Structure, Params } from './common.interfaces';
 
-export { Structure, Entity, Entities } from './entity.interface';
+export { Entity, Entities } from './entity.interfaces';
 
-export { StateParams } from './params.interface';
+export { BaseRoute, Routes, Route } from './routes.interfaces';

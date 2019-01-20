@@ -7,11 +7,8 @@ export function createFeature<T>(
   routes: Routes<T>
 ): Entity<T> {
   const featureEntity = entitify<T>(parentRoute, routes);
-  const newStateValue = updateState<Entity<T>>(
-    parentRoute.route,
-    featureEntity
-  );
-  state.next(newStateValue);
+  const updatedRoutesState = updateState(parentRoute.routeName, featureEntity);
+  state.next(updatedRoutesState);
 
   return featureEntity;
 }

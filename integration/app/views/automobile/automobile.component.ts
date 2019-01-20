@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { Vehicle } from '../../core/interfaces/vehicle';
+import { Vehicle } from '~app/core/interfaces/vehicle';
 
 @Component({
   selector: 'app-automobile',

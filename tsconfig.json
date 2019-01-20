@@ -22,6 +22,9 @@
       "routeshub": [
         "../dist/routeshub"
       ],
+      "routeshub-package": [
+        "../package"
+      ],
       "~app/*": [
         "app/*"
       ],

@@ -1,5 +1,5 @@
 import { indexer } from './indexer';
-import { Entity, Routes, StateParams, Structure } from '../interfaces';
+import { Entity, Params, Routes, Structure } from '../interfaces';
 
 export function entitify<T>(
   parentEntity: Structure | null,
@@ -23,7 +23,7 @@ export function entitify<T>(
       stateFn,
       path,
       lazyPath,
-      route: routeName
+      routeName
     };
 
     return {
@@ -36,7 +36,7 @@ export function entitify<T>(
   }, {});
 }
 
-function stateFn(params?: StateParams, ...rest: StateParams[]): string[] {
+function stateFn(params?: Params, ...rest: Params[]): string[] {
   if (!params) {
     return;
   }
@@ -50,23 +50,20 @@ function stateFn(params?: StateParams, ...rest: StateParams[]): string[] {
   return handleState(parameters, this.state);
 }
 
-const handleState = (params: StateParams, state?: string[]): string[] =>
+const handleState = (params: Params, state?: string[]): string[] =>
   Object.keys(params).reduce(
-    (theState: string[], param: string): string[] =>
-      theState.map(
+    (accState: string[], param: string): string[] =>
+      accState.map(
         (slice: string): string =>
           slice === `:${param}` ? params[param] : slice
       ),
     state
   );
 
-const reduceParams = (
-  params: StateParams,
-  restParams: StateParams[]
-): StateParams =>
+const reduceParams = (params: Params, restParams: Params[]): Params =>
   restParams.reduce(
-    (acc: StateParams, param: StateParams): StateParams => ({
-      ...acc,
+    (accParams: Params, param: Params): Params => ({
+      ...accParams,
       ...param
     }),
     params

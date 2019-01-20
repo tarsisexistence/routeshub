@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-export const state = new BehaviorSubject(null);
+export const state: BehaviorSubject<any> = new BehaviorSubject(null);
 
 export function updateState<T>(branch: string, routes: T): T {
   const children = Object.keys(routes).reduce((acc, routeName) => {
