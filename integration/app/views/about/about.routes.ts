@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutComponent } from './about.component';
-import { aboutRoute } from '~app/routing/routes';
+import { aboutRoute } from '~app/core/routing/routes';
 
 export const routes: Routes = [
   {
