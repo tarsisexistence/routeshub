@@ -1,9 +1,9 @@
-import { createFeature, Entity } from 'routeshub';
+import { createFeature, Slice } from 'routeshub';
 
 import { aboutRoute, AboutRoute } from '../routes';
 import { appSlice } from './app.slice';
 
-export const aboutSlice: Entity<AboutRoute> = createFeature<AboutRoute>(
+export const aboutSlice: Slice<AboutRoute> = createFeature<AboutRoute>(
   appSlice.about,
   aboutRoute
 );

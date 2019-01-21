@@ -1,8 +1,8 @@
-import { createFeature, Entity } from 'routeshub';
+import { createFeature, Slice } from 'routeshub';
 
 import { automobileRoute, AutomobileRoute } from '../routes';
 import { appSlice } from './app.slice';
 
-export const automobileSlice: Entity<AutomobileRoute> = createFeature<
+export const automobileSlice: Slice<AutomobileRoute> = createFeature<
   AutomobileRoute
 >(appSlice.automobile, automobileRoute);

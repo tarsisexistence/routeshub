@@ -1,23 +1,21 @@
 import { indexer } from './indexer';
-import { Entity, Params, Routes, Structure } from '../interfaces';
+import { Params, Routes, Slice, Structure } from '../interfaces';
 
 /**
  * Core function
  * Generates unique routes
  */
 export function entitify<T, C = {}>(
-  parentEntity: Structure | null,
+  parentSlice: Structure | null,
   routes: Routes<T, C | {}>
-): Entity<T> {
-  return Object.keys(routes).reduce((acc: any, routeName: string): Entity<
-    T
-  > => {
+): Slice<T> {
+  return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
     const { path, children, lazyPath } = routes[routeName];
     const id = indexer();
-    const parentId = parentEntity !== null ? parentEntity.id : null;
+    const parentId = parentSlice !== null ? parentSlice.id : null;
     const state =
-      parentEntity !== null
-        ? setNotEmptyPath(parentEntity.state, path)
+      parentSlice !== null
+        ? setNotEmptyPath(parentSlice.state, path)
         : setNotEmptyPath(['/'], path);
 
     const route = {

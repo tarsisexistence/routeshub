@@ -1,4 +1,4 @@
-import { Entities } from 'routeshub';
+import { Slices } from 'routeshub';
 
 import {
   AboutRoute,
@@ -25,7 +25,7 @@ export interface Hub {
   bolid: BolidRoute;
 }
 
-export const hub: Entities<Hub> = {
+export const hub: Slices<Hub> = {
   app,
   about,
   automobile,

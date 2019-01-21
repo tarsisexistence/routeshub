@@ -1,4 +1,4 @@
-import { Entity, Routes, State, Structure } from './interfaces';
+import { Routes, Slice, State, Structure } from './interfaces';
 import { entitify } from './utils';
 import { state, updateState } from './state';
 
@@ -9,11 +9,11 @@ import { state, updateState } from './state';
 export function createFeature<T, C = {}>(
   parentRoute: Structure,
   routes: Routes<T>
-): Entity<T & C> {
-  const featureEntity: Entity<T> = entitify<T, C>(parentRoute, routes);
-  const updatedRouteState: State<Entity<T, C | {}>> = updateState<T>(
+): Slice<T & C> {
+  const feature: Slice<T> = entitify<T, C>(parentRoute, routes);
+  const updatedRouteState: State<Slice<T, C | {}>> = updateState<T>(
     parentRoute.routeName,
-    featureEntity
+    feature
   );
   state.next(updatedRouteState);
 
