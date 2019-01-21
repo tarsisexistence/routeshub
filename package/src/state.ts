@@ -1,8 +1,14 @@
 import { BehaviorSubject } from 'rxjs';
 import { Entity, State } from './interfaces';
 
+/**
+ * it stores the state of all routes on first level
+ */
 export const state: BehaviorSubject<State<any>> = new BehaviorSubject(null);
 
+/**
+ * Updates state via routes or children routes
+ */
 export function updateState<T, C = {}>(
   routeName: string,
   routes: Entity<T>

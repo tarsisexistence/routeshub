@@ -1,6 +1,10 @@
 import { indexer } from './indexer';
 import { Entity, Params, Routes, Structure } from '../interfaces';
 
+/**
+ * Core function
+ * Generates unique routes
+ */
 export function entitify<T, C = {}>(
   parentEntity: Structure | null,
   routes: Routes<T, C | {}>
@@ -36,6 +40,9 @@ export function entitify<T, C = {}>(
   }, {});
 }
 
+/**
+ * State function that takes input args and outputs dynamic state value
+ */
 function stateFn(params?: Params, ...rest: Params[]): string[] {
   if (!params) {
     return;
@@ -50,6 +57,10 @@ function stateFn(params?: Params, ...rest: Params[]): string[] {
   return handleState(parameters, this.state);
 }
 
+/**
+ * Replaces property with value
+ * Helps stateFn generate dynamic values
+ */
 const handleState = (params: Params, state?: string[]): string[] =>
   Object.keys(params).reduce(
     (accState: string[], param: string): string[] =>
@@ -60,6 +71,9 @@ const handleState = (params: Params, state?: string[]): string[] =>
     state
   );
 
+/**
+ * Absorbs and gives out together params
+ */
 const reduceParams = (params: Params, restParams: Params[]): Params =>
   restParams.reduce(
     (accParams: Params, param: Params): Params => ({
@@ -69,6 +83,9 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
     params
   );
 
+/**
+ * Prevents to record empty state paths
+ */
 function setNotEmptyPath(state: string[], path: string): string[] {
   return path !== '' ? [...state, path] : state;
 }

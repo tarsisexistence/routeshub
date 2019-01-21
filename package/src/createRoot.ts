@@ -3,6 +3,10 @@ import { entitify } from './utils';
 import { state, updateState } from './state';
 
 // TODO: could we provide fully dynamic route name?
+/**
+ * Creates main parent routes
+ * Entry point for hub
+ */
 export function createRoot<T, C = {}>(
   routes: Routes<T>,
   routeName: string = 'app'
