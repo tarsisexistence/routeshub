@@ -2,8 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BolidComponent } from './bolid.component';
-import { VehiclesResolver } from '~app/core/routing/resolvers/vehicles.resolver';
-import { bolidRoute } from '~app/core/routing/routes';
+import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
+import { bolidRoute } from '~app/routing/routes';
 
 /**
  * Declares routes on BolidModule level

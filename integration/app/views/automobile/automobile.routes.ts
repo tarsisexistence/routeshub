@@ -2,8 +2,8 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AutomobileComponent } from './automobile.component';
-import { VehiclesResolver } from '~app/core/routing/resolvers/vehicles.resolver';
-import { automobileRoute } from '~app/core/routing/routes';
+import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
+import { automobileRoute } from '~app/routing/routes';
 
 /**
  * Declares routes on AutomobileModule level

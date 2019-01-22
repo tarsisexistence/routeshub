@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { hub } from './hub';
 import { appRoute } from './routes';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { ViewComponent } from '../containers/view/view.component';
+import { ViewComponent } from '../core/containers/view/view.component';
 
 /**
  * Declares routes on root level
