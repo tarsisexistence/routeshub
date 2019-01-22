@@ -5,6 +5,12 @@ import { appRoute } from './routes';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { ViewComponent } from '../containers/view/view.component';
 
+/**
+ * Declares routes on root level
+ * Cool stuff with routes variables
+ * can be used here to add control
+ * over magic strings
+ */
 export const routes: Routes = [
   {
     path: hub.app.root.path,

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
+/**
+ * Plain SharedModule.
+ * Actually just for structure example
+ */
 @NgModule({
   declarations: [],
-  imports: [CommonModule]
+  imports: []
 })
 export class SharedModule {}

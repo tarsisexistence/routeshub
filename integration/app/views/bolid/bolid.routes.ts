@@ -5,6 +5,12 @@ import { BolidComponent } from './bolid.component';
 import { VehiclesResolver } from '~app/core/routing/resolvers/vehicles.resolver';
 import { bolidRoute } from '~app/core/routing/routes';
 
+/**
+ * Declares routes on BolidModule level
+ * Cool stuff with routes variables
+ * can be used here to add control
+ * over magic strings
+ */
 export const routes: Routes = [
   {
     path: bolidRoute.root.path,

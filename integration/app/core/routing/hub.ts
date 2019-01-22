@@ -17,6 +17,9 @@ import {
   bolidSlice as bolid
 } from './slices';
 
+/**
+ * Describes routes hub
+ */
 export interface Hub {
   app: AppRoute & AppChildrenRoute;
   about: AboutRoute;
@@ -25,6 +28,11 @@ export interface Hub {
   bolid: BolidRoute;
 }
 
+/**
+ * Declares hub which contains
+ * all possible routes in the project
+ * and those routes are already stateful
+ */
 export const hub: Slices<Hub> = {
   app,
   about,

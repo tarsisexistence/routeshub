@@ -4,6 +4,10 @@ import { RouterModule } from '@angular/router';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { routes } from './app.routes';
 
+/**
+ * Routing configuration
+ * Nothing special
+ */
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
   enableTracing: false,
   initialNavigation: 'enabled',
@@ -11,6 +15,11 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
   scrollPositionRestoration: 'top'
 });
 
+/**
+ * Routing module contains its configuration
+ * and providers (resolvers, guard, interceptors etc)
+ * and also exports RouterModule
+ */
 @NgModule({
   imports: [routing],
   exports: [RouterModule],

@@ -22,6 +22,13 @@ const components = [
   ViewComponent
 ];
 
+/**
+ * CoreModule is handling imports
+ * framework-specific modules to expand app functionality,
+ * third-party libraries,
+ * main (not reusable) components and providers
+ * on root level (header, footer etc)
+ */
 @NgModule({
   imports: [
     CommonModule,

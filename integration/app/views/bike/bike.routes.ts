@@ -5,6 +5,12 @@ import { BikeComponent } from './bike.component';
 import { VehiclesResolver } from '~app/core/routing/resolvers/vehicles.resolver';
 import { bikeRoute } from '~app/core/routing/routes';
 
+/**
+ * Declares routes on BikeModule level
+ * Cool stuff with routes variables
+ * can be used here to add control
+ * over magic strings
+ */
 export const routes: Routes = [
   {
     path: bikeRoute.root.path,
