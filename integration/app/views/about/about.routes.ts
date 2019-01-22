@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AboutComponent } from './about.component';
 import { aboutRoute } from '~app/routing/routes';
@@ -10,7 +10,7 @@ import { aboutRoute } from '~app/routing/routes';
  * can be used here to add control
  * over magic strings
  */
-export const routes: Routes = [
+export const routes = [
   {
     path: aboutRoute.root.path,
     component: AboutComponent

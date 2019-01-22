@@ -16,7 +16,10 @@
     "// - LINTERS, FORMATTERS - //": "------------------------------",
     "lint": "ng lint",
     "lint-staged": "lint-staged",
-    "prettier": "prettier"
+    "prettier": "prettier",
+    "// - INTEGRATION DOC - //": "------------------------------",
+    "doc:build": "npx compodoc -p integration/tsconfig.app.json --theme=readthedocs -n \"integration documentation\"",
+    "doc:serve": "npx compodoc -s"
   },
   "dependencies": {
     "@angular/animations": "7.2.1",
@@ -41,6 +44,7 @@
     "@angular/language-service": "7.2.1",
     "@commitlint/cli": "7.3.2",
     "@commitlint/config-conventional": "7.3.1",
+    "@compodoc/compodoc": "~1.1.7",
     "@types/jasmine": "2.8.14",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "8.9.5",

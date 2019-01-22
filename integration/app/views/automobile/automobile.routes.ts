@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { AutomobileComponent } from './automobile.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
@@ -11,7 +11,7 @@ import { automobileRoute } from '~app/routing/routes';
  * can be used here to add control
  * over magic strings
  */
-export const routes: Routes = [
+export const routes = [
   {
     path: automobileRoute.root.path,
     component: AutomobileComponent,
