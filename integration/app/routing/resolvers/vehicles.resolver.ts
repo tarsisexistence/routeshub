@@ -10,6 +10,9 @@ import { Observable, of } from 'rxjs';
 import { vehicles } from '~assets/data/vehicles';
 import { Vehicle } from '~app/core/interfaces/vehicle';
 
+/**
+ * Declares resolver that solves business logic problems
+ */
 @Injectable()
 export class VehiclesResolver implements Resolve<string[] | Vehicle[]> {
   public resolve(

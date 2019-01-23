@@ -1,11 +1,15 @@
-import { Routes } from '@angular/router';
-
 import { hub } from './hub';
 import { appRoute } from './routes';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { ViewComponent } from '../containers/view/view.component';
+import { ViewComponent } from '../core/containers/view/view.component';
 
-export const routes: Routes = [
+/**
+ * Declares routes on root level
+ * Cool stuff with routes variables
+ * can be used here to add control
+ * over magic strings
+ */
+export const routes = [
   {
     path: hub.app.root.path,
     component: ViewComponent,

@@ -7,7 +7,7 @@ import en from '@angular/common/locales/en';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
-import { RoutingModule } from './routing/routing.module';
+import { RoutingModule } from '../routing/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
@@ -22,6 +22,13 @@ const components = [
   ViewComponent
 ];
 
+/**
+ * CoreModule is handling imports
+ * framework-specific modules to expand app functionality,
+ * third-party libraries,
+ * main (not reusable) components and providers
+ * on root level (header, footer etc)
+ */
 @NgModule({
   imports: [
     CommonModule,

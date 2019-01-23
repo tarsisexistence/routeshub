@@ -1,7 +1,14 @@
+/**
+ * Allows to describe the base route
+ * Extends interface with root
+ */
 export interface BaseRoute {
   root: Route;
 }
 
+/**
+ * Describes a basic route
+ */
 export interface Route<C = {}> {
   path: string;
   id?: number;
@@ -11,4 +18,7 @@ export interface Route<C = {}> {
   state?: string[];
 }
 
+/**
+ * Describes an object of basic routes
+ */
 export type Routes<T, C = {}> = { [key in keyof T]: Route<C> };

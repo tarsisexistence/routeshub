@@ -1,19 +1,21 @@
 import { indexer } from './indexer';
-import { Entity, Params, Routes, Structure } from '../interfaces';
+import { Params, Routes, Slice, Structure } from '../interfaces';
 
+/**
+ * Core function
+ * Generates unique routes
+ */
 export function entitify<T, C = {}>(
-  parentEntity: Structure | null,
+  parentSlice: Structure | null,
   routes: Routes<T, C | {}>
-): Entity<T> {
-  return Object.keys(routes).reduce((acc: any, routeName: string): Entity<
-    T
-  > => {
+): Slice<T> {
+  return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
     const { path, children, lazyPath } = routes[routeName];
     const id = indexer();
-    const parentId = parentEntity !== null ? parentEntity.id : null;
+    const parentId = parentSlice !== null ? parentSlice.id : null;
     const state =
-      parentEntity !== null
-        ? setNotEmptyPath(parentEntity.state, path)
+      parentSlice !== null
+        ? setNotEmptyPath(parentSlice.state, path)
         : setNotEmptyPath(['/'], path);
 
     const route = {
@@ -36,6 +38,9 @@ export function entitify<T, C = {}>(
   }, {});
 }
 
+/**
+ * State function that takes input args and outputs dynamic state value
+ */
 function stateFn(params?: Params, ...rest: Params[]): string[] {
   if (!params) {
     return;
@@ -50,6 +55,10 @@ function stateFn(params?: Params, ...rest: Params[]): string[] {
   return handleState(parameters, this.state);
 }
 
+/**
+ * Replaces property with value
+ * Helps stateFn generate dynamic values
+ */
 const handleState = (params: Params, state?: string[]): string[] =>
   Object.keys(params).reduce(
     (accState: string[], param: string): string[] =>
@@ -60,6 +69,9 @@ const handleState = (params: Params, state?: string[]): string[] =>
     state
   );
 
+/**
+ * Absorbs and gives out together params
+ */
 const reduceParams = (params: Params, restParams: Params[]): Params =>
   restParams.reduce(
     (accParams: Params, param: Params): Params => ({
@@ -69,6 +81,9 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
     params
   );
 
+/**
+ * Prevents to record empty state paths
+ */
 function setNotEmptyPath(state: string[], path: string): string[] {
   return path !== '' ? [...state, path] : state;
 }
