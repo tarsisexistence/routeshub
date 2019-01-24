@@ -1,7 +1,9 @@
 # Table of contents
 
 * [Routeshub](README.md)
-* [Hub](package.md)
-* [Contributor Covenant Code of Conduct](code_of_conduct.md)
-* [CONTRIBUTING](contributing.md)
+
+## Community
+
+* [Contributing](community/contributing.md)
+* [Code of Conduct](community/code_of_conduct.md)
 

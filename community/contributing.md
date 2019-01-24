@@ -1,4 +1,4 @@
-# CONTRIBUTING
+# Contributing
 
 ## Submitting Pull Requests
 
