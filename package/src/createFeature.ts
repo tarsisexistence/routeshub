@@ -1,5 +1,5 @@
 import { Routes, Slice, State, Structure } from './interfaces';
-import { entitify } from './utils';
+import { enhance } from './utils';
 import { state, updateState } from './state';
 
 /**
@@ -10,7 +10,7 @@ export function createFeature<T, C = {}>(
   parentRoute: Structure,
   routes: Routes<T>
 ): Slice<T & C> {
-  const feature: Slice<T> = entitify<T, C>(parentRoute, routes);
+  const feature: Slice<T> = enhance<T, C>(parentRoute, routes);
   const updatedRouteState: State<Slice<T, C | {}>> = updateState<T>(
     parentRoute.routeName,
     feature

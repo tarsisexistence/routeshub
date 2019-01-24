@@ -1,2 +1,2 @@
 export * from './indexer';
-export * from './entitify';
+export * from './enhance';

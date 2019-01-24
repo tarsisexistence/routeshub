@@ -1,5 +1,5 @@
 import { Routes, Slice, State } from './interfaces';
-import { entitify } from './utils';
+import { enhance } from './utils';
 import { state, updateState } from './state';
 
 // TODO: could we provide fully dynamic route name?
@@ -15,7 +15,7 @@ export function createRoot<T, C = {}>(
     throw new Error('Routeshub is already declared');
   }
 
-  const root: Slice<T> = entitify<T, C>(null, routes);
+  const root: Slice<T> = enhance<T, C>(null, routes);
   const initialRoutesState: State<Slice<T, C | {}>> = updateState<T>(
     routeName,
     root

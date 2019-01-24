@@ -3,9 +3,10 @@ import { Params, Routes, Slice, Structure } from '../interfaces';
 
 /**
  * Core function
- * Generates unique routes
+ * Enhances basic and
+ * generates unique routes
  */
-export function entitify<T, C = {}>(
+export function enhance<T, C = {}>(
   parentSlice: Structure | null,
   routes: Routes<T, C | {}>
 ): Slice<T> {
@@ -32,7 +33,7 @@ export function entitify<T, C = {}>(
       ...acc,
       [routeName]: {
         ...route,
-        children: children !== undefined ? entitify(route, children) : null
+        children: children !== undefined ? enhance(route, children) : null
       }
     };
   }, {});
