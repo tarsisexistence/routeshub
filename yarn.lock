@@ -467,7 +467,7 @@
   dependencies:
     find-up "^2.1.0"
 
-"@compodoc/compodoc@~1.1.7":
+"@compodoc/compodoc@1.1.7":
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/@compodoc/compodoc/-/compodoc-1.1.7.tgz#4c5f04a72291a6db73d8f294cb1ee79632619b96"
   integrity sha512-bTqkv75T9b+3OxG517YL+5B0npAG0Q5nOMAk562Idr/fICTTHQ/xzSBsTptZ4QqYmtzRMV1OqOlk74FXfGPZWw==
@@ -10424,7 +10424,7 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-yarn@~1.13.0:
+yarn@1.13.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.13.0.tgz#affa9c956739548024068532a902cf18c9cb523f"
   integrity sha512-Unfw2eefv8imt4ZMPhvFVP44WCz38huDxkHs+Yqrx4wBTK75Tr0mh3V4rh+2Nw5iQq0rcM/VafotCZo9qTb5DA==

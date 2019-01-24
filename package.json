@@ -44,7 +44,7 @@
     "@angular/language-service": "7.2.2",
     "@commitlint/cli": "7.3.2",
     "@commitlint/config-conventional": "7.3.1",
-    "@compodoc/compodoc": "~1.1.7",
+    "@compodoc/compodoc": "1.1.7",
     "@types/jasmine": "2.8.14",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "8.9.5",
@@ -70,6 +70,6 @@
     "tslint": "5.12.1",
     "tslint-config-prettier": "1.17.0",
     "typescript": "3.1.6",
-    "yarn": "~1.13.0"
+    "yarn": "1.13.0"
   }
 }
