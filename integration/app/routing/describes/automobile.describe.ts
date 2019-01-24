@@ -1,4 +1,4 @@
-import { BaseRoute, Routes } from 'routeshub';
+import { Describes, Root } from 'routeshub';
 
 /**
  * Declares route that would be used
@@ -13,12 +13,12 @@ export const automobile = {
  * Declares a type which contains
  * only one route with 'root' key
  */
-export type AutomobileRoute = BaseRoute;
+export type AutomobileRoute = Root;
 
 /**
  * Declares routes of its own module
  */
-export const automobileRoute: Routes<AutomobileRoute> = {
+export const automobileRoute: Describes<AutomobileRoute> = {
   root: {
     path: ''
   }

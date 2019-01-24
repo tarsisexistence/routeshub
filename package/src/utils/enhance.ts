@@ -1,5 +1,5 @@
 import { indexer } from './indexer';
-import { Params, Routes, Slice, Structure } from '../interfaces';
+import { Params, Describes, Slice, Structure } from '../interfaces';
 
 /**
  * Core function
@@ -8,7 +8,7 @@ import { Params, Routes, Slice, Structure } from '../interfaces';
  */
 export function enhance<T, C = {}>(
   parentSlice: Structure | null,
-  routes: Routes<T, C | {}>
+  routes: Describes<T, C | {}>
 ): Slice<T> {
   return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
     const { path, children, lazyPath } = routes[routeName];

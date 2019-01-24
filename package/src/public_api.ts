@@ -1,4 +1,4 @@
-export { BaseRoute, Route, Routes, Slice, Slices } from './interfaces';
+export { Root, Describe, Describes, Slice, Slices } from './interfaces';
 
 export { createRoot } from './createRoot';
 export { createFeature } from './createFeature';

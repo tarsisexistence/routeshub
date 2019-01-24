@@ -1,6 +1,6 @@
 import { createFeature, Slice } from 'routeshub';
 
-import { bikeRoute, BikeRoute } from '../routes';
+import { bikeRoute, BikeRoute } from '../describes';
 import { appSlice } from './app.slice';
 
 /**

@@ -1,24 +1,24 @@
-import { BaseRoute, Routes } from 'routeshub';
+import { Describes, Root } from 'routeshub';
 
 /**
  * Declares route that would be used
  * as navigator to the own module
  */
-export const bike = {
-  path: 'bikes',
-  lazyPath: 'app/views/bike/bike.module#BikeModule'
+export const bolid = {
+  path: 'bolids',
+  lazyPath: 'app/views/bolid/bolid.module#BolidModule'
 };
 
 /**
  * Declares a type which contains
  * only one route with 'root' key
  */
-export type BikeRoute = BaseRoute;
+export type BolidRoute = Root;
 
 /**
  * Declares routes of its own module
  */
-export const bikeRoute: Routes<BikeRoute> = {
+export const bolidRoute: Describes<BolidRoute> = {
   root: {
     path: ''
   }

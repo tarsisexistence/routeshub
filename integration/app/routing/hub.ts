@@ -7,7 +7,7 @@ import {
   AutomobileRoute,
   BikeRoute,
   BolidRoute
-} from './routes';
+} from './describes';
 
 import {
   aboutSlice as about,

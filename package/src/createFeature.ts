@@ -1,4 +1,4 @@
-import { Routes, Slice, State, Structure } from './interfaces';
+import { Describes, Slice, State, Structure } from './interfaces';
 import { enhance } from './utils';
 import { state, updateState } from './state';
 
@@ -8,7 +8,7 @@ import { state, updateState } from './state';
  */
 export function createFeature<T, C = {}>(
   parentRoute: Structure,
-  routes: Routes<T>
+  routes: Describes<T>
 ): Slice<T & C> {
   const feature: Slice<T> = enhance<T, C>(parentRoute, routes);
   const updatedRouteState: State<Slice<T, C | {}>> = updateState<T>(

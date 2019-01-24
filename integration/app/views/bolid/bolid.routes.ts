@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { BolidComponent } from './bolid.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bolidRoute } from '~app/routing/routes';
+import { bolidRoute } from '~app/routing/describes';
 
 /**
  * Declares routes on BolidModule level
