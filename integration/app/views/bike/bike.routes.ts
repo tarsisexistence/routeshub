@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { BikeComponent } from './bike.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bikeRoute } from '~app/routing/describes';
+import { bikeRoutes } from '~app/routing/describes';
 
 /**
  * Declares routes on BikeModule level
@@ -13,7 +13,7 @@ import { bikeRoute } from '~app/routing/describes';
  */
 export const routes = [
   {
-    path: bikeRoute.root.path,
+    path: bikeRoutes.root.path,
     component: BikeComponent,
     resolve: { vehicles: VehiclesResolver }
   }

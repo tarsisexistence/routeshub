@@ -4,7 +4,7 @@ import { Describes, Root } from 'routeshub';
  * Declares route that would be used
  * as navigator to the own module
  */
-export const automobile = {
+export const automobileRoute = {
   path: 'automobiles',
   lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
 };
@@ -13,12 +13,12 @@ export const automobile = {
  * Declares a type which contains
  * only one route with 'root' key
  */
-export type AutomobileRoute = Root;
+export type AutomobileRoutes = Root;
 
 /**
  * Declares routes of its own module
  */
-export const automobileRoute: Describes<AutomobileRoute> = {
+export const automobileRoutes: Describes<AutomobileRoutes> = {
   root: {
     path: ''
   }

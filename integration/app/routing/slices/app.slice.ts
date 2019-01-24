@@ -1,6 +1,6 @@
 import { createRoot } from 'routeshub';
 
-import { AppChildrenRoute, appRoute, AppRoute } from '../describes';
+import { AppChildrenRoutes, appRoutes, AppRoutes } from '../describes';
 
 /**
  * Creates and contains
@@ -8,4 +8,4 @@ import { AppChildrenRoute, appRoute, AppRoute } from '../describes';
  *
  * First interaction with routeshub
  */
-export const appSlice = createRoot<AppRoute, AppChildrenRoute>(appRoute);
+export const appSlice = createRoot<AppRoutes, AppChildrenRoutes>(appRoutes);

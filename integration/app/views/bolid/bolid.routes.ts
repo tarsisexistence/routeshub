@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { BolidComponent } from './bolid.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bolidRoute } from '~app/routing/describes';
+import { bolidRoutes } from '~app/routing/describes';
 
 /**
  * Declares routes on BolidModule level
@@ -13,7 +13,7 @@ import { bolidRoute } from '~app/routing/describes';
  */
 export const routes = [
   {
-    path: bolidRoute.root.path,
+    path: bolidRoutes.root.path,
     component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }
   }

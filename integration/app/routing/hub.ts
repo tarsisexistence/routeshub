@@ -1,12 +1,12 @@
 import { Slices } from 'routeshub';
 
 import {
-  AboutRoute,
-  AppChildrenRoute,
-  AppRoute,
-  AutomobileRoute,
-  BikeRoute,
-  BolidRoute
+  AboutRoutes,
+  AppChildrenRoutes,
+  AppRoutes,
+  AutomobileRoutes,
+  BikeRoutes,
+  BolidRoutes
 } from './describes';
 
 import {
@@ -21,11 +21,11 @@ import {
  * Describes routes hub
  */
 export interface Hub {
-  app: AppRoute & AppChildrenRoute;
-  about: AboutRoute;
-  automobile: AutomobileRoute;
-  bike: BikeRoute;
-  bolid: BolidRoute;
+  app: AppRoutes & AppChildrenRoutes;
+  about: AboutRoutes;
+  automobile: AutomobileRoutes;
+  bike: BikeRoutes;
+  bolid: BolidRoutes;
 }
 
 /**

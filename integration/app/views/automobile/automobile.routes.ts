@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { AutomobileComponent } from './automobile.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { automobileRoute } from '~app/routing/describes';
+import { automobileRoutes } from '~app/routing/describes';
 
 /**
  * Declares routes on AutomobileModule level
@@ -13,7 +13,7 @@ import { automobileRoute } from '~app/routing/describes';
  */
 export const routes = [
   {
-    path: automobileRoute.root.path,
+    path: automobileRoutes.root.path,
     component: AutomobileComponent,
     resolve: { vehicles: VehiclesResolver }
   }

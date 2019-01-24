@@ -1,13 +1,13 @@
 import { createFeature, Slice } from 'routeshub';
 
-import { bolidRoute, BolidRoute } from '../describes';
+import { bolidRoutes, BolidRoutes } from '../describes';
 import { appSlice } from './app.slice';
 
 /**
  * Creates feature routes
  * through parent in the root
  */
-export const bolidSlice: Slice<BolidRoute> = createFeature<BolidRoute>(
+export const bolidSlice: Slice<BolidRoutes> = createFeature<BolidRoutes>(
   appSlice.bolid,
-  bolidRoute
+  bolidRoutes
 );
