@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { Slices } from 'routeshub';
-
 import {
   aboutSlice,
+  appSlice,
   automobileSlice,
   bikeSlice,
   bolidSlice
@@ -32,6 +31,7 @@ export class HeaderComponent implements OnInit {
      */
     this.slices = {
       aboutSlice,
+      appSlice,
       automobileSlice,
       bikeSlice,
       bolidSlice
