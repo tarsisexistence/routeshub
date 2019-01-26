@@ -30,7 +30,9 @@ const appChildrenRoute: RoutesNotes<AppChildrenRoutes> = {
  * Declares a type which contains
  * only one route with 'root' key
  */
-export type AppRoutes = Root;
+export interface AppRoutes extends Root {
+  notFound: RouteNote;
+}
 
 /**
  * Declares App route
@@ -41,5 +43,8 @@ export const appRoutes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
   root: {
     path: '',
     children: appChildrenRoute
+  },
+  notFound: {
+    path: '**'
   }
 };

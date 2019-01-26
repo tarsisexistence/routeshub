@@ -42,5 +42,9 @@ export const routes = [
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: appRoutes.notFound.path,
+    redirectTo: appRoutes.root.path
   }
 ];

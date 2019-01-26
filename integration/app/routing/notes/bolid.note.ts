@@ -1,4 +1,4 @@
-import { RoutesNotes, Root } from 'routeshub';
+import { Root, RoutesNotes } from 'routeshub';
 
 /**
  * Declares route that would be used

@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
   public ngOnInit(): void {
     /**
      * Nothing special.
-     * Fill in slices and
-     * component gets access to use
+     * Fill in slices.
+     * Component will get access to use
      * slices in template
      */
     this.slices = {
