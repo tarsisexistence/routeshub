@@ -1,4 +1,4 @@
-import { Describes, Slice, State } from './interfaces';
+import { RoutesNotes, Slice, State } from './interfaces';
 import { enhance } from './utils';
 import { state, updateState } from './state';
 
@@ -8,7 +8,7 @@ import { state, updateState } from './state';
  * Entry point for hub
  */
 export function createRoot<T, C = {}>(
-  routes: Describes<T>,
+  routes: RoutesNotes<T>,
   routeName: string = 'app'
 ): Slice<T & C> {
   if (state.value !== null) {

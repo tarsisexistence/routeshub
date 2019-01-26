@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { BikeComponent } from './bike.component';
 import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bikeRoutes } from '~app/routing/describes';
+import { bikeRoutes } from '~app/routing/notes';
 
 /**
  * Declares routes on BikeModule level

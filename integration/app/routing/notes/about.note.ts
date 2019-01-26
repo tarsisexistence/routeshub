@@ -1,4 +1,4 @@
-import { Describes, Root } from 'routeshub';
+import { Root, RoutesNotes } from 'routeshub';
 
 /**
  * Declares route that would be used
@@ -18,7 +18,7 @@ export type AboutRoutes = Root;
 /**
  * Declares routes of its own module
  */
-export const aboutRoutes: Describes<AboutRoutes> = {
+export const aboutRoutes: RoutesNotes<AboutRoutes> = {
   root: {
     path: ''
   }

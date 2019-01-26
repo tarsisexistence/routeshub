@@ -1,6 +1,6 @@
 import { createFeature, Slice } from 'routeshub';
 
-import { bolidRoutes, BolidRoutes } from '../describes';
+import { bolidRoutes, BolidRoutes } from '../notes';
 import { appSlice } from './app.slice';
 
 /**

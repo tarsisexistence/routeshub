@@ -1,24 +1,24 @@
-import { Describe, Describes, Root } from 'routeshub';
+import { Root, RouteNote, RoutesNotes } from 'routeshub';
 
-import { aboutRoute } from './about.describe';
-import { automobileRoute } from './automobile.describe';
-import { bikeRoute } from './bike.describe';
-import { bolidRoute } from './bolid.describe';
+import { aboutRoute } from './about.note';
+import { automobileRoute } from './automobile.note';
+import { bikeRoute } from './bike.note';
+import { bolidRoute } from './bolid.note';
 
 /**
  * Describes App children route
  */
 export interface AppChildrenRoutes extends Root {
-  about: Describe;
-  automobile: Describe;
-  bike: Describe;
-  bolid: Describe;
+  about: RouteNote;
+  automobile: RouteNote;
+  bike: RouteNote;
+  bolid: RouteNote;
 }
 
 /**
  * Declares App children routes
  */
-const appChildrenRoute: Describes<AppChildrenRoutes> = {
+const appChildrenRoute: RoutesNotes<AppChildrenRoutes> = {
   root: { path: '' },
   about: aboutRoute,
   automobile: automobileRoute,
@@ -37,7 +37,7 @@ export type AppRoutes = Root;
  * with one 'root' key
  * and children in the body
  */
-export const appRoutes: Describes<AppRoutes, AppChildrenRoutes> = {
+export const appRoutes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
   root: {
     path: '',
     children: appChildrenRoute

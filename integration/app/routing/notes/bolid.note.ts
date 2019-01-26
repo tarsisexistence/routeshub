@@ -1,4 +1,4 @@
-import { Describes, Root } from 'routeshub';
+import { RoutesNotes, Root } from 'routeshub';
 
 /**
  * Declares route that would be used
@@ -18,7 +18,7 @@ export type BolidRoutes = Root;
 /**
  * Declares routes of its own module
  */
-export const bolidRoutes: Describes<BolidRoutes> = {
+export const bolidRoutes: RoutesNotes<BolidRoutes> = {
   root: {
     path: ''
   }

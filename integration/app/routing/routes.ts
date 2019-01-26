@@ -1,5 +1,5 @@
 import { hub } from './hub';
-import { appRoutes } from './describes';
+import { appRoutes } from './notes';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { ViewComponent } from '../core/containers/view/view.component';
 

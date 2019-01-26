@@ -1,6 +1,6 @@
 import { createRoot } from 'routeshub';
 
-import { AppChildrenRoutes, appRoutes, AppRoutes } from '../describes';
+import { AppChildrenRoutes, appRoutes, AppRoutes } from '../notes';
 
 /**
  * Creates and contains

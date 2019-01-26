@@ -3,17 +3,18 @@
  * Extends interface with root
  */
 export interface Root {
-  root: Describe;
+  root: RouteNote;
 }
 
 /**
- * Describes a basic route
+ * Describes a basic route record via required path
+ * and other optional parameters
  */
-export interface Describe<C = {}> {
+export interface RouteNote<C = {}> {
   path: string;
   id?: number;
   component?: any;
-  children?: Describes<C>;
+  children?: RoutesNotes<C>;
   lazyPath?: string;
   state?: string[];
 }
@@ -21,4 +22,4 @@ export interface Describe<C = {}> {
 /**
  * Describes an object of basic routes
  */
-export type Describes<T, C = {}> = { [key in keyof T]: Describe<C> };
+export type RoutesNotes<T, C = {}> = { [key in keyof T]: RouteNote<C> };
