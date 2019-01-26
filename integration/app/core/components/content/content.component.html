@@ -1,8 +1,14 @@
 <nz-content class="content">
+
   <div class="breadcrumbs">
-    <div *ngFor="let vehicle of vehicles; let index = index">
-      <span class="divider" *ngIf="index !== 0">/</span>
-      <span>{{ vehicle }}</span>
+    <div class="brand"
+      *ngFor="let vehicle of vehicles">
+      <span class="title">
+        {{ vehicle.brand }}
+      </span>
+      <img class="image"
+           [src]="vehicle.logo"
+           [alt]="vehicle.brand"/>
     </div>
   </div>
 

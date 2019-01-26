@@ -1,6 +1,6 @@
 ## Submitting Pull Requests
 
-If you're changing the modules being used please create an issue first.
+If you're changing the code being used please create an issue first.
 
 ## Submitting bug reports
 

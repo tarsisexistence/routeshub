@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentComponent {
-  @Input() public vehicles: string[];
+  @Input() public vehicles: { brand: string; logo: string }[];
 }

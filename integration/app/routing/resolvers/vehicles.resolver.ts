@@ -14,11 +14,12 @@ import { Vehicle } from '~app/core/interfaces/vehicle';
  * Declares resolver that solves business logic problems
  */
 @Injectable()
-export class VehiclesResolver implements Resolve<string[] | Vehicle[]> {
+export class VehiclesResolver
+  implements Resolve<{ brand: string; logo: string }[] | Vehicle[]> {
   public resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<string[] | Vehicle[]> {
+  ): Observable<{ brand: string; logo: string }[] | Vehicle[]> {
     const isTypes = route.routeConfig.resolve.vehicles === undefined;
     const vehicle = state.url.slice(1);
     const isVehicle = Object.keys(vehicles).includes(vehicle);
@@ -28,7 +29,13 @@ export class VehiclesResolver implements Resolve<string[] | Vehicle[]> {
     }
 
     const types = vehicles[vehicle].reduce(
-      (acc, item) => [...acc, item.brand],
+      (acc, item) => [
+        ...acc,
+        {
+          brand: item.brand,
+          logo: item.logo
+        }
+      ],
       []
     );
 

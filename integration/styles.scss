@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+.vehicles {
+  width: 100%;
+
+  .vehicle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .title {
+    color: #022648;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .image {
+    width: auto;
+    height: 200px;
+  }
+}

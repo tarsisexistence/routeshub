@@ -1,5 +1,5 @@
-<ul>
-  <li *ngFor="let bolid of vehicles">
-    <p>{{bolid.name}}</p>
-  </li>
+<ul class="vehicles">
+  <app-vehicle *ngFor="let bolid of vehicles"
+               [vehicle]="bolid">
+  </app-vehicle>
 </ul>

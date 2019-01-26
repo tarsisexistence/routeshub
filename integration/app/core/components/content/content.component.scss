@@ -7,6 +7,20 @@
   margin: 16px 0;
 }
 
-.divider {
-  margin: 0 3px;
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 5px;
+}
+
+.title {
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.image {
+  width: 60px;
+  height: 35px;
+  margin-top: 5px;
 }

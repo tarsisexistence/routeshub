@@ -1,5 +1,5 @@
-<ul>
-  <li *ngFor="let bike of vehicles">
-    <p>{{bike.name}}</p>
-  </li>
+<ul class="vehicles">
+  <app-vehicle *ngFor="let bike of vehicles"
+               [vehicle]="bike">
+  </app-vehicle>
 </ul>
