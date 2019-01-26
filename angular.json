@@ -153,5 +153,8 @@
       }
     }
   },
+  "cli": {
+    "packageManager": "yarn"
+  },
   "defaultProject": "routeshub"
 }
