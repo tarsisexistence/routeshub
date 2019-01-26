@@ -13,13 +13,7 @@ export function nextStateValue<T, C = {}>(
   routeName: string,
   routes: Slice<T>
 ): State<Slice<T, C>> {
-  const children = Object.keys(routes).reduce((acc, routeChildrenName) => {
-    if (!routes[routeChildrenName].children) {
-      return acc;
-    }
-
-    return { ...acc, ...routes[routeChildrenName].children };
-  }, {});
+  const children = detectChildren(routes);
   const hasChildren = Object.keys(children).length > 0;
 
   // tslint:disable-next-line
@@ -27,3 +21,15 @@ export function nextStateValue<T, C = {}>(
     [routeName]: hasChildren ? children : routes
   }) as State<Slice<T, C>>;
 }
+
+/**
+ * Detects routes on children routes
+ */
+const detectChildren = (routes) =>
+  Object.keys(routes).reduce((acc, routeChildrenName) => {
+    if (!routes[routeChildrenName].children) {
+      return acc;
+    }
+
+    return { ...acc, ...routes[routeChildrenName].children };
+  }, {});
