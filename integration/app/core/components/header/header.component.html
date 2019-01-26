@@ -1,5 +1,10 @@
 <nz-header>
-  <div class="logo"></div>
+  <div class="logo">
+    <img class="image"
+         src="/assets/logo/white.png"
+         alt="logo"/>
+  </div>
+
   <ul class="menu"
       nz-menu
       [nzTheme]="'dark'"
@@ -8,10 +13,9 @@
     <!--So, here we are -->
     <!--Feel free to use as you want-->
     <!--But array-like record is preferred-->
+    <li nz-menu-item [routerLink]="slices.aboutSlice.root.state">About</li>
     <li nz-menu-item [routerLink]="slices.automobileSlice.root.state">Automobiles</li>
     <li nz-menu-item [routerLink]="slices.bikeSlice.root.state">Bikes</li>
-    <li nz-menu-item [routerLink]="slices.bolidSlice.root.state">Bolids</li>
-    <!--<li nz-menu-item [routerLink]="slices.aboutSlice.root.state">About</li>-->
-    <li nz-menu-item routerLink="{{slices.aboutSlice.root.state.join('/')}}">About</li>
+    <li nz-menu-item routerLink="{{slices.bolidSlice.root.state.join('/')}}">Bolids</li>
   </ul>
 </nz-header>
