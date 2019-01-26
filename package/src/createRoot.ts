@@ -1,6 +1,6 @@
 import { RoutesNotes, Slice, State } from './interfaces';
 import { enhance } from './utils';
-import { state, updateState } from './state';
+import { nextStateValue, state } from './state';
 
 // TODO: could we provide fully dynamic route name?
 /**
@@ -16,7 +16,7 @@ export function createRoot<T, C = {}>(
   }
 
   const root: Slice<T> = enhance<T, C>(null, routes);
-  const initialRoutesState: State<Slice<T, C | {}>> = updateState<T>(
+  const initialRoutesState: State<Slice<T, C | {}>> = nextStateValue<T>(
     routeName,
     root
   );
