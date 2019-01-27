@@ -1,4 +1,4 @@
-# Why
+# Principles
 
 Have you ever heard of state management, but only for routes? - I don't ❓ 
 
@@ -8,7 +8,7 @@ Read the principles and benefits below to understand what is it ✅
 
 ## 🕯Pattern
 
-Routeshub offers a few ways to configure and manage routes as consistently and as clearly as possible, which allows you to stop worrying about routes and do what is really important.
+Routeshub offers a few approaches to configure and manage routes as consistently and as clearly as possible, which allows you to stop worrying about routes and do what is really important.
 
 ## 🕯Freshness 
 
@@ -26,5 +26,9 @@ So, every time you are about to figure out what is in the slice, you will find i
 
 ## 🕯Looking for the best
 
-This project is not an ideal and final. Just a step for the better. A step to help developers build applications better, faster and calmer. So I am open to any suggestions that help with that goal.
+This project is not an ideal and final. 
+
+Just a step for the better. A step to help developers build applications better, faster and calmer. 
+
+So I am open to any suggestions that help with that goal.
 

@@ -1,6 +1,6 @@
 # Installation
 
-To get started, install the package from **npm**  👨🚒 
+To get started, install the package from **npm** 🦸♂ 
 
 ```bash
 npm install routeshub --save
@@ -12,5 +12,5 @@ Or, if you are using **yarn** 🧶
 yarn add routeshub
 ```
 
-That's it 👍 
+That's it. Enjoy! 👍 
 

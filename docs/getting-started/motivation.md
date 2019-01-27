@@ -12,8 +12,6 @@ So, I had tones of thoughts, but ultimately, I came up with a solution that simu
 
 Looks familiar, right?
 
-{% code-tabs %}
-{% code-tabs-item title="app.routes.ts" %}
 ```typescript
 export const routes: Routes = [
   {
@@ -35,8 +33,6 @@ export const routes: Routes = [
   }
 ];
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ```markup
 <a [routerLink]="['/shop', 'accessories']">Accessories</a>
@@ -48,8 +44,6 @@ Okay, but what if I say that you can do the same thing in a more convenient and 
 
 Let's get a look 🔭 
 
-{% code-tabs %}
-{% code-tabs-item title="app.routes.ts" %}
 ```typescript
 export const routes: Routes = [
   {
@@ -70,8 +64,6 @@ export const routes: Routes = [
   }
 ];
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
 
 ```markup
 <a [routerLink]="shop.accessories.path">Accessories</a>
