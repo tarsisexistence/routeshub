@@ -20,8 +20,8 @@ export interface Params {
 }
 
 /**
- * Describes hub's state
+ * Describes a store of the hub
  */
-export interface State<E> {
+export interface Store<E> {
   [key: string]: E;
 }
