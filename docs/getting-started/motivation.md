@@ -2,11 +2,11 @@
 
 ## Foreword 🤔 
 
-Have you suffered because of the _magic strings_? I did 😤 
+Have you ever suffered because of the _magic strings_? I did 😤 
 
-Actually I was puzzled and stumped many times when I tried to come up with a convenient solution that would solve my problems 😵 
+Actually I was puzzled and stumped many times when I tried to come up with a convenient way out that could solve my problems 😵 
 
-So, I had tones of thoughts, but ultimately, I came up with a solution that simultaneously solves the problems of routes with declaration, navigation and provides general control, predictable results and stability 😌 
+So, I had tones of thoughts, but ultimately, I came up with a solution that simultaneously solves the problems of routes with declaration, navigation, and provides general control, predictable results and stability 😌 
 
 ## Examples 👨💻 
 
@@ -42,7 +42,7 @@ export const routes: Routes = [
 
 Okay, but what if I say that you can do the same thing in a more convenient and manageable manner? 🤔 
 
-Let's get a look 🔭 
+Let's take a look 🔭 
 
 ```typescript
 export const routes: Routes = [
@@ -71,9 +71,9 @@ export const routes: Routes = [
 
 ## Aftertaste
 
-You may ask: “_Okay, Max, but it all looks strange, it's easy to get confused in these variables, and you still declare so-called magic strings somewhere. So where is the real impact?_ " 😕🤨 
+You may ask: “_Okay, but it all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact?_ " 😕🤨 
 
-And my answer is: "_Do not hurry!_ " 😉
+And the answer is: "_Do not hurry!_ " 😉
 
-Benefits are worth it. Be sure to read the next section 👀 
+Benefits worth it. Be sure to read the next section 👀 
 

@@ -2,7 +2,7 @@
 
 To get started, install the package from **npm** 🦸♂ 
 
-```bash
+```text
 npm install routeshub --save
 ```
 

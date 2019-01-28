@@ -26,7 +26,7 @@ So, every time you are about to figure out what is in the slice, you will find i
 
 ## 🕯Looking for the best
 
-This project is not an ideal and final. 
+This project is neither ideal nor final. 
 
 Just a step for the better. A step to help developers build applications better, faster and calmer. 
 
