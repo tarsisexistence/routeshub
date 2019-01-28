@@ -1,4 +1,4 @@
-import { Root, RoutesNotes } from 'routeshub';
+import { RootRoute, RoutesNotes } from 'routeshub';
 
 /**
  * Declares route that would be used
@@ -13,7 +13,7 @@ export const bolidRoute = {
  * Declares a type which contains
  * only one route with 'root' key
  */
-export type BolidRoutes = Root;
+export type BolidRoutes = RootRoute;
 
 /**
  * Declares routes of its own module

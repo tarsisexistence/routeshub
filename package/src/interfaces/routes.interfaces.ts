@@ -2,7 +2,7 @@
  * Allows to describe the base route
  * Extends interface with root
  */
-export interface Root {
+export interface RootRoute {
   root: RouteNote;
 }
 
