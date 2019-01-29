@@ -1,5 +1,7 @@
 import { indexer } from './indexer';
-import { Params, RoutesNotes, Slice, Structure } from '../interfaces';
+import { RoutesNotes, Slice, Structure } from '../interfaces';
+import { checkMultiPath, splitPath } from './path';
+import { setState, stateFn } from './state';
 
 /**
  * Core function
@@ -11,26 +13,13 @@ export function enhance<T, C = {}>(
   routes: RoutesNotes<T, C | {}>
 ): Slice<T> {
   return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
-    const { children, lazyPath } = routes[routeName];
-    let { path } = routes[routeName];
-    const id = indexer();
-    const parentId = parentSlice !== null ? parentSlice.id : null;
-
-    if (checkMultiPath(path)) {
-      path = splitPath(path);
-    }
-
-    const state =
-      parentSlice !== null
-        ? setNotEmptyPath(parentSlice.state, path)
-        : setNotEmptyPath(['/'], path);
-
+    const { children, path, lazyPath } = routes[routeName];
     const route = {
-      id,
-      parentId,
-      state,
+      id: indexer(),
+      parentId: parentSlice !== null ? parentSlice.id : null,
+      state: setState(parentSlice, path),
       stateFn,
-      path,
+      path: checkMultiPath(path) ? splitPath(path) : path,
       lazyPath,
       routeName
     };
@@ -43,67 +32,4 @@ export function enhance<T, C = {}>(
       }
     };
   }, {});
-}
-
-/**
- * State function that takes input args and outputs dynamic state value
- */
-function stateFn(params?: Params, ...otherParams: Params[]): string[] {
-  if (!params) {
-    return this.state;
-  }
-
-  const parameters =
-    otherParams.length === 0 ? params : reduceParams(params, otherParams);
-
-  return handleState(parameters, this.state);
-}
-
-/**
- * Replaces property with value
- * Helps stateFn generate dynamic values
- */
-const handleState = (params: Params, state?: string[]): string[] =>
-  Object.keys(params).reduce(
-    (accState: string[], param: string): string[] =>
-      accState.map(
-        (slice: string): string =>
-          slice === `:${param}` ? params[param] : slice
-      ),
-    state
-  );
-
-/**
- * Absorbs and gives out together params
- */
-const reduceParams = (params: Params, restParams: Params[]): Params =>
-  restParams.reduce(
-    (accParams: Params, param: Params): Params => ({
-      ...accParams,
-      ...param
-    }),
-    params
-  );
-
-/**
- * Prevents to record empty state paths
- */
-function setNotEmptyPath(state: string[], path: string): string[] {
-  return path !== '' ? [...state, path] : state;
-}
-
-/**
- * Checks multi path in each path
- */
-function checkMultiPath(path: string): boolean {
-  const slashId = path ? path.indexOf('/') : -1;
-
-  return slashId !== -1;
-}
-
-/**
- * Prevents to record multi path in state
- */
-function splitPath(path: string): string[] {
-  return path.split('/').filter((state: string) => !!state);
 }
