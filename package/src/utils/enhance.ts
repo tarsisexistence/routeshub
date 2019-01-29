@@ -11,9 +11,15 @@ export function enhance<T, C = {}>(
   routes: RoutesNotes<T, C | {}>
 ): Slice<T> {
   return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
-    const { path, children, lazyPath } = routes[routeName];
+    const { children, lazyPath } = routes[routeName];
+    let { path } = routes[routeName];
     const id = indexer();
     const parentId = parentSlice !== null ? parentSlice.id : null;
+
+    if (checkMultiPath(path)) {
+      path = splitPath(path);
+    }
+
     const state =
       parentSlice !== null
         ? setNotEmptyPath(parentSlice.state, path)
@@ -42,16 +48,13 @@ export function enhance<T, C = {}>(
 /**
  * State function that takes input args and outputs dynamic state value
  */
-function stateFn(params?: Params, ...rest: Params[]): string[] {
+function stateFn(params?: Params, ...otherParams: Params[]): string[] {
   if (!params) {
-    return;
+    return this.state;
   }
 
-  if (rest.length === 0) {
-    return handleState(params, this.state);
-  }
-
-  const parameters = rest.length === 0 ? params : reduceParams(params, rest);
+  const parameters =
+    otherParams.length === 0 ? params : reduceParams(params, otherParams);
 
   return handleState(parameters, this.state);
 }
@@ -87,4 +90,20 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
  */
 function setNotEmptyPath(state: string[], path: string): string[] {
   return path !== '' ? [...state, path] : state;
+}
+
+/**
+ * Checks multi path in each path
+ */
+function checkMultiPath(path: string): boolean {
+  const slashId = path ? path.indexOf('/') : -1;
+
+  return slashId !== -1;
+}
+
+/**
+ * Prevents to record multi path in state
+ */
+function splitPath(path: string): string[] {
+  return path.split('/').filter((state: string) => !!state);
 }
