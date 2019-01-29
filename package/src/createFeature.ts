@@ -1,6 +1,6 @@
-import { RoutesNotes, Slice, Store, Structure } from './interfaces';
+import { Hub, RoutesNotes, Slice, Structure } from './interfaces';
 import { enhance } from './utils';
-import { nextStateValue, store } from './store';
+import { hub, nextStateValue } from './hub';
 
 /**
  * Creates feature route
@@ -11,11 +11,11 @@ export function createFeature<T, C = {}>(
   routes: RoutesNotes<T>
 ): Slice<T & C> {
   const feature: Slice<T> = enhance<T, C>(parentRoute, routes);
-  const updatedRouteState: Store<Slice<T, C | {}>> = nextStateValue<T>(
+  const updatedRouteState: Hub<Slice<T, C | {}>> = nextStateValue<T>(
     parentRoute.routeName,
     feature
   );
-  store.next(updatedRouteState);
+  hub.next(updatedRouteState);
 
-  return store.value[parentRoute.routeName];
+  return hub.value[parentRoute.routeName];
 }

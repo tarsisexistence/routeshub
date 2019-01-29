@@ -1,10 +1,11 @@
 import { BehaviorSubject } from 'rxjs';
-import { Slice, Store } from './interfaces';
+
+import { Hub, Slice } from './interfaces';
 
 /**
  * it stores the states of all routes on first level
  */
-export const store: BehaviorSubject<Store<any>> = new BehaviorSubject(null);
+export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
 
 /**
  * Updates state via routes or children routes
@@ -12,17 +13,17 @@ export const store: BehaviorSubject<Store<any>> = new BehaviorSubject(null);
 export function nextStateValue<T, C = {}>(
   routeName: string,
   routes: Slice<T>
-): Store<Slice<T, C>> {
-  const entity = entitify<T>(routes);
+): Hub<Slice<T, C>> {
+  const slice = entitify<T>(routes);
 
   // tslint:disable-next-line
-  return Object.assign({}, store.value, {
-    [routeName]: entity
-  }) as Store<Slice<T, C>>;
+  return Object.assign({}, hub.value, {
+    [routeName]: slice
+  }) as Hub<Slice<T, C>>;
 }
 
 /**
- * Detects routes on children routes
+ * Detects and handles routes of children
  */
 const entitify = <T>(routes: Slice<T>) =>
   Object.keys(routes).reduce((acc, routeName) => {

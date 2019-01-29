@@ -20,8 +20,8 @@ export interface Params {
 }
 
 /**
- * Describes a store of the hub
+ * Describes a store-like essence
  */
-export interface Store<E> {
+export interface Hub<E> {
   [key: string]: E;
 }

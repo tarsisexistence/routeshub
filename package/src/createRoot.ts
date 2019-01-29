@@ -1,6 +1,6 @@
-import { RoutesNotes, Slice, Store } from './interfaces';
+import { Hub, RoutesNotes, Slice } from './interfaces';
 import { enhance } from './utils';
-import { nextStateValue, store } from './store';
+import { hub, nextStateValue } from './hub';
 
 // TODO: could we provide fully dynamic route name?
 /**
@@ -11,17 +11,17 @@ export function createRoot<T, C = {}>(
   routes: RoutesNotes<T>,
   routeName: string = 'app'
 ): Slice<T & C> {
-  if (store.value !== null) {
+  if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
   }
 
-  const root: Slice<T> = enhance<T, C>(null, routes);
-  const initialRoutesState: Store<Slice<T, C | {}>> = nextStateValue<T>(
+  const rootSlice: Slice<T> = enhance<T, C>(null, routes);
+  const initialRoutesState: Hub<Slice<T, C | {}>> = nextStateValue<T>(
     routeName,
-    root
+    rootSlice
   );
 
-  store.next(initialRoutesState);
+  hub.next(initialRoutesState);
 
-  return store.value[routeName];
+  return hub.value[routeName];
 }
