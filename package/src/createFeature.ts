@@ -1,5 +1,5 @@
 import { Hub, RoutesNotes, Slice, Structure } from './interfaces';
-import { enhance } from './utils';
+import { serialize } from './utils/serialize';
 import { hub, nextStateValue } from './hub';
 
 /**
@@ -10,7 +10,7 @@ export function createFeature<T, C = {}>(
   parentRoute: Structure,
   routes: RoutesNotes<T>
 ): Slice<T & C> {
-  const feature: Slice<T> = enhance<T, C>(parentRoute, routes);
+  const feature: Slice<T> = serialize<T, C>(parentRoute, routes);
   const updatedRouteState: Hub<Slice<T, C | {}>> = nextStateValue<T>(
     parentRoute.routeName,
     feature
