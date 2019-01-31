@@ -11,7 +11,7 @@
   "bugs": "https://github.com/maktarsis/routeshub/issues",
   "license": "MIT",
   "peerDependencies": {
-    "rxjs": "~6.3.3"
+    "rxjs": "~6.3.3 || ~6.4.0"
   },
   "keywords": [
     "angular",
