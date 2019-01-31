@@ -2,14 +2,6 @@
 # yarn lockfile v1
 
 
-"@angular-devkit/architect@0.12.3":
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.12.3.tgz#93671d6cf47a3d75104753a4e4eac4cc81a4d39d"
-  integrity sha512-nRZkuQkUMW0HS/YbVjsEA5zPMgsL4Icd0nFV2gM9vAK5X+Vzn9gZyCL1ogkOsJNlEP6Rc/Pc6Q1PPO2p5NxPsQ==
-  dependencies:
-    "@angular-devkit/core" "7.2.3"
-    rxjs "6.3.3"
-
 "@angular-devkit/architect@0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.13.0.tgz#47a9c76ca4c01c357a8670810f29a45e906447cd"
@@ -71,15 +63,15 @@
   optionalDependencies:
     node-sass "4.11.0"
 
-"@angular-devkit/build-ng-packagr@0.12.3":
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.12.3.tgz#21f7fa31bbb53ead6c21fffda44c01419dd1ff80"
-  integrity sha512-Uct5nuQt+TWGNNcgaXqDTbi/x08GJkNgCoEmJuA0F40vfPNxLiD0ocpryMIczQ8qWNlpCb6Kdv/GEvKB42GgQw==
+"@angular-devkit/build-ng-packagr@0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.13.0.tgz#b02d4793bf6f1720f2defb5fecdca1377c0a15b0"
+  integrity sha512-Up7p300FJS7HJmZOvNZXzYsBRPqMJJKQGaOeINDPBsQFHcxIt4LQmQsqUa/4DEczR9Z2/KhlduXbNI+c7wmlgg==
   dependencies:
-    "@angular-devkit/architect" "0.12.3"
-    "@angular-devkit/core" "7.2.3"
+    "@angular-devkit/architect" "0.13.0"
+    "@angular-devkit/core" "7.3.0"
     rxjs "6.3.3"
-    semver "5.5.1"
+    semver "5.6.0"
 
 "@angular-devkit/build-optimizer@0.13.0":
   version "0.13.0"
@@ -99,17 +91,6 @@
     "@angular-devkit/architect" "0.13.0"
     "@angular-devkit/core" "7.3.0"
     rxjs "6.3.3"
-
-"@angular-devkit/core@7.2.3":
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.2.3.tgz#03fad4edcbfbf5b2f0d35a121eca45b1273b238a"
-  integrity sha512-NnN8O+97nJAxqD2zVTDlU8dSzrGCZmqYMDqDoRJJChYxAgmGwP4lhb+Jyi5D34tPxgKRTnjTOwC+G7D+WrXSDQ==
-  dependencies:
-    ajv "6.6.2"
-    chokidar "2.0.4"
-    fast-json-stable-stringify "2.0.0"
-    rxjs "6.3.3"
-    source-map "0.7.3"
 
 "@angular-devkit/core@7.3.0":
   version "7.3.0"
@@ -918,16 +899,6 @@ ajv-keywords@^3.1.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.2.0.tgz#e86b819c602cf8821ad637413698f1dec021847a"
   integrity sha1-6GuBnGAs+IIa1jdBNpjx3sAhhHo=
-
-ajv@6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.2.tgz#caceccf474bf3fc3ce3b147443711a24063cc30d"
-  integrity sha512-FBHEW6Jf5TB9MGBgUUA9XHkTbjXYfAUjY43ACMfmdMRHniyoMHjHjzD50OK8LGDWQwp4rWEsIq5kEqq7rvIM1g==
-  dependencies:
-    fast-deep-equal "^2.0.1"
-    fast-json-stable-stringify "^2.0.0"
-    json-schema-traverse "^0.4.1"
-    uri-js "^4.2.2"
 
 ajv@6.7.0, ajv@^6.1.0, ajv@^6.5.5:
   version "6.7.0"
@@ -8266,11 +8237,6 @@ semver-intersect@1.4.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
-
-semver@5.5.1:
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
-  integrity sha512-PqpAxfrEhlSUWge8dwIp4tZnQ25DIOthpiaHNIthsjEFQD6EvqUKUDM7L8O2rShkFccYo1VjJR0coWfNkCubRw==
 
 semver@~5.3.0:
   version "5.3.0"
