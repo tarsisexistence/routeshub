@@ -1,9 +1,11 @@
-import { RootRoute, RouteNote } from '../interfaces';
+import { RootRoute, RootRouteNote, RouteNote } from '../interfaces';
 
 /**
  * sets note values
  */
-export const setNote = (options: RouteNote): RouteNote => ({ ...options });
+export const setNote = <C = {}>(options: RouteNote<C>): RouteNote<C> => ({
+  ...options
+});
 
 /**
  * portable shortcut for the RootRoute cases
@@ -15,9 +17,9 @@ export const rootNote: RootRoute = {
 /**
  * flexible shortcut for the RootRoute cases
  */
-export const setRootNote = (
-  options: RouteNote = {} as RouteNote
-): RouteNote => ({
+export const setRootNote = <C = {}>(
+  options: RootRouteNote<C> = {} as RootRouteNote<C>
+): RouteNote<C> => ({
   ...options,
   path: ''
 });

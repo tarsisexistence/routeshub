@@ -4,7 +4,7 @@
  * Extends interface with root
  */
 export interface RootRoute {
-  root: RouteNote;
+  root: RootRouteNote;
 }
 
 /**
@@ -21,6 +21,21 @@ export interface RouteNote<C = {}> {
 }
 
 /**
+ * Describes a special root note
+ * and other optional parameters
+ */
+export interface RootRouteNote<C = {}> {
+  path?: string;
+  id?: number;
+  lazyPath?: string;
+  component?: any;
+  children?: RoutesNotes<C>;
+  state?: string[];
+}
+
+/**
  * Describes an object of basic routes
  */
-export type RoutesNotes<R, C = {}> = { [key in keyof R]: RouteNote<C> };
+export type RoutesNotes<R, C = {}> = {
+  [key in keyof R]: RouteNote<C> | RootRouteNote<C>
+};

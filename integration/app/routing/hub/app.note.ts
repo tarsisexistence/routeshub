@@ -1,4 +1,4 @@
-import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+import { RootRoute, RouteNote, RoutesNotes, setRootNote } from 'routeshub';
 
 import { appChildrenNotes, AppChildrenRoutes } from './app-children.note';
 
@@ -16,10 +16,9 @@ export interface AppRoutes extends RootRoute {
  * and children in the body
  */
 export const appNotes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
-  root: {
-    path: '',
+  root: setRootNote({
     children: appChildrenNotes
-  },
+  }),
   notFound: {
     path: '**'
   }
