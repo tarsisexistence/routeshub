@@ -69,11 +69,15 @@ export const routes: Routes = [
 <a [routerLink]="shop.accessories.path">Accessories</a>
 ```
 
+Full integration with example is on **Integration** section
+
+{% page-ref page="../integration/" %}
+
 ## Aftertaste
 
-You may ask: “_Okay, but it all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact?_ " 😕🤨 
+You might think __it's all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact? " 😕🤨 
 
-And the answer is: "_Do not hurry!_ " 😉
+Don't hurry 😉
 
 Benefits worth it. Be sure to read the next section 👀 
 
