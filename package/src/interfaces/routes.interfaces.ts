@@ -7,19 +7,19 @@ export interface RootRoute {
 }
 
 /**
- * Describes a basic route record via required path
+ * Describes a basic route note
  * and other optional parameters
  */
 export interface RouteNote<C = {}> {
   path: string;
   id?: number;
+  lazyPath?: string;
   component?: any;
   children?: RoutesNotes<C>;
-  lazyPath?: string;
   state?: string[];
 }
 
 /**
  * Describes an object of basic routes
  */
-export type RoutesNotes<T, C = {}> = { [key in keyof T]: RouteNote<C> };
+export type RoutesNotes<R, C = {}> = { [key in keyof R]: RouteNote<C> };
