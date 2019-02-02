@@ -12,5 +12,9 @@ Or, if you are using **yarn** 🧶
 yarn add routeshub
 ```
 
-That's it. Enjoy! 👍 
+{% hint style="warning" %}
+Make sure to read the **Integration** section to see the application of routeshub
+{% endhint %}
+
+{% page-ref page="../integration/" %}
 

@@ -1,10 +1,14 @@
 # Principles
 
-Have you ever heard of state management, but only for routes? - I don't ❓ 
+{% hint style="warning" %}
+ **Essence**
 
-Is it another state management? Essentially no ❗ 
+Have you ever heard of state management, but only for the routes? 
 
-Read the principles and benefits below to understand what is it ✅ 
+And you may ask is it another state management?
+
+Read the principles and benefits below to understand what is it 👀 
+{% endhint %}
 
 ## 🕯Pattern
 
@@ -31,4 +35,12 @@ This project is neither ideal nor final.
 Just a step for the better. A step to help developers build applications better, faster and calmer. 
 
 So I am open to any suggestions that help with that goal.
+
+{% hint style="info" %}
+ **Essence**
+
+Essentially, this is a slightly different concept from _state management_
+
+Routeshub collects and serializes module routes information to manage _state of the routes, not application._ This concept is called ~~store~~ **hub**.
+{% endhint %}
 
