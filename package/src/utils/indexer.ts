@@ -1,5 +1,6 @@
+let id = 0;
+
 /**
  * Utility function to generate unique id
  */
-export const indexer = () => indexer.count++ || 0;
-indexer.count = 0;
+export const indexer = () => id++;

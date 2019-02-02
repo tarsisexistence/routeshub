@@ -1,6 +1,6 @@
-import { Hub, RoutesNotes, Slice, Structure } from './interfaces';
-import { serialize } from './utils/serialize';
-import { hub, nextStateValue } from './hub';
+import { Hub, RoutesNotes, Slice, Structure } from '../interfaces';
+import { serialize } from '../utils/serialize';
+import { hub, nextStateValue } from '../hub';
 
 /**
  * Creates feature route
