@@ -1,4 +1,4 @@
-import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+import { rootNote, RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
 const aboutNote: RouteNote = {
   path: 'about',
@@ -32,7 +32,7 @@ export interface AppChildrenRoutes extends RootRoute {
  * Declares App children routes
  */
 export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
-  root: { path: '' },
+  ...rootNote,
   about: aboutNote,
   automobile: automobileNote,
   bike: bikeNote,
