@@ -4,15 +4,15 @@ const aboutNote: RouteNote = {
   path: 'about',
   lazyPath: 'app/views/about/about.module#AboutModule'
 };
-const automobileNote = {
+const automobileNote: RouteNote = {
   path: 'automobiles',
   lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
 };
-const bikeNote = {
+const bikeNote: RouteNote = {
   path: 'bikes',
   lazyPath: 'app/views/bike/bike.module#BikeModule'
 };
-const bolidNote = {
+const bolidNote: RouteNote = {
   path: 'bolids',
   lazyPath: 'app/views/bolid/bolid.module#BolidModule'
 };

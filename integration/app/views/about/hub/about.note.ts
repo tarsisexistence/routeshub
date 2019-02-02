@@ -9,7 +9,7 @@ export type AboutRoutes = RootRoute;
 /**
  * Declares routes of its own module
  */
-export const aboutNote: RoutesNotes<AboutRoutes> = {
+export const aboutNotes: RoutesNotes<AboutRoutes> = {
   root: {
     path: ''
   }
