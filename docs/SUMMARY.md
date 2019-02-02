@@ -17,5 +17,5 @@
   * [Initial](integration/get-a-boilerplate.md)
   * [Creating Notes](integration/creating-notes.md)
   * [Creating slices](integration/creating-slices.md)
-  * [Connect the dots](integration/connect-the-dots.md)
+  * [Connecting the dots](integration/connect-the-dots.md)
 

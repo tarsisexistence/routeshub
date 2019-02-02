@@ -15,7 +15,7 @@ import { createFeature, Slice } from 'routeshub';
 
 export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
   appSlice.about,
-  aboutRoutes
+  aboutNotes
 );
 ```
 

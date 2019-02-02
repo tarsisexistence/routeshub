@@ -7,7 +7,10 @@ It remains to do not so much. Creators to help 🧙♂ 🧞♂
 {% code-tabs %}
 {% code-tabs-item title="app.slice.ts" %}
 ```typescript
-export const appSlice: Slice<R, C> = createRoot<R, C>(appNote);
+import { appNotes, AppRoutes as R } from './app.note';
+import { AppChildrenRoutes as C } from './app-children.note';
+
+export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
@@ -17,9 +20,12 @@ export const appSlice: Slice<R, C> = createRoot<R, C>(appNote);
 {% code-tabs %}
 {% code-tabs-item title="about.slice.ts" %}
 ```typescript
+import { appSlice } from '~app/routing/hub/app.slice';
+import { aboutNotes, AboutRoutes } from './about.note';
+
 export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
   appSlice.about,
-  aboutNote
+  aboutNotes
 );
 ```
 {% endcode-tabs-item %}
@@ -30,9 +36,12 @@ export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
 {% code-tabs %}
 {% code-tabs-item title="auth.slice.ts" %}
 ```typescript
+import { appSlice } from '~app/routing/hub/app.slice';
+import { authNotes, AuthRoutes } from './about.note';
+
 export const authSlice: Slice<AuthRoutes> = createFeature<AuthRoutes>(
   appSlice.auth,
-  authNote
+  authNotes
 );
 ```
 {% endcode-tabs-item %}

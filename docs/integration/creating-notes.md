@@ -5,7 +5,7 @@ We are going to declare our inputs. In general, this is probably the only boring
 ## 
 
 {% code-tabs %}
-{% code-tabs-item title="app.note.ts" %}
+{% code-tabs-item title="app-children.note.ts" %}
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -13,31 +13,47 @@ export interface AppChildrenRoutes extends RootRoute {
   about: RouteNote;
 }
 
-const appChildrenRoute: RoutesNotes<AppChildrenRoutes> = {
-  root: { path: '' },
-  about: {
-    path: 'about',
-    lazyPath: 'app/views/about/about.module#AboutModule'
-  }
+const aboutNote: RouteNote = {
+  path: 'about',
+  lazyPath: 'app/views/about/about.module#AboutModule'
 };
+
+export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
+  root: { path: '' },
+  about: aboutNote
+};
+
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+{% code-tabs %}
+{% code-tabs-item title="app.note.ts" %}
+```typescript
+import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+import { appChildrenNotes, AppChildrenRoutes } from './app-children.note';
 
 export interface AppRoutes extends RootRoute {
   auth: RouteNote;
   notFound: RouteNote;
 }
 
+const rootNote: RouteNote = {
+  path: '',
+  children: appChildrenNotes
+};
+const authNote: RouteNote = {
+  path: 'auth',
+  lazyPath: 'app/views/auth/auth.module#AuthModule'
+};
+const notFoundNote: RouteNote = {
+  path: '**'
+};
+
 export const appNotes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
-  root: {
-    path: '',
-    children: appChildrenRoute
-  },
-  auth: {
-    path: 'auth',
-    lazyPath: 'app/views/auth/auth.module#AuthModule'
-  },
-  notFound: {
-    path: '**'
-  }
+  root: rootNote,
+  auth: authNote,
+  notFound: notFoundNote
 };
 ```
 {% endcode-tabs-item %}
@@ -52,7 +68,7 @@ import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
 export type AboutRoutes = RootRoute;
 
-export const aboutNote: RoutesNotes<AboutRoutes> = {
+export const aboutNotes: RoutesNotes<AboutRoutes> = {
   root: {
     path: ''
   }
@@ -73,7 +89,7 @@ export interface AuthRoutes extends RootRoute {
   signUp: RouteNote;
 }
 
-export const AuthNote: RoutesNotes<AuthRoutes> = {
+export const AuthNotes: RoutesNotes<AuthRoutes> = {
   root: {
     path: ''
   },
@@ -88,39 +104,37 @@ export const AuthNote: RoutesNotes<AuthRoutes> = {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-## First improvements
-
-
+## First benefits
 
 {% code-tabs %}
 {% code-tabs-item title="app.routes.ts" %}
 ```typescript
 export const routes: Routes = [
   {
-    path: appNote.root.path,
+    path: appNotes.root.path,
     pathMatch: 'full',
     component: AppComponent,
     children: [
       {
-        path: appNote.root.children.root.path,
+        path: appNotes.root.children.root.path,
         pathMatch: 'full',
-        redirectTo: appNote.root.children.about.path
+        redirectTo: appNotes.root.children.about.path
       },
       {
-        path: appNote.root.children.about.path,
+        path: appNotes.root.children.about.path,
         pathMatch: 'full',
-        loadChildren: appNote.root.children.about.lazyPath
+        loadChildren: appNotes.root.children.about.lazyPath
       }
     ]
   },
   {
-    path: appNote.auth.path
+    path: appNotes.auth.path
     pathMatch: 'full',
-    loadChildren: appNote.auth.lazyPath
+    loadChildren: appNotes.auth.lazyPath
   }
   {
-    path: appNote.notFound.path,
-    redirectTo: appNote.root.path
+    path: appNotes.notFound.path,
+    redirectTo: appNotes.root.path
   }
 ];
 ```
@@ -134,7 +148,7 @@ export const routes: Routes = [
 ```typescript
 export const aboutRoutes: Routes = [
   {
-    path: aboutNote.root.path
+    path: aboutNotes.root.path
     component: AboutComponent
   }
 ];
@@ -147,17 +161,17 @@ export const aboutRoutes: Routes = [
 {% code-tabs %}
 {% code-tabs-item title="auth.routes.ts" %}
 ```typescript
-export const authRoutes: Routes = [
+export const authNotes: Routes = [
   {
-    path: authNote.root.path
+    path: authNotes.root.path
     redirectTo: authNote.signIn.path
   },
   {
-    path: authNote.signIn.path
+    path: authNotes.signIn.path
     component: SignInComponent
   },
   {
-    path: authNote.signUp.path
+    path: authNotes.signUp.path
     redirectTo: SignUpComponent
   },
 ];
