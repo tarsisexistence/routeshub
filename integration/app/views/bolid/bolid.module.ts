@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { bolidRouting } from './hub';
 import { SharedModule } from '~app/shared/shared.module';
-import { bolidRouting } from './bolid.routes';
-import { BolidComponent } from './bolid.component';
+import { BolidComponent } from './container/bolid.component';
 
 @NgModule({
   declarations: [BolidComponent],

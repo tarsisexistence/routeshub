@@ -6,18 +6,18 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
-import { Vehicle } from '~app/core/interfaces/vehicle';
+import { Vehicle } from 'app/core/interfaces/vehicle';
 
 @Component({
-  selector: 'app-automobile',
-  templateUrl: './automobile.component.html',
-  styleUrls: ['./automobile.component.scss'],
+  selector: 'app-bolid',
+  templateUrl: './bolid.component.html',
+  styleUrls: ['./bolid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AutomobileComponent implements OnInit, OnDestroy {
+export class BolidComponent implements OnInit, OnDestroy {
   public vehicles: Vehicle[];
   private unsubscribe$: Subject<boolean>;
 

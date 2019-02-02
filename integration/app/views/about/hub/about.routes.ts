@@ -1,8 +1,8 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AboutComponent } from './about.component';
-import { aboutRoutes } from '~app/routing/notes';
+import { AboutComponent } from '../container/about.component';
+import { aboutNote } from './about.note';
 
 /**
  * Declares routes on AboutModule level
@@ -12,7 +12,7 @@ import { aboutRoutes } from '~app/routing/notes';
  */
 export const routes = [
   {
-    path: aboutRoutes.root.path,
+    path: aboutNote.root.path,
     component: AboutComponent
   }
 ];

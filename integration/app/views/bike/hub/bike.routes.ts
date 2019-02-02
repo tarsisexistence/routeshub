@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { BikeComponent } from './bike.component';
-import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bikeRoutes } from '~app/routing/notes';
+import { BikeComponent } from '../container/bike.component';
+import { VehiclesResolver } from 'app/routing/resolvers/vehicles.resolver';
+import { bikeNotes } from '~app/views/bike/hub/bike.note';
 
 /**
  * Declares routes on BikeModule level
@@ -13,7 +13,7 @@ import { bikeRoutes } from '~app/routing/notes';
  */
 export const routes = [
   {
-    path: bikeRoutes.root.path,
+    path: bikeNotes.root.path,
     component: BikeComponent,
     resolve: { vehicles: VehiclesResolver }
   }

@@ -1,0 +1,40 @@
+import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+
+const aboutNote: RouteNote = {
+  path: 'about',
+  lazyPath: 'app/views/about/about.module#AboutModule'
+};
+const automobileNote = {
+  path: 'automobiles',
+  lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
+};
+const bikeNote = {
+  path: 'bikes',
+  lazyPath: 'app/views/bike/bike.module#BikeModule'
+};
+const bolidNote = {
+  path: 'bolids',
+  lazyPath: 'app/views/bolid/bolid.module#BolidModule'
+};
+
+/**
+ * Describes App children route
+ */
+
+export interface AppChildrenRoutes extends RootRoute {
+  about: RouteNote;
+  automobile: RouteNote;
+  bike: RouteNote;
+  bolid: RouteNote;
+}
+
+/**
+ * Declares App children routes
+ */
+export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
+  root: { path: '' },
+  about: aboutNote,
+  automobile: automobileNote,
+  bike: bikeNote,
+  bolid: bolidNote
+};

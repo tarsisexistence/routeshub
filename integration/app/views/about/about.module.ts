@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { aboutRouting } from './about.routes';
-import { AboutComponent } from './about.component';
+import { aboutRouting } from './hub';
+import { AboutComponent } from './container/about.component';
 
 @NgModule({
   declarations: [AboutComponent],

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { bikeRouting } from './hub';
 import { SharedModule } from '~app/shared/shared.module';
-import { bikeRouting } from './bike.routes';
-import { BikeComponent } from './bike.component';
+import { BikeComponent } from './container/bike.component';
 
 @NgModule({
   declarations: [BikeComponent],

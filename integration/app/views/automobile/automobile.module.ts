@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { automobilesRouting } from './hub';
 import { SharedModule } from '~app/shared/shared.module';
-import { automobilesRouting } from './automobile.routes';
-import { AutomobileComponent } from './automobile.component';
+import { AutomobileComponent } from './container/automobile.component';
 
 @NgModule({
   declarations: [AutomobileComponent],

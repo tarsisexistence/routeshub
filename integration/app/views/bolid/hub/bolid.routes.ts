@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { BolidComponent } from './bolid.component';
-import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { bolidRoutes } from '~app/routing/notes';
+import { BolidComponent } from '../container/bolid.component';
+import { VehiclesResolver } from 'app/routing/resolvers/vehicles.resolver';
+import { bolidNotes } from './bolid.note';
 
 /**
  * Declares routes on BolidModule level
@@ -13,7 +13,7 @@ import { bolidRoutes } from '~app/routing/notes';
  */
 export const routes = [
   {
-    path: bolidRoutes.root.path,
+    path: bolidNotes.root.path,
     component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }
   }

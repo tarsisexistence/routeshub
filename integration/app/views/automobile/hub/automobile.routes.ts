@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { AutomobileComponent } from './automobile.component';
-import { VehiclesResolver } from '~app/routing/resolvers/vehicles.resolver';
-import { automobileRoutes } from '~app/routing/notes';
+import { AutomobileComponent } from '../container/automobile.component';
+import { VehiclesResolver } from 'app/routing/resolvers/vehicles.resolver';
+import { automobileNotes } from './automobile.note';
 
 /**
  * Declares routes on AutomobileModule level
@@ -13,7 +13,7 @@ import { automobileRoutes } from '~app/routing/notes';
  */
 export const routes = [
   {
-    path: automobileRoutes.root.path,
+    path: automobileNotes.root.path,
     component: AutomobileComponent,
     resolve: { vehicles: VehiclesResolver }
   }
