@@ -2,12 +2,12 @@ import { RootRoute, RoutesNotes } from 'routeshub';
 
 /**
  * Declares a type which contains
- * only one route with 'root' key
+ * only route with root key
  */
 export type BikeRoutes = RootRoute;
 
 /**
- * Declares routes of its own module
+ * Declares Bike' notes
  */
 export const bikeNotes: RoutesNotes<BikeRoutes> = {
   root: {

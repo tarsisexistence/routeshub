@@ -7,9 +7,6 @@ import { automobileNotes } from './automobile.note';
 
 /**
  * Declares routes on AutomobileModule level
- * Cool stuff with routes variables
- * can be used here to add control
- * over magic strings
  */
 export const routes = [
   {

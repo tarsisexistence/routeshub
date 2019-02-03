@@ -23,7 +23,7 @@ export function nextStateValue<T, C = {}>(
 }
 
 /**
- * Detects and handles routes of children
+ * Detects and handles children routes
  */
 const entitify = <T>(routes: Slice<T>) =>
   Object.keys(routes).reduce((acc, routeName) => {

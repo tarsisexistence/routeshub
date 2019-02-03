@@ -6,9 +6,6 @@ import { aboutNotes } from './about.note';
 
 /**
  * Declares routes on AboutModule level
- * Cool stuff with routes variables
- * can be used here to add control
- * over magic strings
  */
 export const routes = [
   {

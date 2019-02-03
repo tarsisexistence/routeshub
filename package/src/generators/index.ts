@@ -1,1 +1,1 @@
-export { rootNote, setRootNote, setNote } from './notes';
+export { rootNote } from './notes';

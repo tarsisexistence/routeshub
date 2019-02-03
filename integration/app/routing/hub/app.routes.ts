@@ -3,7 +3,7 @@ import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '~app/core/containers/view/view.component';
 
 /**
- * Declares routes on root level
+ * Declares routes on App level
  * Cool stuff with routes variables
  * can be used here to add control
  * over magic strings

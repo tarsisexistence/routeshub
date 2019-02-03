@@ -1,11 +1,10 @@
 import { RootRoute, RootRouteNote, RouteNote } from '../interfaces';
 
 /**
- * sets note values
+ * Generators aren't available for now
+ *
+ * Lazy routes supports only string literals
  */
-export const setNote = <C = {}>(options: RouteNote<C>): RouteNote<C> => ({
-  ...options
-});
 
 /**
  * portable shortcut for the RootRoute cases
@@ -17,9 +16,16 @@ export const rootNote: RootRoute = {
 /**
  * flexible shortcut for the RootRoute cases
  */
-export const setRootNote = <C = {}>(
+const setRootNote = <C = {}>(
   options: RootRouteNote<C> = {} as RootRouteNote<C>
 ): RouteNote<C> => ({
   ...options,
   path: ''
+});
+
+/**
+ * sets note values
+ */
+const setNote = <C = {}>(options: RouteNote<C>): RouteNote<C> => ({
+  ...options
 });

@@ -7,7 +7,7 @@ import {
 } from '~app/views/automobile/hub/automobile.note';
 
 /**
- * Creates feature slice
+ * Creates a feature slice
  */
 export const automobileSlice: Slice<R> = createFeature<R>(
   appSlice.automobile,
