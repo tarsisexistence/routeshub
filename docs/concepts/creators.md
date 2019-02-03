@@ -17,9 +17,9 @@ An example is in `app.slice.ts`
 
 ```typescript
 import { createRoot, Slice } from 'routeshub';
-import { AppChildrenRoutes as C, appRoutes, AppRoutes as R } from '../notes';
+import { AppChildrenNotes as C, appNotes, AppNotes as R } from '...';
 
-export const appSlice: Slice<R, C> = createRoot<R, C>(appRoutes);
+export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 ```
 
 Actually, `AppRoutes` and `AppChildrenRoutes` are represents an interface of a note of _App_ module that has some routes paths and its an immediate children. They're describe an `appRoutes` variable.
@@ -30,12 +30,12 @@ An example is in `about.slice.ts`
 
 ```typescript
 import { createFeature, Slice } from 'routeshub';
-import { aboutRoutes, AboutRoutes } from '../notes';
+import { aboutNotes, AboutNotes } from '...';
 import { appSlice } from './app.slice';
 
-export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
+export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
   appSlice.about,
-  aboutRoutes
+  aboutNotes
 );
 ```
 

@@ -12,8 +12,9 @@ To create a slice we need a few things:
 
 ```typescript
 import { createFeature, Slice } from 'routeshub';
+import { aboutNotes, AboutNotes } from './about.notes';
 
-export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
+export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
   appSlice.about,
   aboutNotes
 );

@@ -1,4 +1,4 @@
-# Creating slices
+# Creating Slices
 
 It remains to do not so much. Creators to help 🧙♂ 🧞♂ 
 
@@ -7,8 +7,8 @@ It remains to do not so much. Creators to help 🧙♂ 🧞♂
 {% code-tabs %}
 {% code-tabs-item title="app.slice.ts" %}
 ```typescript
-import { appNotes, AppRoutes as R } from './app.note';
-import { AppChildrenRoutes as C } from './app-children.note';
+import { appNotes, AppNotes as R } from './app.notes';
+import { AppChildrenNotes as C } from './app-children.notes';
 
 export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 ```
@@ -21,9 +21,9 @@ export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 {% code-tabs-item title="about.slice.ts" %}
 ```typescript
 import { appSlice } from '~app/routing/hub/app.slice';
-import { aboutNotes, AboutRoutes } from './about.note';
+import { aboutNotes, AboutNotes } from './about.notes';
 
-export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
+export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
   appSlice.about,
   aboutNotes
 );
@@ -37,9 +37,9 @@ export const aboutSlice: Slice<AboutRoutes> = createFeature<AboutRoutes>(
 {% code-tabs-item title="auth.slice.ts" %}
 ```typescript
 import { appSlice } from '~app/routing/hub/app.slice';
-import { authNotes, AuthRoutes } from './about.note';
+import { authNotes, AuthNotes } from './about.notes';
 
-export const authSlice: Slice<AuthRoutes> = createFeature<AuthRoutes>(
+export const authSlice: Slice<AuthNotes> = createFeature<AuthNotes>(
   appSlice.auth,
   authNotes
 );

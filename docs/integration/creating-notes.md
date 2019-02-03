@@ -2,15 +2,12 @@
 
 We are going to declare our inputs. In general, this is probably the only boring part but carries a lot of useful things and most importantly - is the declared foundation
 
-##
-
 {% code-tabs %}
 {% code-tabs-item title="app-children.notes.ts" %}
-
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
-export interface AppChildrenRoutes extends RootRoute {
+export interface AppChildrenNotes extends RootRoute {
   about: RouteNote;
 }
 
@@ -19,23 +16,21 @@ const aboutNote: RouteNote = {
   lazyPath: 'app/views/about/about.module#AboutModule'
 };
 
-export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
+export const appChildrenNotes: RoutesNotes<AppChildrenNotes> = {
   root: { path: '' },
   about: aboutNote
 };
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="app.notes.ts" %}
-
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
-import { appChildrenNotes, AppChildrenRoutes } from './app-children.note';
+import { appChildrenNotes, AppChildrenNotes } from './app-children.notes';
 
-export interface AppRoutes extends RootRoute {
+export interface AppNotes extends RootRoute {
   auth: RouteNote;
   notFound: RouteNote;
 }
@@ -52,46 +47,42 @@ const notFoundNote: RouteNote = {
   path: '**'
 };
 
-export const appNotes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
+export const appNotes: RoutesNotes<AppNotes, AppChildrenNotes> = {
   root: rootNote,
   auth: authNote,
   notFound: notFoundNote
 };
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="about.notes.ts" %}
-
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
-export type AboutRoutes = RootRoute;
+export type AboutNotes = RootRoute;
 
-export const aboutNotes: RoutesNotes<AboutRoutes> = {
+export const aboutNotes: RoutesNotes<AboutNotes> = {
   root: {
     path: ''
   }
 };
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
-{% code-tabs-item title="auth.note.ts" %}
-
+{% code-tabs-item title="auth.notes.ts" %}
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
-export interface AuthRoutes extends RootRoute {
+export interface AuthNotes extends RootRoute {
   signIn: RouteNote;
   signUp: RouteNote;
 }
 
-export const AuthNotes: RoutesNotes<AuthRoutes> = {
+export const AuthNotes: RoutesNotes<AuthNotes> = {
   root: {
     path: ''
   },
@@ -103,7 +94,6 @@ export const AuthNotes: RoutesNotes<AuthRoutes> = {
   }
 };
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
@@ -111,8 +101,9 @@ export const AuthNotes: RoutesNotes<AuthRoutes> = {
 
 {% code-tabs %}
 {% code-tabs-item title="app.routes.ts" %}
-
 ```typescript
+import { appNotes } from './app.notes';
+
 export const routes: Routes = [
   {
     path: appNotes.root.path,
@@ -142,14 +133,14 @@ export const routes: Routes = [
   }
 ];
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="about.routes.ts" %}
-
 ```typescript
+import { aboutNotes } from './about.notes';
+
 export const aboutRoutes: Routes = [
   {
     path: aboutNotes.root.path
@@ -157,15 +148,15 @@ export const aboutRoutes: Routes = [
   }
 ];
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="auth.routes.ts" %}
-
 ```typescript
-export const authNotes: Routes = [
+import { authNotes } from './auth.notes';
+
+export const authRoutes: Routes = [
   {
     path: authNotes.root.path
     redirectTo: authNote.signIn.path
@@ -180,8 +171,8 @@ export const authNotes: Routes = [
   },
 ];
 ```
-
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 Looks a bit safer, isn't it? 🙃
+

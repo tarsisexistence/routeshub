@@ -16,8 +16,8 @@
 * [Integration](integration/README.md)
   * [Initial Code](integration/get-a-boilerplate.md)
   * [Creating Notes](integration/creating-notes.md)
-  * [Creating slices](integration/creating-slices.md)
+  * [Creating Slices](integration/creating-slices.md)
   * [Connecting the dots](integration/connect-the-dots.md)
-  * [Navigation](integration/navigation.md)
+  * [Navigating](integration/navigation.md)
 * [Style Guide](style-guide.md)
 
