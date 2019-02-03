@@ -1,3 +1,3 @@
-export * from './bolid.note';
+export * from './bolid.notes';
 export * from './bolid.slice';
 export * from './bolid.routes';

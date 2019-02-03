@@ -4,12 +4,12 @@ import { RootRoute, RoutesNotes } from 'routeshub';
  * Declares a type which contains
  * only route with root key
  */
-export type BikeRoutes = RootRoute;
+export type BikeNotes = RootRoute;
 
 /**
  * Declares Bike' notes
  */
-export const bikeNotes: RoutesNotes<BikeRoutes> = {
+export const bikeNotes: RoutesNotes<BikeNotes> = {
   root: {
     path: ''
   }

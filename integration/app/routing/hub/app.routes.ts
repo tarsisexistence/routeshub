@@ -1,4 +1,4 @@
-import { appNotes } from './app.note';
+import { appNotes } from './app.notes';
 import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '~app/core/containers/view/view.component';
 

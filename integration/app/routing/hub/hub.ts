@@ -1,11 +1,11 @@
 import { Slices } from 'routeshub';
 
-import { AboutRoutes } from 'app/views/about/hub/about.note';
-import { AppRoutes } from 'app/routing/hub/app.note';
-import { AppChildrenRoutes } from 'app/routing/hub/app-children.note';
-import { AutomobileRoutes } from 'app/views/automobile/hub/automobile.note';
-import { BikeRoutes } from 'app/views/bike/hub/bike.note';
-import { BolidRoutes } from 'app/views/bolid/hub/bolid.note';
+import { AboutRoutes } from 'app/views/about/hub/about.notes';
+import { AppNotes } from 'app/routing/hub/app.notes';
+import { AppChildrenNotes } from 'app/routing/hub/app-children.notes';
+import { AutomobileNotes } from 'app/views/automobile/hub/automobile.notes';
+import { BikeNotes } from 'app/views/bike/hub/bike.notes';
+import { BolidNotes } from 'app/views/bolid/hub/bolid.notes';
 
 import { appSlice as app } from 'app/routing/hub/app.slice';
 import { aboutSlice as about } from 'app/views/about/hub';
@@ -17,11 +17,11 @@ import { bolidSlice as bolid } from 'app/views/bolid/hub';
  * Describes routes hub
  */
 export interface Hub {
-  app: AppRoutes & AppChildrenRoutes;
+  app: AppNotes & AppChildrenNotes;
   about: AboutRoutes;
-  automobile: AutomobileRoutes;
-  bike: BikeRoutes;
-  bolid: BolidRoutes;
+  automobile: AutomobileNotes;
+  bike: BikeNotes;
+  bolid: BolidNotes;
 }
 
 /**
