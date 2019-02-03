@@ -18,5 +18,6 @@
   * [Creating Notes](integration/creating-notes.md)
   * [Creating slices](integration/creating-slices.md)
   * [Connecting the dots](integration/connect-the-dots.md)
+  * [Navigation](integration/navigation.md)
 * [Style Guide](style-guide.md)
 
