@@ -1,19 +1,19 @@
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
-import { appChildrenNotes, AppChildrenRoutes } from './app-children.note';
+import { appChildrenNotes, AppChildrenNotes } from './app-children.notes';
 
 /**
  * Declares a type which contains
  * root and notFound routes
  */
-export interface AppRoutes extends RootRoute {
+export interface AppNotes extends RootRoute {
   notFound: RouteNote;
 }
 
 /**
  * Declares App' notes
  */
-export const appNotes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
+export const appNotes: RoutesNotes<AppNotes, AppChildrenNotes> = {
   root: {
     path: '',
     children: appChildrenNotes

@@ -2,7 +2,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { AboutComponent } from '../container/about.component';
-import { aboutNotes } from './about.note';
+import { aboutNotes } from './about.notes';
 
 /**
  * Declares routes on AboutModule level

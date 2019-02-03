@@ -21,7 +21,7 @@ const bolidNote: RouteNote = {
  * Describes App children route
  */
 
-export interface AppChildrenRoutes extends RootRoute {
+export interface AppChildrenNotes extends RootRoute {
   about: RouteNote;
   automobile: RouteNote;
   bike: RouteNote;
@@ -31,7 +31,7 @@ export interface AppChildrenRoutes extends RootRoute {
 /**
  * Declares App children routes
  */
-export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
+export const appChildrenNotes: RoutesNotes<AppChildrenNotes> = {
   ...rootNote,
   about: aboutNote,
   automobile: automobileNote,

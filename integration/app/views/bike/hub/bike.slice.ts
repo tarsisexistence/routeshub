@@ -1,7 +1,7 @@
 import { createFeature, Slice } from 'routeshub';
 
 import { appSlice } from '~app/routing/hub/app.slice';
-import { bikeNotes, BikeRoutes as R } from './bike.note';
+import { bikeNotes, BikeNotes as R } from './bike.notes';
 
 /**
  * Creates a feature slice

@@ -2,10 +2,11 @@
 
 We are going to declare our inputs. In general, this is probably the only boring part but carries a lot of useful things and most importantly - is the declared foundation
 
-## 
+##
 
 {% code-tabs %}
-{% code-tabs-item title="app-children.note.ts" %}
+{% code-tabs-item title="app-children.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -22,13 +23,14 @@ export const appChildrenNotes: RoutesNotes<AppChildrenRoutes> = {
   root: { path: '' },
   about: aboutNote
 };
-
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
-{% code-tabs-item title="app.note.ts" %}
+{% code-tabs-item title="app.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 import { appChildrenNotes, AppChildrenRoutes } from './app-children.note';
@@ -56,13 +58,13 @@ export const appNotes: RoutesNotes<AppRoutes, AppChildrenRoutes> = {
   notFound: notFoundNote
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-
-
 {% code-tabs %}
-{% code-tabs-item title="about.note.ts" %}
+{% code-tabs-item title="about.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -74,13 +76,13 @@ export const aboutNotes: RoutesNotes<AboutRoutes> = {
   }
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-
-
 {% code-tabs %}
 {% code-tabs-item title="auth.note.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -101,6 +103,7 @@ export const AuthNotes: RoutesNotes<AuthRoutes> = {
   }
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
@@ -108,6 +111,7 @@ export const AuthNotes: RoutesNotes<AuthRoutes> = {
 
 {% code-tabs %}
 {% code-tabs-item title="app.routes.ts" %}
+
 ```typescript
 export const routes: Routes = [
   {
@@ -138,13 +142,13 @@ export const routes: Routes = [
   }
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-
-
 {% code-tabs %}
 {% code-tabs-item title="about.routes.ts" %}
+
 ```typescript
 export const aboutRoutes: Routes = [
   {
@@ -153,13 +157,13 @@ export const aboutRoutes: Routes = [
   }
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-
-
 {% code-tabs %}
 {% code-tabs-item title="auth.routes.ts" %}
+
 ```typescript
 export const authNotes: Routes = [
   {
@@ -176,10 +180,8 @@ export const authNotes: Routes = [
   },
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-
-
-Looks a bit safer, isn't it? 🙃 
-
+Looks a bit safer, isn't it? 🙃

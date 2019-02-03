@@ -1,7 +1,7 @@
 import { createRoot, Slice } from 'routeshub';
 
-import { appNotes, AppRoutes as R } from './app.note';
-import { AppChildrenRoutes as C } from './app-children.note';
+import { appNotes, AppNotes as R } from './app.notes';
+import { AppChildrenNotes as C } from './app-children.notes';
 
 /**
  * Hub initialization

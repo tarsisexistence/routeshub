@@ -4,12 +4,12 @@ import { RootRoute, RoutesNotes } from 'routeshub';
  * Declares a type which contains
  * only route with root key
  */
-export type BolidRoutes = RootRoute;
+export type BolidNotes = RootRoute;
 
 /**
  * Declares Bolid' notes
  */
-export const bolidNotes: RoutesNotes<BolidRoutes> = {
+export const bolidNotes: RoutesNotes<BolidNotes> = {
   root: {
     path: ''
   }
