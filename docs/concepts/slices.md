@@ -1,6 +1,6 @@
 # Slices
 
-Essentially, slices are the outputs. Output means a serialized route that has its own state
+Essentially, slices are the outputs. This just defines the serialized route
 
 ## Getting Know with Output
 
