@@ -14,8 +14,9 @@
   * [Interfaces](api/interfaces.md)
   * [Creators](api/creators.md)
 * [Integration](integration/README.md)
-  * [Initial](integration/get-a-boilerplate.md)
+  * [Initial Code](integration/get-a-boilerplate.md)
   * [Creating Notes](integration/creating-notes.md)
   * [Creating slices](integration/creating-slices.md)
   * [Connecting the dots](integration/connect-the-dots.md)
+* [Style Guide](style-guide.md)
 

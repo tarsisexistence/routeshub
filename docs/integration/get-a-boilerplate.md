@@ -1,4 +1,4 @@
-# Initial
+# Initial Code
 
 Let's imagine, we have such routes:
 
@@ -7,7 +7,7 @@ Let's imagine, we have such routes:
 * Auth
 * NotFound
 
-## Boilerplate
+## Initial Code
 
 Below is only the code of the routes files
 
