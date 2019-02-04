@@ -34,7 +34,7 @@
     "hammerjs": "2.0.8",
     "ng-zorro-antd": "7.0.0-rc.3",
     "rxjs": "6.4.0",
-    "zone.js": "0.8.28"
+    "zone.js": "0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.0",
