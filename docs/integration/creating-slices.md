@@ -1,6 +1,6 @@
 # Creating Slices
 
-It remains to do not so much. Creators to help 🧙♂ 🧞♂ 
+It remains to do not so much. Creators to help 🧙♂
 
 ## Creating Slices
 

@@ -34,7 +34,7 @@ This project is neither ideal nor final.
 
 Just a step for the better. A step to help developers build applications better, faster and calmer. 
 
-So I am open to any suggestions that help with that goal.
+So I am opened to any suggestions that help with that goal.
 
 {% hint style="info" %}
  **Essence**

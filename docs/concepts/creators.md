@@ -1,6 +1,6 @@
 # Creators
 
-Creators are represents an idea of creation a tree-like structure from different route nodes
+Creators are representing an idea of creation a tree-like structure from different route nodes
 
 ## **There are** only 2 types of creators:
 
@@ -9,7 +9,7 @@ Creators are represents an idea of creation a tree-like structure from different
 
 **Root creator** _****_invokes only once to initialize a _hub_ ****and creates an entity for expanding the whole tree.
 
-In turn, the **feature creator** is responsible for relations between parent and child nodes. It means that each child node could be as parent node to another child.
+In turn the **feature creator** is responsible for relations between parent and child nodes. It means that each child node could be as parent node to another child.
 
 ## Creating a root
 
@@ -39,5 +39,5 @@ export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
 );
 ```
 
-As we noticed earlier, **feature creator** needs a parent' slice and its own note _to connect the dots_.
+As we noticed earlier **feature creator** needs a parent's slice and its own note _to connect the dots_.
 

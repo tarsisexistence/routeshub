@@ -1,14 +1,14 @@
 # Motivation
 
-## Foreword 🤔 
+## Foreword
 
 Have you ever suffered because of the _magic strings_? I did 😤 
 
 Actually I was puzzled and stumped many times when I tried to come up with a convenient way out that could solve my problems 😵 
 
-So, I had tones of thoughts, but ultimately, I came up with a solution that simultaneously solves the problems of routes with declaration, navigation, and provides general control, predictable results and stability 😌 
+So, I had tones of thoughts, but ultimately, I came up with a solution that simultaneously solves the problems of routes with declaration, navigation, and both providing general control, predictable results and stability
 
-## Examples 👨💻 
+## Examples
 
 Looks familiar, right?
 
@@ -75,9 +75,7 @@ Full integration with example is on **Integration** section
 
 ## Aftertaste
 
-You might think __it's all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact? " 😕🤨 
+You might think __it's all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact? " - Don't hurry 
 
-Don't hurry 😉
-
-Benefits worth it. Be sure to read the next section 👀 
+Benefits worth it. Be sure to read the next section 👀
 

@@ -14,10 +14,10 @@
   * [Interfaces](api/interfaces.md)
   * [Creators](api/creators.md)
 * [Integration](integration/README.md)
-  * [Initial Code](integration/get-a-boilerplate.md)
+  * [Initial Code](integration/initial-code.md)
   * [Creating Notes](integration/creating-notes.md)
   * [Creating Slices](integration/creating-slices.md)
-  * [Connecting the dots](integration/connect-the-dots.md)
-  * [Navigating](integration/navigation.md)
+  * [Connecting the dots](integration/connecting-the-dots.md)
+  * [Navigating](integration/navigating.md)
 * [Style Guide](style-guide.md)
 
