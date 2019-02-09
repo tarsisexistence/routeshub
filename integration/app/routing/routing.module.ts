@@ -6,7 +6,6 @@ import { routes } from './hub/app.routes';
 
 /**
  * Routing configuration
- * Nothing special
  */
 export const routing: ModuleWithProviders = RouterModule.forRoot(
   routes as Routes,

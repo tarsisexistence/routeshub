@@ -1,4 +1,4 @@
-import { Vehicle } from './vehicle';
+import { Vehicle } from './vehicle.interface';
 
 export interface Vehicles {
   automobiles: Vehicle[];

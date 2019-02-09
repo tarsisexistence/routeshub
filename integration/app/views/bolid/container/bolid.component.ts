@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Vehicle } from 'app/core/interfaces/vehicle';
+import { Vehicle } from 'app/core/interfaces/vehicle.interface';
 
 @Component({
   selector: 'app-bolid',

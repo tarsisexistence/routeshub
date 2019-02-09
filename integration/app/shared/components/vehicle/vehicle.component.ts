@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Vehicle } from '~app/core/interfaces/vehicle';
+import { Vehicle } from '~app/core/interfaces/vehicle.interface';
 
 @Component({
   selector: 'app-vehicle',

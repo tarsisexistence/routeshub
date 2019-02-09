@@ -1,7 +1,7 @@
 import { createFeature, Slice } from 'routeshub';
 
 import { appSlice } from '~app/routing/hub/app.slice';
-import { bolidNotes, BolidNotes as R } from '~app/views/bolid/hub/bolid.notes';
+import { bolidNotes, BolidNotes as R } from './bolid.notes';
 
 /**
  * Creates a feature slice
