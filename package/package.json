@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
-  "description": "A minimal unit to simplify your routes business",
-  "version": "0.0.1",
+  "description": "A minimal unit is made to simplify your routes business",
+  "version": "1.0.0",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "repository": {
     "type": "git",
