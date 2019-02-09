@@ -8,7 +8,7 @@ import {
 import { Observable, of } from 'rxjs';
 
 import { vehicles } from '~assets/data/vehicles';
-import { Vehicle } from '~app/core/interfaces/vehicle';
+import { Vehicle } from '~app/core/interfaces/vehicle.interface';
 
 /**
  * Declares resolver that solves business logic problems
