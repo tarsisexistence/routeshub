@@ -19,10 +19,7 @@
       "dom"
     ],
     "paths": {
-      "routeshub": [
-        "../dist/routeshub"
-      ],
-      "routeshub-package": [
+      "routeshub-lib": [
         "../package"
       ],
       "~app/*": [
