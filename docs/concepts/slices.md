@@ -6,7 +6,7 @@ Essentially, slices are the outputs. This just defines the serialized route
 
 To create a slice we need a few things:
 
-* parent' slice
+* parent's slice
 * current note
 * interface that describe a new feature slice
 
