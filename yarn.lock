@@ -6919,7 +6919,7 @@ rollup@^0.67.0:
     "@types/estree" "0.0.39"
     "@types/node" "*"
 
-routeshub@^1.0.0:
+routeshub@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/routeshub/-/routeshub-1.0.0.tgz#a328713ee2f686b215113a435ab92c9bbdc874e1"
   integrity sha512-P3FIKs/OJgf+Q58QDLj7gkVwUFk7RrprXyxzZKGGYiNYqvEb/Fva99bV2FA40ml+uZo1OHpTnoZieMlev+WTlQ==
@@ -8263,13 +8263,14 @@ typescript@2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.1.tgz#fdb19d2c67a15d11995fd15640e373e09ab09961"
 
-typescript@3.1.6:
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
-
 typescript@3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.4.tgz#c585cb952912263d915b462726ce244ba510ef3d"
+
+typescript@3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.3.tgz#f1657fc7daa27e1a8930758ace9ae8da31403221"
+  integrity sha512-Y21Xqe54TBVp+VDSNbuDYdGw0BpoR/Q6wo/+35M8PAU0vipahnyduJWirxxdxjsAkS7hue53x2zp8gz7F05u0A==
 
 typescript@^2.4.2:
   version "2.9.2"
