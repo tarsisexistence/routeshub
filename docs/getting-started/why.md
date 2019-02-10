@@ -2,7 +2,7 @@
 
 ## 🕯Pattern
 
-Routeshub offers a few approaches to configure and manage routes as consistently and as clearly as possible, which allows you to stop worrying about routes and do what is really important.
+Routeshub offers a few approaches to configure and manage routes as consistently and as clearly as possible which allows you to stop worrying about routes and do what is really important.
 
 ## 🕯Freshness 
 
@@ -16,7 +16,7 @@ There is no way to get rid of the routine in working with routes, you can only b
 
 Routeshub is built on the typescript that provides a level of abstraction through generics, which ultimately adds completion suggestions. Also inside is rxjs, but now it is using only to store the routes slices.
 
-So, every time you are about to figure out what is in the slice, you will find it by code auto-completion in the editor.
+So, every time you are about to figure out what is in the slice you will find it by code auto-completion in the editor.
 
 ## 🕯Looking for the best
 
