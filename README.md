@@ -8,6 +8,6 @@
 
 ---
 
-- 📋 Learn more about it on [Gitbook](https://routeshub.gitbooks.io/docs/)
+- 📋 Learn more about it on the [Gitbook (**documentation**) ](https://routeshub.gitbooks.io/docs/)
 - 🧩 Checkout the [sample](https://github.com/maktarsis/routeshub/tree/master/integration)
 - 👣 Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md)
