@@ -2,7 +2,7 @@ import { Params } from '../interfaces';
 import { setNotEmptyPath } from './path';
 
 /**
- * Set state value based on parentSlice's state and current path
+ * Assigns a value based on the parent's  state and a current path
  */
 export const setState = (parentSlice, path) =>
   parentSlice !== null
@@ -10,24 +10,28 @@ export const setState = (parentSlice, path) =>
     : setNotEmptyPath(['/'], path);
 
 /**
- * State function that takes input args and outputs dynamic state value
+ * Supports dynamic paths
  */
-export function stateFn(params?: Params, ...otherParams: Params[]): string[] {
+export function stateFn(
+  state,
+  params?: Params,
+  ...otherParams: Params[]
+): string[] {
   if (!params) {
-    return this.state;
+    return state;
   }
 
   const parameters =
     otherParams.length === 0 ? params : reduceParams(params, otherParams);
 
-  return handleState(parameters, this.state);
+  return handleState(parameters, state);
 }
 
 /**
- * Replaces property with value
- * Helps stateFn generate dynamic values
+ * Replaces property with a value
+ * Helps stateFn generating dynamic values
  */
-const handleState = (params: Params, state?: string[]): string[] =>
+const handleState = (params: Params, state: string[] = []): string[] =>
   Object.keys(params).reduce(
     (accState: string[], param: string): string[] =>
       accState.map(
@@ -38,7 +42,7 @@ const handleState = (params: Params, state?: string[]): string[] =>
   );
 
 /**
- * Absorbs and gives out together params
+ * Absorbs and gives params out together
  */
 const reduceParams = (params: Params, restParams: Params[]): Params =>
   restParams.reduce(

@@ -1,7 +1,5 @@
-// TODO: create rootroute generator
 /**
- * Allows to describe the base route
- * Extends interface with root
+ * Describes a base route
  */
 export interface RootRoute {
   root: RootRouteNote;
@@ -21,7 +19,7 @@ export interface RouteNote<C = {}> {
 }
 
 /**
- * Describes a special root note
+ * Describes a root note
  * and other optional parameters
  */
 export interface RootRouteNote<C = {}> {

@@ -6,7 +6,7 @@ export function setNotEmptyPath(state: string[], path: string): string[] {
 }
 
 /**
- * Checks multi path in each path
+ * Checks multi path in a single route
  */
 export function checkMultiPath(path: string): boolean {
   const slashId = path ? path.indexOf('/') : -1;
@@ -15,7 +15,7 @@ export function checkMultiPath(path: string): boolean {
 }
 
 /**
- * Prevents to record multi path in state
+ * Prevents to record multi path in the state
  */
 export function splitPath(path: string): string[] {
   return path.split('/').filter((state: string) => !!state);

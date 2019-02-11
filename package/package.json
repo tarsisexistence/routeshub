@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/maktarsis/routeshub.git"
   },
-  "homepage": "https://github.com/maktarsis/routeshub/blob/master/README.md",
+  "homepage": "https://github.com/maktarsis/routeshub#readme",
   "bugs": "https://github.com/maktarsis/routeshub/issues",
   "license": "MIT",
   "peerDependencies": {
