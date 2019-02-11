@@ -3,8 +3,7 @@ import { serialize } from '../utils/serialize';
 import { hub, nextStateValue } from '../hub';
 
 /**
- * Creates feature route
- * Each feature module declares its routes from here
+ * Creates a feature route
  */
 export function createFeature<R, C = {}>(
   parentRoute: Structure,

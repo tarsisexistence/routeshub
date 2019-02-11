@@ -3,12 +3,12 @@ import { BehaviorSubject } from 'rxjs';
 import { Hub, Slice } from './interfaces';
 
 /**
- * it stores the states of all routes on first level
+ * stores routes states at the same level
  */
 export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
 
 /**
- * Updates state via routes or children routes
+ * Returns the next hub value
  */
 export function nextStateValue<T, C = {}>(
   routeName: string,

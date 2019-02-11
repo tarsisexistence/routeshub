@@ -2,10 +2,9 @@ import { Hub, RoutesNotes, Slice } from '../interfaces';
 import { serialize } from '../utils/serialize';
 import { hub, nextStateValue } from '../hub';
 
-// TODO: dynamic root route name
 /**
  * Creates main parent routes
- * Entry point for hub
+ * Entry point for the hub
  */
 export function createRoot<R, C = {}>(
   routes: RoutesNotes<R>,

@@ -1,5 +1,7 @@
 /**
- * Describes slice' value
+ * Basic hub structure
+ *
+ * Describes a slice's value
  */
 export interface Structure {
   id: number;
@@ -12,8 +14,8 @@ export interface Structure {
 }
 
 /**
- * Describes parameters that can be
- * used to generate route' state
+ * Describes parameters
+ * could used to generate state of the route
  */
 export interface Params {
   [param: string]: any;

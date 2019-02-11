@@ -4,9 +4,8 @@ import { checkMultiPath, splitPath } from './path';
 import { setState, stateFn } from './state';
 
 /**
- * Core function
- * Enhances basic and
- * generates unique routes
+ * Serializes routes
+ * to enhance capabilities
  */
 export function serialize<T, C = {}>(
   parentSlice: Structure | null,
