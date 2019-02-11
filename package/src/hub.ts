@@ -10,7 +10,7 @@ export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
 /**
  * Returns the next hub value
  */
-export function nextStateValue<T, C = {}>(
+export function nextHubValue<T, C = {}>(
   routeName: string,
   routes: Slice<T>
 ): Hub<Slice<T, C>> {

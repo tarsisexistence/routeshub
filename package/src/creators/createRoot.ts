@@ -1,6 +1,6 @@
 import { Hub, RoutesNotes, Slice } from '../interfaces';
 import { serialize } from '../utils/serialize';
-import { hub, nextStateValue } from '../hub';
+import { hub, nextHubValue } from '../hub';
 
 /**
  * Creates main parent routes
@@ -15,7 +15,7 @@ export function createRoot<R, C = {}>(
   }
 
   const rootSlice: Slice<R> = serialize<R, C>(null, routes);
-  const initialRoutesState: Hub<Slice<R, C | {}>> = nextStateValue<R>(
+  const initialRoutesState: Hub<Slice<R, C | {}>> = nextHubValue<R>(
     routeName,
     rootSlice
   );
