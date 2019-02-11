@@ -6924,10 +6924,10 @@ rollup@^0.67.0:
     "@types/estree" "0.0.39"
     "@types/node" "*"
 
-routeshub@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/routeshub/-/routeshub-1.0.0.tgz#a328713ee2f686b215113a435ab92c9bbdc874e1"
-  integrity sha512-P3FIKs/OJgf+Q58QDLj7gkVwUFk7RrprXyxzZKGGYiNYqvEb/Fva99bV2FA40ml+uZo1OHpTnoZieMlev+WTlQ==
+routeshub@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/routeshub/-/routeshub-1.0.1.tgz#5ad38e59c9e7294e92cff4118fa412a79a3dc066"
+  integrity sha512-8D6XEvGCbnxR+T2+IIiRhaRRpOJjLTnTaw4pwK2jMvktxtvZojnSEDCIzP3B6flOOVhZGtyum76FCmjGrl0s3A==
   dependencies:
     tslib "^1.9.0"
 
