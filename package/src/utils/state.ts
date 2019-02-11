@@ -12,22 +12,26 @@ export const setState = (parentSlice, path) =>
 /**
  * Supports dynamic paths
  */
-export function stateFn(params?: Params, ...otherParams: Params[]): string[] {
+export function stateFn(
+  state,
+  params?: Params,
+  ...otherParams: Params[]
+): string[] {
   if (!params) {
-    return this.state;
+    return state;
   }
 
   const parameters =
     otherParams.length === 0 ? params : reduceParams(params, otherParams);
 
-  return handleState(parameters, this.state);
+  return handleState(parameters, state);
 }
 
 /**
  * Replaces property with a value
  * Helps stateFn generating dynamic values
  */
-const handleState = (params: Params, state?: string[]): string[] =>
+const handleState = (params: Params, state: string[] = []): string[] =>
   Object.keys(params).reduce(
     (accState: string[], param: string): string[] =>
       accState.map(

@@ -19,7 +19,7 @@ export interface RouteNote<C = {}> {
 }
 
 /**
- * Describes a special root note
+ * Describes a root note
  * and other optional parameters
  */
 export interface RootRouteNote<C = {}> {

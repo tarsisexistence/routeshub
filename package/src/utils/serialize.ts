@@ -13,11 +13,12 @@ export function serialize<T, C = {}>(
 ): Slice<T> {
   return Object.keys(routes).reduce((acc: any, routeName: string): Slice<T> => {
     const { children, path, lazyPath } = routes[routeName];
+    const state = setState(parentSlice, path);
     const route = {
       id: indexer(),
       parentId: parentSlice !== null ? parentSlice.id : null,
-      state: setState(parentSlice, path),
-      stateFn,
+      state,
+      stateFn: stateFn.bind(null, state),
       path: checkMultiPath(path) ? splitPath(path) : path,
       lazyPath,
       routeName
