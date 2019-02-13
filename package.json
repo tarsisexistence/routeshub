@@ -65,7 +65,7 @@
     "ng-packagr": "4.7.0",
     "prettier": "1.16.3",
     "protractor": "5.4.2",
-    "snyk": "1.124.0",
+    "snyk": "1.127.0",
     "ts-node": "8.0.2",
     "tsickle": "0.34.2",
     "tslib": "1.9.3",
