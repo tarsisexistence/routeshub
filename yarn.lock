@@ -10,6 +10,14 @@
     "@angular-devkit/core" "7.3.3"
     rxjs "6.3.3"
 
+"@angular-devkit/architect@0.13.4":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.13.4.tgz#f5db62f028e3c0971db5719be9c17a78fd8a67a2"
+  integrity sha512-wJF8oz8MurtpFi0ik42bkI2F5gEnuOe79KHPO1i3SYfdhEp5NY8igVKZ6chB/eq4Ml50aHxas8Hh9ke12K+Pxw==
+  dependencies:
+    "@angular-devkit/core" "7.3.4"
+    rxjs "6.3.3"
+
 "@angular-devkit/build-angular@0.13.3":
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.13.3.tgz#82a6bb884cd7bc4d8dfbfa8cb7c7702c01dc77e8"
@@ -62,13 +70,13 @@
   optionalDependencies:
     node-sass "4.11.0"
 
-"@angular-devkit/build-ng-packagr@0.13.3":
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.13.3.tgz#db7f03e6c6e34d54252d5c410e02e7584554264e"
-  integrity sha512-/jnabl9gALEACrBr7+yZNbIfvuqHy6M05QidD+1jNCh8jirGSCMEKqhvUg1m5tAMt32ZcH8r1GGU0jlfa6L39A==
+"@angular-devkit/build-ng-packagr@0.13.4":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-ng-packagr/-/build-ng-packagr-0.13.4.tgz#149ea558fc7a093865113db078a653d2bcdd762c"
+  integrity sha512-jeGCyD0twyD2/lhb5OmhwKzGQXPAmCVIHBr6/BpUA6LvVOvzDwTBwUqWLZKgiNkfqm98HD40VmIwn1/FrFrL2Q==
   dependencies:
-    "@angular-devkit/architect" "0.13.3"
-    "@angular-devkit/core" "7.3.3"
+    "@angular-devkit/architect" "0.13.4"
+    "@angular-devkit/core" "7.3.4"
     rxjs "6.3.3"
     semver "5.6.0"
 
@@ -95,6 +103,17 @@
   version "7.3.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.3.3.tgz#cd6d5a8eca25ef07b6394bc2b08133d90d08d39f"
   integrity sha512-fosULDtMoDWrOyUzTmBkJccOy7zodo02kENyKai7vOv9EWfv9jytkVdNc+jl0ys9OE2QadvSYBo49jhnZxFXfQ==
+  dependencies:
+    ajv "6.9.1"
+    chokidar "2.0.4"
+    fast-json-stable-stringify "2.0.0"
+    rxjs "6.3.3"
+    source-map "0.7.3"
+
+"@angular-devkit/core@7.3.4":
+  version "7.3.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.3.4.tgz#fae0521652c7430237025f117531ca3262ef8335"
+  integrity sha512-MBfen51iOBKfK4tlg5KwmPxePsF1QoFNUMGLuvUUwPkteonrGcupX1Q7NWTpf+HA+i08mOnZGuepeuQkD12IQw==
   dependencies:
     ajv "6.9.1"
     chokidar "2.0.4"
