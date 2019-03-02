@@ -1,5 +1,5 @@
-export { RootRoute, RouteNote, RoutesNotes, Slice, Slices } from './interfaces';
+export { rootNote } from './generators';
 
 export { createRoot, createFeature } from './creators';
 
-export { rootNote } from './generators';
+export { RootRoute, RouteNote, RoutesNotes, Slice, Slices } from './interfaces';
