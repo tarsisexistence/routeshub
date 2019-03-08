@@ -38,6 +38,7 @@
       }
     ],
     "curly": true,
+    "comment-type": false,
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "deprecation": {

@@ -1,6 +1,6 @@
 import { Vehicles } from '~app/core/interfaces/vehicles.interface';
 
-/* tslint:disable:max-line-length comment-type */
+/* tslint:disable:max-line-length */
 export const vehicles: Vehicles = {
   automobiles: [
     {

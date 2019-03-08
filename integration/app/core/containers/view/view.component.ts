@@ -18,7 +18,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   public vehicles: Observable<string[]>;
   private unsubscribe$: Subject<boolean>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private readonly route: ActivatedRoute) {}
 
   public ngOnInit(): void {
     this.unsubscribe$ = new Subject<boolean>();
