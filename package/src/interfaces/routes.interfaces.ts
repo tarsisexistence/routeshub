@@ -12,7 +12,7 @@ export interface RootRoute {
 export interface RouteNote<C = {}> {
   path: string;
   id?: number;
-  lazyPath?: string;
+  lazy?: string;
   component?: any;
   children?: RoutesNotes<C>;
   state?: string[];
@@ -25,7 +25,7 @@ export interface RouteNote<C = {}> {
 export interface RootRouteNote<C = {}> {
   path?: string;
   id?: number;
-  lazyPath?: string;
+  lazy?: string;
   component?: any;
   children?: RoutesNotes<C>;
   state?: string[];

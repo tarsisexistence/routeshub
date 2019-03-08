@@ -12,7 +12,7 @@ export interface Structure {
   state: string[];
   stateFn: (params?: Params, ...restParams: Params[]) => string[];
   path: string;
-  lazyPath?: string;
+  lazy?: string;
 }
 
 /**

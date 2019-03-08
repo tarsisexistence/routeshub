@@ -21,7 +21,7 @@ export function enhance<R, C = {}>(
 ): Enhanced<R, C> {
   return Object.keys(routes).reduce(
     (acc: Enhanced<R, C>, routeName: string): Enhanced<R, C> => {
-      const { children, path, lazyPath } = routes[routeName];
+      const { children, path, lazy } = routes[routeName];
       const state = setState(parentSlice, path);
       const route = {
         id: indexer(),
@@ -29,7 +29,7 @@ export function enhance<R, C = {}>(
         state,
         stateFn: stateFn.bind(null, state),
         path: checkMultiPath(path) ? splitPath(path) : path,
-        lazyPath,
+        lazy: lazy || null,
         routeName
       };
 

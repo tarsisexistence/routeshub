@@ -4,6 +4,7 @@ We are going to declare our inputs. In general, this is probably the only boring
 
 {% code-tabs %}
 {% code-tabs-item title="app-children.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -13,7 +14,7 @@ export interface AppChildrenNotes extends RootRoute {
 
 const aboutNote: RouteNote = {
   path: 'about',
-  lazyPath: 'app/views/about/about.module#AboutModule'
+  lazy: 'app/views/about/about.module#AboutModule'
 };
 
 export const appChildrenNotes: RoutesNotes<AppChildrenNotes> = {
@@ -21,11 +22,13 @@ export const appChildrenNotes: RoutesNotes<AppChildrenNotes> = {
   about: aboutNote
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="app.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 import { appChildrenNotes, AppChildrenNotes } from './app-children.notes';
@@ -41,7 +44,7 @@ const rootNote: RouteNote = {
 };
 const authNote: RouteNote = {
   path: 'auth',
-  lazyPath: 'app/views/auth/auth.module#AuthModule'
+  lazy: 'app/views/auth/auth.module#AuthModule'
 };
 const notFoundNote: RouteNote = {
   path: '**'
@@ -53,11 +56,13 @@ export const appNotes: RoutesNotes<AppNotes, AppChildrenNotes> = {
   notFound: notFoundNote
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="about.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -69,11 +74,13 @@ export const aboutNotes: RoutesNotes<AboutNotes> = {
   }
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="auth.notes.ts" %}
+
 ```typescript
 import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
@@ -94,6 +101,7 @@ export const AuthNotes: RoutesNotes<AuthNotes> = {
   }
 };
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
@@ -101,6 +109,7 @@ export const AuthNotes: RoutesNotes<AuthNotes> = {
 
 {% code-tabs %}
 {% code-tabs-item title="app.routes.ts" %}
+
 ```typescript
 import { appNotes } from './app.notes';
 
@@ -118,26 +127,28 @@ export const routes: Routes = [
       {
         path: appNotes.root.children.about.path,
         pathMatch: 'full',
-        loadChildren: appNotes.root.children.about.lazyPath
+        loadChildren: appNotes.root.children.about.lazy
       }
     ]
   },
   {
-    path: appNotes.auth.path
+    path: appNotes.auth.path,
     pathMatch: 'full',
-    loadChildren: appNotes.auth.lazyPath
-  }
+    loadChildren: appNotes.auth.lazy
+  },
   {
     path: appNotes.notFound.path,
     redirectTo: appNotes.root.path
   }
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="about.routes.ts" %}
+
 ```typescript
 import { aboutNotes } from './about.notes';
 
@@ -148,31 +159,33 @@ export const aboutRoutes: Routes = [
   }
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 {% code-tabs %}
 {% code-tabs-item title="auth.routes.ts" %}
+
 ```typescript
 import { authNotes } from './auth.notes';
 
 export const authRoutes: Routes = [
   {
-    path: authNotes.root.path
+    path: authNotes.root.path,
     redirectTo: authNote.signIn.path
   },
   {
-    path: authNotes.signIn.path
+    path: authNotes.signIn.path,
     component: SignInComponent
   },
   {
-    path: authNotes.signUp.path
+    path: authNotes.signUp.path,
     redirectTo: SignUpComponent
-  },
+  }
 ];
 ```
+
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
 Looks a bit safer, isn't it? 🙃
-
