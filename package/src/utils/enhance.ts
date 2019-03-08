@@ -7,7 +7,7 @@ import { setState, stateFn } from './state';
  * Serializes routes
  * to enhance capabilities
  */
-export function serialize<T, C = {}>(
+export function enhance<T, C = {}>(
   parentSlice: Structure | null,
   routes: RoutesNotes<T, C | {}>
 ): Slice<T> {
@@ -28,7 +28,7 @@ export function serialize<T, C = {}>(
       ...acc,
       [routeName]: {
         ...route,
-        children: children !== undefined ? serialize(route, children) : null
+        children: children !== undefined ? enhance(route, children) : null
       }
     };
   }, {});

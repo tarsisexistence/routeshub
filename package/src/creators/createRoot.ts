@@ -1,5 +1,5 @@
 import { Hub, RoutesNotes, Slice } from '../interfaces';
-import { serialize } from '../utils/serialize';
+import { enhance } from '../utils/enhance';
 import { hub, nextHubValue } from '../hub';
 
 /**
@@ -14,7 +14,7 @@ export function createRoot<R, C = {}>(
     throw new Error('Routeshub is already declared');
   }
 
-  const rootSlice: Slice<R> = serialize<R, C>(null, routes);
+  const rootSlice: Slice<R> = enhance<R, C>(null, routes);
   const initialRoutesState: Hub<Slice<R, C | {}>> = nextHubValue<R>(
     routeName,
     rootSlice
