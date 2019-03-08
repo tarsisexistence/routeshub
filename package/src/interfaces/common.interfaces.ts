@@ -1,3 +1,5 @@
+import { Slice } from './slice.interfaces';
+
 /**
  * Basic hub structure
  *
@@ -26,4 +28,12 @@ export interface Params {
  */
 export interface Hub<E> {
   [key: string]: E;
+}
+
+/**
+ * Describes a slice's value
+ * that has unprocessed children
+ */
+export interface InternalStructure<C> extends Structure {
+  children?: Slice<C>;
 }

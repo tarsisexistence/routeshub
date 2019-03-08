@@ -1,6 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { Hub, Slice } from './interfaces';
+import { Hub, InternalStructure, Slice } from './interfaces';
 
 /**
  * stores routes states at the same level
@@ -8,28 +8,56 @@ import { Hub, Slice } from './interfaces';
 export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
 
 /**
+ * refreshes children parent target
+ * because of replacing them with a parent node
+ */
+function refreshChildren<R, C>(name: string, routes: Slice<R>): Slice<C> {
+  const parent: InternalStructure<C> = routes[name];
+  const children: Slice<C> = parent.children;
+  const inheritorId: number = parent.id + 1;
+  const namesake: string = Object.keys(children).find(
+    (routeName) => children[routeName].id === inheritorId
+  );
+
+  return Object.keys(children).reduce(
+    (acc, routeName): Slice<C> => {
+      const parentId =
+        children[routeName].id === inheritorId
+          ? routes[name].parentId
+          : children[namesake].id;
+      const route = { ...children[routeName], parentId };
+
+      /* tslint:disable:prefer-object-spread */
+      /* https://github.com/Microsoft/TypeScript/issues/10727 */
+      return { ...(acc as object), [routeName]: route } as Slice<C>;
+    },
+    {} as Slice<C>
+  );
+}
+
+/**
  * Detects and handles children routes
  */
-const entitify = <T>(routes: Slice<T>) =>
-  Object.keys(routes).reduce((acc, routeName) => {
-    if (!routes[routeName].children) {
-      return { ...acc, [routeName]: routes[routeName] };
-    }
-
-    return { ...acc, ...routes[routeName].children };
-  }, {});
+const entitify = <R, C>(routes: Slice<R>): Slice<R, C> =>
+  Object.keys(routes).reduce(
+    (acc, routeName) =>
+      routes[routeName].children
+        ? Object.assign({}, acc, refreshChildren<R, C>(routeName, routes))
+        : Object.assign({}, acc, { [routeName]: routes[routeName] }),
+    {} as Slice<R, C>
+  );
 
 /**
  * Returns the next hub value
  */
-export function nextHubValue<T, C = {}>(
+export function nextHubValue<R, C = {}>(
   routeName: string,
-  routes: Slice<T>
-): Hub<Slice<T, C>> {
-  const slice = entitify<T>(routes);
+  routes: Slice<R>
+): Hub<Slice<R, C>> {
+  const slice: Slice<R> = entitify<R, C>(routes);
 
   // tslint:disable-next-line
   return Object.assign({}, hub.value, {
     [routeName]: slice
-  }) as Hub<Slice<T, C>>;
+  }) as Hub<Slice<R, C>>;
 }
