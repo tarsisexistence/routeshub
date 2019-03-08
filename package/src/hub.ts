@@ -8,6 +8,18 @@ import { Hub, Slice } from './interfaces';
 export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
 
 /**
+ * Detects and handles children routes
+ */
+const entitify = <T>(routes: Slice<T>) =>
+  Object.keys(routes).reduce((acc, routeName) => {
+    if (!routes[routeName].children) {
+      return { ...acc, [routeName]: routes[routeName] };
+    }
+
+    return { ...acc, ...routes[routeName].children };
+  }, {});
+
+/**
  * Returns the next hub value
  */
 export function nextHubValue<T, C = {}>(
@@ -21,15 +33,3 @@ export function nextHubValue<T, C = {}>(
     [routeName]: slice
   }) as Hub<Slice<T, C>>;
 }
-
-/**
- * Detects and handles children routes
- */
-const entitify = <T>(routes: Slice<T>) =>
-  Object.keys(routes).reduce((acc, routeName) => {
-    if (!routes[routeName].children) {
-      return { ...acc, [routeName]: routes[routeName] };
-    }
-
-    return { ...acc, ...routes[routeName].children };
-  }, {});

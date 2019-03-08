@@ -10,22 +10,16 @@ export const setState = (parentSlice, path) =>
     : setNotEmptyPath(['/'], path);
 
 /**
- * Supports dynamic paths
+ * Absorbs and gives params out together
  */
-export function stateFn(
-  state,
-  params?: Params,
-  ...otherParams: Params[]
-): string[] {
-  if (!params) {
-    return state;
-  }
-
-  const parameters =
-    otherParams.length === 0 ? params : reduceParams(params, otherParams);
-
-  return handleState(parameters, state);
-}
+const reduceParams = (params: Params, restParams: Params[]): Params =>
+  restParams.reduce(
+    (accParams: Params, param: Params): Params => ({
+      ...accParams,
+      ...param
+    }),
+    params
+  );
 
 /**
  * Replaces property with a value
@@ -42,13 +36,19 @@ const handleState = (params: Params, state: string[] = []): string[] =>
   );
 
 /**
- * Absorbs and gives params out together
+ * Supports dynamic paths
  */
-const reduceParams = (params: Params, restParams: Params[]): Params =>
-  restParams.reduce(
-    (accParams: Params, param: Params): Params => ({
-      ...accParams,
-      ...param
-    }),
-    params
-  );
+export function stateFn(
+  state,
+  params?: Params,
+  ...otherParams: Params[]
+): string[] {
+  if (!params) {
+    return state;
+  }
+
+  const parameters =
+    otherParams.length === 0 ? params : reduceParams(params, otherParams);
+
+  return handleState(parameters, state);
+}
