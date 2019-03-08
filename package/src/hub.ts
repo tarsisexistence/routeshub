@@ -11,19 +11,18 @@ export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
  * refreshes children parent target
  * because of replacing them with a parent node
  */
-function refreshChildren<R, C>(name: string, routes: Slice<R>): Slice<C> {
-  const parent: InternalStructure<C> = routes[name];
+function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
   const children: Slice<C> = parent.children;
   const inheritorId: number = parent.id + 1;
   const namesake: string = Object.keys(children).find(
-    (routeName) => children[routeName].id === inheritorId
+    (routeName: string) => children[routeName].id === inheritorId
   );
 
   return Object.keys(children).reduce(
-    (acc, routeName): Slice<C> => {
+    (acc: Slice<C>, routeName: string): Slice<C> => {
       const parentId =
         children[routeName].id === inheritorId
-          ? routes[name].parentId
+          ? parent.parentId
           : children[namesake].id;
       const route = { ...children[routeName], parentId };
 
@@ -40,9 +39,9 @@ function refreshChildren<R, C>(name: string, routes: Slice<R>): Slice<C> {
  */
 const entitify = <R, C>(routes: Slice<R>): Slice<R, C> =>
   Object.keys(routes).reduce(
-    (acc, routeName) =>
+    (acc: Slice<R, C>, routeName: string): Slice<R, C> =>
       routes[routeName].children
-        ? Object.assign({}, acc, refreshChildren<R, C>(routeName, routes))
+        ? Object.assign({}, acc, refreshChildren<R, C>(routes[routeName]))
         : Object.assign({}, acc, { [routeName]: routes[routeName] }),
     {} as Slice<R, C>
   );
