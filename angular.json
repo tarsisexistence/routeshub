@@ -19,8 +19,8 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "package/test/test.ts",
-            "karmaConfig": "package/test/karma.conf.js",
+            "main": "package/test.ts",
+            "karmaConfig": "./karma.conf.js",
             "tsConfig": "package/configs/tsconfig.spec.json"
           }
         },
@@ -121,7 +121,7 @@
           "options": {
             "main": "integration/test.ts",
             "tsConfig": "integration/tsconfig.spec.json",
-            "karmaConfig": "integration/karma.conf.js",
+            "karmaConfig": "./karma.conf.js",
             "styles": [
               "integration/styles.scss",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
