@@ -4,10 +4,15 @@ import { setNotEmptyPath } from './path';
 /**
  * Assigns a value based on the parent's  state and a current path
  */
-export const setState = (parentSlice, path) =>
-  parentSlice !== null
+export const setState = (parentSlice, path) => {
+  if (path.includes('*')) {
+    return path;
+  }
+
+  return parentSlice !== null
     ? setNotEmptyPath(parentSlice.state, path)
     : setNotEmptyPath(['/'], path);
+};
 
 /**
  * Absorbs and gives params out together
