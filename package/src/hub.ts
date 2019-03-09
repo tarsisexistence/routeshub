@@ -1,38 +1,12 @@
+/* tslint:disable:prefer-object-spread */
 import { BehaviorSubject } from 'rxjs';
-
-import { Hub, InternalStructure, Slice } from './interfaces';
+import { Hub, Slice } from './interfaces';
+import { refreshChildren } from './utils/refresh-children';
 
 /**
  * stores routes states at the same level
  */
 export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
-
-/**
- * refreshes children parent target
- * because of replacing them with a parent node
- */
-function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
-  const children: Slice<C> = parent.children;
-  const inheritorId: number = parent.id + 1;
-  const namesake: string = Object.keys(children).find(
-    (routeName: string) => children[routeName].id === inheritorId
-  );
-
-  return Object.keys(children).reduce(
-    (acc: Slice<C>, routeName: string): Slice<C> => {
-      const parentId =
-        children[routeName].id === inheritorId
-          ? parent.parentId
-          : children[namesake].id;
-      const route = { ...children[routeName], parentId };
-
-      /* tslint:disable:prefer-object-spread */
-      /* https://github.com/Microsoft/TypeScript/issues/10727 */
-      return { ...(acc as object), [routeName]: route } as Slice<C>;
-    },
-    {} as Slice<C>
-  );
-}
 
 /**
  * Detects and handles children routes
@@ -55,7 +29,6 @@ export function nextHubValue<R, C = {}>(
 ): Hub<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
 
-  // tslint:disable-next-line
   return Object.assign({}, hub.value, {
     [routeName]: slice
   }) as Hub<Slice<R, C>>;
