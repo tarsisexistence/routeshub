@@ -1,7 +1,7 @@
 <p align="center">
   <img src="https://github.com/maktarsis/routeshub/raw/master/docs/assets/logo.png">
   <br />
-  Routeshub is a route management library and pattern, that acts as hub for Angular
+  Routeshub is a route management library and pattern that acts as hub for Angular
   <br />
   <br />
 </p>
