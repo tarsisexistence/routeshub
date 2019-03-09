@@ -6,7 +6,7 @@ import { setNotEmptyPath } from './path';
  */
 export const setState = (parentSlice, path) => {
   if (path.includes('*')) {
-    return path;
+    return [path];
   }
 
   return parentSlice !== null
