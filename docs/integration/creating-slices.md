@@ -20,7 +20,7 @@ export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 {% code-tabs %}
 {% code-tabs-item title="about.slice.ts" %}
 ```typescript
-import { appSlice } from '~app/routing/hub/app.slice';
+import { appSlice } from './app.slice';
 import { aboutNotes, AboutNotes } from './about.notes';
 
 export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
@@ -36,7 +36,7 @@ export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
 {% code-tabs %}
 {% code-tabs-item title="auth.slice.ts" %}
 ```typescript
-import { appSlice } from '~app/routing/hub/app.slice';
+import { appSlice } from './app.slice';
 import { authNotes, AuthNotes } from './about.notes';
 
 export const authSlice: Slice<AuthNotes> = createFeature<AuthNotes>(

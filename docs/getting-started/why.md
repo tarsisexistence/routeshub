@@ -33,3 +33,4 @@ Essentially, this is a slightly different concept from _state management_
 
 Routeshub collects and serializes module's routes information to manage _state of the_ ~~_application_~~ _routes._ This concept is called a ~~store~~ **hub**.
 {% endhint %}
+
