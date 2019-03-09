@@ -3,7 +3,7 @@
 Let's imagine, we have such routes:
 
 * App 
-* About as children of the App
+* About \(App's child\)
 * Auth
 * NotFound
 

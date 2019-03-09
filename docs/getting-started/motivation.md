@@ -1,5 +1,26 @@
 # Motivation
 
+```typescript
+export const routes: Routes = [
+  {
+    path: app.home.path,
+    loadChildren: appRoute.home.lazy
+  },
+  {
+    path: app.shop.path,
+    loadChildren: appRoute.shop.lazy
+  },
+  {
+    path: app.location.path,
+    loadChildren: appRoute.location.lazy
+  },
+  {
+    path: app.cart.path,
+    component: ShoppingCartComponent
+  }
+];
+```
+
 ## Foreword
 
 Have you ever suffered because of the _magic strings_? I did 😤
@@ -76,3 +97,4 @@ Full integration with example is on **Integration** section
 You might think \_\_it's all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact? " - Don't hurry
 
 Benefits worth it. Be sure to read the next section 👀
+
