@@ -1,6 +1,20 @@
-let id = 0;
+/**
+ * generator that keeps and generates unique identifiers
+ */
+function* idfy(): IterableIterator<number> {
+  let index = 0;
+  while (true) {
+    const options = yield index++;
+
+    if (!options) {
+      continue;
+    }
+
+    index = options.reset ? 0 : index;
+  }
+}
 
 /**
- * Utility function to generate unique and consistent id
+ * Gives ordered ids
  */
-export const indexer = () => id++;
+export const indexer = idfy();

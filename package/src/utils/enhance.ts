@@ -24,7 +24,7 @@ export function enhance<R, C = {}>(
       const { children, path, lazy } = routes[routeName];
       const state = setState(parentSlice, path);
       const route = {
-        id: indexer(),
+        id: indexer.next().value,
         parentId: parentSlice !== null ? parentSlice.id : null,
         state,
         stateFn: stateFn.bind(null, state),
