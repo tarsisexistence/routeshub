@@ -7,9 +7,9 @@ describe('createRoot', () => {
     reset();
   });
 
-  it('should create a simple hub with basic and small configuration', () => {
+  it('should create the simplest hub', () => {
     const notes = { root: { path: '' } };
-    const appSlice: any = createRoot(notes);
+    const slice = createRoot(notes);
     const result = {
       root: {
         id: 0,
@@ -22,16 +22,16 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(appSlice)).toBe(JSON.stringify(result));
+    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
   });
 
-  it('should create a simple hub with a few routes', () => {
+  it('should create a hub with a few routes', () => {
     const notes = {
       root: { path: '' },
       notFound: { path: '**' },
       map: { path: 'map' }
     };
-    const appSlice: any = createRoot(notes);
+    const slice = createRoot(notes);
     const result = {
       root: {
         id: 0,
@@ -64,6 +64,145 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(appSlice)).toBe(JSON.stringify(result));
+    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+  });
+
+  it('should create a hub with route that has children', () => {
+    const notes = {
+      root: {
+        path: '',
+        children: {
+          root: {
+            path: ''
+          },
+          about: {
+            path: 'about',
+            lazy: 'app/views/about/about.module#AboutModule'
+          }
+        }
+      }
+    };
+    const slice = createRoot(notes);
+    const result = {
+      root: {
+        id: 1,
+        parentId: null,
+        state: ['/'],
+        stateFn: Function,
+        path: '',
+        lazy: null,
+        routeName: 'root',
+        children: null
+      },
+      about: {
+        id: 2,
+        parentId: 1,
+        state: ['/', 'about'],
+        stateFn: Function,
+        path: 'about',
+        lazy: 'app/views/about/about.module#AboutModule',
+        routeName: 'about',
+        children: null
+      }
+    };
+    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+  });
+
+  it('should create a hub with routes and children', () => {
+    const notes = {
+      root: {
+        path: '',
+        children: {
+          root: {
+            path: ''
+          },
+          about: {
+            path: 'about',
+            lazy: 'app/views/about/about.module#AboutModule'
+          }
+        }
+      },
+      map: {
+        path: 'map',
+        children: {
+          root: {
+            path: ''
+          },
+          location: {
+            path: 'location',
+            lazy: 'app/views/map/views/location/location.module#LocationModule'
+          }
+        }
+      },
+      info: {
+        path: 'info',
+        lazy: 'app/views/info/info.module#InfoModule'
+      },
+      notFound: { path: '**' }
+    };
+    const slice = createRoot(notes);
+    const result = {
+      root: {
+        id: 1,
+        parentId: null,
+        state: ['/'],
+        stateFn: Function,
+        path: '',
+        lazy: null,
+        routeName: 'root',
+        children: null
+      },
+      about: {
+        id: 2,
+        parentId: 1,
+        state: ['/', 'about'],
+        stateFn: Function,
+        path: 'about',
+        lazy: 'app/views/about/about.module#AboutModule',
+        routeName: 'about',
+        children: null
+      },
+      map: {
+        id: 4,
+        parentId: null,
+        state: ['/', 'map'],
+        stateFn: Function,
+        path: '',
+        lazy: null,
+        routeName: 'map',
+        children: null
+      },
+      location: {
+        id: 5,
+        parentId: 4,
+        state: ['/', 'map', 'location'],
+        stateFn: Function,
+        path: 'location',
+        lazy: 'app/views/map/views/location/location.module#LocationModule',
+        routeName: 'location',
+        children: null
+      },
+      info: {
+        id: 6,
+        parentId: null,
+        state: ['/', 'info'],
+        stateFn: Function,
+        path: 'info',
+        lazy: 'app/views/info/info.module#InfoModule',
+        routeName: 'info',
+        children: null
+      },
+      notFound: {
+        id: 7,
+        parentId: null,
+        state: ['**'],
+        stateFn: Function,
+        path: '**',
+        lazy: null,
+        routeName: 'notFound',
+        children: null
+      }
+    };
+    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
   });
 });
