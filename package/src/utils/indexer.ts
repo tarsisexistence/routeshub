@@ -9,12 +9,11 @@ function* idfy(): IterableIterator<number> {
     if (!options) {
       continue;
     }
-
-    index = options.reset ? 0 : index;
+    index = options.reset ? -1 : index;
   }
 }
 
 /**
- * Gives ordered ids
+ * provides ordered ids
  */
 export const indexer = idfy();
