@@ -223,13 +223,12 @@
   dependencies:
     tslib "^1.9.0"
 
-"@ant-design/icons-angular@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@ant-design/icons-angular/-/icons-angular-2.0.1.tgz#ac1828f408fd513c6261f232f44d7c72cc62fdff"
-  integrity sha512-XFhTgft/X54YYYF42tmIa7MaZFb2MIbyNB3zqCjRBgm2IuCxMldh5cul85a5ImZcaVphqBcXyhWkPbEIkEIyhA==
+"@ant-design/icons-angular@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@ant-design/icons-angular/-/icons-angular-2.0.2.tgz#ee81d7c098eb8e2a04dd82d3370511af26e46d13"
+  integrity sha512-Pk/9BY5/KmasrK1ViYwbZG0piL27IdKqWjAyTltqJbKrqqJi9DMXYKnXhmqGXQeZ2YCPi9eXGYkwaWEjwJRgzA==
   dependencies:
     ant-design-palettes "^1.1.3"
-    tslib "^1.9.0"
 
 "@babel/code-frame@^7.0.0":
   version "7.0.0"
@@ -6184,13 +6183,13 @@ ng-packagr@4.7.1:
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
 
-ng-zorro-antd@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-7.0.1.tgz#4dd42f6c59e59e35238b1b2c503663c35ab0176d"
-  integrity sha512-dNs21hCdKt8oVd0HNGGwCIAsetyI0zduigx1pxcVThXd/j+8G5Z17p+GZpNECdAsaK6YNRqATMuWGgZzCpbDGA==
+ng-zorro-antd@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-7.0.3.tgz#83802fba75d17422625ff2475e8d878d0ae618ec"
+  integrity sha512-dN242YnfWJ74yDLo9WQ5o+W08f4pONvGxDtnf8mkyC3Rvd+coTIzB7GYJAkyZclVvx2B6B08XHoiYDvmLPhIaw==
   dependencies:
     "@angular/cdk" "^7.0.0"
-    "@ant-design/icons-angular" "2.0.1"
+    "@ant-design/icons-angular" "^2.0.2"
     date-fns "^1.29.0"
     tslib "^1.9.0"
 
