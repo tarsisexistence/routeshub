@@ -1,8 +1,7 @@
 <nz-content class="content">
 
   <div class="breadcrumbs">
-    <div class="brand"
-      *ngFor="let vehicle of vehicles">
+    <div class="brand" *ngFor="let vehicle of vehicles; trackBy: identify">
       <span class="title">
         {{ vehicle.brand }}
       </span>

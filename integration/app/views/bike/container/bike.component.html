@@ -1,5 +1,5 @@
 <ul class="vehicles">
-  <app-vehicle *ngFor="let bike of vehicles"
+  <app-vehicle *ngFor="let bike of vehicles; trackBy: identify"
                [vehicle]="bike">
   </app-vehicle>
 </ul>

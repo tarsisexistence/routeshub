@@ -185,6 +185,7 @@
         "named-imports-order": "case-insensitive"
       }
     ],
+    "return-undefined": false,
     "prefer-function-over-method": [
       true,
       "allow-public",
@@ -282,11 +283,7 @@
     "pipe-impure": true,
     "templates-no-negated-async": true,
     "trackBy-function": true,
-    "i18n": [
-      true,
-      "check-id",
-      "check-text"
-    ],
+    "i18n": false,
     "no-attribute-parameter-decorator": true,
     "no-forward-ref": true,
     "no-life-cycle-call": true,

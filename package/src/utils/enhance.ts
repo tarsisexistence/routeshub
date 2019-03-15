@@ -29,7 +29,7 @@ export function enhance<R, C = {}>(
         state,
         stateFn: stateFn.bind(null, state),
         path: checkMultiPath(path) ? splitPath(path) : path,
-        lazy: lazy || null,
+        lazy: lazy ? lazy : null,
         routeName
       };
 

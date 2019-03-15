@@ -21,7 +21,7 @@ export class BolidComponent implements OnInit, OnDestroy {
   public vehicles: Vehicle[];
   private unsubscribe$: Subject<boolean>;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private readonly route: ActivatedRoute) {}
 
   public ngOnInit(): void {
     this.unsubscribe$ = new Subject<boolean>();
@@ -31,6 +31,10 @@ export class BolidComponent implements OnInit, OnDestroy {
       .subscribe(({ vehicles }) => {
         this.vehicles = vehicles;
       });
+  }
+
+  public identify(index, item: Vehicle): string {
+    return item.name;
   }
 
   public ngOnDestroy(): void {

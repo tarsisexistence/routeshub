@@ -8,4 +8,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class ContentComponent {
   @Input() public vehicles: { brand: string; logo: string }[];
+
+  public identify(index, item: { brand: string; logo: string }): string {
+    return item.brand;
+  }
 }
