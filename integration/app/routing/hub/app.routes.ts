@@ -22,22 +22,22 @@ export const routes = [
       },
       {
         path: appNotes.root.children.about.path,
-        loadChildren: appNotes.root.children.about.lazyPath,
+        loadChildren: appNotes.root.children.about.lazy,
         pathMatch: 'full'
       },
       {
         path: appNotes.root.children.automobile.path,
-        loadChildren: appNotes.root.children.automobile.lazyPath,
+        loadChildren: appNotes.root.children.automobile.lazy,
         pathMatch: 'full'
       },
       {
         path: appNotes.root.children.bike.path,
-        loadChildren: appNotes.root.children.bike.lazyPath,
+        loadChildren: appNotes.root.children.bike.lazy,
         pathMatch: 'full'
       },
       {
         path: appNotes.root.children.bolid.path,
-        loadChildren: appNotes.root.children.bolid.lazyPath,
+        loadChildren: appNotes.root.children.bolid.lazy,
         pathMatch: 'full'
       }
     ]

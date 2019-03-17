@@ -2,19 +2,19 @@ import { rootNote, RootRoute, RouteNote, RoutesNotes } from 'routeshub';
 
 const aboutNote: RouteNote = {
   path: 'about',
-  lazyPath: 'app/views/about/about.module#AboutModule'
+  lazy: 'app/views/about/about.module#AboutModule'
 };
 const automobileNote: RouteNote = {
   path: 'automobiles',
-  lazyPath: 'app/views/automobile/automobile.module#AutomobileModule'
+  lazy: 'app/views/automobile/automobile.module#AutomobileModule'
 };
 const bikeNote: RouteNote = {
   path: 'bikes',
-  lazyPath: 'app/views/bike/bike.module#BikeModule'
+  lazy: 'app/views/bike/bike.module#BikeModule'
 };
 const bolidNote: RouteNote = {
   path: 'bolids',
-  lazyPath: 'app/views/bolid/bolid.module#BolidModule'
+  lazy: 'app/views/bolid/bolid.module#BolidModule'
 };
 
 /**
