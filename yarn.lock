@@ -6188,10 +6188,10 @@ ng-packagr@4.7.1:
     uglify-js "^3.0.7"
     update-notifier "^2.3.0"
 
-ng-zorro-antd@7.0.3:
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-7.0.3.tgz#83802fba75d17422625ff2475e8d878d0ae618ec"
-  integrity sha512-dN242YnfWJ74yDLo9WQ5o+W08f4pONvGxDtnf8mkyC3Rvd+coTIzB7GYJAkyZclVvx2B6B08XHoiYDvmLPhIaw==
+ng-zorro-antd@7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-7.1.0.tgz#1e7189834796655bf43961465a8b4639d85eb1be"
+  integrity sha512-EA/vsrnfkmEfwr1hTXOh3p3g7rx/4go34JQm6QtVnk7ddH9Fvk+hSLgrh8CddNvSrNtxDDHXKlnAyAqWCNpTZQ==
   dependencies:
     "@angular/cdk" "^7.0.0"
     "@ant-design/icons-angular" "^2.0.2"
