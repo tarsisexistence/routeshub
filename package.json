@@ -64,7 +64,7 @@
     "lint-staged": "8.1.2",
     "ng-packagr": "4.7.1",
     "prettier": "1.16.3",
-    "protractor": "5.4.2",
+    "protractor": "6.0.0",
     "snyk": "1.135.1",
     "ts-node": "8.0.2",
     "tsickle": "0.34.2",
