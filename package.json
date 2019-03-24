@@ -35,7 +35,7 @@
     "ng-zorro-antd": "7.1.0",
     "routeshub": "1.1.1",
     "rxjs": "6.4.0",
-    "zone.js": "0.8.29"
+    "zone.js": "0.9.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.6",
