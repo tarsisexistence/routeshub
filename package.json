@@ -66,7 +66,7 @@
     "prettier": "1.16.3",
     "protractor": "6.0.0",
     "snyk": "1.143.1",
-    "ts-node": "8.0.2",
+    "ts-node": "8.0.3",
     "tsickle": "0.34.2",
     "tslib": "1.9.3",
     "tslint": "5.13.0",
