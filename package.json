@@ -50,7 +50,7 @@
     "@types/jasminewd2": "2.0.6",
     "@types/node": "8.10.46",
     "angular-tslint-rules": "1.14.0",
-    "codelyzer": "5.0.0",
+    "codelyzer": "5.0.1",
     "husky": "2.1.0",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
