@@ -48,7 +48,7 @@
     "@compodoc/compodoc": "1.1.9",
     "@types/jasmine": "2.8.14",
     "@types/jasminewd2": "2.0.6",
-    "@types/node": "8.10.39",
+    "@types/node": "8.10.46",
     "angular-tslint-rules": "1.14.0",
     "codelyzer": "5.0.0",
     "husky": "2.1.0",
