@@ -38,9 +38,9 @@
         }
       }
     },
-    "integration": {
+    "example-app": {
       "root": "",
-      "sourceRoot": "integration",
+      "sourceRoot": "example-app",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
@@ -53,13 +53,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/integration",
-            "index": "integration/index.html",
-            "main": "integration/main.ts",
-            "tsConfig": "integration/tsconfig.app.json",
+            "outputPath": "dist/example-app",
+            "index": "example-app/index.html",
+            "main": "example-app/main.ts",
+            "tsConfig": "example-app/tsconfig.app.json",
             "assets": [
-              "integration/favicon.ico",
-              "integration/assets",
+              "example-app/favicon.ico",
+              "example-app/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
@@ -67,7 +67,7 @@
               }
             ],
             "styles": [
-              "integration/styles.scss",
+              "example-app/styles.scss",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
@@ -76,8 +76,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "integration/environments/environment.ts",
-                  "with": "integration/environments/environment.prod.ts"
+                  "replace": "example-app/environments/environment.ts",
+                  "with": "example-app/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -102,34 +102,34 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "integration:build"
+            "browserTarget": "example-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "integration:build:production"
+              "browserTarget": "example-app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "integration:build"
+            "browserTarget": "example-app:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "integration/test.ts",
-            "tsConfig": "integration/tsconfig.spec.json",
+            "main": "example-app/test.ts",
+            "tsConfig": "example-app/tsconfig.spec.json",
             "karmaConfig": "./karma.conf.js",
             "styles": [
-              "integration/styles.scss",
+              "example-app/styles.scss",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": [],
             "assets": [
-              "integration/favicon.ico",
-              "integration/assets",
+              "example-app/favicon.ico",
+              "example-app/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
@@ -142,8 +142,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "integration/tsconfig.app.json",
-              "integration/tsconfig.spec.json"
+              "example-app/tsconfig.app.json",
+              "example-app/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

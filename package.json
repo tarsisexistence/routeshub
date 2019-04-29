@@ -17,8 +17,8 @@
     "lint": "ng lint routeshub",
     "lint-staged": "lint-staged",
     "prettier": "prettier",
-    "// - INTEGRATION DOC - //": "------------------------------",
-    "doc:build": "npx compodoc -p integration/tsconfig.app.json --theme=readthedocs -n \"integration documentation\"",
+    "// - EXAMPLE-APP DOC - //": "------------------------------",
+    "doc:build": "npx compodoc -p example-app/tsconfig.app.json --theme=readthedocs -n \\\"example-app documentation\\\"",
     "doc:serve": "npx compodoc -s"
   },
   "dependencies": {
