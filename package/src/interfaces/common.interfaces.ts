@@ -10,7 +10,6 @@ export interface Structure {
   parentId: number;
   routeName: string;
   state: string[];
-  stateFn: (params?: Params, ...restParams: Params[]) => string[];
   path: string;
   lazy?: string;
 }

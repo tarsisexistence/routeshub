@@ -1,22 +1,16 @@
 /**
  * Prevents to record empty state paths
  */
-export function setNotEmptyPath(state: string[], path: string): string[] {
-  return path !== '' ? [...state, path] : state;
-}
+export const setNotEmptyPath = (state: string[], path: string): string[] =>
+  path === '' ? state : [...state, path];
 
 /**
  * Checks multi path in a single route
  */
-export function checkMultiPath(path: string): boolean {
-  const slashId = path ? path.indexOf('/') : -1;
-
-  return slashId !== -1;
-}
+export const checkMultiPath = (path: string): boolean => path.includes('/');
 
 /**
  * Prevents to record multi path in the state
  */
-export function splitPath(path: string): string[] {
-  return path.split('/').filter((state: string) => !!state);
-}
+export const splitPath = (path: string): string[] =>
+  path.split('/').filter((state: string) => !!state);

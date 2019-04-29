@@ -90,7 +90,7 @@
         ]
       }
     ],
-    "newline-before-return": true,
+    "newline-before-return": false,
     "newline-per-chained-call": false,
     "new-parens": true,
     "no-arg": true,
@@ -291,7 +291,7 @@
     "no-queries-parameter": true,
     "no-template-call-expression": true,
     "no-unused-css": true,
-    "prefer-inline-decorator": true,
+    "prefer-inline-decorator": false,
     "prefer-output-readonly": true,
     "use-pipe-decorator": true,
     "use-view-encapsulation": true,
