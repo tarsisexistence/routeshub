@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import en from '@angular/common/locales/en';
+import { NavigationModule } from 'routeshub-lib';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
@@ -36,7 +37,8 @@ const components = [
     HttpClientModule,
     BrowserAnimationsModule,
     NgZorroAntdModule,
-    RoutingModule
+    RoutingModule,
+    NavigationModule
   ],
   declarations: components,
   exports: [RoutingModule, ...components],
