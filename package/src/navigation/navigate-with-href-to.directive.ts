@@ -8,12 +8,12 @@ import { forwardRouteParams } from '../utils/state';
 import { splitPath } from '../utils/path';
 
 @Directive({
-  selector: `a[${ATTRS.LINK}],area[${ATTRS.PARAMS}]`
+  selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`
 })
 export class NavigateWithHrefTo extends RouterLinkWithHref {
   public link: string[];
 
-  @Input() set [ATTRS.LINK](link: string | string[]) {
+  @Input() set navLink(link: string | string[]) {
     this.link = typeof link === 'string' ? splitPath(link) : link;
   }
 

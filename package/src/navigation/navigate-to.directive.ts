@@ -17,7 +17,7 @@ import { splitPath } from '../utils/path';
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
 export class NavigateTo extends RouterLink {
-  @Input() set [ATTRS.LINK](link: string | string[]) {
+  @Input() set navLink(link: string | string[]) {
     this.link = typeof link === 'string' ? splitPath(link) : link;
   }
 
