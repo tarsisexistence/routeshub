@@ -21,7 +21,6 @@ export function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
         name === inheritorName && name === 'root' ? parent.routeName : name;
       const route = { ...children[name], parentId, routeName };
 
-      /* tslint:disable:prefer-object-spread */
       /* https://github.com/Microsoft/TypeScript/issues/10727 */
       return { ...(acc as object), [routeName]: route } as Slice<C>;
     },

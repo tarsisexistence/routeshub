@@ -32,7 +32,6 @@ export function enhance<R, C = {}>(
         routeName
       };
 
-      /* tslint:disable:prefer-object-spread */
       return Object.assign(acc, {
         [routeName]: {
           ...route,

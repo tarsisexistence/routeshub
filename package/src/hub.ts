@@ -1,28 +1,11 @@
-/* tslint:disable:prefer-object-spread */
 import { BehaviorSubject } from 'rxjs';
 import { Hub, Slice } from './interfaces';
-import { refreshChildren } from './utils/refresh-children';
+import { entitify } from './utils/entityfy';
 
 /**
  * stores routes states at the same level
  */
 export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
-
-/**
- * Detects and handles children routes
- */
-const entitify = <R, C>(routes: Slice<R>): Slice<R, C> =>
-  Object.keys(routes).reduce(
-    (acc: Slice<R, C>, routeName: string): Slice<R, C> => {
-      if (!routes[routeName].children) {
-        return Object.assign({}, acc, { [routeName]: routes[routeName] });
-      }
-
-      const refreshedChildren = refreshChildren<R, C>(routes[routeName]);
-      return Object.assign({}, acc, refreshedChildren);
-    },
-    {} as Slice<R, C>
-  );
 
 /**
  * Returns the next hub value
