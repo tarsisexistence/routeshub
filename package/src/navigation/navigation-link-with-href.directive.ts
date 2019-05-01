@@ -18,7 +18,7 @@ export class NavigationLinkWithHref extends RouterLinkWithHref {
   }
 
   @Input(ATTRS.PARAMS) params: Params;
-  private _router: Router;
+  private readonly _router: Router;
 
   constructor(
     router: Router,

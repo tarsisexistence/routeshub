@@ -23,7 +23,7 @@ export class NavigationLink extends RouterLink {
 
   @Input(ATTRS.PARAMS) params: Params;
   public link: string[];
-  private _router: Router;
+  private readonly _router: Router;
 
   constructor(
     router: Router,

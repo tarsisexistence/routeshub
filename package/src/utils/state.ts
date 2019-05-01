@@ -27,6 +27,20 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
   );
 
 /**
+ * Replaces property with a value
+ * Helps stateFn generating dynamic values
+ */
+const handleState = (state: string[], params: Params): string[] =>
+  Object.keys(params).reduce(
+    (accState: string[], param: string): string[] =>
+      accState.map(
+        (slice: string): string =>
+          slice === `:${param}` ? params[param] : slice
+      ),
+    state || []
+  );
+
+/**
  * Supports dynamic paths
  * through route variables
  */
@@ -44,17 +58,3 @@ export function forwardParams(
 
   return handleState(state, parameters);
 }
-
-/**
- * Replaces property with a value
- * Helps stateFn generating dynamic values
- */
-const handleState = (state: string[], params: Params): string[] =>
-  Object.keys(params).reduce(
-    (accState: string[], param: string): string[] =>
-      accState.map(
-        (slice: string): string =>
-          slice === `:${param}` ? params[param] : slice
-      ),
-    state || []
-  );
