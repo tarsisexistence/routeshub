@@ -21,7 +21,7 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+    expect(slice).toEqual(result);
   });
 
   it('should create a hub with a few routes', () => {
@@ -60,7 +60,7 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+    expect(slice).toEqual(result);
   });
 
   it('should create a hub with route that has children', () => {
@@ -99,7 +99,7 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+    expect(slice).toEqual(result);
   });
 
   it('should create a hub with routes and children', () => {
@@ -191,6 +191,6 @@ describe('createRoot', () => {
         children: null
       }
     };
-    expect(JSON.stringify(slice)).toBe(JSON.stringify(result));
+    expect(slice).toEqual(result);
   });
 });
