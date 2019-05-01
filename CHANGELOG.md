@@ -1,3 +1,11 @@
+# 1.2.0 2019-05-01
+
+- added few navigation directives
+- added forwardParams fn
+- minor fixes and refactoring
+- updated documentation
+- updated dependencies
+
 # 1.1.1 2019-03-09
 
 - improved reliability and typing

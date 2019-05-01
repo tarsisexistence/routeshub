@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
   "description": "A minimal unit is made to simplify your routes business",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "repository": {
     "type": "git",
@@ -11,6 +11,10 @@
   "bugs": "https://github.com/maktarsis/routeshub/issues",
   "license": "MIT",
   "peerDependencies": {
+    "@angular/core": ">=6.0.0-rc.0",
+    "@angular/common": ">=6.0.0-rc.0",
+    "@angular/router": ">=6.0.0-rc.0",
+    "typescript": "^3.2.4",
     "rxjs": "^6.4.0"
   },
   "keywords": [

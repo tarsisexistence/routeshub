@@ -1,0 +1,20 @@
+<nz-header>
+  <a class="logo"
+     [navLink]="slices.appSlice.root.state">
+    <img class="image"
+         src="/assets/logo/white.png"
+         alt="logo"/>
+  </a>
+
+  <ul class="menu"
+      nz-menu
+      [nzTheme]="'dark'"
+      [nzMode]="'horizontal'">
+
+    <!--do navigation as you like-->
+    <li nz-menu-item [navLink]="slices.aboutSlice.root.state">About</li>
+    <li nz-menu-item [navLink]="slices.automobileSlice.root.state">Automobiles</li>
+    <li nz-menu-item [navLink]="slices.bikeSlice.root.state">Bikes</li>
+    <li nz-menu-item navLink="{{slices.bolidSlice.root.state.join('/')}}" [navParams]="{year: '2018'}">Bolids</li>
+  </ul>
+</nz-header>

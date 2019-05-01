@@ -1,7 +1,7 @@
 import { indexer } from './indexer';
 import { InternalSlice, RoutesNotes, Slice, Structure } from '../interfaces';
 import { checkMultiPath, splitPath } from './path';
-import { setState, stateFn } from './state';
+import { setState } from './state';
 
 /**
  * Describes an output of enhance fn
@@ -27,13 +27,11 @@ export function enhance<R, C = {}>(
         id: indexer.next().value,
         parentId: parentSlice !== null ? parentSlice.id : null,
         state,
-        stateFn: stateFn.bind(null, state),
         path: checkMultiPath(path) ? splitPath(path) : path,
-        lazy: lazy || null,
+        lazy: lazy ? lazy : null,
         routeName
       };
 
-      /* tslint:disable:prefer-object-spread */
       return Object.assign(acc, {
         [routeName]: {
           ...route,

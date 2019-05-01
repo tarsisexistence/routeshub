@@ -1,0 +1,16 @@
+{
+  "extends": "../tslint.json",
+  "rules": {
+    "directive-selector": false,
+    "directive-class-suffix": false,
+    "component-selector": [
+      true,
+      "element",
+      "lib",
+      "rh",
+      "kebab-case"
+    ],
+    "member-access": false,
+    "prefer-object-spread": false
+  }
+}
