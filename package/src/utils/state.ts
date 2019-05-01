@@ -30,8 +30,8 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
  * Supports dynamic paths
  * through route variables
  */
-export function forwardRouteParams(
-  state,
+export function forwardParams(
+  state: string[],
   params?: Params,
   ...otherParams: Params[]
 ): string[] {

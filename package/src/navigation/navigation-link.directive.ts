@@ -1,37 +1,44 @@
 // tslint:disable:max-line-length
-import { Directive, HostListener, Input } from '@angular/core';
-import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
+import {
+  Attribute,
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  Renderer2
+} from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
-import { forwardRouteParams } from '../utils/state';
+import { forwardParams } from '../utils/state';
 import { splitPath } from '../utils/path';
 
 @Directive({
-  selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`
+  selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
-export class NavigateWithHrefTo extends RouterLinkWithHref {
-  public link: string[];
-
+export class NavigationLink extends RouterLink {
   @Input() set navLink(link: string | string[]) {
     this.link = typeof link === 'string' ? splitPath(link) : link;
   }
 
   @Input(ATTRS.PARAMS) params: Params;
+  public link: string[];
   private _router: Router;
 
   constructor(
     router: Router,
     route: ActivatedRoute,
-    locationStrategy: LocationStrategy
+    @Attribute('tabindex') tabIndex: string,
+    renderer: Renderer2,
+    el: ElementRef
   ) {
-    super(router, route, locationStrategy);
+    super(router, route, tabIndex, renderer, el);
     this._router = router;
   }
 
   @HostListener('click') onClick(): boolean {
     const link = this.params
-      ? forwardRouteParams(this.link, this.params)
+      ? forwardParams(this.link, this.params)
       : this.link;
     this._router.navigate(link).catch(console.error);
     return false;

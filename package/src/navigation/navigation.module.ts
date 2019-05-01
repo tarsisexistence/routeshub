@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { NavigateTo } from './navigate-to.directive';
-import { NavigateWithHrefTo } from './navigate-with-href-to.directive';
+import { NavigationLink } from './navigation-link.directive';
+import { NavigationLinkWithHref } from './navigation-link-with-href.directive';
 
-const directives = [NavigateTo, NavigateWithHrefTo];
+const directives = [NavigationLink, NavigationLinkWithHref];
 
 @NgModule({
   declarations: directives,
