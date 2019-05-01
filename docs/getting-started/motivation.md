@@ -1,100 +1,39 @@
 # Motivation
 
-```typescript
-export const routes: Routes = [
-  {
-    path: app.home.path,
-    loadChildren: appRoute.home.lazy
-  },
-  {
-    path: app.shop.path,
-    loadChildren: appRoute.shop.lazy
-  },
-  {
-    path: app.location.path,
-    loadChildren: appRoute.location.lazy
-  },
-  {
-    path: app.cart.path,
-    component: ShoppingCartComponent
-  }
-];
-```
+## 🕯Prerequisites
 
-## Foreword
+What kind of things does _routeshub_ solve?
 
-Have you ever suffered because of the _magic strings_? I did 😤
+* **magic strings** - that behavior takes a lot of our time and attention
+* **variables** - faster and safer navigating through route's state
+* **code completion** - nice to have abstraction level using enhanced routes
+* **pattern** - managing routes in the agreed manner
 
-Actually I was puzzled and stumped many times when I tried to come up with a convenient way out that could solve my problems 😵
+## 🕯Plugin
 
-So, I had tones of thoughts, but ultimately, I came up with a solution that simultaneously solves the problems of routes with declaration, navigation, and both providing general control, predictable results and stability
+Routeshub serves as a small unit that simplifies life in the short and long term.
 
-## Examples
+It was designed to be added at any time during the development.
 
-Looks familiar, right?
+## 🕯Pattern
 
-```typescript
-export const routes: Routes = [
-  {
-    path: '',
-    loadChildren: 'app/home/home.module#HomeModule'
-  },
+The package offers a few approaches to configure and manage routes as consistently and as clearly as possible which allows you to stop worrying about routes and do what is really important.
 
-  {
-    path: 'shop',
-    loadChildren: 'app/shop/shop.module#ShopModule'
-  },
-  {
-    path: 'location',
-    loadChildren: 'app/location/location.module#LocationModule'
-  },
-  {
-    path: 'cart',
-    component: ShoppingCartComponent
-  }
-];
-```
+The documentation proposes the style guide which is recommended to follow.
 
-```markup
-<a [routerLink]="['/shop', 'accessories']">Accessories</a>
-```
+## 🕯Looking for the best
 
-Okay, but what if I say that you can do the same thing in a more convenient and manageable manner? 🤔
+This project is neither ideal nor final.
 
-Let's take a look 🔭
+Just a step for the better. A step to help engineers building applications better and faster.
 
-```typescript
-export const routes: Routes = [
-  {
-    path: app.home.path,
-    loadChildren: appRoute.home.lazy
-  },
-  {
-    path: app.shop.path,
-    loadChildren: appRoute.shop.lazy
-  },
-  {
-    path: app.location.path,
-    loadChildren: appRoute.location.lazy
-  },
-  {
-    path: app.cart.path,
-    component: ShoppingCartComponent
-  }
-];
-```
+That's why I'll be happy with any kind of involvement and I am opened to any suggestions.
 
-```markup
-<a [routerLink]="shop.accessories.path">Accessories</a>
-```
+{% hint style="info" %}
+**Essence**
 
-Full integration with example is on **Integration** section
+It is a slightly different concept from _state management._
 
-{% page-ref page="../integration/" %}
-
-## Aftertaste
-
-You might think \_\_it's all looks strange, it's easy to get confused in these variables, and we still declare magic strings somewhere. So where is the real impact? " - Don't hurry
-
-Benefits worth it. Be sure to read the next section 👀
+Routeshub collects and analyzes routes information to create manageable state of route_._ You can understand this concept as a **hub**.
+{% endhint %}
 

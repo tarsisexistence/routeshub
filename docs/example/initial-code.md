@@ -44,9 +44,7 @@ export const routes: Routes = [
 ];
 ```
 {% endcode-tabs-item %}
-{% endcode-tabs %}
 
-{% code-tabs %}
 {% code-tabs-item title="about.routes.ts" %}
 ```typescript
 export const aboutRoutes: Routes = [
@@ -57,9 +55,7 @@ export const aboutRoutes: Routes = [
 ];
 ```
 {% endcode-tabs-item %}
-{% endcode-tabs %}
 
-{% code-tabs %}
 {% code-tabs-item title="auth.routes.ts" %}
 ```typescript
 export const authRoutes: Routes = [
@@ -80,5 +76,5 @@ export const authRoutes: Routes = [
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-Now we need to integrate **routeshub** in the project 👨💻 
+Now we're going to integrate **routeshub** in the project
 
