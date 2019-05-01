@@ -13,11 +13,7 @@ import { AppChildrenNotes as C } from './app-children.notes';
 export const appSlice: Slice<R, C> = createRoot<R, C>(appNotes);
 ```
 {% endcode-tabs-item %}
-{% endcode-tabs %}
 
-
-
-{% code-tabs %}
 {% code-tabs-item title="about.slice.ts" %}
 ```typescript
 import { appSlice } from './app.slice';
@@ -29,11 +25,7 @@ export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
 );
 ```
 {% endcode-tabs-item %}
-{% endcode-tabs %}
 
-
-
-{% code-tabs %}
 {% code-tabs-item title="auth.slice.ts" %}
 ```typescript
 import { appSlice } from './app.slice';
