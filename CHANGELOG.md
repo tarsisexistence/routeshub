@@ -2,6 +2,7 @@
 
 - added few navigation directives
 - added forwardParams fn
+- deprecated stateFn and withdrawn from API
 - minor fixes and refactoring
 - updated documentation
 - updated dependencies
