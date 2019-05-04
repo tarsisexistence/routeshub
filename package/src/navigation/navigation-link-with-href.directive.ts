@@ -5,7 +5,7 @@ import { LocationStrategy } from '@angular/common';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { getRouteLink } from '../utils/route';
+import { getRouteLink } from '../utils/link';
 
 @Directive({
   selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`

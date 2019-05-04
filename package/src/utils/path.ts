@@ -13,4 +13,10 @@ export const checkMultiPath = (path: string): boolean => path.includes('/');
  * Prevents to record multi path in the state
  */
 export const splitPath = (path: string): string[] =>
-  path.split('/').filter((state: string) => !!state);
+  path
+    .split('/')
+    .reduce(
+      (link: string[], pathUnit: string): string[] =>
+        setNotEmptyPath(link, pathUnit),
+      ['/']
+    );

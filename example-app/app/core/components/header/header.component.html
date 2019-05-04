@@ -11,7 +11,7 @@
       [nzTheme]="'dark'"
       [nzMode]="'horizontal'">
 
-    <li nz-menu-item [navLink]="slices.about.root">About</li>
+    <li nz-menu-item navLink="{{slices.about.root.state}}">About</li>
     <li nz-menu-item [navLink]="slices.automobile.root.state">Automobiles</li>
     <li nz-menu-item [navLink]="slices.bike.root">Bikes</li>
     <li nz-menu-item [navLink]="slices.bolid.root.state" [navParams]="{year: '2018'}">Bolids</li>

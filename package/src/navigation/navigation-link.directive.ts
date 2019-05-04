@@ -11,7 +11,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { getRouteLink } from '../utils/route';
+import { getRouteLink } from '../utils/link';
 
 @Directive({
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
