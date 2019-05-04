@@ -5,19 +5,19 @@ import { LocationStrategy } from '@angular/common';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { splitPath } from '../utils/path';
+import { getRouteLink } from '../utils/route';
 
 @Directive({
   selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`
 })
 export class NavigationLinkWithHref extends RouterLinkWithHref {
-  public link: string[];
+  @Input(ATTRS.PARAMS) params: Params;
 
-  @Input() set navLink(link: string | string[]) {
-    this.link = typeof link === 'string' ? splitPath(link) : link;
+  @Input() set navLink(value: string | string[]) {
+    this.link = getRouteLink(value);
   }
 
-  @Input(ATTRS.PARAMS) params: Params;
+  public link: string[];
   private readonly _router: Router;
 
   constructor(

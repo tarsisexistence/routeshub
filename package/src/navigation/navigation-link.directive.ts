@@ -11,17 +11,18 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { splitPath } from '../utils/path';
+import { getRouteLink } from '../utils/route';
 
 @Directive({
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
 export class NavigationLink extends RouterLink {
-  @Input() set navLink(link: string | string[]) {
-    this.link = typeof link === 'string' ? splitPath(link) : link;
+  @Input(ATTRS.PARAMS) params: Params;
+
+  @Input() set navLink(value: string | string[]) {
+    this.link = getRouteLink(value);
   }
 
-  @Input(ATTRS.PARAMS) params: Params;
   public link: string[];
   private readonly _router: Router;
 
