@@ -6,14 +6,14 @@
          alt="logo"/>
   </a>
 
-  <ul class="menu"
+  <nav class="menu"
       nz-menu
       [nzTheme]="'dark'"
       [nzMode]="'horizontal'">
 
-    <li nz-menu-item navLink="{{slices.about.root.state}}">About</li>
-    <li nz-menu-item [navLink]="slices.automobile.root.state">Automobiles</li>
-    <li nz-menu-item [navLink]="slices.bike.root">Bikes</li>
-    <li nz-menu-item [navLink]="slices.bolid.root.state" [navParams]="{year: '2018'}">Bolids</li>
-  </ul>
+    <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
+    <a nz-menu-item [navLink]="slices.automobile.root.state">Automobiles</a>
+    <a nz-menu-item [navLink]="slices.bike.root">Bikes</a>
+    <a nz-menu-item [navLink]="slices.bolid.root" [navParams]="{year: '2018'}">Bolids</a>
+  </nav>
 </nz-header>

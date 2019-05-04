@@ -1,39 +1,34 @@
 // tslint:disable:max-line-length
-import { Directive, HostListener, Input } from '@angular/core';
-import { ActivatedRoute, Router, RouterLinkWithHref } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
+import { Directive, HostBinding, HostListener, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { getRouteLink } from '../utils/link';
+import { getRouteHref, getRouteLink } from '../utils/link';
 
 @Directive({
   selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`
 })
-export class NavigationLinkWithHref extends RouterLinkWithHref {
+export class NavigationLinkWithHref {
   @Input(ATTRS.PARAMS) params: Params;
 
   @Input() set navLink(value: string | string[]) {
     this.link = getRouteLink(value);
+    this.href = getRouteHref(this.link);
   }
 
+  @HostBinding()
+  public href: string;
   public link: string[];
-  private readonly _router: Router;
 
-  constructor(
-    router: Router,
-    route: ActivatedRoute,
-    locationStrategy: LocationStrategy
-  ) {
-    super(router, route, locationStrategy);
-    this._router = router;
-  }
+  constructor(private router: Router) {}
 
-  @HostListener('click') onClick(): boolean {
+  @HostListener('click')
+  public onClick(): boolean {
     const link = this.params
       ? forwardParams(this.link, this.params)
       : this.link;
-    this._router.navigate(link).catch(console.error);
+    this.router.navigate(link).catch(console.error);
     return false;
   }
 }

@@ -1,23 +1,24 @@
 import { Structure } from '../interfaces';
 import { splitPath } from './path';
 
-export const getLinkFromStructure = (input: Structure | any) => {
-  return input.state;
-};
-
-const correctStringLink = (value: string): string => {
-  if (value === '[Object object]') {
-    // checks invalid forwarded data
-    console.error(`ERROR: ${value} has been passed into navLink`);
-    return '/';
-  } else if (value[1] === ',') {
-    // checks auto toString and rewrites it
-    return value.replace(',', '');
+// makes adjustments to string link
+export function correctStringLink(value: string): string {
+  switch (true) {
+    case value === '[Object object]': {
+      console.error(`ERROR: ${value} has been passed into navLink`);
+      return '/';
+    }
+    case value[1] === ',':
+      return value.replace(',', '');
+    default:
+      return value;
   }
+}
 
-  return value;
-};
-
+/*
+ * get route link from
+ * string literal, route node, or route link
+ */
 export const getRouteLink = (
   input: string | string[] | Structure
 ): string[] => {
@@ -27,8 +28,11 @@ export const getRouteLink = (
   } else if (input instanceof Array) {
     return input;
   } else if (typeof input === 'object' && input.state) {
-    return getLinkFromStructure(input);
+    return input.state;
   }
 
   return [];
 };
+
+// converts array-like link into string literal
+export const getRouteHref = (link: string[]): string => link.join('/').slice(1);
