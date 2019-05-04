@@ -1,6 +1,6 @@
 {
   "extends": [
-    "angular-tslint-rules",
+    "tslint-angular",
     "tslint:latest",
     "tslint-config-prettier"
   ],
@@ -260,9 +260,6 @@
       "allow-leading-underscore",
       "ban-keywords"
     ],
-    "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
-    "use-host-property-decorator": true,
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "use-isnan": true,
@@ -277,28 +274,14 @@
       "check-typecast",
       "check-preblock"
     ],
-    "banana-in-box": true,
     "contextual-life-cycle": true,
-    "decorator-not-allowed": true,
-    "pipe-impure": true,
-    "templates-no-negated-async": true,
-    "trackBy-function": true,
     "i18n": false,
-    "no-attribute-parameter-decorator": true,
     "no-forward-ref": true,
     "no-life-cycle-call": true,
-    "no-output-named-after-standard-event": true,
-    "no-queries-parameter": true,
-    "no-template-call-expression": true,
     "no-unused-css": true,
     "prefer-inline-decorator": false,
     "prefer-output-readonly": true,
     "use-pipe-decorator": true,
-    "use-view-encapsulation": true,
-    "angular-whitespace": [
-      true,
-      "check-interpolation",
-      "check-semicolon"
-    ]
+    "angular-whitespace": false
   }
 }

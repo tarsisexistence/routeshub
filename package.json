@@ -49,7 +49,6 @@
     "@types/jasmine": "2.8.14",
     "@types/jasminewd2": "2.0.6",
     "@types/node": "8.10.46",
-    "angular-tslint-rules": "1.14.0",
     "codelyzer": "5.0.1",
     "husky": "2.2.0",
     "jasmine-core": "2.99.1",
@@ -70,6 +69,7 @@
     "tsickle": "0.35.0",
     "tslib": "1.9.3",
     "tslint": "5.16.0",
+    "tslint-angular": "2.0.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.2.4"
   }

@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
+import { asapScheduler, Observable, scheduled } from 'rxjs';
 
 import { vehicles } from '~assets/data/vehicles';
 import { Vehicle } from '~app/core/interfaces/vehicle.interface';
@@ -20,12 +20,16 @@ export class VehiclesResolver
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<{ brand: string; logo: string }[] | Vehicle[]> {
-    const isTypes = route.routeConfig.resolve.vehicles === undefined;
     const vehicle = state.url.slice(1);
     const isVehicle = Object.keys(vehicles).includes(vehicle);
 
     if (!isVehicle) {
       return;
+    }
+
+    if (route.routeConfig.resolve.vehicles !== undefined) {
+      const data = vehicles[vehicle];
+      return scheduled([data], asapScheduler);
     }
 
     const types = vehicles[vehicle].reduce(
@@ -39,6 +43,6 @@ export class VehiclesResolver
       []
     );
 
-    return isTypes ? of(types) : of(vehicles[vehicle]);
+    return scheduled([types], asapScheduler);
   }
 }
