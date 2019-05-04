@@ -4,6 +4,27 @@
 
 Routeshub offers directive `navLink` for navigation. It is extended by `routerLink` and doing the same as `routerLink` except one thing. `navLink` helps to manage dynamic paths \(parameters\) more productive.
 
+First, we need to import module to get access for `navLink`
+
+**Import example:**
+
+```typescript
+...
+import { NavigationModule } from 'routeshub';
+...
+
+@NgModule({
+  imports: [
+    ...
+    NavigationModule
+  ],
+  ...
+})
+export class AppModule {
+}
+
+```
+
 #### Use example:
 
 ```markup
