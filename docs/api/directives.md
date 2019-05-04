@@ -2,9 +2,9 @@
 
 ## Navigation
 
-Routeshub offers directive `navLink` for navigation. It is extended by `routerLink` and doing the same as `routerLink` except one thing. `navLink` helps to manage dynamic paths \(parameters\) more productive.
+Routeshub offers directive `navLink` for navigation. It is extended by `routerLink` and doing the same as `routerLink` except one thing. `navLink` helps to manage dynamic paths \(parameters\) with additional attribute `navParams` . That design makes performance improvements in comparison, as it was before
 
-First, we need to import module to get access for `navLink`
+Before we start using `navLink`, we need to import module to get access.
 
 **Import example:**
 
@@ -29,23 +29,18 @@ export class AppModule {
 
 ```markup
 
-<!--string format-->
-<li navLink="{{ slices.appSlice.root.state }}">Home</li>
-<!--array format-->
-<li [navLink]="slices.aboutSlice.root.state">About</li>
-<!--array with params-->
+<li [navLink]="slices.locationSlice.map.state">Map</li>
+
+<li [navLink]="slices.locationSlice.search">Search</li>
+
 <li [navLink]="slices.userSlice.profile.state" 
     [navParams]="{id: USER_ID}">
     Profile
 </li>
 
-
-<!--just as example. Don't use navLink like that.-->
-<li [navLink]="['/', 'account', ACCOUNT_ID]">
-    Account
-</li>
-
 ```
 
-As you can see, `navLinks` works in the same way as `routerLink`. It consumes the string or array of strings. But first and foremost, this directive was created for navigation through route states and supporting dynamic parameters.
+As you could see, we can pass in the `navLink` route's state or it also possible to omit the state, and then `navLink` itself will still handle the link.
+
+Summing up, `navLink` works in the same way as `routerLink`. It consumes the string or array of strings. But first and foremost, this directive was created for navigation through route states and supporting dynamic parameters via states.
 
