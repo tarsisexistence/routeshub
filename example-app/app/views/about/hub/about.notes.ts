@@ -1,4 +1,4 @@
-import { RootRoute, RoutesNotes } from 'routeshub';
+import { RootRoute, RoutesNotes } from '../../../../../package';
 
 /**
  * Declares a type which contains

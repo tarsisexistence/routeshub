@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import en from '@angular/common/locales/en';
-import { NavigationModule } from 'routeshub';
+import { NavigationModule } from '../../../package';
 
 import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
 
