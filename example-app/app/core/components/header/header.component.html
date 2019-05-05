@@ -14,6 +14,14 @@
     <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
     <a nz-menu-item [navLink]="slices.automobile.root.state" navLinkActive="myActiveClass">Automobiles</a>
     <a nz-menu-item [navLink]="slices.bike.root">Bikes</a>
-    <a nz-menu-item [navLink]="slices.bolid.root" [navParams]="{year: '2018'}">Bolids</a>
+    <a nz-menu-item [navLink]="slices.bolid.root" [navLinkActive]="['myActiveClass']">
+      Bolids
+    </a>
+    <a nz-menu-item
+       [navLink]="slices.bolid.year"
+       [navParams]="{year: 2018}"
+       [navLinkActive]="['myActiveClass']">
+      Bolids (2018)
+    </a>
   </nav>
 </nz-header>

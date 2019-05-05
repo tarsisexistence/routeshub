@@ -1,4 +1,4 @@
-import { RootRoute, RoutesNotes } from '../../../../../package';
+import { rootNote, RootRoute, RoutesNotes } from '../../../../../package';
 
 /**
  * Declares a type which contains
@@ -9,8 +9,4 @@ export type AutomobileNotes = RootRoute;
 /**
  * Declares an Automobile' notes
  */
-export const automobileNotes: RoutesNotes<AutomobileNotes> = {
-  root: {
-    path: ''
-  }
-};
+export const automobileNotes: RoutesNotes<AutomobileNotes> = rootNote;

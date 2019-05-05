@@ -12,6 +12,12 @@ export const routes = [
   {
     path: bolidNotes.root.path,
     component: BolidComponent,
+    pathMatch: 'full',
+    resolve: { vehicles: VehiclesResolver }
+  },
+  {
+    path: bolidNotes.year.path,
+    component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }
   }
 ];

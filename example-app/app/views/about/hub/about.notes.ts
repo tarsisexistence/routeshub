@@ -7,7 +7,7 @@ import { RootRoute, RoutesNotes } from '../../../../../package';
 export type AboutRoutes = RootRoute;
 
 /**
- * Declares About' notes
+ * Declares of About module
  */
 export const aboutNotes: RoutesNotes<AboutRoutes> = {
   root: {
