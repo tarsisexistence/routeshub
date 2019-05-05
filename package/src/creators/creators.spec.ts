@@ -1,7 +1,6 @@
 import { createRoot } from './createRoot';
 import { reset } from '../utils/reset';
 
-/* tslint:disable:max-line-length */
 describe('createRoot', () => {
   afterEach(() => {
     reset();

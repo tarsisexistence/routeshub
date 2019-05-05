@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import {
   Attribute,
   Directive,
@@ -12,18 +11,33 @@ import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
 import { getRouteLink } from '../utils/link';
+import { QueryParamsHandling } from '@angular/router/src/config';
+import { checkAttrActivity } from '../utils/helpers';
 
 @Directive({
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
 export class NavigationLink {
+  @Input() queryParams!: { [k: string]: any };
+  @Input() fragment!: string;
+  @Input() queryParamsHandling!: QueryParamsHandling;
+  @Input() preserveFragment!: boolean;
+  @Input() skipLocationChange!: boolean;
+  @Input() replaceUrl!: boolean;
+  @Input() state?: { [k: string]: any };
   @Input(ATTRS.PARAMS) params: Params;
 
   @Input() set navLink(value: string | string[]) {
     this.link = getRouteLink(value);
   }
 
+  @Input()
+  set preserveQueryParams(value: boolean) {
+    this.preserve = value;
+  }
+
   public link: string[];
+  private preserve!: boolean;
 
   constructor(
     private router: Router,
@@ -37,10 +51,14 @@ export class NavigationLink {
   }
 
   @HostListener('click') onClick(): boolean {
+    const extras = {
+      skipLocationChange: checkAttrActivity(this.skipLocationChange),
+      replaceUrl: checkAttrActivity(this.replaceUrl)
+    };
     const link = this.params
       ? forwardParams(this.link, this.params)
       : this.link;
-    this.router.navigate(link).catch(console.error);
+    this.router.navigate(link, extras).catch(console.error);
     return false;
   }
 }
