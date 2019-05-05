@@ -2,7 +2,7 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
-import { forwardParams } from '../utils/state';
+import { forwardParams, insertHrefParams } from '../utils/state';
 import { getRouteHref, getRouteLink } from '../utils/link';
 import { QueryParamsHandling } from '@angular/router/src/config';
 import { checkAttrActivity } from '../utils/helpers';
@@ -23,7 +23,8 @@ export class NavigationLinkWithHref {
 
   @Input() set navLink(value: string | string[]) {
     this.link = getRouteLink(value);
-    this.href = getRouteHref(this.link);
+    const originalHref = getRouteHref(this.link);
+    this.href = insertHrefParams(originalHref, this.params);
   }
 
   @HostBinding()

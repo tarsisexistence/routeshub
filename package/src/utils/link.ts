@@ -10,8 +10,11 @@ export function correctStringLink(value: string): string {
       console.error(`ERROR: ${value} has been passed into navLink`);
       return '/';
     }
-    case value[1] === ',':
-      return value.replace(',', '');
+    case value.includes(','):
+      while (value.includes(',')) {
+        value = value.replace(',', '/');
+      }
+      return value;
     default:
       return value;
   }
@@ -31,13 +34,14 @@ export const getRouteLink = (
     return input;
   } else if (typeof input === 'object' && input.state) {
     return input.state;
+  } else {
+    console.error('ERROR: navLink gets incorrect data format', '\n', input);
+    return [];
   }
-
-  return [];
 };
 
 /**
- * converts an array-like link into the string literal href
+ * converts an array-like link into href
  */
 export const getRouteHref = (link: string[]): string => {
   const paths = link.filter(

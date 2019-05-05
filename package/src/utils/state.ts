@@ -26,35 +26,67 @@ const reduceParams = (params: Params, restParams: Params[]): Params =>
     params
   );
 
-/**
- * Replaces property with a value
- * Helps stateFn generating dynamic values
- */
-const handleState = (state: string[], params: Params): string[] =>
-  Object.keys(params).reduce(
-    (accState: string[], param: string): string[] =>
-      accState.map(
-        (slice: string): string =>
-          slice === `:${param}` ? params[param] : slice
-      ),
-    state || []
-  );
+const handleParamsPath = (path: string, params: Params): string => {
+  const param = path.slice(1);
+  return path[0] === ':' && Boolean(params[param]) ? params[param] : path;
+};
 
 /**
- * Supports dynamic paths
+ * Replaces original dynamic path with params
+ * Generates dynamic-ready links
+ */
+// TODO: think about semantics
+const insertLinkParams = (paths: string[], params: Params): string[] =>
+  paths.map((path: string): string => handleParamsPath(path, params));
+
+/**
+ * Replaces original href with params
+ * Generates dynamic-ready href
+ */
+export const insertHrefParams = (href: string, params: Params): string =>
+  href.split('/').reduce((acc: string, path: string): string => {
+    if (path.length === 0 || path === '/') {
+      return acc;
+    }
+
+    const paramsVerifiedPath = handleParamsPath(path, params);
+    return `${acc}/${paramsVerifiedPath}`;
+  }, '');
+
+/**
+ * Supports dynamic paths for array-like links
  * through route variables
  */
 export function forwardParams(
-  state: string[],
+  link: string[],
   params?: Params,
   ...otherParams: Params[]
 ): string[] {
   if (!params || typeof params !== 'object') {
-    return state;
+    return link;
   }
 
   const parameters =
     otherParams.length === 0 ? params : reduceParams(params, otherParams);
 
-  return handleState(state, parameters);
+  return insertLinkParams(link, parameters);
+}
+
+/**
+ * Supports dynamic paths for href
+ * through route variables
+ */
+export function forwardHrefParams(
+  href: string,
+  params?: Params,
+  ...otherParams: Params[]
+): string {
+  if (!params || typeof params !== 'object') {
+    return href;
+  }
+
+  const parameters =
+    otherParams.length === 0 ? params : reduceParams(params, otherParams);
+
+  return insertHrefParams(href, parameters);
 }

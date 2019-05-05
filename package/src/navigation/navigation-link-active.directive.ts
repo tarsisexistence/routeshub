@@ -15,6 +15,9 @@ import { NavigationLink } from './navigation-link.directive';
 import { NavigationLinkWithHref } from './navigation-link-with-href.directive';
 import { getRouteHref } from '../utils/link';
 import { getClassNames } from '../utils/helpers';
+import { ATTRS } from './helpers';
+import { Params } from '../interfaces';
+import { insertHrefParams } from '../utils/state';
 
 @Directive({
   selector: '[navLinkActive]',
@@ -26,6 +29,7 @@ export class NavigationLinkActive
   public links!: QueryList<NavigationLink>;
   @ContentChildren(NavigationLinkWithHref, { descendants: true })
   public linksWithHrefs!: QueryList<NavigationLinkWithHref>;
+  @Input(ATTRS.PARAMS) params: Params;
 
   @Input() navLinkActiveOptions: { exact: boolean } = { exact: false };
 
@@ -85,15 +89,21 @@ export class NavigationLinkActive
 
   private hasActiveLinks(): boolean {
     return (
-      this.links.some((unit: any) => this.isLinkActive(unit)) ||
-      this.linksWithHrefs.some((unit: any) => this.isLinkActive(unit))
+      this.links.some((instance: any) => this.isLinkActive(instance)) ||
+      this.linksWithHrefs.some((instance: any) => this.isLinkActive(instance))
     );
   }
 
-  private isLinkActive({ link }: { link: string[] }): boolean {
+  private isLinkActive(instance: {
+    link: string[];
+    params: Params;
+    href: string;
+  }): boolean {
     const { url } = this.router;
     const { exact } = this.navLinkActiveOptions;
-    const href = getRouteHref(link);
+    const href = instance.href
+      ? instance.href
+      : insertHrefParams(getRouteHref(instance.link), instance.params);
     console.log(url, href);
     return exact ? url === href : url.includes(href);
   }
