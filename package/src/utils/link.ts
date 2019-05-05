@@ -1,7 +1,9 @@
 import { Structure } from '../interfaces';
 import { splitPath } from './path';
 
-// makes adjustments to string link
+/**
+ * makes adjustments to string link
+ */
 export function correctStringLink(value: string): string {
   switch (true) {
     case value === '[Object object]': {
@@ -34,5 +36,12 @@ export const getRouteLink = (
   return [];
 };
 
-// converts array-like link into string literal
-export const getRouteHref = (link: string[]): string => link.join('/').slice(1);
+/**
+ * converts an array-like link into the string literal href
+ */
+export const getRouteHref = (link: string[]): string => {
+  const paths = link.filter(
+    (value: string) => value.length > 0 && value !== '/'
+  );
+  return `/${paths.join('/')}`;
+};

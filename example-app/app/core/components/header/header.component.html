@@ -7,12 +7,12 @@
   </a>
 
   <nav class="menu"
-      nz-menu
-      [nzTheme]="'dark'"
-      [nzMode]="'horizontal'">
+       nz-menu
+       [nzTheme]="'dark'"
+       [nzMode]="'horizontal'">
 
     <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
-    <a nz-menu-item [navLink]="slices.automobile.root.state">Automobiles</a>
+    <a nz-menu-item [navLink]="slices.automobile.root.state" navLinkActive="myActiveClass">Automobiles</a>
     <a nz-menu-item [navLink]="slices.bike.root">Bikes</a>
     <a nz-menu-item [navLink]="slices.bolid.root" [navParams]="{year: '2018'}">Bolids</a>
   </nav>
