@@ -36,4 +36,7 @@ export interface RootRouteNote<C = {}> {
  */
 type Note<C> = RouteNote<C> | RootRouteNote<C>;
 
+/**
+ * Describes a bunch of RouteNote
+ */
 export type RoutesNotes<R, C = {}> = { [key in keyof R]: Note<C> };

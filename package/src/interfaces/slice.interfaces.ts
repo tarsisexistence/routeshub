@@ -13,6 +13,6 @@ export type InternalSlice<R, C = {}> = {
 };
 
 /**
- * Describes a bunch of the slices
+ * Describes a bunch of slices
  */
 export type Slices<R> = { [key in keyof R]: Slice<R[key]> };
