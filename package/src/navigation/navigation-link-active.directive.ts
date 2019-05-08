@@ -104,7 +104,6 @@ export class NavigationLinkActive
     const href = instance.href
       ? instance.href
       : insertHrefParams(getRouteHref(instance.link), instance.params);
-    console.log(url, href);
     return exact ? url === href : url.includes(href);
   }
 }
