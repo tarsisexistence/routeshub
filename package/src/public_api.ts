@@ -9,7 +9,7 @@ export {
 
 export { rootNote } from './generators';
 
-export { forwardParams, forwardHrefParams } from './utils/state';
+export { forwardParams } from './utils/state';
 
 export { createRoot, createFeature } from './creators';
 
