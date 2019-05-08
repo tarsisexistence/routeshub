@@ -1,3 +1,11 @@
+# 1.3.0 2019-05-08
+
+- added new navLinkActive directive
+- refactored navigation directives
+- fixed bugs and inaccuracies
+- updated documentation
+- updated dependencies
+
 # 1.2.0 2019-05-01
 
 - added few navigation directives
