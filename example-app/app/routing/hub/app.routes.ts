@@ -37,8 +37,7 @@ export const routes = [
       },
       {
         path: appNotes.root.children.bolid.path,
-        loadChildren: appNotes.root.children.bolid.lazy,
-        pathMatch: 'full'
+        loadChildren: appNotes.root.children.bolid.lazy
       }
     ]
   },

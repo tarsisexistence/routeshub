@@ -1,4 +1,4 @@
-import { RootRoute, RoutesNotes } from 'routeshub';
+import { RootRoute, RoutesNotes } from '../../../../../package';
 
 /**
  * Declares a type which contains
@@ -7,7 +7,7 @@ import { RootRoute, RoutesNotes } from 'routeshub';
 export type AboutRoutes = RootRoute;
 
 /**
- * Declares About' notes
+ * Declares of About module
  */
 export const aboutNotes: RoutesNotes<AboutRoutes> = {
   root: {

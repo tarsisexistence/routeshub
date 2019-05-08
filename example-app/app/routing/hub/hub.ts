@@ -1,4 +1,4 @@
-import { Slices } from 'routeshub';
+import { Slices } from '../../../../package';
 
 import { AboutRoutes } from 'app/views/about/hub/about.notes';
 import { AppNotes } from 'app/routing/hub/app.notes';

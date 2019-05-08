@@ -1,20 +1,27 @@
 <nz-header>
   <a class="logo"
-     [navLink]="slices.appSlice.root.state">
+     [navLink]="slices.app.root.state">
     <img class="image"
          src="/assets/logo/white.png"
          alt="logo"/>
   </a>
 
-  <ul class="menu"
-      nz-menu
-      [nzTheme]="'dark'"
-      [nzMode]="'horizontal'">
+  <nav class="menu"
+       nz-menu
+       [nzTheme]="'dark'"
+       [nzMode]="'horizontal'">
 
-    <!--do navigation as you like-->
-    <li nz-menu-item [navLink]="slices.aboutSlice.root.state">About</li>
-    <li nz-menu-item [navLink]="slices.automobileSlice.root.state">Automobiles</li>
-    <li nz-menu-item [navLink]="slices.bikeSlice.root.state">Bikes</li>
-    <li nz-menu-item navLink="{{slices.bolidSlice.root.state.join('/')}}" [navParams]="{year: '2018'}">Bolids</li>
-  </ul>
+    <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
+    <a nz-menu-item [navLink]="slices.automobile.root.state" navLinkActive="my-active-class">Automobiles</a>
+    <a nz-menu-item [navLink]="slices.bike.root">Bikes</a>
+    <a nz-menu-item [navLink]="slices.bolid.root" [navLinkActive]="['myActiveClass']">
+      Bolids
+    </a>
+    <a nz-menu-item
+       [navLink]="slices.bolid.year"
+       [navParams]="{year: 2018}"
+       [navLinkActive]="['myActiveClass']">
+      Bolids (2018)
+    </a>
+  </nav>
 </nz-header>

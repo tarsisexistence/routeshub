@@ -16,7 +16,6 @@ export interface Structure {
 
 /**
  * Describes parameters
- * could used to generate state of the route
  */
 export interface Params {
   [param: string]: any;

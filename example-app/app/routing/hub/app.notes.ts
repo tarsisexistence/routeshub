@@ -1,4 +1,4 @@
-import { RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+import { RootRoute, RouteNote, RoutesNotes } from '../../../../package';
 
 import { appChildrenNotes, AppChildrenNotes } from './app-children.notes';
 

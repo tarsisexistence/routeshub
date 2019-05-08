@@ -1,4 +1,4 @@
-import { createFeature, Slice } from 'routeshub';
+import { createFeature, Slice } from '../../../../../package';
 
 import { appSlice } from '~app/routing/hub/app.slice';
 import { bikeNotes, BikeNotes as R } from './bike.notes';

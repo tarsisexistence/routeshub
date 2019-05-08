@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Slices } from '../../../../../package';
 
-import { appSlice } from '~app/routing/hub/app.slice';
-import { aboutSlice } from '~app/views/about/hub';
-import { automobileSlice } from '~app/views/automobile/hub';
-import { bikeSlice } from '~app/views/bike/hub';
-import { bolidSlice } from '~app/views/bolid/hub';
+import { Hub } from '~app/routing/hub/hub';
+import { appSlice as app } from '~app/routing/hub/app.slice';
+import { aboutSlice as about } from '~app/views/about/hub';
+import { automobileSlice as automobile } from '~app/views/automobile/hub';
+import { bikeSlice as bike } from '~app/views/bike/hub';
+import { bolidSlice as bolid } from '~app/views/bolid/hub';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +20,7 @@ export class HeaderComponent implements OnInit {
    * which will keep imported slices.
    * Autocomplete saved anyway
    */
-  public slices: any;
+  public slices: Slices<Hub>;
 
   public ngOnInit(): void {
     /**
@@ -28,11 +30,11 @@ export class HeaderComponent implements OnInit {
      * slices in template
      */
     this.slices = {
-      aboutSlice,
-      appSlice,
-      automobileSlice,
-      bikeSlice,
-      bolidSlice
+      about,
+      app,
+      automobile,
+      bike,
+      bolid
     };
   }
 }

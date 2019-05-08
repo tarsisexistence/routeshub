@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import {
   Attribute,
   Directive,
@@ -7,40 +6,59 @@ import {
   Input,
   Renderer2
 } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
-import { splitPath } from '../utils/path';
+import { getRouteLink } from '../utils/link';
+import { QueryParamsHandling } from '@angular/router/src/config';
+import { checkAttrActivity } from '../utils/helpers';
 
 @Directive({
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
-export class NavigationLink extends RouterLink {
-  @Input() set navLink(link: string | string[]) {
-    this.link = typeof link === 'string' ? splitPath(link) : link;
+export class NavigationLink {
+  @Input() queryParams!: { [k: string]: any };
+  @Input() fragment!: string;
+  @Input() queryParamsHandling!: QueryParamsHandling;
+  @Input() preserveFragment!: boolean;
+  @Input() skipLocationChange!: boolean;
+  @Input() replaceUrl!: boolean;
+  @Input() state?: { [k: string]: any };
+  @Input(ATTRS.PARAMS) params: Params;
+
+  @Input() set navLink(value: string | string[]) {
+    this.link = getRouteLink(value);
   }
 
-  @Input(ATTRS.PARAMS) params: Params;
+  @Input()
+  set preserveQueryParams(value: boolean) {
+    this.preserve = value;
+  }
+
   public link: string[];
-  private readonly _router: Router;
+  private preserve!: boolean;
 
   constructor(
-    router: Router,
-    route: ActivatedRoute,
+    private router: Router,
     @Attribute('tabindex') tabIndex: string,
     renderer: Renderer2,
     el: ElementRef
   ) {
-    super(router, route, tabIndex, renderer, el);
-    this._router = router;
+    if (tabIndex == null) {
+      renderer.setAttribute(el.nativeElement, 'tabindex', '0');
+    }
   }
 
   @HostListener('click') onClick(): boolean {
+    const extras = {
+      skipLocationChange: checkAttrActivity(this.skipLocationChange),
+      replaceUrl: checkAttrActivity(this.replaceUrl)
+    };
     const link = this.params
       ? forwardParams(this.link, this.params)
       : this.link;
-    this._router.navigate(link).catch(console.error);
+    this.router.navigate(link, extras).catch(console.error);
     return false;
   }
 }

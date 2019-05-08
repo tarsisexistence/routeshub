@@ -1,4 +1,9 @@
-import { rootNote, RootRoute, RouteNote, RoutesNotes } from 'routeshub';
+import {
+  rootNote,
+  RootRoute,
+  RouteNote,
+  RoutesNotes
+} from '../../../../package';
 
 const aboutNote: RouteNote = {
   path: 'about',
