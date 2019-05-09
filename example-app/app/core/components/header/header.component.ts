@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Slices } from '../../../../../package';
 
-import { Hub } from '~app/routing/hub/hub';
-import { appSlice as app } from '~app/routing/hub/app.slice';
-import { aboutSlice as about } from '~app/views/about/hub';
-import { automobileSlice as automobile } from '~app/views/automobile/hub';
-import { bikeSlice as bike } from '~app/views/bike/hub';
-import { bolidSlice as bolid } from '~app/views/bolid/hub';
+import { Hub } from '../../../routing/hub/hub';
+import { appSlice as app } from '../../../routing/hub/app.slice';
+import { aboutSlice as about } from '../../../views/about/hub';
+import { automobileSlice as automobile } from '../../../views/automobile/hub';
+import { bikeSlice as bike } from '../../../views/bike/hub';
+import { bolidSlice as bolid } from '../../../views/bolid/hub';
 
 @Component({
   selector: 'app-header',

@@ -1,6 +1,6 @@
 import { createFeature, Slice } from '../../../../../package';
 
-import { appSlice } from '~app/routing/hub/app.slice';
+import { appSlice } from '../../../routing/hub/app.slice';
 import { automobileNotes, AutomobileNotes as R } from './automobile.notes';
 
 /**
