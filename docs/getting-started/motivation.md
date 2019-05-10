@@ -1,6 +1,6 @@
 # Motivation
 
-## 🕯Prerequisites
+## Prerequisites
 
 What kind of things does _routeshub_ solve?
 
@@ -9,19 +9,19 @@ What kind of things does _routeshub_ solve?
 * **code completion** - nice to have abstraction level using enhanced routes
 * **pattern** - managing routes in the agreed manner
 
-## 🕯Plugin
+## Plugin
 
 Routeshub serves as a small unit that simplifies life in the short and long term.
 
 It was designed to be added at any time during the development.
 
-## 🕯Pattern
+## Pattern
 
 The package offers a few approaches to configure and manage routes as consistently and as clearly as possible which allows you to stop worrying about routes and do what is really important.
 
 The documentation proposes the style guide which is recommended to follow.
 
-## 🕯Looking for the best
+## Looking for the best
 
 This project is neither ideal nor final.
 

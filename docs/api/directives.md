@@ -22,13 +22,11 @@ import { NavigationModule } from 'routeshub';
 })
 export class AppModule {
 }
-
 ```
 
-#### Use example:
+### Use example:
 
 ```markup
-
 <li [navLink]="slices.locationSlice.map.state">Map</li>
 
 <li [navLink]="slices.locationSlice.search">Search</li>
@@ -37,7 +35,6 @@ export class AppModule {
     [navParams]="{id: USER_ID}">
     Profile
 </li>
-
 ```
 
 As you could see, we can pass in the `navLink` route's state or it also possible to omit the state, and then `navLink` itself will still handle the link.
