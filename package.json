@@ -61,7 +61,7 @@
     "karma-jasmine-html-reporter": "1.4.2",
     "karma-parallel": "0.3.1",
     "lint-staged": "8.1.6",
-    "ng-packagr": "5.1.0",
+    "ng-packagr": "5.2.0",
     "prettier": "1.17.0",
     "protractor": "6.0.0",
     "snyk": "1.165.0",
