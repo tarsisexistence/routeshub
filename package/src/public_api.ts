@@ -11,6 +11,6 @@ export { rootNote } from './generators';
 
 export { forwardParams } from './utils/state';
 
-export { createRoot, createFeature } from './creators';
+export { createRoot, createFeature, createNote } from './creators';
 
 export { NavigationModule } from './navigation/navigation.module';
