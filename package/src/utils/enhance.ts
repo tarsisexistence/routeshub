@@ -20,20 +20,19 @@ export function enhance<R, C = {}>(
   routes: RoutesNotes<R, C | {}>
 ): Enhanced<R, C> {
   return Object.keys(routes).reduce(
-    (acc: Enhanced<R, C>, routeName: string): Enhanced<R, C> => {
-      const { children, path, lazy } = routes[routeName];
-      const state = setState(parentSlice, path);
+    (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {
+      const { children, path, lazy, name } = routes[key];
       const route = {
         id: indexer.next().value,
         parentId: parentSlice !== null ? parentSlice.id : null,
-        state,
         path: checkMultiPath(path) ? splitPath(path) : path,
-        lazy: lazy ? lazy : null,
-        routeName
+        state: setState(parentSlice, path),
+        lazy: lazy || null,
+        name: key
       };
 
       return Object.assign(acc, {
-        [routeName]: {
+        [name]: {
           ...route,
           children: children !== undefined ? enhance(route, children) : null
         }

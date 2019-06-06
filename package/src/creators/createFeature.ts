@@ -11,10 +11,10 @@ export function createFeature<R, C = {}>(
 ): Slice<R & C> {
   const feature: Slice<R> = enhance<R, C>(parentRoute, routes);
   const updatedRouteState: Hub<Slice<R, C | {}>> = nextHubValue<R>(
-    parentRoute.routeName,
+    parentRoute.name,
     feature
   );
   hub.next(updatedRouteState);
 
-  return hub.value[parentRoute.routeName];
+  return hub.value[parentRoute.name];
 }

@@ -8,7 +8,7 @@ import { hub, nextHubValue } from '../hub';
  */
 export function createRoot<R, C = {}>(
   routes: RoutesNotes<R>,
-  routeName = 'app'
+  name = 'app'
 ): Slice<R & C> {
   if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
@@ -16,11 +16,11 @@ export function createRoot<R, C = {}>(
 
   const rootSlice: Slice<R> = enhance<R, C>(null, routes);
   const initialRoutesState: Hub<Slice<R, C | {}>> = nextHubValue<R>(
-    routeName,
+    name,
     rootSlice
   );
 
   hub.next(initialRoutesState);
 
-  return hub.value[routeName];
+  return hub.value[name];
 }

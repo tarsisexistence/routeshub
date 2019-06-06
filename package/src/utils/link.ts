@@ -7,7 +7,8 @@ import { splitPath } from './path';
 export function correctStringLink(value: string): string {
   switch (true) {
     case value === '[Object object]': {
-      console.error(`ERROR: ${value} has been passed into navLink`);
+      // tslint:disable-next-line:max-line-length
+      console.error(`ERROR: incorrect [[${value}]] has been passed into navLink`);
       return '/';
     }
     case value.includes(','):

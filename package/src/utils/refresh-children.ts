@@ -8,7 +8,7 @@ export function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
   const children: Slice<C> = parent.children;
   const inheritorId: number = parent.id + 1;
   const inheritorName: string = Object.keys(children).find(
-    (routeName: string) => children[routeName].id === inheritorId
+    (name: string) => children[name].id === inheritorId
   );
 
   return Object.keys(children).reduce(
@@ -18,8 +18,8 @@ export function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
           ? parent.parentId
           : children[inheritorName].id;
       const routeName =
-        name === inheritorName && name === 'root' ? parent.routeName : name;
-      const route = { ...children[name], parentId, routeName };
+        name === inheritorName && name === 'root' ? parent.name : name;
+      const route = { ...children[name], parentId, name: routeName };
 
       /* https://github.com/Microsoft/TypeScript/issues/10727 */
       return { ...(acc as object), [routeName]: route } as Slice<C>;

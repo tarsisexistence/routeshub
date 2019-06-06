@@ -1,14 +1,18 @@
 import { createRoot } from './createRoot';
 import { reset } from '../utils/reset';
+import { Routes } from '@angular/router';
+import { createNote } from './createNote';
 
+// tslint:disable:max-line-length
 describe('createRoot', () => {
   afterEach(() => {
     reset();
   });
 
   it('should create the simplest hub', () => {
-    const notes = { root: { path: '' } };
-    const slice = createRoot(notes);
+    const routes: Routes = [{ path: '' }];
+    const note = createNote(routes);
+    const slice = createRoot(note);
     const result = {
       root: {
         id: 0,
@@ -16,7 +20,7 @@ describe('createRoot', () => {
         state: ['/'],
         path: '',
         lazy: null,
-        routeName: 'root',
+        name: 'root',
         children: null
       }
     };
@@ -24,12 +28,13 @@ describe('createRoot', () => {
   });
 
   it('should create a hub with a few routes', () => {
-    const notes = {
-      root: { path: '' },
-      notFound: { path: '**' },
-      map: { path: 'map' }
-    };
-    const slice = createRoot(notes);
+    const routes: Routes = [
+      { path: '' },
+      { path: '**' },
+      { path: 'map' }
+    ];
+    const note = createNote(routes);
+    const slice = createRoot(note);
     const result = {
       root: {
         id: 0,
@@ -37,16 +42,16 @@ describe('createRoot', () => {
         state: ['/'],
         path: '',
         lazy: null,
-        routeName: 'root',
+        name: 'root',
         children: null
       },
-      notFound: {
+      wildcard: {
         id: 1,
         parentId: null,
         state: ['**'],
         path: '**',
         lazy: null,
-        routeName: 'notFound',
+        name: 'wildcard',
         children: null
       },
       map: {
@@ -55,7 +60,7 @@ describe('createRoot', () => {
         state: ['/', 'map'],
         path: 'map',
         lazy: null,
-        routeName: 'map',
+        name: 'map',
         children: null
       }
     };
@@ -63,21 +68,22 @@ describe('createRoot', () => {
   });
 
   it('should create a hub with route that has children', () => {
-    const notes = {
-      root: {
+    const routes: Routes = [
+      {
         path: '',
-        children: {
-          root: {
+        children: [
+          {
             path: ''
           },
-          about: {
+          {
             path: 'about',
-            lazy: 'app/views/about/about.module#AboutModule'
+            loadChildren: 'app/views/about/about.module#AboutModule'
           }
-        }
+        ]
       }
-    };
-    const slice = createRoot(notes);
+    ];
+    const note = createNote(routes);
+    const slice = createRoot(note);
     const result = {
       root: {
         id: 1,
@@ -85,7 +91,7 @@ describe('createRoot', () => {
         state: ['/'],
         path: '',
         lazy: null,
-        routeName: 'root',
+        name: 'root',
         children: null
       },
       about: {
@@ -94,7 +100,7 @@ describe('createRoot', () => {
         state: ['/', 'about'],
         path: 'about',
         lazy: 'app/views/about/about.module#AboutModule',
-        routeName: 'about',
+        name: 'about',
         children: null
       }
     };
@@ -102,38 +108,40 @@ describe('createRoot', () => {
   });
 
   it('should create a hub with routes and children', () => {
-    const notes = {
-      root: {
+    const routes: Routes = [
+      {
         path: '',
-        children: {
-          root: {
+        children: [
+          {
             path: ''
           },
-          about: {
+          {
             path: 'about',
-            lazy: 'app/views/about/about.module#AboutModule'
+            loadChildren: 'app/views/about/about.module#AboutModule'
           }
-        }
+        ]
       },
-      map: {
+      {
         path: 'map',
-        children: {
-          root: {
+        children: [
+          {
             path: ''
           },
-          location: {
+          {
             path: 'location',
-            lazy: 'app/views/map/views/location/location.module#LocationModule'
+            // tslint:disable-next-line:max-line-length
+            loadChildren: 'app/views/map/views/location/location.module#LocationModule'
           }
-        }
+        ]
       },
-      info: {
+      {
         path: 'info',
-        lazy: 'app/views/info/info.module#InfoModule'
+        loadChildren: 'app/views/info/info.module#InfoModule'
       },
-      notFound: { path: '**' }
-    };
-    const slice = createRoot(notes);
+      { path: '**' }
+    ];
+    const note = createNote(routes);
+    const slice = createRoot(note);
     const result = {
       root: {
         id: 1,
@@ -141,7 +149,7 @@ describe('createRoot', () => {
         state: ['/'],
         path: '',
         lazy: null,
-        routeName: 'root',
+        name: 'root',
         children: null
       },
       about: {
@@ -150,7 +158,7 @@ describe('createRoot', () => {
         state: ['/', 'about'],
         path: 'about',
         lazy: 'app/views/about/about.module#AboutModule',
-        routeName: 'about',
+        name: 'about',
         children: null
       },
       map: {
@@ -159,7 +167,7 @@ describe('createRoot', () => {
         state: ['/', 'map'],
         path: '',
         lazy: null,
-        routeName: 'map',
+        name: 'map',
         children: null
       },
       location: {
@@ -168,7 +176,7 @@ describe('createRoot', () => {
         state: ['/', 'map', 'location'],
         path: 'location',
         lazy: 'app/views/map/views/location/location.module#LocationModule',
-        routeName: 'location',
+        name: 'location',
         children: null
       },
       info: {
@@ -177,16 +185,16 @@ describe('createRoot', () => {
         state: ['/', 'info'],
         path: 'info',
         lazy: 'app/views/info/info.module#InfoModule',
-        routeName: 'info',
+        name: 'info',
         children: null
       },
-      notFound: {
+      wildcard: {
         id: 7,
         parentId: null,
         state: ['**'],
         path: '**',
         lazy: null,
-        routeName: 'notFound',
+        name: 'wildcard',
         children: null
       }
     };

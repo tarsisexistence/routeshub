@@ -11,12 +11,12 @@ export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
  * Returns the next hub value
  */
 export function nextHubValue<R, C = {}>(
-  routeName: string,
+  name: string,
   routes: Slice<R>
 ): Hub<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
 
   return Object.assign({}, hub.value, {
-    [routeName]: slice
+    [name]: slice
   }) as Hub<Slice<R, C>>;
 }

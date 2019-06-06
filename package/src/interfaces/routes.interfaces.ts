@@ -1,5 +1,7 @@
+import { LoadChildren } from '@angular/router';
+
 /**
- * Describes a base route
+ * Describes the base route
  */
 export interface RootRoute {
   root: RootRouteNote;
@@ -11,11 +13,9 @@ export interface RootRoute {
  */
 export interface RouteNote<C = {}> {
   path: string;
-  id?: number;
-  lazy?: string;
-  component?: any;
+  name?: string;
+  lazy?: LoadChildren;
   children?: RoutesNotes<C>;
-  state?: string[];
 }
 
 /**
@@ -24,11 +24,8 @@ export interface RouteNote<C = {}> {
  */
 export interface RootRouteNote<C = {}> {
   path?: string;
-  id?: number;
   lazy?: string;
-  component?: any;
   children?: RoutesNotes<C>;
-  state?: string[];
 }
 
 /**
