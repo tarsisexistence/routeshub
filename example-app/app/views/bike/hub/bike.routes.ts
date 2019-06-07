@@ -2,15 +2,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { BikeComponent } from '../container/bike.component';
-import { VehiclesResolver } from 'app/routing/resolvers/vehicles.resolver';
-import { bikeNotes } from './bike.notes';
+import { VehiclesResolver } from '../../../routing/resolvers/vehicles.resolver';
 
-/**
- * Declares routes on BikeModule level
- */
 export const routes = [
   {
-    path: bikeNotes.root.path,
+    path: '',
     component: BikeComponent,
     resolve: { vehicles: VehiclesResolver }
   }

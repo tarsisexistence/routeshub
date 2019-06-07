@@ -35,3 +35,11 @@ export interface Hub<E> {
 export interface InternalStructure<C> extends Structure {
   children?: Slice<C>;
 }
+
+/**
+ * describes Route Name options
+ */
+export interface RouteNameOptions {
+  root?: string;
+  wildcard?: string;
+}

@@ -1,4 +1,4 @@
-import { appNotes } from './app.notes';
+import { Routes } from '@angular/router';
 import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '../../core/containers/view/view.component';
 
@@ -8,41 +8,43 @@ import { ViewComponent } from '../../core/containers/view/view.component';
  * can be used here to add control
  * over magic strings
  */
-export const routes = [
+export const routes: Routes = [
   {
-    path: appNotes.root.path,
+    path: '',
     component: ViewComponent,
     resolve: { types: VehiclesResolver },
     runGuardsAndResolvers: 'always',
     children: [
       {
-        path: appNotes.root.path,
-        redirectTo: appNotes.root.children.about.path,
+        path: '',
+        redirectTo: 'about',
         pathMatch: 'full'
       },
       {
-        path: appNotes.root.children.about.path,
-        loadChildren: appNotes.root.children.about.lazy,
+        path: 'about',
+        loadChildren: 'example-app/app/views/about/about.module#AboutModule',
         pathMatch: 'full'
       },
       {
-        path: appNotes.root.children.automobile.path,
-        loadChildren: appNotes.root.children.automobile.lazy,
+        path: 'automobiles',
+        // tslint:disable-next-line:max-line-length
+        loadChildren:
+          'example-app/app/views/automobile/automobile.module#AutomobileModule',
         pathMatch: 'full'
       },
       {
-        path: appNotes.root.children.bike.path,
-        loadChildren: appNotes.root.children.bike.lazy,
+        path: 'bikes',
+        loadChildren: 'example-app/app/views/bike/bike.module#BikeModule',
         pathMatch: 'full'
       },
       {
-        path: appNotes.root.children.bolid.path,
-        loadChildren: appNotes.root.children.bolid.lazy
+        path: 'bolids',
+        loadChildren: 'example-app/app/views/bolid/bolid.module#BolidModule'
       }
     ]
   },
   {
-    path: appNotes.notFound.path,
-    redirectTo: appNotes.root.path
+    path: '**',
+    redirectTo: ''
   }
 ];

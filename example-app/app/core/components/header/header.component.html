@@ -12,13 +12,13 @@
        [nzMode]="'horizontal'">
 
     <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
-    <a nz-menu-item [navLink]="slices.automobile.root.state" navLinkActive="my-active-class">Automobiles</a>
+    <a nz-menu-item [navLink]="slices.automobiles.root.state" navLinkActive="my-active-class">Automobiles</a>
     <a nz-menu-item routerLink="/bikes">Bikes</a>
-    <a nz-menu-item [navLink]="slices.bolid.root" [navLinkActive]="['myActiveClass']">
+    <a nz-menu-item [navLink]="slices.bolids.root" [navLinkActive]="['myActiveClass']">
       Bolids
     </a>
     <a nz-menu-item
-       [navLink]="slices.bolid.year"
+       [navLink]="slices.bolids.year"
        [navParams]="{year: 2018}"
        [navLinkActive]="['myActiveClass']">
       Bolids (2018)

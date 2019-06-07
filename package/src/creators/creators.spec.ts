@@ -1,7 +1,6 @@
-import { createRoot } from './createRoot';
+import { createNote, createRoot } from './createRoot';
 import { reset } from '../utils/reset';
 import { Routes } from '@angular/router';
-import { createNote } from './createNote';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
@@ -28,11 +27,7 @@ describe('createRoot', () => {
   });
 
   it('should create a hub with a few routes', () => {
-    const routes: Routes = [
-      { path: '' },
-      { path: '**' },
-      { path: 'map' }
-    ];
+    const routes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const note = createNote(routes);
     const slice = createRoot(note);
     const result = {
@@ -130,7 +125,8 @@ describe('createRoot', () => {
           {
             path: 'location',
             // tslint:disable-next-line:max-line-length
-            loadChildren: 'app/views/map/views/location/location.module#LocationModule'
+            loadChildren:
+              'app/views/map/views/location/location.module#LocationModule'
           }
         ]
       },

@@ -2,21 +2,17 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { BolidComponent } from '../container/bolid.component';
-import { VehiclesResolver } from 'app/routing/resolvers/vehicles.resolver';
-import { bolidNotes } from './bolid.notes';
+import { VehiclesResolver } from '../../../routing/resolvers/vehicles.resolver';
 
-/**
- * Declares routes on BolidModule level
- */
 export const routes = [
   {
-    path: bolidNotes.root.path,
+    path: '',
     component: BolidComponent,
     pathMatch: 'full',
     resolve: { vehicles: VehiclesResolver }
   },
   {
-    path: bolidNotes.year.path,
+    path: ':year',
     component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }
   }

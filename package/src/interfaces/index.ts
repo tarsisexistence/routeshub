@@ -1,4 +1,10 @@
-export { InternalStructure, Structure, Params, Hub } from './common.interfaces';
+export {
+  InternalStructure,
+  Structure,
+  Params,
+  Hub,
+  RouteNameOptions
+} from './common.interfaces';
 
 export {
   RootRoute,
