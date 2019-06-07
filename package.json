@@ -18,7 +18,7 @@
     "lint-staged": "lint-staged",
     "prettier": "prettier",
     "// - EXAMPLE-APP DOC - //": "------------------------------",
-    "doc:build": "npx compodoc -p example-app/tsconfig.app.json --theme=readthedocs -n \\\"example-app documentation\\\"",
+    "doc:build": "npx compodoc -p example-app/tsconfig.app.json --theme=readthedocs -n \\\"example-app\\\"",
     "doc:serve": "npx compodoc -s"
   },
   "dependencies": {
