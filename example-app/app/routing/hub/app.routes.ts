@@ -22,24 +22,35 @@ export const routes: Routes = [
       },
       {
         path: 'about',
-        loadChildren: 'example-app/app/views/about/about.module#AboutModule',
+        loadChildren: () =>
+          import('example-app/app/views/about/about.module').then(
+            m => m.AboutModule
+          ),
         pathMatch: 'full'
       },
       {
         path: 'automobiles',
         // tslint:disable-next-line:max-line-length
-        loadChildren:
-          'example-app/app/views/automobile/automobile.module#AutomobileModule',
+        loadChildren: () =>
+          import('example-app/app/views/automobile/automobile.module').then(
+            m => m.AutomobileModule
+          ),
         pathMatch: 'full'
       },
       {
         path: 'bikes',
-        loadChildren: 'example-app/app/views/bike/bike.module#BikeModule',
+        loadChildren: () =>
+          import('example-app/app/views/bike/bike.module').then(
+            m => m.BikeModule
+          ),
         pathMatch: 'full'
       },
       {
         path: 'bolids',
-        loadChildren: 'example-app/app/views/bolid/bolid.module#BolidModule'
+        loadChildren: () =>
+          import('example-app/app/views/bolid/bolid.module').then(
+            m => m.BolidModule
+          )
       }
     ]
   },
