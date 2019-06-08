@@ -1,6 +1,7 @@
-import { createNote, createRoot } from './create-root';
-import { reset } from '../utils/reset';
 import { Routes } from '@angular/router';
+import { createRoot } from './create-root';
+import { createNote } from './create-note';
+import { reset } from '../utils/reset';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
