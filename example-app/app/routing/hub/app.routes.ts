@@ -14,6 +14,7 @@ export const routes: Routes = [
     component: ViewComponent,
     resolve: { types: VehiclesResolver },
     runGuardsAndResolvers: 'always',
+    pathMatch: 'full',
     children: [
       {
         path: '',
@@ -25,24 +26,21 @@ export const routes: Routes = [
         loadChildren: () =>
           import('example-app/app/views/about/about.module').then(
             m => m.AboutModule
-          ),
-        pathMatch: 'full'
+          )
       },
       {
         path: 'automobiles',
         loadChildren: () =>
           import('example-app/app/views/automobile/automobile.module').then(
             m => m.AutomobileModule
-          ),
-        pathMatch: 'full'
+          )
       },
       {
         path: 'bikes',
         loadChildren: () =>
           import('example-app/app/views/bike/bike.module').then(
             m => m.BikeModule
-          ),
-        pathMatch: 'full'
+          )
       },
       {
         path: 'bolids',
