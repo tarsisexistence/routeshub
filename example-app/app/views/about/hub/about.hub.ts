@@ -1,4 +1,4 @@
-import { createFeature, createNote, RouteNote, Slice } from 'lib';
+import { createFeature, createNote, Note, Slice } from 'lib';
 import { routes } from './about.routes';
 import { appSlice } from '../../../routing/hub/app.hub';
 
@@ -7,7 +7,7 @@ import { appSlice } from '../../../routing/hub/app.hub';
  * only one route with root key
  */
 export interface AboutNote {
-  root: RouteNote;
+  root: Note;
 }
 
 /**

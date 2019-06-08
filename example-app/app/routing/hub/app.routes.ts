@@ -30,7 +30,6 @@ export const routes: Routes = [
       },
       {
         path: 'automobiles',
-        // tslint:disable-next-line:max-line-length
         loadChildren: () =>
           import('example-app/app/views/automobile/automobile.module').then(
             m => m.AutomobileModule

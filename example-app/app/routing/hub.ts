@@ -2,7 +2,6 @@ import { Slices } from 'lib';
 
 import { AppChildrenNotes, AppNote, appSlice as app } from './hub/app.hub';
 import { AboutNote, aboutSlice as about } from '../views/about/hub';
-// tslint:disable-next-line:max-line-length
 import {
   AutomobileNote,
   automobileSlice as automobiles

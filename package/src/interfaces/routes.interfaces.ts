@@ -1,39 +1,34 @@
 import { LoadChildren } from '@angular/router';
 
 /**
+ * Describes a root note
+ * and other optional parameters
+ */
+export interface RootNote<C = {}> {
+  path?: string;
+  lazy?: string;
+  children?: Notes<C>;
+}
+
+/**
  * Describes the base route
  */
-export interface RootRoute {
-  root: RootRouteNote;
+export interface Root<C = {}> {
+  root: RootNote<C>;
 }
 
 /**
  * Describes a basic route note
  * and other optional parameters
  */
-export interface RouteNote<C = {}> {
+export interface Note<C = {}> {
   path: string;
   name?: string;
   lazy?: LoadChildren;
-  children?: RoutesNotes<C>;
+  children?: Notes<C>;
 }
 
 /**
- * Describes a root note
- * and other optional parameters
+ * Describes a bunch of Note
  */
-export interface RootRouteNote<C = {}> {
-  path?: string;
-  lazy?: string;
-  children?: RoutesNotes<C>;
-}
-
-/**
- * Describes an object of basic routes
- */
-type Note<C> = RouteNote<C> | RootRouteNote<C>;
-
-/**
- * Describes a bunch of RouteNote
- */
-export type RoutesNotes<R, C = {}> = { [key in keyof R]: Note<C> };
+export type Notes<R, C = {}> = { [key in keyof R]: Note<C> | RootNote<C> };

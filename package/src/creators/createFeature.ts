@@ -1,4 +1,4 @@
-import { Hub, RoutesNotes, Slice, Structure } from '../interfaces';
+import { Hub, Notes, Slice, Structure } from '../interfaces';
 import { enhance } from '../utils/enhance';
 import { hub, nextHubValue } from '../hub';
 
@@ -7,7 +7,7 @@ import { hub, nextHubValue } from '../hub';
  */
 export function createFeature<R, C = {}>(
   parentRoute: Structure,
-  routes: RoutesNotes<R>
+  routes: Notes<R>
 ): Slice<R & C> {
   const feature: Slice<R> = enhance<R, C>(parentRoute, routes);
   const updatedRouteState: Hub<Slice<R, C | {}>> = nextHubValue<R>(

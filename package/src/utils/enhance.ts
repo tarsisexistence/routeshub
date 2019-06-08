@@ -1,5 +1,5 @@
 import { indexer } from './indexer';
-import { InternalSlice, RoutesNotes, Slice, Structure } from '../interfaces';
+import { InternalSlice, Notes, Slice, Structure } from '../interfaces';
 import { checkMultiPath, splitPath } from './path';
 import { setState } from './state';
 
@@ -17,7 +17,7 @@ type Enhanced<R, C> = Slice<R> | InternalSlice<R, C>;
  */
 export function enhance<R, C = {}>(
   parentSlice: Structure | null,
-  routes: RoutesNotes<R, C | {}>
+  routes: Notes<R, C | {}>
 ): Enhanced<R, C> {
   return Object.keys(routes).reduce(
     (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {

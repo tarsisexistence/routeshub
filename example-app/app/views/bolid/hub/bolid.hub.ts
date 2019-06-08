@@ -1,10 +1,10 @@
-import { createFeature, createNote, RouteNote, Slice } from 'lib';
+import { createFeature, createNote, Note, Slice } from 'lib';
 import { routes } from './bolid.routes';
 import { appSlice } from '../../../routing/hub/app.hub';
 
 export interface BolidNote {
-  root: RouteNote;
-  year: RouteNote;
+  root: Note;
+  year: Note;
 }
 
 export const bolidNote = createNote<BolidNote>(routes);
