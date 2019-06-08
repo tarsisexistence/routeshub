@@ -23,12 +23,12 @@ export const createUnion = <T>(slices: T): T =>
 /**
  * creates a route note
  */
-export const createNote = <R = {}, C = {}>(
+export const createNote = <R = {}>(
   routes: Route[],
   nameOptions: RouteNameOptions = {}
-): R & C =>
+): R =>
   routes.reduce(
-    (acc: R & C, route: Route): R & C => {
+    (acc: R, route: Route): R => {
       const note: Note = {
         path: route.path,
         name: route['name'] || setRouteName(route.path, nameOptions)
@@ -44,5 +44,5 @@ export const createNote = <R = {}, C = {}>(
 
       return { ...acc, [note.name]: note };
     },
-    {} as R & C
+    {} as R
   );

@@ -4,7 +4,7 @@ import { routes } from './app.routes';
 /**
  * Describes App children routes
  */
-export interface AppChildrenNotes extends Root {
+export interface AppChildrenNote extends Root {
   about: Note;
   automobiles: Note;
   bikes: Note;
@@ -14,7 +14,7 @@ export interface AppChildrenNotes extends Root {
 /**
  * Describes App main routes
  */
-export interface AppNote extends Root<AppChildrenNotes> {
+export interface AppNote extends Root<AppChildrenNote> {
   notFound: Note;
 }
 
@@ -26,7 +26,7 @@ export const appNote = createNote<AppNote>(routes, { wildcard: 'notFound' });
 /**
  * Creates stateful named App routes
  */
-export const appSlice: Slice<AppNote, AppChildrenNotes> = createRoot<
+export const appSlice: Slice<AppNote, AppChildrenNote> = createRoot<
   AppNote,
-  AppChildrenNotes
+  AppChildrenNote
 >(appNote);

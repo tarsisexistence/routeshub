@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { createUnion, Slices } from 'lib';
+import { Router } from '@angular/router';
+import { createUnion, forwardParams, Slices } from 'lib';
 
 import { Hub, hub } from '../../../routing/hub';
 import { appSlice } from '../../../routing/hub/app.hub';
@@ -22,6 +23,8 @@ export class HeaderComponent implements OnInit {
   public hub: Slices<Hub>;
   public union;
 
+  constructor(private router: Router) {}
+
   public ngOnInit(): void {
     /**
      * Getting access to use slices in template
@@ -40,5 +43,11 @@ export class HeaderComponent implements OnInit {
       bikes: bikeSlice,
       bolids: bolidSlice
     });
+  }
+
+  public freshBolids(): void {
+    this.router
+      .navigate(forwardParams(this.union.bolids.year.state, { year: 2019 }))
+      .catch(console.error);
   }
 }

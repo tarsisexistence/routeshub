@@ -1,5 +1,5 @@
 import { createUnion, getHub } from 'lib';
-import { AppChildrenNotes, AppNote, appSlice } from './hub/app.hub';
+import { AppChildrenNote, AppNote, appSlice } from './hub/app.hub';
 import { AboutNote, aboutSlice } from '../views/about/hub';
 import { AutomobileNote, automobileSlice } from '../views/automobile/hub';
 import { BikeNote, bikeSlice } from '../views/bike/hub';
@@ -9,7 +9,7 @@ import { BolidNote, bolidSlice } from '../views/bolid/hub';
  * Describes the project's hub
  */
 export interface Hub {
-  app: AppNote & AppChildrenNotes;
+  app: AppNote & AppChildrenNote;
   about: AboutNote;
   automobiles: AutomobileNote;
   bikes: BikeNote;
