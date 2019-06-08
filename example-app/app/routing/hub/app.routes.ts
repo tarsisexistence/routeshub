@@ -14,7 +14,6 @@ export const routes: Routes = [
     component: ViewComponent,
     resolve: { types: VehiclesResolver },
     runGuardsAndResolvers: 'always',
-    pathMatch: 'full',
     children: [
       {
         path: '',
