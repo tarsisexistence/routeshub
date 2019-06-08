@@ -1,6 +1,7 @@
+<!--here you can find different navigation approaches-->
 <nz-header>
   <a class="logo"
-     [navLink]="slices.app.root.state">
+     [navLink]="hub.app.root.state">
     <img class="image"
          src="/assets/logo/white.png"
          alt="logo"/>
@@ -11,14 +12,14 @@
        [nzTheme]="'dark'"
        [nzMode]="'horizontal'">
 
-    <a nz-menu-item navLink="{{ slices.about.root.state }}">About</a>
-    <a nz-menu-item [navLink]="slices.automobiles.root.state" navLinkActive="my-active-class">Automobiles</a>
+    <a nz-menu-item navLink="{{ union.about.root.state }}">About</a>
+    <a nz-menu-item [navLink]="union.automobiles.root.state" navLinkActive="my-active-class">Automobiles</a>
     <a nz-menu-item routerLink="/bikes">Bikes</a>
-    <a nz-menu-item [navLink]="slices.bolids.root" [navLinkActive]="['myActiveClass']">
+    <a nz-menu-item [navLink]="union.bolids.root" [navLinkActive]="['myActiveClass']">
       Bolids
     </a>
     <a nz-menu-item
-       [navLink]="slices.bolids.year"
+       [navLink]="hub.bolids.year"
        [navParams]="{year: 2018}"
        [navLinkActive]="['myActiveClass']">
       Bolids (2018)

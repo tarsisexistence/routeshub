@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Slices } from 'lib';
+import { createUnion, Slices } from 'lib';
 
-import { Hub } from '../../../routing/hub';
-import { appSlice as app } from '../../../routing/hub/app.hub';
-import { aboutSlice as about } from '../../../views/about/hub';
-import { automobileSlice as automobiles } from '../../../views/automobile/hub';
-import { bikeSlice as bikes } from '../../../views/bike/hub';
-import { bolidSlice as bolids } from '../../../views/bolid/hub';
+import { Hub, hub } from '../../../routing/hub';
+import { appSlice } from '../../../routing/hub/app.hub';
+import { aboutSlice } from '../../../views/about/hub';
+import { automobileSlice } from '../../../views/automobile/hub';
+import { bikeSlice } from '../../../views/bike/hub';
+import { bolidSlice } from '../../../views/bolid/hub';
 
 @Component({
   selector: 'app-header',
@@ -16,25 +16,29 @@ import { bolidSlice as bolids } from '../../../views/bolid/hub';
 })
 export class HeaderComponent implements OnInit {
   /**
-   * Declares component's property
-   * which will keep imported slices.
-   * Autocomplete saved anyway
+   * Declares component property
+   * for template access reason
    */
-  public slices: Slices<Hub>;
+  public hub: Slices<Hub>;
+  public union;
 
   public ngOnInit(): void {
     /**
-     * Nothing special.
-     * Fill in slices.
-     * Component will get access to use
-     * slices in template
+     * Getting access to use slices in template
      */
-    this.slices = {
-      about,
-      app,
-      automobiles,
-      bikes,
-      bolids
-    };
+    this.hub = hub;
+
+    /**
+     * creating union to get access
+     * and pick slices on demand
+     * as union
+     */
+    this.union = createUnion({
+      app: appSlice,
+      about: aboutSlice,
+      automobiles: automobileSlice,
+      bikes: bikeSlice,
+      bolids: bolidSlice
+    });
   }
 }

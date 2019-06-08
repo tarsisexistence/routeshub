@@ -1,4 +1,4 @@
-import { createNote, createRoot } from './createRoot';
+import { createNote, createRoot } from './create-root';
 import { reset } from '../utils/reset';
 import { Routes } from '@angular/router';
 

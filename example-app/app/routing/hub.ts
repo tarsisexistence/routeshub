@@ -1,16 +1,12 @@
-import { Slices } from 'lib';
-
-import { AppChildrenNotes, AppNote, appSlice as app } from './hub/app.hub';
-import { AboutNote, aboutSlice as about } from '../views/about/hub';
-import {
-  AutomobileNote,
-  automobileSlice as automobiles
-} from '../views/automobile/hub';
-import { BikeNote, bikeSlice as bikes } from '../views/bike/hub';
-import { BolidNote, bolidSlice as bolids } from '../views/bolid/hub';
+import { createUnion, getHub } from 'lib';
+import { AppChildrenNotes, AppNote, appSlice } from './hub/app.hub';
+import { AboutNote, aboutSlice } from '../views/about/hub';
+import { AutomobileNote, automobileSlice } from '../views/automobile/hub';
+import { BikeNote, bikeSlice } from '../views/bike/hub';
+import { BolidNote, bolidSlice } from '../views/bolid/hub';
 
 /**
- * Describes routes hub
+ * Describes the project's hub
  */
 export interface Hub {
   app: AppNote & AppChildrenNotes;
@@ -22,13 +18,22 @@ export interface Hub {
 
 /**
  * Declares hub which contains
- * all possible routes in the project
- * and those routes are already stateful
+ * all existed slices in the project
  */
-export const hub: Slices<Hub> = {
-  app,
-  about,
-  automobiles,
-  bikes,
-  bolids
-};
+export const hub = getHub<Hub>();
+
+/**
+ * Another way getting slices
+ * but this one provides slices on demand
+ *
+ * Illustrated here just for example purpose
+ *
+ * Practical example of unions is in header component
+ */
+export const union = createUnion({
+  app: appSlice,
+  about: aboutSlice,
+  automobiles: automobileSlice,
+  bikes: bikeSlice,
+  bolids: bolidSlice
+});
