@@ -1,4 +1,4 @@
-import { createFeature, createNote, Note, Slice } from 'lib';
+import { createFeature, createNote, Root, Slice } from 'lib';
 import { routes } from './about.routes';
 import { appSlice } from '../../../routing/hub/app.hub';
 
@@ -6,10 +6,7 @@ import { appSlice } from '../../../routing/hub/app.hub';
  * Describes About note which contains
  * only one route with root key
  */
-export interface AboutNote {
-  root: Note;
-}
-
+export type AboutNote = Root;
 /**
  * Declares a note of About module
  */
