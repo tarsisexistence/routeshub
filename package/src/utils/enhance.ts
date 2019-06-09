@@ -1,6 +1,5 @@
 import { indexer } from './indexer';
-import { InternalSlice, RoutesNotes, Slice, Structure } from '../interfaces';
-import { checkMultiPath, splitPath } from './path';
+import { InternalSlice, Notes, Slice, Structure } from '../interfaces';
 import { setState } from './state';
 
 /**
@@ -17,23 +16,21 @@ type Enhanced<R, C> = Slice<R> | InternalSlice<R, C>;
  */
 export function enhance<R, C = {}>(
   parentSlice: Structure | null,
-  routes: RoutesNotes<R, C | {}>
+  routes: Notes<R, C | {}>
 ): Enhanced<R, C> {
   return Object.keys(routes).reduce(
-    (acc: Enhanced<R, C>, routeName: string): Enhanced<R, C> => {
-      const { children, path, lazy } = routes[routeName];
-      const state = setState(parentSlice, path);
+    (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {
+      const { children, path, name } = routes[key];
       const route = {
+        parentId: parentSlice === null ? null : parentSlice.id,
+        state: setState(parentSlice, path),
         id: indexer.next().value,
-        parentId: parentSlice !== null ? parentSlice.id : null,
-        state,
-        path: checkMultiPath(path) ? splitPath(path) : path,
-        lazy: lazy ? lazy : null,
-        routeName
+        path,
+        name
       };
 
       return Object.assign(acc, {
-        [routeName]: {
+        [name]: {
           ...route,
           children: children !== undefined ? enhance(route, children) : null
         }

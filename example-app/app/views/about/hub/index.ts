@@ -1,3 +1,2 @@
-export * from './about.notes';
-export * from './about.slice';
+export * from './about.hub';
 export * from './about.routes';

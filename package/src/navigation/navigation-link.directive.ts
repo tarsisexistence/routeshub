@@ -7,11 +7,10 @@ import {
   Renderer2
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ATTRS } from './helpers';
+import { ATTRS, QueryParamsHandling } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams } from '../utils/state';
 import { getRouteLink } from '../utils/link';
-import { QueryParamsHandling } from '@angular/router/src/config';
 import { checkAttrActivity } from '../utils/helpers';
 
 @Directive({

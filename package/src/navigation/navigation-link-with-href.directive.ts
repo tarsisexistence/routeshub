@@ -1,10 +1,9 @@
 import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ATTRS } from './helpers';
+import { ATTRS, QueryParamsHandling } from './helpers';
 import { Params } from '../interfaces';
 import { forwardParams, insertHrefParams } from '../utils/state';
 import { getRouteHref, getRouteLink } from '../utils/link';
-import { QueryParamsHandling } from '@angular/router/src/config';
 import { checkAttrActivity } from '../utils/helpers';
 
 @Directive({

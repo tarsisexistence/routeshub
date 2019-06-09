@@ -1,22 +1,26 @@
 import { BehaviorSubject } from 'rxjs';
-import { Hub, Slice } from './interfaces';
+import { Hub, Slice, Slices } from './interfaces';
 import { entitify } from './utils/entityfy';
 
 /**
  * stores routes states at the same level
  */
-export const hub: BehaviorSubject<Hub<any>> = new BehaviorSubject(null);
+export const hub = new BehaviorSubject(null);
 
 /**
  * Returns the next hub value
  */
 export function nextHubValue<R, C = {}>(
-  routeName: string,
+  name: string,
   routes: Slice<R>
 ): Hub<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
 
   return Object.assign({}, hub.value, {
-    [routeName]: slice
+    [name]: slice
   }) as Hub<Slice<R, C>>;
+}
+
+export function getHub<T = {}>(): Slices<T> {
+  return hub.getValue();
 }

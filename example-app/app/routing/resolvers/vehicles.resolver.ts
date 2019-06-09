@@ -7,8 +7,8 @@ import {
 
 import { asapScheduler, Observable, scheduled } from 'rxjs';
 
-import { vehicles } from '~assets/data/vehicles';
-import { Vehicle } from '~app/core/interfaces/vehicle.interface';
+import { Vehicle } from '../../core/interfaces/vehicle.interface';
+import { vehicles } from '../../../assets/data/vehicles';
 
 /**
  * Declares resolver that solves business logic problems

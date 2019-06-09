@@ -1,17 +1,17 @@
 import { Params } from '../interfaces';
-import { setNotEmptyPath } from './path';
+import { setNotEmptyPath, transformPathToState } from './path';
 
 /**
  * Assigns a value based on the parent's  state and a current path
  */
 export const setState = (parentSlice, path) => {
-  if (path.includes('*')) {
+  if (path[0] === '*') {
     return [path];
   }
 
-  return parentSlice !== null
-    ? setNotEmptyPath(parentSlice.state, path)
-    : setNotEmptyPath(['/'], path);
+  return parentSlice === null
+    ? transformPathToState(path)
+    : setNotEmptyPath(parentSlice.state, path);
 };
 
 /**

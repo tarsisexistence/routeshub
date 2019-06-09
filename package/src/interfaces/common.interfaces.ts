@@ -1,17 +1,16 @@
 import { Slice } from './slice.interfaces';
 
 /**
- * Basic hub structure
+ * basic hub structure
  *
- * Describes a slice's value
+ * describes a slice's value
  */
 export interface Structure {
   id: number;
   parentId: number;
-  routeName: string;
   state: string[];
+  name: string;
   path: string;
-  lazy?: string;
 }
 
 /**
@@ -22,16 +21,24 @@ export interface Params {
 }
 
 /**
- * Describes a store-like essence
+ * describes a store-like essence
  */
 export interface Hub<E> {
   [key: string]: E;
 }
 
 /**
- * Describes a slice's value
+ * describes a slice's value
  * that has unprocessed children
  */
 export interface InternalStructure<C> extends Structure {
   children?: Slice<C>;
+}
+
+/**
+ * describes Route Name options
+ */
+export interface RouteNameOptions {
+  root?: string;
+  wildcard?: string;
 }

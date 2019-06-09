@@ -1,5 +1,5 @@
 import { Structure } from '../interfaces';
-import { splitPath } from './path';
+import { transformPathToState } from './path';
 
 /**
  * makes adjustments to string link
@@ -7,7 +7,10 @@ import { splitPath } from './path';
 export function correctStringLink(value: string): string {
   switch (true) {
     case value === '[Object object]': {
-      console.error(`ERROR: ${value} has been passed into navLink`);
+      // tslint:disable-next-line:max-line-length
+      console.error(
+        `ERROR: incorrect [[${value}]] has been passed into navLink`
+      );
       return '/';
     }
     case value.includes(','):
@@ -29,7 +32,7 @@ export const getRouteLink = (
 ): string[] => {
   if (typeof input === 'string') {
     const link = correctStringLink(input);
-    return splitPath(link);
+    return transformPathToState(link);
   } else if (input instanceof Array) {
     return input;
   } else if (typeof input === 'object' && input.state) {

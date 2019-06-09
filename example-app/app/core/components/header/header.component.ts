@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Slices } from '../../../../../package';
+import { Router } from '@angular/router';
+import { createUnion, forwardParams, Slices } from 'lib';
 
-import { Hub } from '~app/routing/hub/hub';
-import { appSlice as app } from '~app/routing/hub/app.slice';
-import { aboutSlice as about } from '~app/views/about/hub';
-import { automobileSlice as automobile } from '~app/views/automobile/hub';
-import { bikeSlice as bike } from '~app/views/bike/hub';
-import { bolidSlice as bolid } from '~app/views/bolid/hub';
+import { Hub, hub } from '../../../routing/routing.hub';
+import { appSlice } from '../../../routing/hub';
+import { aboutSlice } from '../../../views/about/hub';
+import { automobileSlice } from '../../../views/automobile/hub';
+import { bikeSlice } from '../../../views/bike/hub';
+import { bolidSlice } from '../../../views/bolid/hub';
 
 @Component({
   selector: 'app-header',
@@ -16,25 +17,37 @@ import { bolidSlice as bolid } from '~app/views/bolid/hub';
 })
 export class HeaderComponent implements OnInit {
   /**
-   * Declares component's property
-   * which will keep imported slices.
-   * Autocomplete saved anyway
+   * Declares component property
+   * for template access reason
    */
-  public slices: Slices<Hub>;
+  public hub: Slices<Hub>;
+  public union;
+
+  constructor(private router: Router) {}
 
   public ngOnInit(): void {
     /**
-     * Nothing special.
-     * Fill in slices.
-     * Component will get access to use
-     * slices in template
+     * Getting access to use slices in template
      */
-    this.slices = {
-      about,
-      app,
-      automobile,
-      bike,
-      bolid
-    };
+    this.hub = hub;
+
+    /**
+     * creating union to get access
+     * and pick slices on demand
+     * as union
+     */
+    this.union = createUnion({
+      app: appSlice,
+      about: aboutSlice,
+      automobiles: automobileSlice,
+      bikes: bikeSlice,
+      bolids: bolidSlice
+    });
+  }
+
+  public freshBolids(): void {
+    this.router
+      .navigate(forwardParams(this.union.bolids.year.state, { year: 2019 }))
+      .catch(console.error);
   }
 }

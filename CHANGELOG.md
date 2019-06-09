@@ -1,3 +1,15 @@
+# 2.0.0 2019-06-09
+
+- reduced the amount of required boilerplate code
+- added new features to API: createNote, createUnion, getHub
+- added improvements that accelerate development
+- added tests for all creator functions
+- added support for recent Angular versions
+- completely rewritten documentation
+- fixed bugs and inaccuracies
+- finish hub management pattern and improved semantics
+
+
 # 1.3.0 2019-05-08
 
 - added new navLinkActive directive

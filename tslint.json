@@ -260,7 +260,7 @@
       "allow-leading-underscore",
       "ban-keywords"
     ],
-    "use-life-cycle-interface": true,
+    "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "use-isnan": true,
     "whitespace": [
@@ -274,10 +274,10 @@
       "check-typecast",
       "check-preblock"
     ],
-    "contextual-life-cycle": true,
-    "i18n": false,
+    "contextual-lifecycle": true,
+    "template-i18n": false,
     "no-forward-ref": true,
-    "no-life-cycle-call": true,
+    "no-lifecycle-call": true,
     "no-unused-css": true,
     "prefer-inline-decorator": false,
     "prefer-output-readonly": true,

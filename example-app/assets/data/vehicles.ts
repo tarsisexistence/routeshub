@@ -1,4 +1,4 @@
-import { Vehicles } from '~app/core/interfaces/vehicles.interface';
+import { Vehicles } from '../../app/core/interfaces/vehicles.interface';
 
 /* tslint:disable:max-line-length */
 export const vehicles: Vehicles = {

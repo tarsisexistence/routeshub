@@ -1,42 +1,30 @@
 /**
- * Describes a base route
+ * Describes a root note
+ * and other optional parameters
  */
-export interface RootRoute {
-  root: RootRouteNote;
+export interface RootNote<C = {}> {
+  path?: string;
+  children?: Notes<C>;
+}
+
+/**
+ * Describes the base route
+ */
+export interface Root<C = {}> {
+  root: RootNote<C>;
 }
 
 /**
  * Describes a basic route note
  * and other optional parameters
  */
-export interface RouteNote<C = {}> {
+export interface Note<C = {}> {
   path: string;
-  id?: number;
-  lazy?: string;
-  component?: any;
-  children?: RoutesNotes<C>;
-  state?: string[];
+  name?: string;
+  children?: Notes<C>;
 }
 
 /**
- * Describes a root note
- * and other optional parameters
+ * Describes a bunch of Note
  */
-export interface RootRouteNote<C = {}> {
-  path?: string;
-  id?: number;
-  lazy?: string;
-  component?: any;
-  children?: RoutesNotes<C>;
-  state?: string[];
-}
-
-/**
- * Describes an object of basic routes
- */
-type Note<C> = RouteNote<C> | RootRouteNote<C>;
-
-/**
- * Describes a bunch of RouteNote
- */
-export type RoutesNotes<R, C = {}> = { [key in keyof R]: Note<C> };
+export type Notes<R, C = {}> = { [key in keyof R]: Note<C> | RootNote<C> };
