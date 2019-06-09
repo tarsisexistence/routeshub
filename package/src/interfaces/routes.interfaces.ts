@@ -1,12 +1,9 @@
-import { LoadChildren } from '@angular/router';
-
 /**
  * Describes a root note
  * and other optional parameters
  */
 export interface RootNote<C = {}> {
   path?: string;
-  lazy?: string;
   children?: Notes<C>;
 }
 
@@ -24,7 +21,6 @@ export interface Root<C = {}> {
 export interface Note<C = {}> {
   path: string;
   name?: string;
-  lazy?: LoadChildren;
   children?: Notes<C>;
 }
 

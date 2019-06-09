@@ -11,7 +11,6 @@ export interface Structure {
   state: string[];
   name: string;
   path: string;
-  lazy?: string;
 }
 
 /**

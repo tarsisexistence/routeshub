@@ -19,7 +19,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        lazy: null,
         name: 'root',
         children: null
       }
@@ -37,7 +36,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        lazy: null,
         name: 'root',
         children: null
       },
@@ -46,7 +44,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['**'],
         path: '**',
-        lazy: null,
         name: 'wildcard',
         children: null
       },
@@ -55,7 +52,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/', 'map'],
         path: 'map',
-        lazy: null,
         name: 'map',
         children: null
       }
@@ -86,7 +82,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        lazy: null,
         name: 'root',
         children: null
       },
@@ -95,7 +90,6 @@ describe('createRoot', () => {
         parentId: 1,
         state: ['/', 'about'],
         path: 'about',
-        lazy: 'app/views/about/about.module#AboutModule',
         name: 'about',
         children: null
       }
@@ -125,7 +119,6 @@ describe('createRoot', () => {
           },
           {
             path: 'location',
-            // tslint:disable-next-line:max-line-length
             loadChildren:
               'app/views/map/views/location/location.module#LocationModule'
           }
@@ -145,7 +138,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        lazy: null,
         name: 'root',
         children: null
       },
@@ -154,7 +146,6 @@ describe('createRoot', () => {
         parentId: 1,
         state: ['/', 'about'],
         path: 'about',
-        lazy: 'app/views/about/about.module#AboutModule',
         name: 'about',
         children: null
       },
@@ -163,7 +154,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/', 'map'],
         path: '',
-        lazy: null,
         name: 'map',
         children: null
       },
@@ -172,7 +162,6 @@ describe('createRoot', () => {
         parentId: 4,
         state: ['/', 'map', 'location'],
         path: 'location',
-        lazy: 'app/views/map/views/location/location.module#LocationModule',
         name: 'location',
         children: null
       },
@@ -181,7 +170,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/', 'info'],
         path: 'info',
-        lazy: 'app/views/info/info.module#InfoModule',
         name: 'info',
         children: null
       },
@@ -190,7 +178,6 @@ describe('createRoot', () => {
         parentId: null,
         state: ['**'],
         path: '**',
-        lazy: null,
         name: 'wildcard',
         children: null
       }

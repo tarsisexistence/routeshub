@@ -1,4 +1,4 @@
-import { createUnion, getHub } from 'lib';
+import { createUnion, getHub, Slices } from 'lib';
 import { AppChildrenNote, AppNote, appSlice } from './hub/app.hub';
 import { AboutNote, aboutSlice } from '../views/about/hub';
 import { AutomobileNote, automobileSlice } from '../views/automobile/hub';
@@ -20,7 +20,7 @@ export interface Hub {
  * Declares hub which contains
  * all existed slices in the project
  */
-export const hub = getHub<Hub>();
+export const hub: Slices<Hub> = getHub<Hub>();
 
 /**
  * Another way getting slices
