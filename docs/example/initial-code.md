@@ -14,11 +14,13 @@ Below is only the code of the routes files
 {% code-tabs %}
 {% code-tabs-item title="app.routes.ts" %}
 ```typescript
+import { ViewComponent } from '../view.component';
+
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: AppComponent,
+    component: ViewComponent,
     children: [
       {
         path: '',
@@ -27,7 +29,6 @@ export const routes: Routes = [
       },
       {
         path: 'about',
-        pathMatch: 'full',
         loadChildren: 'app/views/about/about.module#AboutModule'
       }
     ]
@@ -47,6 +48,8 @@ export const routes: Routes = [
 
 {% code-tabs-item title="about.routes.ts" %}
 ```typescript
+import { AboutComponent } from './about.component';
+
 export const aboutRoutes: Routes = [
   {
     path: ''
@@ -58,23 +61,31 @@ export const aboutRoutes: Routes = [
 
 {% code-tabs-item title="auth.routes.ts" %}
 ```typescript
+import { SignUpComponent } from './sign-up.component';
+import { SignInComponent } from './sign-in.component';
+
 export const authRoutes: Routes = [
   {
     path: ''
+    pathMatch: 'full',
     redirectTo: 'sign-in'
+  },
+  {
+    path: 'sign-up'
+    redirectTo: SignUpComponent
   },
   {
     path: 'sign-in'
     component: SignInComponent
   },
   {
-    path: 'sign-up'
-    redirectTo: SignUpComponent
+    path: 'sign-in/:id'
+    component: SignInComponent
   },
 ];
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-Now we're going to integrate **routeshub** in the project
+Now we're going to integrate **routeshub** into the project
 
