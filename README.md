@@ -23,7 +23,7 @@ npm install routeshub
 ## Usage
 
 
-#### Basic routes setup
+#### Routes setup
 ```typescript
 export const routes: Routes = [
   {

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { createUnion, forwardParams, Slices } from 'lib';
 
-import { Hub, hub } from '../../../routing/hub';
-import { appSlice } from '../../../routing/hub/app.hub';
+import { Hub, hub } from '../../../routing/routing.hub';
+import { appSlice } from '../../../routing/hub';
 import { aboutSlice } from '../../../views/about/hub';
 import { automobileSlice } from '../../../views/automobile/hub';
 import { bikeSlice } from '../../../views/bike/hub';

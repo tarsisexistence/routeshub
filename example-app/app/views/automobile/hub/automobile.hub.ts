@@ -1,6 +1,6 @@
 import { createFeature, createNote, Note, Slice } from 'lib';
 import { routes } from './automobile.routes';
-import { appSlice } from '../../../routing/hub/app.hub';
+import { appSlice } from '../../../routing/hub';
 
 export interface AutomobileNote {
   root: Note;

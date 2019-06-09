@@ -1,6 +1,6 @@
 import { createFeature, createNote, Root, Slice } from 'lib';
 import { routes } from './about.routes';
-import { appSlice } from '../../../routing/hub/app.hub';
+import { appSlice } from '../../../routing/hub';
 
 /**
  * Describes About note which contains

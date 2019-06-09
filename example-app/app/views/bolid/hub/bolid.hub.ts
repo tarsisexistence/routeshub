@@ -1,6 +1,6 @@
 import { createFeature, createNote, Note, Slice } from 'lib';
 import { routes } from './bolid.routes';
-import { appSlice } from '../../../routing/hub/app.hub';
+import { appSlice } from '../../../routing/hub';
 
 export interface BolidNote {
   root: Note;

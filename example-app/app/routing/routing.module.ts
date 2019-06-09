@@ -1,21 +1,18 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { routes } from './hub/app.routes';
+import { routes } from './hub';
 
 /**
  * Routing configuration
  */
-export const routing: ModuleWithProviders = RouterModule.forRoot(
-  routes as Routes,
-  {
-    enableTracing: false,
-    initialNavigation: 'enabled',
-    onSameUrlNavigation: 'reload',
-    scrollPositionRestoration: 'top'
-  }
-);
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
+  enableTracing: false,
+  initialNavigation: 'enabled',
+  onSameUrlNavigation: 'reload',
+  scrollPositionRestoration: 'top'
+});
 
 /**
  * Routing module contains its configuration

@@ -1,12 +1,33 @@
 import { Routes } from '@angular/router';
 import { createNote } from './note.creator';
 
+// tslint:disable:max-line-length
 describe('createNote', () => {
   it('should create note with root and wildcard', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];
     const note = createNote(routes);
     const result = {
       root: { path: '', name: 'root' },
+      wildcard: { path: '**', name: 'wildcard' }
+    };
+    expect(note).toEqual(result);
+  });
+
+  it('should create note with children', () => {
+    const routes: Routes = [
+      { path: '', children: [{ path: '' }, { path: 'map' }] },
+      { path: '**' }
+    ];
+    const note = createNote(routes);
+    const result = {
+      root: {
+        path: '',
+        name: 'root',
+        children: {
+          root: { path: '', name: 'root' },
+          map: { path: 'map', name: 'map' }
+        }
+      },
       wildcard: { path: '**', name: 'wildcard' }
     };
     expect(note).toEqual(result);
@@ -82,7 +103,6 @@ describe('createNote', () => {
     expect(note).toEqual(result);
   });
 
-  // tslint:disable-next-line:max-line-length
   it('should create note with multi, underscore, dash and dynamic paths', () => {
     const routes: Routes = [
       { path: '' },
