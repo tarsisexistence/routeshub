@@ -5,7 +5,7 @@ import { hub, nextHubValue } from '../hub';
 /**
  * Creates a feature route
  */
-export function createFeature<R, C = {}>(
+export function createFeature<R = any, C = {}>(
   parentRoute: Structure,
   routes: Notes<R>
 ): Slice<R & C> {

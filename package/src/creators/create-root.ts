@@ -6,7 +6,7 @@ import { Hub, Notes, Slice } from '../interfaces';
  * Creates main parent routes
  * Entry point for the hub
  */
-export function createRoot<R, C = {}>(
+export function createRoot<R = any, C = {}>(
   routes: Notes<R>,
   name = 'app'
 ): Slice<R & C> {
