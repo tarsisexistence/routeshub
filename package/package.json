@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
-  "description": "A minimal unit is made to simplify developers routes business",
-  "version": "1.3.0",
+  "description": "A route management library and pattern for Angular",
+  "version": "2.0.0",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "repository": {
     "type": "git",
