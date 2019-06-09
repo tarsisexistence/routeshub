@@ -1,4 +1,4 @@
-export { createRoot } from './create-root';
-export { createFeature } from './create-feature';
-export { createUnion } from './create-union';
-export { createNote } from './create-note';
+export { createRoot } from './root.creator';
+export { createFeature } from './feature.creator';
+export { createUnion } from './union.creator';
+export { createNote } from './note.creator';
