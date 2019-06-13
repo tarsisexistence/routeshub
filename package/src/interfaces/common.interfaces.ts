@@ -1,4 +1,5 @@
 import { Slice } from './slice.interfaces';
+import { PRIVATE_HUB_KEY } from '../constants';
 
 /**
  * basic hub structure
@@ -38,7 +39,14 @@ export interface InternalStructure<C> extends Structure {
 /**
  * describes Route Name options
  */
-export interface RouteNameOptions {
+export interface DefaultRouteName {
   root?: string;
   wildcard?: string;
+}
+
+/**
+ * private local hub identifier
+ */
+export interface PrivateHubKey {
+  [PRIVATE_HUB_KEY]: string;
 }

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { Note, RouteNameOptions } from '../interfaces';
+import { DefaultRouteName, Note } from '../interfaces';
 import { setRouteName } from '../utils/name';
 
 /**
@@ -7,7 +7,7 @@ import { setRouteName } from '../utils/name';
  */
 export const createNote = <R = {}>(
   routes: Route[],
-  nameOptions: RouteNameOptions = {}
+  nameOptions: DefaultRouteName = {}
 ): R =>
   routes.reduce(
     (acc: R, route: Route): R => {

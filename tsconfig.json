@@ -21,9 +21,6 @@
     "paths": {
       "lib": [
         "./package"
-      ],
-      "lib/*": [
-        "./package/*"
       ]
     }
   }

@@ -1,4 +1,4 @@
-import { RouteNameOptions } from 'lib/src/interfaces/common.interfaces';
+import { DefaultRouteName } from '../interfaces/common.interfaces';
 
 function fixPathName(path: string): string {
   let newPath = '';
@@ -33,7 +33,7 @@ function fixPathName(path: string): string {
  */
 export function setRouteName(
   path: string,
-  nameOptions: RouteNameOptions = {}
+  nameOptions: DefaultRouteName = {}
 ): string {
   if (path === '') {
     return nameOptions.root || 'root';
@@ -42,4 +42,24 @@ export function setRouteName(
   } else {
     return fixPathName(path);
   }
+}
+
+export function assignCreatorArgs<R>(
+  args: (symbol | DefaultRouteName)[],
+  name: string
+): { key: symbol | string; options: DefaultRouteName } {
+  const res = {} as { key: symbol | string; options: DefaultRouteName };
+
+  args.forEach(arg => {
+    if (typeof arg === 'symbol') {
+      res.key = arg;
+    } else if (typeof arg === 'object') {
+      res.options = arg;
+    }
+  });
+
+  return {
+    key: res.key || name,
+    options: res.options || {}
+  };
 }
