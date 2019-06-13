@@ -21,6 +21,9 @@ export function nextHubValue<R, C = {}>(
   }) as Hub<Slice<R, C>>;
 }
 
+/**
+ * returns aggregated hubs
+ */
 export function getHub<T = {}>(): Slices<T> {
   return hub.getValue();
 }
