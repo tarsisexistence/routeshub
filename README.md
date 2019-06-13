@@ -62,7 +62,7 @@ export const appSlice: Slice<AppNote> = createRoot<AppNote>(appNote);
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { Slice } from 'routeshub';
-import { AppNote, appSlice } from '../hub';
+import { AppNote, appSlice } from hub;
 
 @Component({
   selector: 'app-header',
@@ -262,7 +262,7 @@ export class ExampleComponent implements OnInit {
 A function that returns all declared slices in the application (hub)
 
 ```typescript
-// you have to describe the hub by interface for code suggestions reason
+hub
 export interface Hub {
   app: AppNote & AppChildrenNote;
   about: AboutNote;

@@ -10,7 +10,7 @@ describe('createUnion', () => {
     reset();
   });
 
-  it('should create create union with one slice', () => {
+  it('should create create union with one Hub', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];
     const app = createRoot(routes);
     const union = createUnion({ app });

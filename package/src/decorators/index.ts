@@ -1,1 +1,1 @@
-export { slice } from './slice.decorator';
+export { Sliced } from './sliced.decorator';

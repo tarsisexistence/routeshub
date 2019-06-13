@@ -1,6 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { createUnion, forwardParams, getHub, slice, Slice, Slices } from 'lib';
+import {
+  createUnion,
+  forwardParams,
+  getHubSlices,
+  Slice,
+  Sliced,
+  Slices
+} from 'lib';
 
 import { Hub } from '../../../routing/routing.hub';
 import { appSlice } from '../../../routing/hub/app.routes';
@@ -10,12 +17,12 @@ import {
   APP_HUB_KEY,
   AppChildNotes,
   AppNotes
-} from '../../../routing/hub/app.hub';
+} from '../../../routing/hub/app.notes';
 // tslint:disable-next-line:max-line-length
 import { automobileSlice } from '../../../views/automobile/hub/automobile.routes';
 import { bikeSlice } from '../../../views/bike/hub/bike.routes';
 import { bolidSlice } from '../../../views/bolid/hub/bolid.routes';
-import { AboutNotes } from '../../../views/about/hub/about.hub';
+import { AboutNotes } from '../../../views/about/hub/about.notes';
 
 @Component({
   selector: 'app-header',
@@ -31,22 +38,21 @@ export class HeaderComponent implements OnInit {
   public hub: Slices<Hub>;
   public union;
 
-  // getting slice by type or name
-  @slice(APP_HUB_KEY)
+  // getting Hub by key
+  @Sliced(APP_HUB_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
 
-  @slice('about')
+  // getting Hub by name
+  @Sliced('about')
   private about: Slice<AboutNotes>;
 
   constructor(private router: Router) {}
 
   public ngOnInit(): void {
-    this.app = null;
-
     /**
      * Getting access to use slices in template
      */
-    this.hub = getHub<Hub>();
+    this.hub = getHubSlices<Hub>();
 
     /**
      * creating union to get access

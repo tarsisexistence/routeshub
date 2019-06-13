@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { createRoot, Slice } from 'lib';
 import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '../../core/containers/view/view.component';
-import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.hub';
+import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.notes';
 
 /**
  * Declares routes on App level

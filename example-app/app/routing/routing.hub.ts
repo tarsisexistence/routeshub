@@ -1,12 +1,12 @@
-import { getHub, Slices } from 'lib';
-import { AppChildNotes, AppNotes } from './hub/app.hub';
-import { BolidNotes } from '../views/bolid/hub/bolid.hub';
-import { BikeNotes } from '../views/bike/hub/bike.hub';
-import { AutomobileNotes } from '../views/automobile/hub/automobile.hub';
-import { AboutNotes } from '../views/about/hub/about.hub';
+import { getHubSlices, Slices } from 'lib';
+import { AppChildNotes, AppNotes } from './hub/app.notes';
+import { BolidNotes } from '../views/bolid/hub/bolid.notes';
+import { BikeNotes } from '../views/bike/hub/bike.notes';
+import { AutomobileNotes } from '../views/automobile/hub/automobile.notes';
+import { AboutNotes } from '../views/about/hub/about.notes';
 
 /**
- * Describes the project's hub
+ * Describes the project's hubs
  */
 export interface Hub {
   app: AppNotes & AppChildNotes;
@@ -17,7 +17,7 @@ export interface Hub {
 }
 
 /**
- * Declares hub which contains
+ * Declares hubs which contains
  * all existed slices in the project
  */
-export const hub: Slices<Hub> = getHub<Hub>();
+export const hub: Slices<Hub> = getHubSlices<Hub>();

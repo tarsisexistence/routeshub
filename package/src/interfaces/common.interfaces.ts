@@ -2,9 +2,9 @@ import { Slice } from './slice.interfaces';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 /**
- * basic hub structure
+ * basic hubs structure
  *
- * describes a slice's value
+ * describes a Hub's value
  */
 export interface Structure {
   id: number;
@@ -29,7 +29,7 @@ export interface Hub<E> {
 }
 
 /**
- * describes a slice's value
+ * describes a Hub's value
  * that has unprocessed children
  */
 export interface InternalStructure<C> extends Structure {
@@ -45,7 +45,7 @@ export interface DefaultRouteName {
 }
 
 /**
- * private local hub identifier
+ * private local hubs identifier
  */
 export interface PrivateHubKey {
   [PRIVATE_HUB_KEY]: string;

@@ -5,7 +5,7 @@ import { setState } from './state';
 /**
  * Describes an output of enhance fn
  *
- * Could be plain Slice or internal slice
+ * Could be plain Slice or internal Hub
  * with unprocessed children routes
  */
 type Enhanced<R, C> = Slice<R> | InternalSlice<R, C>;

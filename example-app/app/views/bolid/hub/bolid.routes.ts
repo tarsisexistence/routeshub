@@ -4,7 +4,7 @@ import { createFeature, Slice } from 'lib';
 import { BolidComponent } from '../container/bolid.component';
 import { VehiclesResolver } from '../../../routing/resolvers/vehicles.resolver';
 import { appSlice } from '../../../routing/hub/app.routes';
-import { BOLID_HUB_KEY, BolidNotes } from './bolid.hub';
+import { BOLID_HUB_KEY, BolidNotes } from './bolid.notes';
 
 export const routes = [
   {

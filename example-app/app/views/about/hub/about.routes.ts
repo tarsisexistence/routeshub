@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { createFeature } from 'lib';
 import { AboutComponent } from '../container/about.component';
 import { appSlice } from '../../../routing/hub/app.routes';
-import { ABOUT_HUB_KEY, AboutNotes } from './about.hub';
+import { ABOUT_HUB_KEY, AboutNotes } from './about.notes';
 
 /**
  * Declares routes on AboutModule level

@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 import { PRIVATE_HUB_KEY } from '../constants';
 import { hub } from '../hub';
 
-export function slice<T = any>(
+export function Sliced<T = any>(
   arg: string | symbol | string[] | symbol[]
 ): (target: any, propertyKey: PropertyKey) => T {
   return <R>(target: any, propertyKey: string | symbol) => {

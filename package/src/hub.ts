@@ -9,7 +9,7 @@ import { PRIVATE_HUB_KEY } from './constants';
 export const hub = new BehaviorSubject(null);
 
 /**
- * Returns the next hub value
+ * Returns the next hubs value
  */
 export function nextHubValue<R, C = {}>(
   routes: Slice<R>,
@@ -27,6 +27,6 @@ export function nextHubValue<R, C = {}>(
 /**
  * returns aggregated hubs
  */
-export function getHub<T = {}>(): Slices<T> {
+export function getHubSlices<T = {}>(): Slices<T> {
   return hub.getValue();
 }

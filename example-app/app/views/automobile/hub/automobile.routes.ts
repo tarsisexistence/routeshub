@@ -4,7 +4,7 @@ import { createFeature, Slice } from 'lib';
 import { AutomobileComponent } from '../container/automobile.component';
 import { VehiclesResolver } from '../../../routing/resolvers/vehicles.resolver';
 import { appSlice } from '../../../routing/hub/app.routes';
-import { AUTOMOBILE_HUB_KEY, AutomobileNotes } from './automobile.hub';
+import { AUTOMOBILE_HUB_KEY, AutomobileNotes } from './automobile.notes';
 
 export const routes = [
   {

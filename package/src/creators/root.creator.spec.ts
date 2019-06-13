@@ -155,7 +155,7 @@ describe('createRoot', () => {
     expect(slice).toEqual(result);
   });
 
-  it('should create root slice with different dynamic paths', () => {
+  it('should create root Hub with different dynamic paths', () => {
     const routes: Routes = [
       { path: 'map' },
       { path: 'map/:id' },

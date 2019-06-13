@@ -7,7 +7,7 @@ import { assignCreatorArgs } from '../utils/name';
 
 /**
  * Creates main parent routes
- * Entry point for the hub
+ * Entry point for the hubs
  */
 export function createRoot<R = any, C = any>(
   routes: Route[],
