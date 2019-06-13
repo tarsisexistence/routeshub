@@ -132,7 +132,7 @@ export interface AppChildrenNote extends Root {
 /**
   * it is equivalent of the previous interface
   * 
-  export interface AppChildrenNote {
+  export interface AppChildNotes {
     root: Note;
     about: Note;
   }
@@ -151,8 +151,8 @@ export interface AppNote extends Root<AppChildrenNote> {
 /**
   * it is equivalent of the previous interface
   * 
-  export interface AppNote {
-    root: Note<AppChildrenNote>
+  export interface AppNotes {
+    root: Note<AppChildNotes>
     firstName: Note;
     personAge: Note;
     wildcard: Note;

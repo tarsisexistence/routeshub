@@ -8,6 +8,7 @@
 - completely rewritten documentation
 - fixed bugs and inaccuracies
 - finish hub management pattern and improved semantics
+- updated dependencies
 
 
 # 1.3.0 2019-05-08
