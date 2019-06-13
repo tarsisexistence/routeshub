@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
-import { createNote } from './note.creator';
 import { reset } from '../utils/reset';
+import { PRIVATE_HUB_KEY } from '../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
@@ -11,8 +11,7 @@ describe('createRoot', () => {
 
   it('should create root', () => {
     const routes: Routes = [{ path: '' }];
-    const note = createNote(routes);
-    const slice = createRoot(note);
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -21,15 +20,15 @@ describe('createRoot', () => {
         path: '',
         name: 'root',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
 
   it('should create root with a few routes', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const note = createNote(routes);
-    const slice = createRoot(note);
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -54,7 +53,8 @@ describe('createRoot', () => {
         path: 'map',
         name: 'map',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -63,8 +63,7 @@ describe('createRoot', () => {
     const routes: Routes = [
       { path: '', children: [{ path: '' }, { path: 'about' }] }
     ];
-    const note = createNote(routes);
-    const slice = createRoot(note);
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -81,7 +80,8 @@ describe('createRoot', () => {
         path: 'about',
         name: 'about',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -100,8 +100,7 @@ describe('createRoot', () => {
       { path: 'info' },
       { path: '**' }
     ];
-    const note = createNote(routes);
-    const slice = createRoot(note);
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -150,7 +149,8 @@ describe('createRoot', () => {
         path: '**',
         name: 'wildcard',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -161,8 +161,7 @@ describe('createRoot', () => {
       { path: 'map/:id' },
       { path: ':token/profile' }
     ];
-    const note = createNote(routes);
-    const slice = createRoot(note);
+    const slice = createRoot(routes);
     const result = {
       map: {
         id: 0,
@@ -187,7 +186,8 @@ describe('createRoot', () => {
         path: ':token/profile',
         name: 'profile',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });

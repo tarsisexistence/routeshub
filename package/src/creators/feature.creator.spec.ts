@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
-import { createNote } from './note.creator';
 import { createFeature } from './feature.creator';
 import { reset } from '../utils/reset';
+import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('createFeature', () => {
   afterEach(() => {
@@ -11,11 +11,9 @@ describe('createFeature', () => {
 
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appNote = createNote(appRoutes);
-    const appSlice = createRoot(appNote);
+    const appSlice = createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }];
-    const mapNote = createNote(mapRoutes);
-    const mapSlice = createFeature(appSlice.map, mapNote);
+    const mapSlice = createFeature(appSlice.map, mapRoutes);
     const result = {
       root: {
         id: 3,
@@ -24,23 +22,22 @@ describe('createFeature', () => {
         path: '',
         name: 'root',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'map'
     };
     expect(mapSlice).toEqual(result);
   });
 
   it('should create feature with a few routes', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appNote = createNote(appRoutes);
-    const appSlice = createRoot(appNote);
+    const appSlice = createRoot(appRoutes);
 
     const mapRoutes: Routes = [
       { path: '' },
       { path: 'location' },
       { path: ':profileId' }
     ];
-    const mapNote = createNote(mapRoutes);
-    const mapSlice = createFeature(appSlice.map, mapNote);
+    const mapSlice = createFeature(appSlice.map, mapRoutes);
     const result = {
       root: {
         id: 3,
@@ -65,21 +62,19 @@ describe('createFeature', () => {
         path: ':profileId',
         name: 'profileId',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'map'
     };
     expect(mapSlice).toEqual(result);
   });
 
   it('should create feature with a few routes', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appNote = createNote(appRoutes);
-    const appSlice = createRoot(appNote);
+    const appSlice = createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapNote = createNote(mapRoutes);
-    const mapSlice = createFeature(appSlice.map, mapNote);
+    const mapSlice = createFeature(appSlice.map, mapRoutes);
     const locationRoutes: Routes = [{ path: '' }];
-    const locationNote = createNote(locationRoutes);
-    const locationSlice = createFeature(mapSlice.location, locationNote);
+    const locationSlice = createFeature(mapSlice.location, locationRoutes);
     const result = {
       root: {
         id: 5,
@@ -88,7 +83,8 @@ describe('createFeature', () => {
         path: '',
         name: 'root',
         children: null
-      }
+      },
+      [PRIVATE_HUB_KEY]: 'location'
     };
     expect(locationSlice).toEqual(result);
   });
