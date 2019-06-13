@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
+import { createRoot, Slice } from 'lib';
 import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '../../core/containers/view/view.component';
+import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.hub';
 
 /**
  * Declares routes on App level
@@ -55,3 +57,11 @@ export const routes: Routes = [
     redirectTo: ''
   }
 ];
+
+/**
+ * Creates stateful named App routes
+ */
+export const appSlice: Slice<AppNotes, AppChildNotes> = createRoot<
+  AppNotes,
+  AppChildNotes
+>(routes, APP_HUB_KEY);

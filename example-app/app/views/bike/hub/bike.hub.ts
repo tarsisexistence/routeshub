@@ -1,12 +1,7 @@
-import { createFeature, createNote, Root, Slice } from 'lib';
-import { routes } from './bike.routes';
-import { appSlice } from '../../../routing/hub';
+import { Note } from 'lib';
 
-export type BikeNote = Root;
+export interface BikeNotes {
+  root: Note;
+}
 
-export const bikeNote = createNote<BikeNote>(routes);
-
-export const bikeSlice: Slice<BikeNote> = createFeature<BikeNote>(
-  appSlice.bikes,
-  bikeNote
-);
+export const BIKE_HUB_KEY = Symbol();

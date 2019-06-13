@@ -1,10 +1,9 @@
-import { createNote, createRoot, Note, Root, Slice } from 'lib';
-import { routes } from './app.routes';
+import { Note, Root } from 'lib';
 
 /**
  * Describes App children routes
  */
-export interface AppChildrenNote extends Root {
+export interface AppChildNotes extends Root {
   about: Note;
   automobiles: Note;
   bikes: Note;
@@ -14,19 +13,9 @@ export interface AppChildrenNote extends Root {
 /**
  * Describes App main routes
  */
-export interface AppNote extends Root<AppChildrenNote> {
+export interface AppNotes {
+  root: Note<AppChildNotes>;
   notFound: Note;
 }
 
-/**
- * declares App's note
- */
-export const appNote = createNote<AppNote>(routes, { wildcard: 'notFound' });
-
-/**
- * Creates stateful named App routes
- */
-export const appSlice: Slice<AppNote, AppChildrenNote> = createRoot<
-  AppNote,
-  AppChildrenNote
->(appNote);
+export const APP_HUB_KEY = Symbol();

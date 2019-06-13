@@ -1,4 +1,4 @@
-import { DefaultRouteName } from '../interfaces/common.interfaces';
+import { DefaultRouteName } from '../interfaces';
 
 function fixPathName(path: string): string {
   let newPath = '';

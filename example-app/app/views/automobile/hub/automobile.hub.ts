@@ -1,13 +1,7 @@
-import { createFeature, createNote, Note, Slice } from 'lib';
-import { routes } from './automobile.routes';
-import { appSlice } from '../../../routing/hub';
+import { Note } from 'lib';
 
-export interface AutomobileNote {
+export interface AutomobileNotes {
   root: Note;
 }
 
-export const automobileNote = createNote<AutomobileNote>(routes);
-
-export const automobileSlice: Slice<AutomobileNote> = createFeature<
-  AutomobileNote
->(appSlice.automobiles, automobileNote);
+export const AUTOMOBILE_HUB_KEY = Symbol();

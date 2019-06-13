@@ -1,21 +1,14 @@
-import { createFeature, createNote, Root, Slice } from 'lib';
-import { routes } from './about.routes';
-import { appSlice } from '../../../routing/hub';
+import { Note } from 'lib';
 
 /**
  * Describes About note which contains
  * only one route with root key
  */
-export type AboutNote = Root;
-/**
- * Declares a note of About module
- */
-export const aboutNote = createNote<AboutNote>(routes);
+export interface AboutNotes {
+  root: Note;
+}
 
 /**
- * Creates a feature slice
+ * unique local hub key
  */
-export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
-  appSlice.about,
-  aboutNote
-);
+export const ABOUT_HUB_KEY = Symbol();
