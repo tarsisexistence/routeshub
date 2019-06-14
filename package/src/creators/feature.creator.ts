@@ -11,15 +11,14 @@ import { assignCreatorArgs } from '../utils/name';
 export function createFeature<R = any, C = {}>(
   parentRoute: Structure,
   routes: Route[],
-  ...args: (symbol | DefaultRouteName)[]
+  key?: symbol
 ): Slice<R & C> {
-  const { key, options } = assignCreatorArgs(args, parentRoute.name);
-  const note: R = createNote<R>(routes, options);
+  const note: R = createNote<R>(routes);
   const feature: Slice<R> = enhance<R, C>(parentRoute, note);
   const updatedRouteState: Slice<Slice<R, C | {}>> = nextHubValue<R>(
     feature,
     parentRoute.name,
-    key
+    key || parentRoute.name
   );
   hub.next(updatedRouteState);
 

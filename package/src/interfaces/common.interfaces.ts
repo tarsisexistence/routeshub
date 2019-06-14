@@ -48,5 +48,5 @@ export interface DefaultRouteName {
  * private local hubs identifier
  */
 export interface PrivateHubKey {
-  [PRIVATE_HUB_KEY]: string;
+  [PRIVATE_HUB_KEY]: string | symbol;
 }

@@ -1,4 +1,4 @@
-import { hub } from '../hubs';
+import { hub } from '../hub';
 import { indexer } from './indexer';
 
 /*

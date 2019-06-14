@@ -4,7 +4,7 @@ import { PRIVATE_HUB_KEY } from '../constants';
 import { hub } from '../hub';
 
 export function Sliced<T = any>(
-  arg: string | symbol | string[] | symbol[]
+  arg: string | symbol
 ): (target: any, propertyKey: PropertyKey) => T {
   return <R>(target: any, propertyKey: string | symbol) => {
     let sliceValue: R;

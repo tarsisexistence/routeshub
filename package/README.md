@@ -81,7 +81,7 @@ import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
   </nav>
 `
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   // getting slice by key
   @Sliced(APP_HUB_KEY)
   public app: Slice<AppNotes>;
@@ -261,7 +261,7 @@ export const exampleUnion = createUnion({
 @Component({
   ...
 })
-export class ExampleComponent implements OnInit {
+export class ExampleComponent {
   ...
   
   // or even declare in the straightforward way
@@ -287,7 +287,7 @@ export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KE
 @Component({
   ...
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   // getting slice by key
   @Sliced(APP_HUB_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
@@ -304,7 +304,7 @@ export class HeaderComponent implements OnInit {
 @Component({
   ...
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
     public union = createUnion({
       app: appSlice,
       about: aboutSlice,
@@ -320,7 +320,7 @@ export class HeaderComponent implements OnInit {
 @Component({
   ...
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   public hub: Slices<Hub> = getHubSlices<Hub>();
 }
 ```
@@ -374,7 +374,7 @@ A function that inserts parameters into route's state. Outputs a ready-made dyna
 @Component({
   ...
 })
-export class ExampleComponent implements OnInit {
+export class ExampleComponent {
   ...
 
   constructor(private router: Router) {}
