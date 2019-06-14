@@ -1,4 +1,8 @@
-import { InternalStructure, Structure } from './common.interfaces';
+import {
+  InternalStructure,
+  PrivateHubKey,
+  Structure
+} from './common.interfaces';
 
 /**
  * Describes unprocessed slices
@@ -10,7 +14,9 @@ export type InternalSlice<R, C = {}> = {
 /**
  * Describes processed slices
  */
-export type Slice<R, C = {}> = { [key in keyof (R & C)]: Structure };
+export type Slice<R, C = {}> = {
+  [key in keyof (R & C)]: Structure & (PrivateHubKey | any)
+};
 
 /**
  * Describes a bunch of slices

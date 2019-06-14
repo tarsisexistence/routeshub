@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { automobilesRouting } from './hub';
+import { automobilesRouting } from './hub/automobile.routes';
 import { SharedModule } from '../../shared/shared.module';
 import { AutomobileComponent } from './container/automobile.component';
 

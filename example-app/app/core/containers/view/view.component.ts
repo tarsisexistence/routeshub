@@ -7,6 +7,16 @@ import {
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
+import { Slice, Sliced } from 'lib';
+import {
+  APP_HUB_KEY,
+  AppChildNotes,
+  AppNotes
+} from '../../../routing/hub/app.notes';
+import {
+  BOLID_HUB_KEY,
+  BolidNotes
+} from '../../../views/bolid/hub/bolid.notes';
 
 @Component({
   selector: 'app-view',
@@ -17,6 +27,12 @@ import { Observable, Subject } from 'rxjs';
 export class ViewComponent implements OnInit, OnDestroy {
   public vehicles: Observable<string[]>;
   private unsubscribe$: Subject<boolean>;
+
+  @Sliced(APP_HUB_KEY)
+  private app: Slice<AppNotes, AppChildNotes>;
+
+  @Sliced(BOLID_HUB_KEY)
+  private bolid: Slice<BolidNotes>;
 
   constructor(private readonly route: ActivatedRoute) {}
 

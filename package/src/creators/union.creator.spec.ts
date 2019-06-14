@@ -1,19 +1,18 @@
 import { Routes } from '@angular/router';
-import { createNote } from './note.creator';
+import { createFeature } from './feature.creator';
 import { createRoot } from './root.creator';
 import { createUnion } from './union.creator';
-import { reset } from 'lib/src/utils/reset';
-import { createFeature } from 'lib/src/creators/feature.creator';
+import { reset } from '../utils/reset';
+import { PRIVATE_HUB_KEY } from '../constants';
 
-describe('createNote', () => {
+describe('createUnion', () => {
   afterEach(() => {
     reset();
   });
 
-  it('should create create union with one slice', () => {
+  it('should create create union with one Hub', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];
-    const note = createNote(routes);
-    const app = createRoot(note);
+    const app = createRoot(routes);
     const union = createUnion({ app });
     const result = {
       app: {
@@ -32,7 +31,8 @@ describe('createNote', () => {
           path: '**',
           name: 'wildcard',
           children: null
-        }
+        },
+        [PRIVATE_HUB_KEY]: 'app'
       }
     };
     expect(union).toEqual(result);
@@ -40,14 +40,11 @@ describe('createNote', () => {
 
   it('should create create union with few routes', () => {
     const routes: Routes = [{ path: '' }, { path: 'map' }];
-    const note = createNote(routes);
-    const app = createRoot(note);
+    const app = createRoot(routes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapNote = createNote(mapRoutes);
-    const map = createFeature(app.map, mapNote);
+    const map = createFeature(app.map, mapRoutes);
     const locationRoutes: Routes = [{ path: '' }];
-    const locationNote = createNote(locationRoutes);
-    const location = createFeature(map.location, locationNote);
+    const location = createFeature(map.location, locationRoutes);
     const union = createUnion({
       app,
       map,
@@ -71,7 +68,8 @@ describe('createNote', () => {
           path: 'map',
           name: 'map',
           children: null
-        }
+        },
+        [PRIVATE_HUB_KEY]: 'app'
       },
       map: {
         root: {
@@ -89,7 +87,8 @@ describe('createNote', () => {
           path: 'location',
           name: 'location',
           children: null
-        }
+        },
+        [PRIVATE_HUB_KEY]: 'map'
       },
       location: {
         root: {
@@ -99,7 +98,8 @@ describe('createNote', () => {
           path: '',
           name: 'root',
           children: null
-        }
+        },
+        [PRIVATE_HUB_KEY]: 'location'
       }
     };
     expect(union).toEqual(result);

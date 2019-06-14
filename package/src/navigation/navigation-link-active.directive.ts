@@ -15,9 +15,9 @@ import { NavigationLink } from './navigation-link.directive';
 import { NavigationLinkWithHref } from './navigation-link-with-href.directive';
 import { getRouteHref } from '../utils/link';
 import { getClassNames } from '../utils/helpers';
+import { insertHrefParams } from '../utils/state';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
-import { insertHrefParams } from '../utils/state';
 
 @Directive({
   selector: '[navLinkActive]',

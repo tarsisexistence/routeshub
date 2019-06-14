@@ -1,3 +1,12 @@
+# 2.1.0 2019-06-14
+
+- added new @Sliced decorator
+- created approach to leverage the issues with circular dependencies
+- refactored api
+- slightly refactored pattern
+- updated documentation
+
+
 # 2.0.0 2019-06-09
 
 - reduced the amount of required boilerplate code
@@ -8,6 +17,7 @@
 - completely rewritten documentation
 - fixed bugs and inaccuracies
 - finish hub management pattern and improved semantics
+- updated dependencies
 
 
 # 1.3.0 2019-05-08
@@ -18,6 +28,7 @@
 - updated documentation
 - updated dependencies
 
+
 # 1.2.0 2019-05-01
 
 - added few navigation directives
@@ -26,6 +37,7 @@
 - minor fixes and refactoring
 - updated documentation
 - updated dependencies
+
 
 # 1.1.1 2019-03-09
 
@@ -41,6 +53,7 @@
 - improved an explanation
 - updated and fixed readme
 - refactored and made functionality clearer
+
 
 # 1.0.0 2019-02-09
 

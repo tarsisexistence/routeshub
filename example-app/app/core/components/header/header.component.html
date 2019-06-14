@@ -1,7 +1,7 @@
 <!--here you can find different navigation approaches-->
 <nz-header>
   <a class="logo"
-     [navLink]="hub.app.root.state">
+     [navLink]="app.root.state">
     <img class="image"
          src="/assets/logo/white.png"
          alt="logo"/>
@@ -12,7 +12,7 @@
        [nzTheme]="'dark'"
        [nzMode]="'horizontal'">
 
-    <a nz-menu-item navLink="{{ union.about.root.state }}">About</a>
+    <a nz-menu-item navLink="{{ about.root.state }}">About</a>
     <a nz-menu-item [navLink]="union.automobiles.root.state" navLinkActive="my-active-class">Automobiles</a>
     <a nz-menu-item routerLink="/bikes">Bikes</a>
     <a nz-menu-item [navLink]="union.bolids.root" [navLinkActive]="['myActiveClass']">

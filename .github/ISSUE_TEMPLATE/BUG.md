@@ -1,4 +1,4 @@
-# 🐛 bug report
+# 🐛 Bug Report
 
 ### Description of the problem
 A clear and concise description of what the bug is.
