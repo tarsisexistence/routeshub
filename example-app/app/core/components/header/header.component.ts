@@ -38,11 +38,11 @@ export class HeaderComponent implements OnInit {
   public hub: Slices<Hub>;
   public union;
 
-  // getting Hub by key
+  // getting slice by key
   @Sliced(APP_HUB_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
 
-  // getting Hub by name
+  // getting slice by slice name
   @Sliced('about')
   private about: Slice<AboutNotes>;
 
