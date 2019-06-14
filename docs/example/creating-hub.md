@@ -3,12 +3,11 @@
 Let's create the notes and slices
 
 {% code-tabs %}
-{% code-tabs-item title="app.hub.ts" %}
+{% code-tabs-item title="app.notes.ts" %}
 ```typescript
 import { createRoot, createNote, Root, Note } from 'routeshub';
-import { routes } from './app.routes';
 
-export interface AppChildrenNote extends Root {
+export interface AppChildNotes extends Root {
   about: Note;
 }
 
@@ -16,7 +15,7 @@ export interface AppChildrenNote extends Root {
 * Root is the shortcut of root path
 * Designed to speed up code reusing
 */
-export interface AppNote extends Root<AppChildrenNote> {
+export interface AppNotes extends Root<AppChildNotes> {
   auth: Note;
   notFound: Note;
 }
@@ -24,14 +23,51 @@ export interface AppNote extends Root<AppChildrenNote> {
 /**
   * it is equivalent of the code above
   * choose the one you comfortable with
-
   export interface AppNotes {
-    root: Note<AppChildrenNote>
+    root: Note<AppChildNotes>
     auth: Note;
     notFound: Note;
   }
-
 */
+
+// unique key of app hub. That we should add as argument of its slice declaration in routes file
+export const APP_HUB_KEY = Symbol();
+```
+{% endcode-tabs-item %}
+
+{% code-tabs-item title="about.notes.ts" %}
+```typescript
+import { createFeature, Root } from 'routeshub';
+import { appSlice } from '../../../routing/app.hub';
+
+export type AboutNotes = Root;
+
+export const ABOUT_HUB_KEY = Symbol();
+```
+{% endcode-tabs-item %}
+
+{% code-tabs-item title="auth.notes.ts" %}
+```typescript
+import { createFeature, Root, Note } from 'routeshub';
+import { appSlice } from '../../../routing/app.hub';
+
+export interface AuthNotes extends Root {
+  signIn: Note;
+  signUp: Note;
+  id: Note;
+}
+
+export const AUTH_HUB_KEY = Symbol();
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+Next, we need to update routes files. Exactly we have to declare just one variable in the and of the file that gets routes and optional name parameters and key from notes \(also optional\)
+
+{% code-tabs %}
+{% code-tabs-item title="app.routes.ts" %}
+```typescript
+....
 
 /**
 * you may be confused about the second argument
@@ -41,53 +77,34 @@ export interface AppNote extends Root<AppChildrenNote> {
 * So, you can customize property keys through the second argument
 * as illustrated below
 */
-export const appNote = createNote<AppNote>(routes, { wildcard: 'notFound' });
-
-export const appSlice: Slice<AppNote, AppChildrenNote> = createRoot<
-  AppNote,
-  AppChildrenNote
->(appNote);
-
+export const appSlice: Slice<AppNotes, AppChildNotes> = createRoot<
+  AppNotes,
+  AppChildNotes
+>(appRoutes, { wildcard: 'notFound' }, APP_HUB_KEY);
 ```
 {% endcode-tabs-item %}
 
-{% code-tabs-item title="about.hub.ts" %}
+{% code-tabs-item title="about.routes.ts" %}
 ```typescript
-import { createFeature, createNote, Root, Note } from 'routeshub';
-import { routes } from './about.routes';
-import { appSlice } from '../../../routing/app.hub';
+...
 
-export type AboutNote = Root;
-
-export const aboutNote = createNote<AboutNote>(routes);
-
-export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
+export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
   appSlice.about,
-  aboutNote
+  aboutRoutes,
+  ABOUT_HUB_KEY
 );
-
 ```
 {% endcode-tabs-item %}
 
-{% code-tabs-item title="auth.note.ts" %}
+{% code-tabs-item title="auth.routes.ts" %}
 ```typescript
-import { createFeature, createNote, Root, Note } from 'routeshub';
-import { routes } from './auth.routes';
-import { appSlice } from '../../../routing/app.hub';
+...
 
-export interface AuthNote extends Root {
-  signIn: Note;
-  signUp: Note;
-  id: Note;
-}
-
-export const authNote = createNote<AuthNote>(routes);
-
-export const authSlice: Slice<AuthNote> = createFeature<AuthNote>(
+export const authSlice: Slice<AuthNotes> = createFeature<AuthNotes>(
   appSlice.auth,
-  authNote
+  authRoutes,
+  AUTH_HUB_KEY
 );
-
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}

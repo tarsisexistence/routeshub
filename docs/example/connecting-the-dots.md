@@ -21,23 +21,18 @@ That step allows us to connect all pieces together and get the hub as one level 
 {% code-tabs %}
 {% code-tabs-item title="hub.ts" %}
 ```typescript
-import { getHub } from 'routeshub';
-import { AppChildrenNote, AppNote, appSlice } from './hub/app.hub';
-import { AboutNote, aboutSlice } from '../views/about/hub';
-import { AutomobileNote, automobileSlice } from '../views/automobile/hub';
-import { BikeNote, bikeSlice } from '../views/bike/hub';
-import { BolidNote, bolidSlice } from '../views/bolid/hub';
+import { getHubSlices } from 'routeshub';
+import { AppChildNotes, AppNotes } from './hub/app.notes';
+import { AboutNotes } from '../views/about/hub/about.notes';
+import { AuthNotes } from '../views/auth/hub/auth.notes';
 
 export interface Hub {
-  app: AppNote & AppChildrenNote;
-  about: AboutNote;
-  automobiles: AutomobileNote;
-  bikes: BikeNote;
-  bolids: BolidNote;
+  app: AppNotes & AppChildNotes;
+  about: AboutNotes;
+  auth: AuthNotes;
 }
 
-export const hub = getHub<Hub>();
-
+export const hub = getHubSlices<Hub>();
 ```
 {% endcode-tabs-item %}
 {% endcode-tabs %}
@@ -49,18 +44,14 @@ Allows performing flexible development steps
 {% code-tabs %}
 {% code-tabs-item title="hub.ts" %}
 ```typescript
-import { appSlice } from './hub/app.hub';
-import { aboutSlice } from '../views/about/hub';
-import { automobileSlice } from '../views/automobile/hub';
-import { bikeSlice } from '../views/bike/hub';
-import { bolidSlice } from '../views/bolid/hub';
+import { createUnion } from 'routeshub';
+import { aboutSlice } from '../views/about/hub/about.routes';
+import { authSlice } from '../views/auth/hub/auth.routes';
 
+// the union of about and auth slices
 export const union = createUnion({
-  app: appSlice,
-  about: aboutSlice,
-  automobiles: automobileSlice,
-  bikes: bikeSlice,
-  bolids: bolidSlice
+    about: aboutSlice,
+    auth: authSlice
 });
 
 ```

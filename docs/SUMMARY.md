@@ -11,10 +11,10 @@
   * [Introduction](concepts/introduction.md)
   * [Notes](concepts/notes.md)
   * [Slices](concepts/slices.md)
-  * [Unions](concepts/unions.md)
 * [API](api/README.md)
   * [Interfaces](api/interfaces.md)
   * [Creators](api/creators.md)
   * [Directives](api/directives.md)
   * [Functions](api/functions.md)
+  * [Decorators](api/decorators.md)
 

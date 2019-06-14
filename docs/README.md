@@ -10,7 +10,7 @@ Acts as a hub, which brings more control, stable and predictable interaction wit
 
 ⚙ A route manager. Designed to improve improve reliability and speed of development
 
-🔩 Engineered by plugin design. It was designed to be added at any time during the development process, even for separate complicated project parts.
+🔩 Engineered as a plugin. It was designed to be added at any time during the development process, even for separate complicated project parts.
 
 🔧 Modeled after a tree data structure. 
 

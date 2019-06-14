@@ -1,46 +1,12 @@
 # Notes
 
-Note is input to reproduce the slice
+Note is input to reproduce the slice.
 
-## Creating Note
+You won't deal with them directly in the application.
 
-Takes two arguments \(the second is optional\) and one generic type. The first argument is the usual routes variable that needs angular router. The second argument is the options for name customization. As you can see above, we've changed default `root` and `wildcard` to `home` and `notFound`
+## What Does it Do?
 
-Usage example:
-
-```typescript
-import { createNote, Note } from 'routeshub';
-import { ViewComponent } from '../view.component';
-
-export const routes: Routes = [
-  {
-    path: '',
-    component: ViewComponent,
-  },
-  {
-    path: '**',
-    redirectTo: ''
-  }
-];
-
-export interface AppNote {
-  home: Note;
-  notFound: Note;
-}
-
-export const appNote = createNote<AppNote>(routes, { 
-  root: 'home', 
-  wildcard: 'notFound' 
-});
-
-// it will produce an object equals to
-{
-  home: { path: '', name: 'home' },
-  notFound:{ path: '**', name: 'notFound' }
-}
-```
-
-Let's take a look on another example
+Let's take a look on example of routes file and see in what it transforms
 
 ```typescript
 import { createNote, Note } from 'routeshub';
@@ -80,17 +46,8 @@ export const routes: Routes = [
   }
 ];
 
-export interface AppChildrenNote extends Root {
-  about: Note;
-}
-
-export interface AppNote extends Root<AppChildrenNote> {
-  superPlace: Note;
-  city: Note;
-  wildcard: Note;
-}
-
-export const appNote = createNote<AppNote>(routes);
+// note of those routes generates under the hood of createRoot/createFeature functions
+export const appSlice = createRoot(routes);
 
 // it will produce an object equals to
 {
@@ -110,11 +67,11 @@ You may have lots of questions here.
 
 First, routeshub converts paths into camelCase keys. 
 
-Variables in paths are also recognizable. 
+Variables in paths are recognizable. 
 
-Notes interfaces could have shortcuts for reusable reason. Root interface just adds `root: Note`  to common interface. Also, root path can have children routes. If so, then just pass generic children `Root<ChildrenNote>` as illustrated above.
+Notes interfaces could have shortcuts for reusable reason. Root interface just adds `root: Note`  to common interface. Also, root path can have children routes. If so, then just pass generic children `Root<Childnotee>` as illustrated above.
 
-If you want to know more then be sure to read **API** section 
+If you want to know more, then make sure to read **API** section 
 
 {% page-ref page="../api/" %}
 
