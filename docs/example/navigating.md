@@ -27,6 +27,7 @@ Before we finished, we should get access for slices in the component and then us
 As was mentioned previously, there are some different approaches of how you can use slices:
 
 * decorator @Sliced - apply the decorator on component property  \(preferable\)
+* getSlice - function that works as well as @Sliced decorator.
 * separately - get access for each slice
 * unions - declare slices entity on demand
 * hub - declare and get access for all slices
@@ -55,6 +56,41 @@ import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
 export class HeaderComponent {
   @Sliced(APP_HUB_KEY)
   public app: Slice<AppNotes>;
+  
+  constructor(private router: Router) {}
+
+  profile(): void {
+    const url = forwardParams(this.app.id.state, { id: 0 });
+    this.router.navigate(url).catch(console.error);
+  }
+}
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
+
+### getSlice
+
+{% code-tabs %}
+{% code-tabs-item title="header.component.ts" %}
+```typescript
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { getSlice, Slice } from 'routeshub';
+import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
+
+@Component({
+  selector: 'app-header',
+  template: `
+  <nav>
+    <a navLink="{{ app.root.state }}">Home</a>
+    <a [navLink]="app.auth.state">Auth</a>
+    <a [navLink]="app.account.state" [navParams]="{account: 1234}">Account</a>
+    <button (click)=profile()>Profile</button>
+  </nav>
+`
+})
+export class HeaderComponent {
+  public app = getSlice<AppNotes>(APP_HUB_KEY);
   
   constructor(private router: Router) {}
 
