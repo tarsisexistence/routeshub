@@ -4,6 +4,7 @@ import {
   createUnion,
   forwardParams,
   getHubSlices,
+  getSlice,
   Slice,
   Sliced,
   Slices
@@ -23,6 +24,10 @@ import { automobileSlice } from '../../../views/automobile/hub/automobile.routes
 import { bikeSlice } from '../../../views/bike/hub/bike.routes';
 import { bolidSlice } from '../../../views/bolid/hub/bolid.routes';
 import { AboutNotes } from '../../../views/about/hub/about.notes';
+import {
+  AUTOMOBILE_HUB_KEY,
+  AutomobileNotes
+} from '../../../views/automobile/hub/automobile.notes';
 
 @Component({
   selector: 'app-header',
@@ -37,6 +42,9 @@ export class HeaderComponent implements OnInit {
    */
   public hub: Slices<Hub>;
   public union;
+
+  // getting slice from function by key (slice name is available too)
+  public automobiles = getSlice<AutomobileNotes>(AUTOMOBILE_HUB_KEY);
 
   // getting slice by key
   @Sliced(APP_HUB_KEY)

@@ -282,6 +282,7 @@ There are several ways to get a slice:
 ```typescript
 export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
 ```
+
 -  **@Sliced decorator**. Apply that decorator on component's prop. You should pass key or slice name (example at the top)
 ```typescript
 @Component({
@@ -296,7 +297,20 @@ export class HeaderComponent {
   @Sliced('about')
   private about: Slice<AboutNotes>;
 }
+```
 
+-  **getSlice** - is a function, that works as decorator. Essentially it is created as an alternative to decorator
+```typescript
+@Component({
+  ...
+})
+export class HeaderComponent {
+  // getting slice by key
+  private app = getSlice<AppNotes, AppChildNotes>(APP_HUB_KEY);
+
+  // getting slice by slice name
+  private about = getSlice<AboutNotes>('about');
+}
 ```
 
 -  **Union** - almost the same, as first way with slice const. That one creates a union from any quantity of slices.

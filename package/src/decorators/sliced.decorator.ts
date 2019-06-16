@@ -1,7 +1,5 @@
-import 'reflect-metadata';
 import { take } from 'rxjs/operators';
-import { PRIVATE_HUB_KEY } from '../constants';
-import { hub } from '../hub';
+import { getSlice, hub } from '../hub';
 
 export function Sliced<T = any>(
   arg: string | symbol
@@ -9,13 +7,8 @@ export function Sliced<T = any>(
   return <R>(target: any, propertyKey: string | symbol) => {
     let sliceValue: R;
 
-    hub.pipe(take(1)).subscribe(routes => {
-      sliceValue =
-        typeof arg === 'string'
-          ? routes[arg]
-          : (Object.values(routes || {}).find(
-              (value: R) => value[PRIVATE_HUB_KEY] === arg
-            ) as R);
+    hub.pipe(take(1)).subscribe(slices => {
+      sliceValue = getSlice<R>(arg, slices);
     });
 
     Object.defineProperty(target, propertyKey, {

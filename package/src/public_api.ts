@@ -6,6 +6,6 @@ export { createRoot, createFeature, createNote, createUnion } from './creators';
 
 export { NavigationModule } from './navigation/navigation.module';
 
-export { getHubSlices, hub } from './hub';
+export { getHubSlices, getSlice, hub } from './hub';
 
 export { Sliced } from './decorators';
