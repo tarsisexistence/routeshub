@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import { take } from 'rxjs/operators';
 import { getSlice, hub } from '../hub';
 
