@@ -27,6 +27,14 @@ export function nextHubValue<R, C = {}>(
 /**
  * returns aggregated hubs
  */
-export function getHubSlices<T = {}>(): Slices<T> {
-  return hub.getValue();
-}
+export const getHubSlices = <T = {}>(): Slices<T> => hub.getValue();
+
+export const getSlice = <T = any, C = {}>(
+  arg: string | symbol,
+  slices: Slices<any> = hub.value
+): Slice<T, C> =>
+  typeof arg === 'string'
+    ? slices[arg]
+    : Object.values((slices as Slices<any>) || {}).find(
+        (slice: Slice<any>) => slice[PRIVATE_HUB_KEY] === arg
+      );
