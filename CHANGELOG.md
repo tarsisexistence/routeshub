@@ -1,3 +1,9 @@
+# 2.1.0 2019-06-16
+
+- added new getSlice function (as an alternative to @Sliced decorator)
+- refactored code
+
+
 # 2.1.0 2019-06-14
 
 - added new @Sliced decorator
