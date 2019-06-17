@@ -7,8 +7,8 @@ export function Sliced<T = any>(
   return <R>(target: any, propertyKey: string | symbol) => {
     let sliceValue: R;
 
-    hub.pipe(take(1)).subscribe(slices => {
-      sliceValue = getSlice<R>(arg, slices);
+    hub.pipe(take(1)).subscribe(() => {
+      sliceValue = getSlice<R>(arg);
     });
 
     Object.defineProperty(target, propertyKey, {
