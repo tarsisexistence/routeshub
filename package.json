@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
   "description": "A route management library and pattern for Angular",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "MIT",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "private": true,
@@ -32,7 +32,7 @@
     "@angular/router": "8.0.1",
     "hammerjs": "2.0.8",
     "ng-zorro-antd": "7.5.0",
-    "routeshub": "2.1.0",
+    "routeshub": "2.1.1",
     "rxjs": "6.5.2",
     "zone.js": "0.9.1"
   },
