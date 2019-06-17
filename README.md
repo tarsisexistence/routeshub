@@ -23,24 +23,6 @@ npm install routeshub
 
 ## Usage
 
-#### Describing possible paths in **[module]**.notes.ts
-```typescript
-import { Note } from 'routeshub';
-
-export interface AppNote {
-  root: Note; // === ''
-  about: Note;
-  wildcard: Note; // === '**'
-}
-
-/** 
-* Optional
-* Provides opportunity to get slice in decorator
-* instead of slice name (string)
-*/
-export const APP_HUB_KEY = Symbol();
-```
-
 #### Simple **[module]**.routes.ts with slice declaration in the end
 ```typescript
 ...
@@ -63,13 +45,32 @@ export const routes: Routes = [
   }
 ];
 
+// creating the root slice
 export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
+```
+
+#### Getting interface and unique slice key in **[module]**.notes.ts
+```typescript
+import { Note } from 'routeshub';
+
+export interface AppNote {
+  root: Note; // === ''
+  about: Note;
+  wildcard: Note; // === '**'
+}
+
+/** 
+* Optional
+* Provides opportunity to get slice in decorator
+* instead of slice name (string)
+*/
+export const APP_HUB_KEY = Symbol();
 ```
 
 #### Component
 ```typescript
 ... 
-import { Slice, Sliced } from 'routeshub';
+import { getSlice, Slice, Sliced } from 'routeshub';
 import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
 
 @Component({
@@ -85,41 +86,49 @@ export class HeaderComponent {
   // getting slice by key
   @Sliced(APP_HUB_KEY)
   public app: Slice<AppNotes>;
+  
+  //or
+  
+   // getting slice by name
+   @Sliced('app')
+   public app: Slice<AppNotes>;
+   
+   // getting slice from fn
+   @Sliced('app')
+   public app = getSlice<AppNotes>(APP_HUB_KEY);
 }
 ```
 
 [Angular]: https://github.com/storeon/angular
 [rxjs]: https://github.com/ReactiveX/rxjs
 
-You can find a more complex example in this repo [here](https://github.com/maktarsis/routeshub/tree/master/example-app) or on [GitBook](https://routeshub.gitbook.io/docs/example)
+You can find a more complex example in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app)  here or on [GitBook](https://routeshub.gitbook.io/docs/example).
 
 <br/>
 
 # Hub
-Routeshub offers an approach (pattern) to structure routing in the application. You can see it in this repo -> [example-app folder](https://github.com/maktarsis/routeshub/tree/master/example-app)
+Routeshub offers an approach (pattern) to structure routing in the application. You can see it in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app).
 
-The point is the following. Application has a directory **routing** that declares starting configuration of the application via routing module
+This application should have directory app/routing that declares a starting configuration of the application via the routing module.
 
 There you should have:
 - routing module file
-- routing hub (optional) file - there you declaring the whole project hub with one nesting level of all slices
-- resolvers/etc folders - folders where you manage other angular routing api
-- hub folder - is an entry point of the hub. There you should declare app.routes (as usual +1 code line) and app.notes (interfaces and key) files.
+- routing hub file (optional) - declare the whole project hub with one nesting level of all slices
+- other routing configuration folders (resolvers, guards, strategies) - manage other angular/routing api
+- hub folder - an entry point of the hub, declare app.routes as usual + 1 line of code and app.notes (interfaces and key) files.
 
-Feature modules of application should also contain hub folder that has **[featureName].notes** for interfaces and key (optional) and **[featureName].routes** files.
+Feature modules of the application should also contain a hub folder that has **[featureName].notes** for interfaces and key/name and **[featureName].routes** files.
 
 <br/>
 
 # Concepts
 
 ## Note
-You won't deal with it directly but good to know how it actually works.
+The `Note` is input to reproduce the slice. Each `Note` represents one route and each module collects the route in the `Notes` bunch.
 
-The `Note` is input to reproduce the slice. Each `Note` represents one route and each modules collects them in the `Notes` bunch.
+The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened to three dots.
 
-Example below shows capabilities and illustrates how it actually works. Unnecessary route information will be shortened into three dots
-
-Now you do not need to create `Notes` by yourself. But here is an example of how routes transform depending on the route path
+Now you do not need to create `Notes` by yourself, because this handles under the hood. Here is an example of how routes transform depending on the route path:
 ```typescript
 export const routes: Routes = [
   {
@@ -192,15 +201,15 @@ export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 
 
 
 ## Slice
-The `Slice` is a modular entity that contains stateful module routes.
+`Slice` is a modular entity that contains stateful module routes.
 
 There are two ways to create the `slice`:
 - **createRoot**
 - **createFeature**
 
-Each function takes the routes list `Routes` from @angular/router and list of options in any order to provide route name options as you see above (where we customized the route name by path) and local hub key as you could see in the example above. It provides an opportunity to fetch slice by key instead of slice name.
+Each function takes the `routes: Routes` and list of options ({ root: 'NAME OF EMPTY PATH, wildcard: 'NAME OF ** PATH'}) to provide route name options as you have seen above (where we customized the route name by path) and local hub key as you have seen in the example. It provides an opportunity to fetch slice by key instead of slice name.
 
-**Root** creator invokes only once to initialize the hub in application. It takes initial (app) the note and produces a `slice` which will be used for subsequent feature creators (to connect each other as tree).
+**Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` and produces a `slice` which will be used for subsequent feature creators to connect each other as a single tree.
 
 ```typescript
 // possible records
@@ -224,7 +233,7 @@ export const appSlice =
     createRoot<AppNotes, AppChildNotes>(routes, APP_HUB_KEY);
 ```
 
-In turn the **feature** creator is responsible for relations between parent and child nodes
+In turn, the **feature** creator is responsible for relations between parent and child nodes
 
 ```typescript
 export const routes: Routes = [
@@ -244,10 +253,10 @@ export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
 ```
 
 ## Union
-The `union` is an entity that connects several selected slices. It takes an object of keys and values. Key is a route name and value - its slice.
+`Union` is an entity that connects several selected slices. It takes an object of keys-values. 
+Key - route name. Value - its slice.
 
-It allows performing flexible development steps
-
+It allows performing flexible development steps:
 ```typescript
 export const exampleUnion = createUnion({
   app: appSlice,
@@ -278,12 +287,12 @@ export class ExampleComponent {
 Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
 There are several ways to get a slice:
 
--  **Slice const** which we got from create function. You can import this one into component and that's it.
+-  **Slice const** - this came from create function and you can import this one into component.
 ```typescript
 export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
 ```
 
--  **@Sliced decorator**. Apply that decorator on component's prop. You should pass key or slice name (example at the top)
+-  **@Sliced decorator**. Apply this decorator on the component's prop. You should pass the key or slice name.
 ```typescript
 @Component({
   ...
@@ -299,7 +308,7 @@ export class HeaderComponent {
 }
 ```
 
--  **getSlice** - is a function, that works as decorator. Essentially it is created as an alternative to decorator
+-  **getSlice** - This is a function that works as decorator. Essentially, it is created as an alternative to @Sliced decorator.
 ```typescript
 @Component({
   ...
@@ -313,7 +322,7 @@ export class HeaderComponent {
 }
 ```
 
--  **Union** - almost the same, as first way with slice const. That one creates a union from any quantity of slices.
+-  **Union** - This is similar to slice const way, but creates a union from any quantity of slices.
 ```typescript
 @Component({
   ...
@@ -329,7 +338,7 @@ export class HeaderComponent {
 }
 
 ```
--  **getHubSlices** - is a function that returns all declared slices in the project.
+-  **getHubSlices** - This is a function that returns all declared slices in the project.
 ```typescript
 @Component({
   ...
@@ -341,9 +350,9 @@ export class HeaderComponent {
 
 
 ## Navigation
-Also, **Routeshub** provides directives and function to make your experience with navigation better
+**Routeshub** provides directives and functions to make your experience with navigation better.
 
-Before you start, don't forget to import **NavigationModule**
+Before you start, don't forget to import **NavigationModule**:
 ```typescript
 import { NavigationModule } from 'routeshub';
 
@@ -380,7 +389,8 @@ export class AppModule {
 ```
 
 ### forwardParams
-A function that inserts parameters into route's state. Outputs a ready-made dynamic state. It allows to forward as many objects parameters as you like. It means that you can pass more than one object with parameters.
+A function that inserts parameters into route's state and outputs a ready-made dynamic state. 
+It allows you to forward as many object parameters as you like which means that you can pass more than one object with parameters. 
 
 ```typescript
 ...
@@ -409,7 +419,7 @@ Please make sure to update tests as appropriate and keep the examples consistent
 
 ## Changelog
 
-Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md)
+Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md).
 
 
 ## License
