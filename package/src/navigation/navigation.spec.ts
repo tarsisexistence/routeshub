@@ -9,7 +9,7 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { getHubSlices, getSlice } from '../hub';
+import { getSlice } from '../hub';
 import { NavigationModule } from './navigation.module';
 import { createRoot } from '../creators/root.creator';
 import { Routes } from '@angular/router';
@@ -31,7 +31,7 @@ class TestComponent {
   public app = getSlice(APP_HUB_KEY);
 }
 
-describe('Navigation', () => {
+describe('Navigation Link Directive', () => {
   let location: Location;
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
