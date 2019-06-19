@@ -9,7 +9,7 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { getHubSlices } from '../hub';
+import { getHubSlices, getSlice } from '../hub';
 import { NavigationModule } from './navigation.module';
 import { createRoot } from '../creators/root.creator';
 import { Routes } from '@angular/router';
@@ -20,50 +20,53 @@ const APP_HUB_KEY = Symbol();
 @Component({
   selector: 'app-header',
   template: `
-    <a [navLink]="slices.app.root.state" navLinkActive="active">Home</a>
-    <a navLink="{{ slices.app.about.state }}">About</a>
-    <a [navLink]="slices.app.map">Map</a>
-    <a [navLink]="slices.app.user" [navParams]="{ user: 'maktarsis' }">User</a>
+    <a [navLink]="app.root.state" navLinkActive="active">Home</a>
+    <a navLink="{{ app.about.state }}">About</a>
+    <a [navLink]="app.map">Map</a>
+    <a [navLink]="app.user" [navParams]="{ user: 'maktarsis' }">User</a>
+    <a [navLink]="app.id" [navParams]="{ id: '123' }">User</a>
   `
 })
-class HeaderComponent {
-  public slices = getHubSlices();
+class TestComponent {
+  public app = getSlice(APP_HUB_KEY);
 }
-
-const routes: Routes = ([] = [
-  {
-    path: '',
-    component: HeaderComponent
-  },
-  {
-    path: 'about',
-    component: HeaderComponent
-  },
-  {
-    path: 'map',
-    component: HeaderComponent
-  },
-  {
-    path: ':user',
-    component: HeaderComponent
-  }
-]);
 
 describe('Navigation', () => {
   let location: Location;
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
-
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
+  const routes: Routes = ([] = [
+    {
+      path: '',
+      component: TestComponent
+    },
+    {
+      path: 'about',
+      component: TestComponent
+    },
+    {
+      path: 'map',
+      component: TestComponent
+    },
+    {
+      path: ':user',
+      component: TestComponent
+    },
+    {
+      path: 'users/:id',
+      component: TestComponent
+    }
+  ]);
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
+      declarations: [TestComponent],
       imports: [NavigationModule, RouterTestingModule.withRoutes(routes)]
     }).compileComponents();
 
     createRoot(routes, APP_HUB_KEY);
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     location = TestBed.get(Location);
@@ -107,10 +110,17 @@ describe('Navigation', () => {
     expect(location.path()).toBe('/map');
   }));
 
-  it('should navigate to dynamic route', fakeAsync(() => {
+  it('should navigate to route with dynamic path', fakeAsync(() => {
     const link = fixture.debugElement.nativeElement.querySelectorAll('a')[3];
     link.click();
     tick();
     expect(location.path()).toBe('/maktarsis');
+  }));
+
+  it('should navigate to route with dynamic double path', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[4];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/users/123');
   }));
 });
