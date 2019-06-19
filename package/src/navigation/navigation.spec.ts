@@ -20,7 +20,7 @@ const APP_HUB_KEY = Symbol();
 @Component({
   selector: 'app-header',
   template: `
-    <a [navLink]="slices.app.root.state">Home</a>
+    <a [navLink]="slices.app.root.state" navLinkActive="active">Home</a>
     <a navLink="{{ slices.app.about.state }}">About</a>
     <a [navLink]="slices.app.map">Map</a>
   `
@@ -70,6 +70,13 @@ describe('Navigation', () => {
 
   it('should have root path', fakeAsync(() => {
     expect(location.path()).toBe('');
+  }));
+
+  it('should have active link', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[0];
+    link.click();
+    tick();
+    expect(link).toHaveClass('active');
   }));
 
   it('should navigate and change location path', fakeAsync(() => {
