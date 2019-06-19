@@ -23,6 +23,7 @@ const APP_HUB_KEY = Symbol();
     <a [navLink]="slices.app.root.state" navLinkActive="active">Home</a>
     <a navLink="{{ slices.app.about.state }}">About</a>
     <a [navLink]="slices.app.map">Map</a>
+    <a [navLink]="slices.app.user" [navParams]="{ user: 'maktarsis' }">User</a>
   `
 })
 class HeaderComponent {
@@ -40,6 +41,10 @@ const routes: Routes = ([] = [
   },
   {
     path: 'map',
+    component: HeaderComponent
+  },
+  {
+    path: ':user',
     component: HeaderComponent
   }
 ]);
@@ -100,5 +105,12 @@ describe('Navigation', () => {
     link.click();
     tick();
     expect(location.path()).toBe('/map');
+  }));
+
+  it('should navigate to dynamic route', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[3];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/maktarsis');
   }));
 });
