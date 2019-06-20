@@ -1,10 +1,9 @@
+// tslint:disable:max-classes-per-file
+// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { Sliced } from '.';
 import { createFeature, createRoot } from 'lib';
 import { PRIVATE_HUB_KEY } from '../constants';
-
-// tslint:disable:max-classes-per-file
-// tslint:disable:max-line-length
 
 describe('Sliced decorator', () => {
   describe('when create simple slice', () => {
