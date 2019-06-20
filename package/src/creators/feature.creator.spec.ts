@@ -5,9 +5,7 @@ import { reset } from '../utils/reset';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('createFeature', () => {
-  afterEach(() => {
-    reset();
-  });
+  afterEach(reset);
 
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];

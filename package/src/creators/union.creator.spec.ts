@@ -6,9 +6,7 @@ import { reset } from '../utils/reset';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('createUnion', () => {
-  afterEach(() => {
-    reset();
-  });
+  afterEach(reset);
 
   it('should create create union with one Hub', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];

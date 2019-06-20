@@ -5,9 +5,7 @@ import { PRIVATE_HUB_KEY } from '../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
-  afterEach(() => {
-    reset();
-  });
+  afterEach(reset);
 
   it('should create root', () => {
     const routes: Routes = [{ path: '' }];
