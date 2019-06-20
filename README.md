@@ -198,6 +198,7 @@ export interface AppNotes extends Root<AppChildNotes> {
 export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' });
 ```
 
+<br/>
 
 ## Slice
 `Slice` is a modular entity that contains stateful module routes.
@@ -251,6 +252,8 @@ export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
 );
 ```
 
+<br/>
+
 ## Union
 `Union` is an entity that connects several selected slices. It takes an object of keys-values. 
 Key - route name. Value - its slice.
@@ -281,6 +284,8 @@ export class ExampleComponent {
    ...
 }
 ```
+
+<br/>
 
 ## Get Slice
 Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
@@ -347,6 +352,7 @@ export class HeaderComponent {
 }
 ```
 
+<br/>
 
 ## Navigation
 **Routeshub** provides directives and functions to make your experience with navigation better.
@@ -410,16 +416,20 @@ export class ExampleComponent {
 
 ```
 
+<br/>
+
 ## Contributing
 Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 If you made a PR, make sure to update tests as appropriate and keep the examples consistent.
 
+<br/>
 
 ## Changelog
 
 Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md).
 
+<br/>
 
 ## License
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.

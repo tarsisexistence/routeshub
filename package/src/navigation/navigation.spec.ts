@@ -65,6 +65,7 @@ describe('Navigation Link Directive', () => {
 
     createRoot(routes, APP_HUB_KEY);
   }));
+
   beforeEach(() => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
@@ -72,13 +73,11 @@ describe('Navigation Link Directive', () => {
     location = TestBed.get(Location);
   });
 
-  afterEach(() => {
-    reset();
-  });
+  afterEach(reset);
 
-  it('should have root path', fakeAsync(() => {
+  it('should have root path', () => {
     expect(location.path()).toBe('');
-  }));
+  });
 
   it('should have active link', fakeAsync(() => {
     const link = fixture.debugElement.nativeElement.querySelectorAll('a')[0];
