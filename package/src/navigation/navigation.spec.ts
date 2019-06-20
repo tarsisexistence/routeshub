@@ -9,11 +9,10 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { getSlice } from '../hub';
+import { getSlice } from '../functions/hub';
 import { NavigationModule } from './navigation.module';
 import { createRoot } from '../creators/root.creator';
 import { Routes } from '@angular/router';
-import { reset } from '../utils/reset';
 
 const APP_HUB_KEY = Symbol();
 
@@ -72,8 +71,6 @@ describe('Navigation Link Directive', () => {
     fixture.detectChanges();
     location = TestBed.get(Location);
   });
-
-  afterEach(reset);
 
   it('should have root path', () => {
     expect(location.path()).toBe('');

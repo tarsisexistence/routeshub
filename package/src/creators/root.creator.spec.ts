@@ -1,12 +1,9 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
-import { reset } from '../utils/reset';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
-  afterEach(reset);
-
   it('should create root', () => {
     const routes: Routes = [{ path: '' }];
     const slice = createRoot(routes);

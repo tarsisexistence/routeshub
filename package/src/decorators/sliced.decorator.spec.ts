@@ -2,14 +2,11 @@ import { Routes } from '@angular/router';
 import { Sliced } from '.';
 import { createFeature, createRoot } from 'lib';
 import { PRIVATE_HUB_KEY } from '../constants';
-import { reset } from '../utils/reset';
 
 // tslint:disable:max-classes-per-file
 // tslint:disable:max-line-length
 
-describe('createNote', () => {
-  afterEach(reset);
-
+describe('Sliced decorator', () => {
   describe('when create simple slice', () => {
     const routes: Routes = [{ path: '' }];
     const getResult = identifier => ({
