@@ -17,7 +17,7 @@ export const setState = (parentSlice, path) => {
 /**
  * Absorbs and gives params out together
  */
-const reduceParams = (params: Params, restParams: Params[]): Params =>
+export const reduceParams = (params: Params, restParams: Params[]): Params =>
   restParams.reduce(
     (accParams: Params, param: Params): Params => ({
       ...accParams,
@@ -36,7 +36,7 @@ const handleParamsPath = (path: string, params: Params): string => {
  * Generates dynamic-ready links
  */
 // TODO: think about semantics
-const insertLinkParams = (paths: string[], params: Params): string[] =>
+export const insertLinkParams = (paths: string[], params: Params): string[] =>
   paths.map((path: string): string => handleParamsPath(path, params));
 
 /**
@@ -52,25 +52,6 @@ export const insertHrefParams = (href: string, params: Params): string =>
     const paramsVerifiedPath = handleParamsPath(path, params);
     return `${acc}/${paramsVerifiedPath}`;
   }, '');
-
-/**
- * Supports dynamic paths for array-like links
- * through route variables
- */
-export function forwardParams(
-  link: string[],
-  params?: Params,
-  ...otherParams: Params[]
-): string[] {
-  if (!params || typeof params !== 'object') {
-    return link;
-  }
-
-  const parameters =
-    otherParams.length === 0 ? params : reduceParams(params, otherParams);
-
-  return insertLinkParams(link, parameters);
-}
 
 /**
  * Supports dynamic paths for href

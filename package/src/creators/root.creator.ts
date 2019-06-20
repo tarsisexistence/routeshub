@@ -1,9 +1,10 @@
 import { Route } from '@angular/router';
 import { enhance } from '../utils/enhance';
-import { hub, nextHubValue } from '../hub';
+import { hub } from '../hub';
 import { DefaultRouteName, Slice } from '../interfaces';
 import { createNote } from './note.creator';
 import { assignCreatorArgs } from '../utils/name';
+import { nextHubValue } from '../functions/hub';
 
 /**
  * Creates main parent routes
