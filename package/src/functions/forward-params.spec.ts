@@ -38,4 +38,11 @@ describe('forwardParams', () => {
     const state = forwardParams(appSlice.map.state, { map: 'world' });
     expect(state).toEqual(['/', 'maps', 'world']);
   });
+
+  it('should return new parameterized state with reverted the same double path', () => {
+    const appRoutes: Routes = [{ path: ':map/map' }];
+    const appSlice = createRoot(appRoutes);
+    const state = forwardParams(appSlice.map.state, { map: 'world' });
+    expect(state).toEqual(['/', 'world', 'map']);
+  });
 });
