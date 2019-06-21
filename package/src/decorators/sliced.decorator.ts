@@ -1,5 +1,6 @@
 import { take } from 'rxjs/operators';
-import { getSlice, hub } from '../hub';
+import { hub } from '../hub';
+import { getSlice } from '../functions/hub';
 
 export function Sliced<T = any>(
   arg: string | symbol

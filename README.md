@@ -8,9 +8,8 @@ A **route manager** and pattern for **[Angular]**
 * **Navigation.** Provides declarative experience of navigation.
 * **Fast.** In addition to speeding up development, it works as fast as it does without it.
 * **Pluggable.** Engineered as a plug-in. Designed to be added at any time during the development process.
-* **Human-understandable.** Supports code suggestions in the editors (with additional forces).
 * **Pattern.** Provides unified approach to manage the routing of the entire application.
-* **Small.** ~3kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
+* **Small.** ~3.5kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
 
 Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 
@@ -199,6 +198,7 @@ export interface AppNotes extends Root<AppChildNotes> {
 export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' });
 ```
 
+<br/>
 
 ## Slice
 `Slice` is a modular entity that contains stateful module routes.
@@ -252,6 +252,8 @@ export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
 );
 ```
 
+<br/>
+
 ## Union
 `Union` is an entity that connects several selected slices. It takes an object of keys-values. 
 Key - route name. Value - its slice.
@@ -282,6 +284,8 @@ export class ExampleComponent {
    ...
 }
 ```
+
+<br/>
 
 ## Get Slice
 Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
@@ -348,6 +352,7 @@ export class HeaderComponent {
 }
 ```
 
+<br/>
 
 ## Navigation
 **Routeshub** provides directives and functions to make your experience with navigation better.
@@ -411,16 +416,20 @@ export class ExampleComponent {
 
 ```
 
+<br/>
+
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate and keep the examples consistent.
+If you made a PR, make sure to update tests as appropriate and keep the examples consistent.
 
+<br/>
 
 ## Changelog
 
 Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md).
 
+<br/>
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.

@@ -1,0 +1,122 @@
+// tslint:disable:max-line-length
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { RouterTestingModule } from '@angular/router/testing';
+import {
+  async,
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick
+} from '@angular/core/testing';
+import { getSlice } from '../functions/hub';
+import { NavigationModule } from './navigation.module';
+import { createRoot } from '../creators/root.creator';
+import { Routes } from '@angular/router';
+
+const APP_HUB_KEY = Symbol();
+
+@Component({
+  selector: 'app-header',
+  template: `
+    <a [navLink]="app.root.state" navLinkActive="active">Home</a>
+    <a navLink="{{ app.about.state }}">About</a>
+    <a [navLink]="app.map">Map</a>
+    <a [navLink]="app.user" [navParams]="{ user: 'maktarsis' }">User</a>
+    <a [navLink]="app.id" [navParams]="{ id: '123' }">User</a>
+  `
+})
+class TestComponent {
+  public app = getSlice(APP_HUB_KEY);
+}
+
+describe('Navigation Link Directive', () => {
+  let location: Location;
+  let component: TestComponent;
+  let fixture: ComponentFixture<TestComponent>;
+  const routes: Routes = ([] = [
+    {
+      path: '',
+      component: TestComponent
+    },
+    {
+      path: 'about',
+      component: TestComponent
+    },
+    {
+      path: 'map',
+      component: TestComponent
+    },
+    {
+      path: ':user',
+      component: TestComponent
+    },
+    {
+      path: 'users/:id',
+      component: TestComponent
+    }
+  ]);
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestComponent],
+      imports: [NavigationModule, RouterTestingModule.withRoutes(routes)]
+    }).compileComponents();
+
+    createRoot(routes, APP_HUB_KEY);
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    location = TestBed.get(Location);
+  });
+
+  it('should have root path', () => {
+    expect(location.path()).toBe('');
+  });
+
+  it('should have active link', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[0];
+    link.click();
+    tick();
+    expect(link).toHaveClass('active');
+  }));
+
+  it('should navigate and change location path', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[1];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/about');
+  }));
+
+  it('should navigate and change location path and return', fakeAsync(() => {
+    const links = fixture.debugElement.nativeElement.querySelectorAll('a');
+    links[1].click();
+    tick();
+    links[0].click();
+    tick();
+    expect(location.path()).toBe('/');
+  }));
+
+  it('should navigate without state prop with square brackets', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[2];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/map');
+  }));
+
+  it('should navigate to route with dynamic path', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[3];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/maktarsis');
+  }));
+
+  it('should navigate to route with dynamic double path', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[4];
+    link.click();
+    tick();
+    expect(location.path()).toBe('/users/123');
+  }));
+});

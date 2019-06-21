@@ -14,18 +14,6 @@ export const setState = (parentSlice, path) => {
     : setNotEmptyPath(parentSlice.state, path);
 };
 
-/**
- * Absorbs and gives params out together
- */
-const reduceParams = (params: Params, restParams: Params[]): Params =>
-  restParams.reduce(
-    (accParams: Params, param: Params): Params => ({
-      ...accParams,
-      ...param
-    }),
-    params
-  );
-
 const handleParamsPath = (path: string, params: Params): string => {
   const param = path.slice(1);
   return path[0] === ':' && Boolean(params[param]) ? params[param] : path;
@@ -36,7 +24,7 @@ const handleParamsPath = (path: string, params: Params): string => {
  * Generates dynamic-ready links
  */
 // TODO: think about semantics
-const insertLinkParams = (paths: string[], params: Params): string[] =>
+export const insertLinkParams = (paths: string[], params: Params): string[] =>
   paths.map((path: string): string => handleParamsPath(path, params));
 
 /**
@@ -54,39 +42,13 @@ export const insertHrefParams = (href: string, params: Params): string =>
   }, '');
 
 /**
- * Supports dynamic paths for array-like links
- * through route variables
- */
-export function forwardParams(
-  link: string[],
-  params?: Params,
-  ...otherParams: Params[]
-): string[] {
-  if (!params || typeof params !== 'object') {
-    return link;
-  }
-
-  const parameters =
-    otherParams.length === 0 ? params : reduceParams(params, otherParams);
-
-  return insertLinkParams(link, parameters);
-}
-
-/**
  * Supports dynamic paths for href
  * through route variables
  */
-export function forwardHrefParams(
-  href: string,
-  params?: Params,
-  ...otherParams: Params[]
-): string {
+export function forwardHrefParams(href: string, params?: Params): string {
   if (!params || typeof params !== 'object') {
     return href;
   }
 
-  const parameters =
-    otherParams.length === 0 ? params : reduceParams(params, otherParams);
-
-  return insertHrefParams(href, parameters);
+  return insertHrefParams(href, params);
 }

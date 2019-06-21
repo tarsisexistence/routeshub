@@ -1,14 +1,9 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';
-import { reset } from '../utils/reset';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('createFeature', () => {
-  afterEach(() => {
-    reset();
-  });
-
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const appSlice = createRoot(appRoutes);

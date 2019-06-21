@@ -1,3 +1,10 @@
+# 2.1.3 2019-06-21
+
+- insignificant api changes
+- fixed issues with typing of getter functions
+- covered with tests all api
+
+
 # 2.1.2 2019-06-17
 
 - improved documentation

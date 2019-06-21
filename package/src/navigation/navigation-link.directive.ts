@@ -9,9 +9,9 @@ import {
 import { Router } from '@angular/router';
 import { ATTRS, QueryParamsHandling } from './helpers';
 import { Params } from '../interfaces';
-import { forwardParams } from '../utils/state';
 import { getRouteLink } from '../utils/link';
 import { checkAttrActivity } from '../utils/helpers';
+import { forwardParams } from '../functions/forward-params';
 
 @Directive({
   selector: `:not(a):not(area)[${ATTRS.LINK}]`

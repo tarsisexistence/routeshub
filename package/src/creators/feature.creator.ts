@@ -1,9 +1,8 @@
 import { Route } from '@angular/router';
-import { DefaultRouteName, Slice, Structure } from '../interfaces';
+import { Slice, Structure } from '../interfaces';
 import { hub, nextHubValue } from '../hub';
 import { createNote } from './note.creator';
 import { enhance } from '../utils/enhance';
-import { assignCreatorArgs } from '../utils/name';
 
 /**
  * Creates a feature route

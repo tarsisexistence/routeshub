@@ -2,9 +2,10 @@ import { Directive, HostBinding, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ATTRS, QueryParamsHandling } from './helpers';
 import { Params } from '../interfaces';
-import { forwardParams, insertHrefParams } from '../utils/state';
+import { insertHrefParams } from '../utils/state';
 import { getRouteHref, getRouteLink } from '../utils/link';
 import { checkAttrActivity } from '../utils/helpers';
+import { forwardParams } from '../functions/forward-params';
 
 @Directive({
   selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`

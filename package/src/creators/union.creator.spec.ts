@@ -2,14 +2,9 @@ import { Routes } from '@angular/router';
 import { createFeature } from './feature.creator';
 import { createRoot } from './root.creator';
 import { createUnion } from './union.creator';
-import { reset } from '../utils/reset';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('createUnion', () => {
-  afterEach(() => {
-    reset();
-  });
-
   it('should create create union with one Hub', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];
     const app = createRoot(routes);
