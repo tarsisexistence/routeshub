@@ -13,9 +13,16 @@ import { Vehicle } from 'example-app/app/core/interfaces/vehicle.interface';
 
 @Component({
   selector: 'app-bolid',
-  templateUrl: './bolid.component.html',
-  styleUrls: ['./bolid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ul class="vehicles">
+      <app-vehicle
+        *ngFor="let bolid of vehicles; trackBy: identify"
+        [vehicle]="bolid"
+      >
+      </app-vehicle>
+    </ul>
+  `
 })
 export class BolidComponent implements OnInit, OnDestroy {
   public vehicles: Vehicle[];
