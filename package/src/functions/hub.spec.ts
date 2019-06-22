@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { getHubSlices, getSlice } from './';
+import { getHubSlices, getSlice } from './hub';
 import { PRIVATE_HUB_KEY } from '../constants';
 import { createFeature, createRoot } from '../creators';
 
