@@ -254,39 +254,6 @@ export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
 
 <br/>
 
-## Union
-`Union` is an entity that connects several selected slices. It takes an object of keys-values. 
-Key - route name. Value - its slice.
-
-It allows performing flexible development steps:
-```typescript
-export const exampleUnion = createUnion({
-  app: appSlice,
-  about: aboutSlice,
-});
-```
-
-```typescript
-...
-
-@Component({
-  ...
-})
-export class ExampleComponent {
-  ...
-  
-  // or even declare in the straightforward way
-  public union = createUnion({ 
-    app: appSlice, 
-    about: aboutSlice
-   });
-   
-   ...
-}
-```
-
-<br/>
-
 ## Get Slice
 Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
 There are several ways to get a slice:
@@ -326,22 +293,6 @@ export class HeaderComponent {
 }
 ```
 
--  **Union** - This is similar to slice const way, but creates a union from any quantity of slices.
-```typescript
-@Component({
-  ...
-})
-export class HeaderComponent {
-    public union = createUnion({
-      app: appSlice,
-      about: aboutSlice,
-      automobiles: automobileSlice,
-      bikes: bikeSlice,
-      bolids: bolidSlice
-    });
-}
-
-```
 -  **getHubSlices** - This is a function that returns all declared slices in the project.
 ```typescript
 @Component({
@@ -395,7 +346,6 @@ export class AppModule {
 
 ### forwardParams
 A function that inserts parameters into route's state and outputs a ready-made dynamic state. 
-It allows you to forward as many object parameters as you like which means that you can pass more than one object with parameters. 
 
 ```typescript
 ...

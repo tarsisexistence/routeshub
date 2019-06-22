@@ -1,4 +1,4 @@
-export { createRoot, createFeature, createNote, createUnion } from './creators';
+export { createRoot, createFeature, createNote } from './creators';
 
 export { Sliced } from './decorators';
 

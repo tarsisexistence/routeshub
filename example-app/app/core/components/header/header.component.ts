@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  createUnion,
   forwardParams,
   getHubSlices,
   getSlice,
@@ -41,7 +40,6 @@ export class HeaderComponent implements OnInit {
    * for template access reason
    */
   public hub: Slices<Hub>;
-  public union;
 
   // getting slice from function by key (slice name is available too)
   public automobiles = getSlice<AutomobileNotes>(AUTOMOBILE_HUB_KEY);
@@ -61,24 +59,11 @@ export class HeaderComponent implements OnInit {
      * Getting access to use slices in template
      */
     this.hub = getHubSlices<Hub>();
-
-    /**
-     * creating union to get access
-     * and pick slices on demand
-     * as union
-     */
-    this.union = createUnion({
-      app: appSlice,
-      about: aboutSlice,
-      automobiles: automobileSlice,
-      bikes: bikeSlice,
-      bolids: bolidSlice
-    });
   }
 
   public freshBolids(): void {
     this.router
-      .navigate(forwardParams(this.union.bolids.year.state, { year: 2019 }))
+      .navigate(forwardParams(this.hub.bolids.year.state, { year: 2019 }))
       .catch(console.error);
   }
 }
