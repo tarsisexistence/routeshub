@@ -2,7 +2,7 @@
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { Sliced } from '.';
-import { createFeature, createRoot } from 'lib';
+import { createFeature, createRoot } from '../creators';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 describe('Sliced decorator', () => {
