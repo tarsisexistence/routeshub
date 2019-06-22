@@ -17,11 +17,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "package/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "tsConfig": "package/configs/tsconfig.spec.json"
+            "configPath": "./configs/jest.config.js"
           }
         },
         "lint": {
@@ -117,26 +115,8 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "example-app/test.ts",
-            "tsConfig": "example-app/tsconfig.spec.json",
-            "karmaConfig": "./karma.conf.js",
-            "styles": [
-              "example-app/styles.scss",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
-            ],
-            "scripts": [],
-            "assets": [
-              "example-app/favicon.ico",
-              "example-app/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
-            ]
-          }
+          "builder": "@angular-builders/jest:run",
+          "options": {}
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
