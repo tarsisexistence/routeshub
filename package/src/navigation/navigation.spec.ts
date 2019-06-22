@@ -80,7 +80,7 @@ describe('Navigation Link Directive', () => {
     const link = fixture.debugElement.nativeElement.querySelectorAll('a')[0];
     link.click();
     tick();
-    expect(link).toHaveClass('active');
+    expect(link.classList.contains('active')).toBe(true);
   }));
 
   it('should navigate and change location path', fakeAsync(() => {
