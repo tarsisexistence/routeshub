@@ -1,7 +1,7 @@
 // tslint:disable:max-classes-per-file
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { Sliced } from '.';
+import { Sliced } from './sliced.decorator';
 import { createFeature, createRoot } from '../creators';
 import { PRIVATE_HUB_KEY } from '../constants';
 
