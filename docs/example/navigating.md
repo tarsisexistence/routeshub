@@ -29,7 +29,6 @@ As was mentioned previously, there are some different approaches of how you can 
 * decorator @Sliced - apply the decorator on component property  \(preferable\)
 * getSlice - function that works as well as @Sliced decorator.
 * separately - get access for each slice
-* unions - declare slices entity on demand
 * hub - declare and get access for all slices
 
 ### @Sliced decorator
@@ -132,45 +131,6 @@ export class HeaderComponent {
   profile(): void {
     const url = forwardParams(this.app.id.state, { id: 0 });
     this.router.navigate(url).catch(console.error);
-  }
-}
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-### Union
-
-{% code-tabs %}
-{% code-tabs-item title="header.component.ts" %}
-```typescript
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { createUnion } from 'routeshub';
-import { appSlice } from '../../routing/hub/app.routes';
-import { authSlice } from '../../auth/hub/auth.rroutes';
-
-@Component({
-  selector: 'app-header',
-  template: `  
-  <nav>
-    <a navLink="{{ union.app.root.state }}">Home</a>
-    <a [navLink]="union.auth.signUp.state">Sign Up</a>
-    <button (click)=profile()>Profile</button>
-  </nav>
-`
-})
-export class HeaderComponent {
-  public union = createUnion({
-      app: appSlice,
-      auth: authSlice
-    });
-  
-  constructor(private router: Router) {}
-  
-  navigateSomewhere(): void {
-    this.router
-      .navigate(forwardParams(this.union.auth.id.state, { id: 1 }))
-      .catch(console.error);
   }
 }
 ```
