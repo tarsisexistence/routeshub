@@ -20,7 +20,7 @@ export const bolidRoutes = [
       )
   },
   {
-    path: ':year',
+    path: 'engine/:year',
     pathMatch: 'full',
     component: BolidComponent,
     resolve: { vehicles: VehiclesResolver }

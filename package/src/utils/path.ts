@@ -1,17 +1,22 @@
 /**
- * Prevents to record empty state paths
+ * removes empty or slash paths
  */
-export const setNotEmptyPath = (state: string[], path: string): string[] =>
-  path === '' ? state : [...state, path];
-
 export const setOnlyPaths = (link: string[]): string[] =>
   link.filter((path: string) => path.length > 0 && path !== '/');
 
 /**
  * Prevents to record multi path in the state
  */
-export const transformPathToState = (path: string): string[] => {
+export const transformPathToState = (
+  path: string,
+  state: string[] = ['/']
+): string[] => {
   const rawPaths = path.split('/');
   const paths = setOnlyPaths(rawPaths);
-  return ['/', ...paths];
+  return state.concat(paths);
 };
+
+/**
+ * checks a string on wildcard path
+ */
+export const isWildcard = (path: string) => path === '**';

@@ -22,7 +22,7 @@ export function enhance<R, C = {}>(
     (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {
       const { children, path, name } = routes[key];
       const route = {
-        parentId: parentSlice === null ? null : parentSlice.id,
+        parentId: parentSlice && parentSlice.id,
         state: setState(parentSlice, path),
         id: indexer.next().value,
         path,

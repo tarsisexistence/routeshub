@@ -1,17 +1,17 @@
 import { Params } from '../interfaces';
-import { setNotEmptyPath, transformPathToState } from './path';
+import { isWildcard, transformPathToState } from './path';
 
 /**
  * Assigns a value based on the parent's  state and a current path
  */
 export const setState = (parentSlice, path) => {
-  if (path[0] === '*') {
+  if (isWildcard(path)) {
     return [path];
   }
 
   return parentSlice === null
     ? transformPathToState(path)
-    : setNotEmptyPath(parentSlice.state, path);
+    : transformPathToState(path, parentSlice.state);
 };
 
 const handleParamsPath = (path: string, params: Params): string => {
@@ -40,15 +40,3 @@ export const insertHrefParams = (href: string, params: Params): string =>
     const paramsVerifiedPath = handleParamsPath(path, params);
     return `${acc}/${paramsVerifiedPath}`;
   }, '');
-
-/**
- * Supports dynamic paths for href
- * through route variables
- */
-export function forwardHrefParams(href: string, params?: Params): string {
-  if (!params || typeof params !== 'object') {
-    return href;
-  }
-
-  return insertHrefParams(href, params);
-}

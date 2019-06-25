@@ -1,4 +1,5 @@
 import { DefaultRouteName } from '../interfaces';
+import { isWildcard } from './path';
 
 function fixPathName(path: string): string {
   let newPath = '';
@@ -37,13 +38,16 @@ export function setRouteName(
 ): string {
   if (path === '') {
     return nameOptions.root || 'root';
-  } else if (path === '**') {
+  } else if (isWildcard(path)) {
     return nameOptions.wildcard || 'wildcard';
   } else {
     return fixPathName(path);
   }
 }
 
+/**
+ * assigns create fn options properly
+ */
 export function assignCreatorArgs<R>(
   args: (symbol | DefaultRouteName)[],
   name: string

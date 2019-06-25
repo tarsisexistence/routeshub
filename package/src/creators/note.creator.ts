@@ -13,7 +13,7 @@ export const createNote = <R = {}>(
     (acc: R, route: Route): R => {
       const note: Note = {
         path: route.path,
-        name: route['name'] || setRouteName(route.path, nameOptions)
+        name: setRouteName(route.path, nameOptions)
       };
 
       if (route.children) {
