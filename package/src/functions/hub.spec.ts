@@ -2,8 +2,9 @@ import { Routes } from '@angular/router';
 import { getHubSlices, getSlice } from './hub';
 import { PRIVATE_HUB_KEY } from '../constants';
 import { createFeature, createRoot } from '../creators';
+import { connectFeatures } from '../functions/connect-features';
 
-describe('Hub functions', () => {
+describe('Hub', () => {
   const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
   const mapRoutes: Routes = [{ path: '' }];
 
@@ -43,8 +44,9 @@ describe('Hub functions', () => {
     });
 
     it('should create hub with root and feature', () => {
-      const appSlice = createRoot(appRoutes);
-      createFeature(appSlice.map, mapRoutes);
+      createRoot(appRoutes);
+      const mapSlice = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapSlice });
       expect(getHubSlices()).toEqual({
         app: {
           root: {
@@ -154,7 +156,8 @@ describe('Hub functions', () => {
 
     it('should get slice for feature creator and return created slice', () => {
       createRoot(appRoutes);
-      createFeature(getSlice('app').map, mapRoutes);
+      const mapSlice = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapSlice });
 
       expect(getSlice('map')).toEqual({
         root: {

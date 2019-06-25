@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { Sliced } from './sliced.decorator';
 import { createFeature, createRoot } from '../creators';
 import { PRIVATE_HUB_KEY } from '../constants';
+import { connectFeatures } from '../functions/connect-features';
 
 describe('Sliced decorator', () => {
   describe('when create simple slice', () => {
@@ -62,8 +63,9 @@ describe('Sliced decorator', () => {
     const mapRoutes: Routes = [{ path: '' }];
 
     it('should get feature slice by name', () => {
-      const appSlice = createRoot(appRoutes);
-      createFeature(appSlice.map, mapRoutes);
+      createRoot(appRoutes);
+      const mapSlice = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapSlice });
 
       class Example {
         @Sliced('map')
@@ -75,9 +77,12 @@ describe('Sliced decorator', () => {
     });
 
     it('should get feature slice by key', () => {
+      const APP_HUB_KEY = Symbol();
       const MAP_HUB_KEY = Symbol();
-      const appSlice = createRoot(appRoutes);
-      createFeature(appSlice.map, mapRoutes, MAP_HUB_KEY);
+
+      createRoot(appRoutes, APP_HUB_KEY);
+      const mapSlice = createFeature(mapRoutes, MAP_HUB_KEY);
+      connectFeatures(APP_HUB_KEY, { map: mapSlice });
 
       class Example {
         @Sliced(MAP_HUB_KEY)

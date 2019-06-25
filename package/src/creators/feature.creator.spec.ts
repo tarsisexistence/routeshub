@@ -2,13 +2,16 @@ import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';
 import { PRIVATE_HUB_KEY } from '../constants';
+import { connectFeatures } from '../functions/connect-features';
+import { getSlice } from '../functions/hub';
 
 describe('createFeature', () => {
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appSlice = createRoot(appRoutes);
+    createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }];
-    const mapSlice = createFeature(appSlice.map, mapRoutes);
+    const mapSlice = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapSlice });
     const result = {
       root: {
         id: 3,
@@ -20,19 +23,19 @@ describe('createFeature', () => {
       },
       [PRIVATE_HUB_KEY]: 'map'
     };
-    expect(mapSlice).toEqual(result);
+    expect(getSlice('map')).toEqual(result);
   });
 
   it('should create feature with a few routes', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appSlice = createRoot(appRoutes);
-
+    createRoot(appRoutes);
     const mapRoutes: Routes = [
       { path: '' },
       { path: 'location' },
       { path: ':profileId' }
     ];
-    const mapSlice = createFeature(appSlice.map, mapRoutes);
+    const mapSlice = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapSlice });
     const result = {
       root: {
         id: 3,
@@ -60,16 +63,18 @@ describe('createFeature', () => {
       },
       [PRIVATE_HUB_KEY]: 'map'
     };
-    expect(mapSlice).toEqual(result);
+    expect(getSlice('map')).toEqual(result);
   });
 
-  it('should create feature with a few routes', () => {
+  it('should create feature with a few another features', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const appSlice = createRoot(appRoutes);
+    createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapSlice = createFeature(appSlice.map, mapRoutes);
+    const mapSlice = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapSlice });
     const locationRoutes: Routes = [{ path: '' }];
-    const locationSlice = createFeature(mapSlice.location, locationRoutes);
+    const locationSlice = createFeature(locationRoutes);
+    connectFeatures('map', { location: locationSlice });
     const result = {
       root: {
         id: 5,
@@ -81,6 +86,6 @@ describe('createFeature', () => {
       },
       [PRIVATE_HUB_KEY]: 'location'
     };
-    expect(locationSlice).toEqual(result);
+    expect(getSlice('location')).toEqual(result);
   });
 });
