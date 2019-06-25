@@ -2,7 +2,12 @@ export { createRoot, createFeature, createNote } from './creators';
 
 export { Sliced } from './decorators';
 
-export { forwardParams, getHubSlices, getSlice } from './functions';
+export {
+  connectFeatures,
+  forwardParams,
+  getHubSlices,
+  getSlice
+} from './functions';
 
 export { hub } from './hub';
 
