@@ -20,4 +20,4 @@ export interface Hub {
  * Declares hubs which contains
  * all existed slices in the project
  */
-export const hub: Slices<Hub> = getHubSlices<Hub>();
+export const hub = getHubSlices<Hub>();

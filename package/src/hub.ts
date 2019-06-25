@@ -1,12 +1,14 @@
 import { BehaviorSubject } from 'rxjs';
-import { Slice } from './interfaces/slice.interfaces';
+import { Slice, Slices } from './interfaces/slice.interfaces';
 import { entitify } from './utils/entityfy';
 import { PRIVATE_HUB_KEY } from './constants';
 
 /**
  * stores routes states at the same level
  */
-export const hub = new BehaviorSubject(null);
+export const hub: BehaviorSubject<Slices<any>> = new BehaviorSubject<
+  Slices<any>
+>(null);
 
 /**
  * Returns the next hubs value
