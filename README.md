@@ -151,7 +151,7 @@ export const routes: Routes = [
   {
     path: 'person/:person-age', // name => personAge
     ...
-  }
+  },
   {
     path: '**',  // name => wildcard (by default with possibility to customize). In example we'll rename to 'notFound'
     redirectTo: ''

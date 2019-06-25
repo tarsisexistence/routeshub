@@ -9,7 +9,7 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { getSlice } from '../functions/hub';
+import { getSlice } from '../functions/getSlice';
 import { NavigationModule } from './navigation.module';
 import { createRoot } from '../creators/root.creator';
 import { Routes } from '@angular/router';
