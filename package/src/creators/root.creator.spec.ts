@@ -81,6 +81,103 @@ describe('createRoot', () => {
     expect(slice).toEqual(result);
   });
 
+  it('should create root with dynamic multi paths', () => {
+    const routes: Routes = [
+      { path: '' },
+      { path: 'users/:user' },
+      { path: ':country' },
+      { path: 'place/road' }
+    ];
+    const slice = createRoot(routes);
+    const result = {
+      root: {
+        id: 0,
+        parentId: null,
+        state: ['/'],
+        path: '',
+        name: 'root',
+        children: null
+      },
+      user: {
+        id: 1,
+        parentId: null,
+        state: ['/', 'users', ':user'],
+        path: 'users/:user',
+        name: 'user',
+        children: null
+      },
+      country: {
+        id: 2,
+        parentId: null,
+        state: ['/', ':country'],
+        path: ':country',
+        name: 'country',
+        children: null
+      },
+      road: {
+        id: 3,
+        parentId: null,
+        state: ['/', 'place', 'road'],
+        path: 'place/road',
+        name: 'road',
+        children: null
+      },
+      [PRIVATE_HUB_KEY]: 'app'
+    };
+    expect(slice).toEqual(result);
+  });
+
+  it('should create root with dynamic multi paths in children', () => {
+    const routes: Routes = [
+      {
+        path: '',
+        children: [
+          { path: '' },
+          { path: 'users/:user' },
+          { path: ':country' },
+          { path: 'place/road' }
+        ]
+      }
+    ];
+    const slice = createRoot(routes);
+    const result = {
+      root: {
+        id: 1,
+        parentId: null,
+        state: ['/'],
+        path: '',
+        name: 'root',
+        children: null
+      },
+      user: {
+        id: 2,
+        parentId: 1,
+        state: ['/', 'users', ':user'],
+        path: 'users/:user',
+        name: 'user',
+        children: null
+      },
+      country: {
+        id: 3,
+        parentId: 1,
+        state: ['/', ':country'],
+        path: ':country',
+        name: 'country',
+        children: null
+      },
+      road: {
+        id: 4,
+        parentId: 1,
+        state: ['/', 'place', 'road'],
+        path: 'place/road',
+        name: 'road',
+        children: null
+      },
+      [PRIVATE_HUB_KEY]: 'app'
+    };
+    expect(slice).toEqual(result);
+  });
+
   it('should create root with routes and children', () => {
     // TODO: think about redundant children
     const routes: Routes = [
