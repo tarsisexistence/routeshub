@@ -1,9 +1,9 @@
 import { getHubSlices, Slices } from 'lib';
-import { AppChildNotes, AppNotes } from './hub/app.notes';
-import { BolidNotes } from '../views/bolid/hub/bolid.notes';
-import { BikeNotes } from '../views/bike/hub/bike.notes';
-import { AutomobileNotes } from '../views/automobile/hub/automobile.notes';
-import { AboutNotes } from '../views/about/hub/about.notes';
+import { AppChildNotes, AppNotes } from './hub';
+import { BolidNotes } from '../views/bolid/hub';
+import { BikeNotes } from '../views/bike/hub';
+import { AutomobileNotes } from '../views/automobile/hub';
+import { AboutNotes } from '../views/about/hub';
 
 /**
  * Describes the project's hubs

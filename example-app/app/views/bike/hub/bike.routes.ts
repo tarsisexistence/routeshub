@@ -1,12 +1,9 @@
-import { ModuleWithProviders } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { createFeature, Slice } from 'lib';
+import { createFeature } from 'lib';
 import { BikeComponent } from '../container/bike.component';
 import { VehiclesResolver } from '../../../routing/resolvers/vehicles.resolver';
-import { appSlice } from '../../../routing/hub/app.routes';
 import { BIKE_HUB_KEY, BikeNotes } from './bike.notes';
 
-export const routes = [
+export const bikeRoutes = [
   {
     path: '',
     component: BikeComponent,
@@ -14,10 +11,4 @@ export const routes = [
   }
 ];
 
-export const bikeRouting: ModuleWithProviders = RouterModule.forChild(routes);
-
-export const bikeSlice: Slice<BikeNotes> = createFeature<BikeNotes>(
-  appSlice.bikes,
-  routes,
-  BIKE_HUB_KEY
-);
+export const bikeSlice = createFeature<BikeNotes>(bikeRoutes, BIKE_HUB_KEY);

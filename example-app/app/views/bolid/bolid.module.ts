@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { bolidRoutes } from './hub/bolid.routes';
+import { bolidRoutes } from './hub';
 import { SharedModule } from '../../shared/shared.module';
 import { BolidComponent } from './container/bolid.component';
 

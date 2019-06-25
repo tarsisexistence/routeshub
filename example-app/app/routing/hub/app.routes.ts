@@ -1,8 +1,14 @@
 import { Routes } from '@angular/router';
-import { createRoot, Slice } from 'lib';
+
+import { connectFeatures, createRoot, Slice } from 'lib';
+
 import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '../../core/containers/view/view.component';
 import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.notes';
+import { aboutSlice } from '../../views/about/hub';
+import { automobileSlice } from '../../views/automobile/hub';
+import { bolidSlice } from '../../views/bolid/hub';
+import { bikeSlice } from '../../views/bike/hub';
 
 /**
  * Declares routes on App level
@@ -65,3 +71,10 @@ export const appSlice: Slice<AppNotes, AppChildNotes> = createRoot<
   AppNotes,
   AppChildNotes
 >(routes, APP_HUB_KEY);
+
+connectFeatures<AppNotes, AppChildNotes>(APP_HUB_KEY, {
+  about: aboutSlice,
+  automobiles: automobileSlice,
+  bikes: bikeSlice,
+  bolids: bolidSlice
+});

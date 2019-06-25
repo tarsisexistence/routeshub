@@ -2,7 +2,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
-import { routes } from './hub/app.routes';
+import { routes } from './hub';
 
 /**
  * Routing configuration
