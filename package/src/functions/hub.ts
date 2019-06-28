@@ -5,7 +5,7 @@ import { hub } from '../hub';
 /**
  * returns aggregated hubs
  */
-export const getHubSlices = <T = any, U = Slices<T>>(): U => hub.getValue();
+export const getHubSlices = <T = any>(): Slices<T> => hub.getValue();
 
 /**
  * returns declared slice

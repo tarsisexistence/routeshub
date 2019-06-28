@@ -26,6 +26,26 @@ describe('createFeature', () => {
     expect(getSlice('map')).toEqual(result);
   });
 
+  it('should create feature with one route with different name options', () => {
+    const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
+    createRoot(appRoutes, { root: 'rootRoute' });
+    const mapRoutes: Routes = [{ path: '' }];
+    const mapSlice = createFeature(mapRoutes, { root: 'home' });
+    connectFeatures('app', { map: mapSlice });
+    const result = {
+      home: {
+        id: 3,
+        parentId: 2,
+        state: ['/', 'map'],
+        path: '',
+        name: 'home',
+        children: null
+      },
+      [PRIVATE_HUB_KEY]: 'map'
+    };
+    expect(getSlice('map')).toEqual(result);
+  });
+
   it('should create feature with a few routes', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     createRoot(appRoutes);
