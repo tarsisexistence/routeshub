@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+// tslint:disable:max-line-length
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   forwardParams,
@@ -10,29 +11,14 @@ import {
 } from 'lib';
 
 import { Hub } from '../../../routing/routing.hub';
-import { appSlice } from '../../../routing/hub/app.routes';
-import { aboutSlice } from '../../../views/about/hub/about.routes';
-
-import {
-  APP_HUB_KEY,
-  AppChildNotes,
-  AppNotes
-} from '../../../routing/hub/app.notes';
-// tslint:disable-next-line:max-line-length
-import { automobileSlice } from '../../../views/automobile/hub/automobile.routes';
-import { bikeSlice } from '../../../views/bike/hub/bike.routes';
-import { bolidSlice } from '../../../views/bolid/hub/bolid.routes';
-import { AboutNotes } from '../../../views/about/hub/about.notes';
-import {
-  AUTOMOBILE_HUB_KEY,
-  AutomobileNotes
-} from '../../../views/automobile/hub/automobile.notes';
+import { APP_HUB_KEY, AppChildNotes, AppNotes } from '../../../routing/hub';
+import { AboutNotes } from '../../../views/about/hub';
+import { CAR_HUB_KEY, CarNotes } from '../../../views/car/hub';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   /**
@@ -42,7 +28,7 @@ export class HeaderComponent implements OnInit {
   public hub: Slices<Hub>;
 
   // getting slice from function by key (slice name is available too)
-  public automobiles = getSlice<AutomobileNotes>(AUTOMOBILE_HUB_KEY);
+  public car = getSlice<CarNotes>(CAR_HUB_KEY);
 
   // getting slice by key
   @Sliced(APP_HUB_KEY)
@@ -61,9 +47,13 @@ export class HeaderComponent implements OnInit {
     this.hub = getHubSlices<Hub>();
   }
 
-  public freshBolids(): void {
+  /**
+   * navigation through
+   * router.navigate and forwardParams
+   */
+  public freshCar(): void {
     this.router
-      .navigate(forwardParams(this.hub.bolids.year.state, { year: 2019 }))
+      .navigate(forwardParams(this.hub.car.year.state, { year: 2019 }))
       .catch(console.error);
   }
 }

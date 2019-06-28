@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { aboutRoutes } from './hub';
-import { AboutComponent } from './container/about.component';
+import { AboutComponent } from './components/about.component';
 
 @NgModule({
   declarations: [AboutComponent],

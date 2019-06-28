@@ -1,14 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { connectFeatures, createRoot, Slice } from 'lib';
+import { connectFeatures, createRoot } from 'lib';
 
-import { VehiclesResolver } from '../resolvers/vehicles.resolver';
 import { ViewComponent } from '../../core/containers/view/view.component';
 import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.notes';
 import { aboutSlice } from '../../views/about/hub';
-import { automobileSlice } from '../../views/automobile/hub';
-import { bolidSlice } from '../../views/bolid/hub';
-import { bikeSlice } from '../../views/bike/hub';
+import { carSlice } from '../../views/car/hub';
 
 /**
  * Declares routes on App level
@@ -20,13 +17,18 @@ export const routes: Routes = [
   {
     path: '',
     component: ViewComponent,
-    resolve: { types: VehiclesResolver },
-    runGuardsAndResolvers: 'always',
     children: [
       {
         path: '',
         redirectTo: 'about',
         pathMatch: 'full'
+      },
+      {
+        path: 'lazy',
+        loadChildren: () =>
+          import('example-app/app/views/+lazy/lazy.module').then(
+            m => m.LazyModule
+          )
       },
       {
         path: 'about',
@@ -36,45 +38,20 @@ export const routes: Routes = [
           )
       },
       {
-        path: 'automobiles',
+        path: 'car',
         loadChildren: () =>
-          import('example-app/app/views/automobile/automobile.module').then(
-            m => m.AutomobileModule
-          )
-      },
-      {
-        path: 'bikes',
-        loadChildren: () =>
-          import('example-app/app/views/bike/bike.module').then(
-            m => m.BikeModule
-          )
-      },
-      {
-        path: 'bolids',
-        loadChildren: () =>
-          import('example-app/app/views/bolid/bolid.module').then(
-            m => m.BolidModule
-          )
+          import('example-app/app/views/car/car.module').then(m => m.CarModule)
       }
     ]
-  },
-  {
-    path: '**',
-    redirectTo: ''
   }
 ];
 
 /**
  * Creates stateful named App routes
  */
-export const appSlice: Slice<AppNotes, AppChildNotes> = createRoot<
-  AppNotes,
-  AppChildNotes
->(routes, APP_HUB_KEY);
+createRoot<AppNotes, AppChildNotes>(routes, APP_HUB_KEY);
 
 connectFeatures<AppNotes, AppChildNotes>(APP_HUB_KEY, {
   about: aboutSlice,
-  automobiles: automobileSlice,
-  bikes: bikeSlice,
-  bolids: bolidSlice
+  car: carSlice
 });

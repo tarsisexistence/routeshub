@@ -5,9 +5,7 @@ import { Note, Root } from 'lib';
  */
 export interface AppChildNotes extends Root {
   about: Note;
-  automobiles: Note;
-  bikes: Note;
-  bolids: Note;
+  car: Note;
 }
 
 /**
@@ -15,7 +13,6 @@ export interface AppChildNotes extends Root {
  */
 export interface AppNotes {
   root: Note<AppChildNotes>;
-  notFound: Note;
 }
 
 /**

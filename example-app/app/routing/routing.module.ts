@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { routes } from './hub';
 
 /**
@@ -21,7 +20,6 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
  */
 @NgModule({
   imports: [routing],
-  exports: [RouterModule],
-  providers: [VehiclesResolver]
+  exports: [RouterModule]
 })
 export class RoutingModule {}

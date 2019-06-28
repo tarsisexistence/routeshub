@@ -1,8 +1,6 @@
-import { getHubSlices, Slices } from 'lib';
+import { getHubSlices } from 'lib';
 import { AppChildNotes, AppNotes } from './hub';
-import { BolidNotes } from '../views/bolid/hub';
-import { BikeNotes } from '../views/bike/hub';
-import { AutomobileNotes } from '../views/automobile/hub';
+import { CarNotes } from '../views/car/hub';
 import { AboutNotes } from '../views/about/hub';
 
 /**
@@ -11,9 +9,7 @@ import { AboutNotes } from '../views/about/hub';
 export interface Hub {
   app: AppNotes & AppChildNotes;
   about: AboutNotes;
-  automobiles: AutomobileNotes;
-  bikes: BikeNotes;
-  bolids: BolidNotes;
+  car: CarNotes;
 }
 
 /**

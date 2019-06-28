@@ -1,5 +1,4 @@
-<!--here you can find different navigation approaches-->
-<nz-header>
+<header class="header">
   <a class="logo"
      [navLink]="app.root.state">
     <img class="image"
@@ -7,30 +6,32 @@
          alt="logo"/>
   </a>
 
-  <nav class="menu"
-       nz-menu
-       [nzTheme]="'dark'"
-       [nzMode]="'horizontal'">
-
-    <a nz-menu-item navLink="{{ about.root.state }}">About</a>
-    <a nz-menu-item [navLink]="automobiles.root.state" navLinkActive="my-active-class">Automobiles</a>
-    <a nz-menu-item routerLink="/bikes">Bikes</a>
-    <a nz-menu-item [navLink]="hub.bolids.root" [navLinkActive]="['myActiveClass']">
-      Bolids
+  <nav class="menu">
+    <a navLink="{{ about.root.state }}">About</a>
+    <a [routerLink]="['/lazy']" [routerLinkActive]="['router-link-active']">
+      Lazy
     </a>
-    <a nz-menu-item
-       [navLink]="hub.bolids.year.state"
+    <a [navLink]="hub.car.root" [navLinkActive]="['active']">
+      Car
+    </a>
+    <a [navLink]="hub.car.year.state"
        [navParams]="{year: 2018}"
        [navLinkActive]="['myActiveClass', 'myActiveClass2']">
-      Bolids (2018)
+      Car (2018)
     </a>
 
-    <a nz-menu-item (click)="freshBolids()">
-      Bolids (2019)
+    <a (click)="freshCar()">
+      Car (2019)
     </a>
 
-    <a nz-menu-item [navLink]="hub.details.root.state">
+    <a [navLink]="hub.details.root.state">
       Details
     </a>
+    <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+      Home
+    </a>
+    <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']">
+      Users
+    </a>
   </nav>
-</nz-header>
+</header>

@@ -43,8 +43,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss",
-          "changeDetection": "OnPush"
+          "styleext": "scss"
         }
       },
       "architect": {
@@ -65,8 +64,7 @@
               }
             ],
             "styles": [
-              "example-app/styles.scss",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+              "example-app/styles.scss"
             ],
             "scripts": []
           },
