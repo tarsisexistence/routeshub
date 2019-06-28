@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { connectFeatures, createRoot } from 'lib';
 
-import { ViewComponent } from '../../core/containers/view/view.component';
+import { ViewComponent } from '../../core/components/view/view.component';
 import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.notes';
 import { aboutSlice } from '../../views/about/hub';
 import { carSlice } from '../../views/car/hub';
@@ -22,13 +22,6 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'about',
         pathMatch: 'full'
-      },
-      {
-        path: 'lazy',
-        loadChildren: () =>
-          import('example-app/app/views/+lazy/lazy.module').then(
-            m => m.LazyModule
-          )
       },
       {
         path: 'about',

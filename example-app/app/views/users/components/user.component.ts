@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
       <a [routerLink]="['../']">Back</a>
       <a [routerLink]="['profile']">Profile</a>
     </nav>
-    <h2>User text</h2>
+    <h2>User</h2>
     <p>
       {{ user | async }}
     </p>

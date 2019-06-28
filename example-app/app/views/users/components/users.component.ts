@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
       >
     </nav>
     <p>
-      Users Text
+      Users
     </p>
   `
 })

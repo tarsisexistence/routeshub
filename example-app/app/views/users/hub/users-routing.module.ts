@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UsersComponent } from './components/users.component';
-import { UserComponent } from './components/user.component';
-import { ProfileComponent } from './components/profile.component';
+import { UsersComponent } from '../components/users.component';
+import { UserComponent } from '../components/user.component';
+import { ProfileComponent } from '../components/profile.component';
 import { createRoot } from 'routeshub';
 
 const usersRoutes = [

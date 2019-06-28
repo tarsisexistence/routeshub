@@ -8,25 +8,23 @@
 
   <nav class="menu">
     <a navLink="{{ about.root.state }}">About</a>
-    <a [routerLink]="['/lazy']" [routerLinkActive]="['router-link-active']">
-      Lazy
-    </a>
     <a [navLink]="hub.car.root" [navLinkActive]="['active']">
       Car
     </a>
     <a [navLink]="hub.car.year.state"
        [navParams]="{year: 2018}"
        [navLinkActive]="['myActiveClass', 'myActiveClass2']">
-      Car (2018)
+      Car (navLink)
     </a>
 
     <a (click)="freshCar()">
-      Car (2019)
+      Car (navigate)
     </a>
 
     <a [navLink]="hub.details.root.state">
       Details
     </a>
+
     <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
       Home
     </a>

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-home',
   template: `
     <p>
-      Home Text
+      Home
     </p>
   `
 })

@@ -12,7 +12,7 @@ import { RoutingModule } from '../routing/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
-import { ViewComponent } from './containers/view/view.component';
+import { ViewComponent } from './components/view/view.component';
 
 const components = [
   HeaderComponent,
