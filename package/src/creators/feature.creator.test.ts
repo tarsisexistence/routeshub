@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';
 import { PRIVATE_HUB_KEY } from '../constants';
-import { connectFeatures } from '../functions/connect-features';
-import { getSlice } from '../functions/hub';
+import { connectFeatures, getSlice } from '../functions';
 
 describe('createFeature', () => {
   it('should create feature with one route', () => {

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { connectFeatures, createFeature, createRoot } from 'lib';
 import { PRIVATE_HUB_KEY } from '../constants';
-import { getSlice } from './hub';
+import { getSlice } from './get-slice';
 
 describe('connectFeatures', () => {
   const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
