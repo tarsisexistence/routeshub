@@ -1,8 +1,8 @@
 import { Route } from '@angular/router';
-import { DefaultRouteName, Slice, Structure } from '../interfaces';
-import { hub, nextHubValue } from '../hub';
+import { DefaultRouteName, Notes, Slice, Structure } from '../interfaces';
+import { hub, updateHub } from '../hub';
 import { createNote } from './note.creator';
-import { enhance } from '../utils/enhance';
+import { createSlice } from './slice.creator';
 import { assignCreatorArgs } from '../utils/name';
 
 /**
@@ -10,13 +10,13 @@ import { assignCreatorArgs } from '../utils/name';
  */
 export function createFeature<R = any, C = {}>(
   routes: Route[],
-  ...args: (symbol | DefaultRouteName)[]
+  ...args: (symbol | DefaultRouteName | Slice<any>[])[]
 ): (parentRoute: Structure) => Slice<R & C> {
   return (parentRoute: Structure): Slice<R & C> => {
-    const { key, options } = assignCreatorArgs(args, name);
-    const note: R = createNote<R>(routes, options);
-    const feature: Slice<R> = enhance<R, C>(parentRoute, note);
-    const updatedRouteState: Slice<Slice<R, C | {}>> = nextHubValue<R>(
+    const { key, options, siblings } = assignCreatorArgs(args, name);
+    const notes: Notes<R> = createNote<R>(routes, options);
+    const feature: Slice<R> = createSlice<R, C>(parentRoute, notes);
+    const updatedRouteState: Slice<Slice<R, C | {}>> = updateHub<R>(
       feature,
       parentRoute.name,
       key || parentRoute.name

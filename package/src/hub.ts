@@ -6,15 +6,13 @@ import { PRIVATE_HUB_KEY } from './constants';
 /**
  * stores routes states at the same level
  */
-export const hub: BehaviorSubject<Slices<any>> = new BehaviorSubject<
-  Slices<any>
->(null);
+export const hub = new BehaviorSubject<Slices<any>>(null);
 
 /**
  * Returns the next hubs value
  */
-export function nextHubValue<R, C = {}>(
-  routes: Slice<R>,
+export function updateHub<R, C = {}>(
+  routes: Slice<R, C>,
   name: string,
   key: symbol | string
 ): Slice<Slice<R, C>> {

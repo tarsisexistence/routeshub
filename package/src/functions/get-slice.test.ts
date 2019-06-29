@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { getHubSlices, getSlice } from './hub';
 import { PRIVATE_HUB_KEY } from '../constants';
+import { connectFeatures } from './connect-features';
+import { getHubSlices, getSlice } from './get-slice';
 import { createFeature, createRoot } from '../creators';
-import { connectFeatures } from '../functions/connect-features';
 
-describe('Hub', () => {
+describe('Slice Getters', () => {
   const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
   const mapRoutes: Routes = [{ path: '' }];
 

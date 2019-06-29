@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
-import { enhance } from '../utils/enhance';
-import { hub, nextHubValue } from '../hub';
-import { DefaultRouteName, Slice } from '../interfaces';
+import { hub, updateHub } from '../hub';
+import { DefaultRouteName, Notes, Slice } from '../interfaces';
+import { createSlice } from './slice.creator';
 import { createNote } from './note.creator';
 import { assignCreatorArgs } from '../utils/name';
 
@@ -11,17 +11,17 @@ import { assignCreatorArgs } from '../utils/name';
  */
 export function createRoot<R = any, C = any>(
   routes: Route[],
-  ...args: (symbol | DefaultRouteName)[]
+  ...args: (symbol | DefaultRouteName | Slice<any>[])[]
 ): Slice<R & C> {
   if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
   }
 
   const name = 'app';
-  const { key, options } = assignCreatorArgs(args, name);
-  const note: R = createNote<R>(routes, options);
-  const rootSlice: Slice<R> = enhance<R, C>(null, note);
-  const initialRoutesState: Slice<Slice<R, C | {}>> = nextHubValue<R>(
+  const { key, options, siblings } = assignCreatorArgs(args, name);
+  const notes: Notes<R> = createNote<R>(routes, options);
+  const rootSlice: Slice<R> = createSlice<R, C>(null, notes);
+  const initialRoutesState: Slice<Slice<R, C | {}>> = updateHub<R>(
     rootSlice,
     name,
     key

@@ -1,3 +1,3 @@
 export * from './connect-features';
 export * from './forward-params';
-export * from './getSlice';
+export * from './get-slice';

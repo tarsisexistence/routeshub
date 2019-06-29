@@ -1,4 +1,4 @@
-import { DefaultRouteName } from '../interfaces';
+import { DefaultRouteName, Slice } from '../interfaces';
 import { isWildcard } from './path';
 
 function fixPathName(path: string): string {
@@ -46,24 +46,37 @@ export function setRouteName(
 }
 
 /**
+ * possible args
+ * in root/feature creators
+ */
+interface CreatorArgs {
+  key: symbol | string;
+  options: DefaultRouteName;
+  siblings: Slice<any>[];
+}
+
+/**
  * assigns create fn options properly
  */
 export function assignCreatorArgs<R>(
-  args: (symbol | DefaultRouteName)[],
+  args: (symbol | DefaultRouteName | Slice<any>[])[],
   name: string
-): { key: symbol | string; options: DefaultRouteName } {
-  const res = {} as { key: symbol | string; options: DefaultRouteName };
+): CreatorArgs {
+  const res = {} as CreatorArgs;
 
   args.forEach(arg => {
     if (typeof arg === 'symbol') {
       res.key = arg;
-    } else if (typeof arg === 'object') {
+    } else if (Array.isArray(arg)) {
+      res.siblings = arg;
+    } else {
       res.options = arg;
     }
   });
 
   return {
     key: res.key || name,
-    options: res.options || {}
+    options: res.options || {},
+    siblings: res.siblings || []
   };
 }
