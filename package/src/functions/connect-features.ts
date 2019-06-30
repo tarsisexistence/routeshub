@@ -22,13 +22,17 @@ type partialFeatureRoutes<K> = {
 /**
  * connects feature slices
  * to parent slice
+ * which route paths described
+ * directly in the parent routes
  */
-export const connectFeatures = <R = any, C = {}>(
-  parent: string | symbol | Slice<any>,
+export function connectFeatures<R = any, C = {}>(
+  parentSliceOrKey: string | symbol | Slice<any>,
   features: partialFeatureRoutes<R & C>
-): void => {
+): void {
   const parentKey =
-    typeof parent === 'object' ? parent[PRIVATE_HUB_KEY] : parent;
+    typeof parentSliceOrKey === 'object'
+      ? parentSliceOrKey[PRIVATE_HUB_KEY]
+      : parentSliceOrKey;
 
   hub
     .asObservable()
@@ -45,4 +49,4 @@ export const connectFeatures = <R = any, C = {}>(
       })
     )
     .subscribe();
-};
+}

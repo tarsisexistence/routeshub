@@ -6,6 +6,8 @@ import { ViewComponent } from '../../core/components/view/view.component';
 import { APP_HUB_KEY, AppChildNotes, AppNotes } from './app.notes';
 import { aboutSlice } from '../../views/about/hub';
 import { carSlice } from '../../views/car/hub';
+import { homeSlice } from '../../views/home/hub';
+import { usersSlice } from '../../views/users/hub';
 
 /**
  * Declares routes on App level
@@ -42,9 +44,16 @@ export const routes: Routes = [
 /**
  * Creates stateful named App routes
  */
-createRoot<AppNotes, AppChildNotes>(routes, APP_HUB_KEY);
+const appSlice = createRoot<AppNotes, AppChildNotes>(
+  routes,
+  {
+    home: homeSlice,
+    users: usersSlice
+  },
+  APP_HUB_KEY
+);
 
-connectFeatures<AppNotes, AppChildNotes>(APP_HUB_KEY, {
+connectFeatures<AppNotes, AppChildNotes>(appSlice, {
   about: aboutSlice,
   car: carSlice
 });

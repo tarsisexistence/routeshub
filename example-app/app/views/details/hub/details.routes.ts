@@ -8,12 +8,13 @@ import { DetailsComponent } from '../components/details.component';
  */
 export const detailsRoutes: Routes = [
   {
-    path: '',
+    path: 'details',
     component: DetailsComponent
   }
 ];
 
 export const detailsSlice = createFeature<DetailsNotes>(
   detailsRoutes,
+  null,
   DETAILS_HUB_KEY
 );

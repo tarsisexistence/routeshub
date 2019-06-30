@@ -15,11 +15,11 @@ export function updateHub<R, C = {}>(
   routes: Slice<R, C>,
   name: string,
   key: symbol | string
-): Slice<Slice<R, C>> {
+): Slices<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
   slice[PRIVATE_HUB_KEY] = key;
 
   return Object.assign({}, hub.value, {
     [name]: slice
-  }) as Slice<Slice<R, C>>;
+  }) as Slices<Slice<R, C>>;
 }

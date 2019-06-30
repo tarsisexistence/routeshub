@@ -13,4 +13,8 @@ export const aboutRoutes: Routes = [
   }
 ];
 
-export const aboutSlice = createFeature<AboutNotes>(aboutRoutes, ABOUT_HUB_KEY);
+export const aboutSlice = createFeature<AboutNotes>(
+  aboutRoutes,
+  null,
+  ABOUT_HUB_KEY
+);

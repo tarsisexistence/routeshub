@@ -21,14 +21,14 @@
       Car (navigate)
     </a>
 
-    <a [navLink]="hub.details.root.state">
+    <a [navLink]="hub.details.details.state">
       Details
     </a>
 
-    <a [routerLink]="['/home']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+    <a [navLink]="hub.home.home.state" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
       Home
     </a>
-    <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']">
+    <a [navLink]="hub.users.users.state" [routerLinkActive]="['router-link-active']">
       Users
     </a>
   </nav>

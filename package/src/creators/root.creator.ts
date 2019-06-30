@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { hub, updateHub } from '../hub';
-import { DefaultRouteName, Notes, Slice, Structure } from '../interfaces';
+import { DefaultRouteName, LazySlices, Notes, Slice } from '../interfaces';
 import { createSlice } from './slice.creator';
 import { createNote } from './note.creator';
 import { assignCreatorArgs } from '../utils/name';
@@ -11,19 +11,17 @@ import { assignCreatorArgs } from '../utils/name';
  */
 export function createRoot<R = any, C = any>(
   routes: Route[],
-  ...args: (symbol | DefaultRouteName | ((parent: Structure) => Slice<any>)[])[]
+  detachedFeatures?: LazySlices,
+  ...args: (symbol | DefaultRouteName)[]
 ): Slice<R & C> {
   if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
   }
 
   const name = 'app';
-  const { key, options, siblings } = assignCreatorArgs(args, name);
+  const { key, options } = assignCreatorArgs(args, name);
   const notes: Notes<R> = createNote<R>(routes, options);
   const rootSlice: Slice<R> = createSlice<R, C>(null, notes);
-  siblings.forEach(sibling => {
-    sibling(null);
-  });
   const initialRoutesState: Slice<Slice<R, C | {}>> = updateHub<R>(
     rootSlice,
     name,
@@ -31,6 +29,10 @@ export function createRoot<R = any, C = any>(
   );
 
   hub.next(initialRoutesState);
+
+  Object.keys(detachedFeatures || {}).forEach((featureName: string) => {
+    detachedFeatures[featureName](null, featureName);
+  });
 
   return hub.value[name];
 }

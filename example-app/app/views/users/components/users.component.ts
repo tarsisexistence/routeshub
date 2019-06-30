@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { getSlice } from 'lib';
+import { USERS_HUB_KEY } from '../hub/users.notes';
 
 @Component({
   selector: 'app-users',
@@ -6,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
     <nav>
       <a
         *ngFor="let user of users"
-        [navLink]="[user]"
+        [navLink]="usersSlice.id"
+        [navParams]="{ id: user }"
         [routerLinkActive]="['router-link-active']"
         >{{ user }}</a
       >
@@ -17,17 +20,16 @@ import { Component, OnInit } from '@angular/core';
   `
 })
 export class UsersComponent implements OnInit {
+  public usersSlice = getSlice(USERS_HUB_KEY);
   public users: string[];
 
   public ngOnInit(): void {
     this.users = [
-      'Ada Lovelace',
-      'Niklaus Wirth',
-      'Donald Knuth',
-      'Bjarne Stroustrup',
-      'Edsger W. Dijkstra',
-      'Alan Turing',
-      'Anders Hejlsberg'
+      'Wilhelm Röntgen',
+      'Henri Becquerel',
+      'Lord Rayleigh',
+      'Philipp Lenard',
+      'J. J. Thomson'
     ];
   }
 }

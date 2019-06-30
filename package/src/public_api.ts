@@ -1,4 +1,4 @@
-export { createRoot, createFeature, createNote } from './creators';
+export { createRoot, createFeature } from './creators';
 
 export { Sliced } from './decorators';
 
@@ -11,6 +11,15 @@ export {
 
 export { hub } from './hub';
 
-export { Root, Note, Notes, Slice, Slices, Params } from './interfaces';
-
 export { NavigationModule } from './navigation/navigation.module';
+
+export {
+  Root,
+  Note,
+  Notes,
+  Slice,
+  Slices,
+  LazySlice,
+  LazySlices,
+  Params
+} from './interfaces';

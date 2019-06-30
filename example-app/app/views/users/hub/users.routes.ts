@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { UsersComponent } from '../components/users.component';
 import { UserComponent } from '../components/user.component';
 import { ProfileComponent } from '../components/profile.component';
-import { createRoot } from 'routeshub';
+import { createFeature } from 'lib';
+import { USERS_HUB_KEY, UsersChildNotes, UsersNotes } from './users.notes';
 
-const usersRoutes = [
+export const usersRoutes = [
   {
     path: 'users',
     children: [
@@ -16,10 +15,8 @@ const usersRoutes = [
   }
 ];
 
-export const userSlice = createRoot(usersRoutes);
-
-@NgModule({
-  imports: [RouterModule.forChild(usersRoutes)],
-  exports: [RouterModule]
-})
-export class UsersRoutingModule {}
+export const usersSlice = createFeature<UsersNotes, UsersChildNotes>(
+  usersRoutes,
+  null,
+  USERS_HUB_KEY
+);
