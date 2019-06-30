@@ -3,6 +3,7 @@ import { hub, updateHub } from '../hub';
 import { CreatorOptionArgs, Notes, Slice } from '../interfaces';
 import { createSlice } from './slice.creator';
 import { createNote } from './note.creator';
+import { connectDetached } from '../functions';
 
 /**
  * Creates main parent routes
@@ -18,20 +19,18 @@ export function createRoot<R = any, C = any>({
     throw new Error('Routeshub is already declared');
   }
 
-  const name = 'app';
+  const defaultRootName = 'app';
   const notes: Notes<R> = createNote<R>(routes, nameOptions);
   const rootSlice: Slice<R> = createSlice<R, C>(null, notes);
   const initialRoutesState: Slice<Slice<R, C | {}>> = updateHub<R>(
     rootSlice,
-    name,
+    defaultRootName,
     key
   );
 
   hub.next(initialRoutesState);
 
-  Object.keys(detachedFeatures || {}).forEach((featureName: string) => {
-    detachedFeatures[featureName](null, featureName);
-  });
+  connectDetached(detachedFeatures);
 
-  return hub.value[name];
+  return hub.value[defaultRootName];
 }

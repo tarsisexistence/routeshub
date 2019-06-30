@@ -32,3 +32,10 @@ export type LazySlice<R = any, C = {}> = (
 ) => Slice<R, C>;
 
 export type LazySlices<R = any> = { [key in keyof R]: LazySlice<R[key]> };
+
+/**
+ * gives optional keys from main and children routes of slice
+ */
+export type partialFeatureRoutes<K> = {
+  [key in keyof Partial<K>]: (parentRoute: Structure) => Slice<any>
+};

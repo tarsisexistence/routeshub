@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
     <p>
       Home
     </p>
+    <nav>
+      <a [routerLink]="['../']">Back</a>
+    </nav>
   `
 })
 export class HomeComponent {}
