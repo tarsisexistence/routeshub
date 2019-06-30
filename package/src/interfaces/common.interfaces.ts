@@ -39,7 +39,7 @@ export interface InternalStructure<C> extends Structure {
 /**
  * describes Route Name options
  */
-export interface DefaultRouteName {
+export interface DefaultRouteNames {
   root?: string;
   wildcard?: string;
 }

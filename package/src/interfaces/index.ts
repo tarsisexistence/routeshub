@@ -3,7 +3,7 @@ export {
   Structure,
   Params,
   Hub,
-  DefaultRouteName,
+  DefaultRouteNames,
   PrivateHubKey
 } from './common.interfaces';
 

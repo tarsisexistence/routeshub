@@ -10,8 +10,7 @@ export const homeRoutes: Routes = [
   }
 ];
 
-export const homeSlice = createFeature<HomeNotes>(
-  homeRoutes,
-  null,
-  HOME_HUB_KEY
-);
+export const homeSlice = createFeature<HomeNotes>({
+  routes: homeRoutes,
+  key: HOME_HUB_KEY
+});

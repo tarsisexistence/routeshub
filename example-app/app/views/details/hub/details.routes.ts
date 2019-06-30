@@ -13,8 +13,7 @@ export const detailsRoutes: Routes = [
   }
 ];
 
-export const detailsSlice = createFeature<DetailsNotes>(
-  detailsRoutes,
-  null,
-  DETAILS_HUB_KEY
-);
+export const detailsSlice = createFeature<DetailsNotes>({
+  routes: detailsRoutes,
+  key: DETAILS_HUB_KEY
+});

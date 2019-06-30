@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import {
-  DefaultRouteName,
+  DefaultRouteNames,
   LazySlices,
   Notes,
   Slice,
@@ -9,25 +9,38 @@ import {
 import { hub, updateHub } from '../hub';
 import { createNote } from './note.creator';
 import { createSlice } from './slice.creator';
-import { assignCreatorArgs } from '../utils/name';
+
+/**
+ * possible args
+ * in root/feature creators
+ */
+interface CreatorArgs {
+  detachedFeatures: LazySlices;
+  routeNames: DefaultRouteNames;
+  key: symbol | string;
+}
 
 /**
  * Creates a feature route
  */
-export function createFeature<R = any, C = {}>(
-  routes: Route[],
-  detachedFeatures?: LazySlices,
-  ...args: (symbol | DefaultRouteName)[]
-): (parentRoute: Structure, alternativeName?: string) => Slice<R & C> {
+export function createFeature<R = any, C = {}>({
+  routes,
+  key,
+  detachedFeatures,
+  routeNames
+}: { routes: Route[] } & Partial<CreatorArgs>): (
+  parentRoute: Structure,
+  alternativeName?: string
+) => Slice<R & C> {
   return (parentRoute: Structure, alternativeName?: string): Slice<R & C> => {
     const name = alternativeName ? alternativeName : parentRoute.name;
-    const { key, options } = assignCreatorArgs(args, name);
-    const notes: Notes<R> = createNote<R>(routes, options);
+    key = key || name;
+    const notes: Notes<R> = createNote<R>(routes, routeNames);
     const feature: Slice<R> = createSlice<R, C>(parentRoute, notes);
     const updatedRouteState: Slice<Slice<R, C | {}>> = updateHub<R>(
       feature,
-      name || alternativeName,
-      key || alternativeName
+      name,
+      key
     );
     hub.next(updatedRouteState);
 
