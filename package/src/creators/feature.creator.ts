@@ -12,26 +12,21 @@ export function createFeature<R = any, C = {}>({
   routes,
   key,
   detachedFeatures,
-  nameOptions
+  routeNames
 }: { routes: Route[] } & Partial<CreatorOptionArgs>): (
   parentRoute: Structure,
   alternativeName?: string
 ) => Slice<R & C> {
   return (parentRoute: Structure, alternativeName?: string): Slice<R & C> => {
     const name = alternativeName ? alternativeName : parentRoute.name;
-    key = key || name;
-    const notes: Notes<R> = createNote<R>(routes, nameOptions);
+    const notes: Notes<R> = createNote<R>(routes, routeNames);
     const feature: Slice<R> = createSlice<R, C>(parentRoute, notes);
     const updatedRouteState: Slice<Slice<R, C | {}>> = updateHub<R>(
       feature,
       name,
-      key
+      key || name
     );
     hub.next(updatedRouteState);
-
-    Object.keys(detachedFeatures || {}).forEach((featureName: string) => {
-      detachedFeatures[featureName](parentRoute, featureName);
-    });
 
     connectDetached(detachedFeatures, parentRoute);
 

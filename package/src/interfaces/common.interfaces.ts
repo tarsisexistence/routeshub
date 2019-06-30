@@ -57,6 +57,6 @@ export interface PrivateHubKey {
  */
 export interface CreatorOptionArgs {
   key: symbol | string;
-  nameOptions: DefaultNameOptions;
+  routeNames: DefaultNameOptions;
   detachedFeatures: LazySlices;
 }
