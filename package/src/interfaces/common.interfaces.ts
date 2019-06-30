@@ -1,4 +1,4 @@
-import { Slice } from './slice.interfaces';
+import { LazySlices, Slice } from './slice.interfaces';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 /**
@@ -39,7 +39,7 @@ export interface InternalStructure<C> extends Structure {
 /**
  * describes Route Name options
  */
-export interface DefaultRouteNames {
+export interface DefaultNameOptions {
   root?: string;
   wildcard?: string;
 }
@@ -49,4 +49,14 @@ export interface DefaultRouteNames {
  */
 export interface PrivateHubKey {
   [PRIVATE_HUB_KEY]: string | symbol;
+}
+
+/**
+ * possible args
+ * in root/feature creators
+ */
+export interface CreatorOptionArgs {
+  key: symbol | string;
+  nameOptions: DefaultNameOptions;
+  detachedFeatures: LazySlices;
 }

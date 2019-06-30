@@ -3,8 +3,9 @@ export {
   Structure,
   Params,
   Hub,
-  DefaultRouteNames,
-  PrivateHubKey
+  DefaultNameOptions,
+  PrivateHubKey,
+  CreatorOptionArgs
 } from './common.interfaces';
 
 export { Root, RootNote, Note, Notes } from './routes.interfaces';

@@ -1,4 +1,4 @@
-import { DefaultRouteNames } from '../interfaces';
+import { DefaultNameOptions } from '../interfaces';
 import { isWildcard } from './path';
 
 function fixPathName(path: string): string {
@@ -34,7 +34,7 @@ function fixPathName(path: string): string {
  */
 export function setRouteName(
   path: string,
-  nameOptions: DefaultRouteNames = {}
+  nameOptions: DefaultNameOptions = {}
 ): string {
   if (path === '') {
     return nameOptions.root || 'root';
