@@ -8,8 +8,8 @@ describe('connectFeatures', () => {
   const mapRoutes: Routes = [{ path: '' }];
 
   it('should invoke connectFeatures by name', () => {
-    createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
+    createRoot({ routes: appRoutes });
+    const mapSlice = createFeature({ routes: mapRoutes });
     connectFeatures('app', { map: mapSlice });
     const result = {
       root: {
@@ -27,8 +27,8 @@ describe('connectFeatures', () => {
 
   it('should invoke connectFeatures by key', () => {
     const APP_HUB_KEY = Symbol();
-    createRoot(appRoutes, APP_HUB_KEY);
-    const mapSlice = createFeature(mapRoutes);
+    createRoot({ routes: appRoutes, key: APP_HUB_KEY });
+    const mapSlice = createFeature({ routes: mapRoutes });
     connectFeatures(APP_HUB_KEY, { map: mapSlice });
     const result = {
       root: {
@@ -45,8 +45,8 @@ describe('connectFeatures', () => {
   });
 
   it('should invoke connectFeatures by slice', () => {
-    const appSlice = createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
+    const appSlice = createRoot({ routes: appRoutes });
+    const mapSlice = createFeature({ routes: mapRoutes });
     connectFeatures(appSlice, { map: mapSlice });
     const result = {
       root: {
@@ -63,8 +63,8 @@ describe('connectFeatures', () => {
   });
 
   it('should invoke connectFeatures by hidden key prop', () => {
-    const appSlice = createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
+    const appSlice = createRoot({ routes: appRoutes });
+    const mapSlice = createFeature({ routes: mapRoutes });
     connectFeatures(appSlice[PRIVATE_HUB_KEY], { map: mapSlice });
     const result = {
       root: {

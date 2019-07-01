@@ -17,7 +17,7 @@ export function updateHub<R, C = {}>(
   key: symbol | string
 ): Slices<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
-  slice[PRIVATE_HUB_KEY] = key;
+  slice[PRIVATE_HUB_KEY] = key || name;
 
   return Object.assign({}, hub.value, {
     [name]: slice
