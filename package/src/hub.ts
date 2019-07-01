@@ -6,7 +6,7 @@ import { PRIVATE_HUB_KEY } from './constants';
 /**
  * stores routes states at the same level
  */
-export const hub = new BehaviorSubject<Slices<any>>(null);
+export const hub = new BehaviorSubject<Slices>(null);
 
 /**
  * Returns the next hubs value

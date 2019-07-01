@@ -15,6 +15,6 @@ export const getSlice = <T = any, C = {}, U = Slice<T, C>>(
 ): U =>
   typeof arg === 'string'
     ? hub.value[arg]
-    : Object.values((hub.value as Slices<any>) || {}).find(
-        (slice: Slice<any>) => slice[PRIVATE_HUB_KEY] === arg
+    : Object.values((hub.value as Slices) || {}).find(
+        (slice: Slice) => slice[PRIVATE_HUB_KEY] === arg
       );

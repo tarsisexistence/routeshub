@@ -8,9 +8,9 @@ import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
  * returns slice by key
  * from the second slices arg
  */
-const findSlice = (parentKey, slices: Slices<any>): Slice<any> | null =>
+const findSlice = (parentKey, slices: Slices): Slice | null =>
   Object.values(slices || {}).find(
-    (slice: Slice<any>) => slice[PRIVATE_HUB_KEY] === parentKey
+    (slice: Slice) => slice[PRIVATE_HUB_KEY] === parentKey
   );
 
 /**
@@ -20,7 +20,7 @@ const findSlice = (parentKey, slices: Slices<any>): Slice<any> | null =>
  * directly in the parent routes
  */
 export function connectFeatures<R = any, C = {}>(
-  parentSliceOrKey: string | symbol | Slice<any>,
+  parentSliceOrKey: string | symbol | Slice,
   features: partialFeatureRoutes<R & C>
 ): void {
   const parentKey =
@@ -31,9 +31,9 @@ export function connectFeatures<R = any, C = {}>(
   hub
     .asObservable()
     .pipe(
-      find((slices: Slices<any>) => Boolean(findSlice(parentKey, slices))),
+      find((slices: Slices) => Boolean(findSlice(parentKey, slices))),
       finalize(() => {
-        const slice: Slice<any> = findSlice(parentKey, hub.value);
+        const slice: Slice = findSlice(parentKey, hub.value);
 
         for (const route of Object.keys(features)) {
           const feature = features[route];
