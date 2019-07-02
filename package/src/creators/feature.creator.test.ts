@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';
 import { PRIVATE_HUB_KEY } from '../constants';
-import { connectFeatures, getSlice } from '../functions';
+import { connectFeatures, getHubSlices, getSlice } from '../functions';
 
 describe('createFeature', () => {
   it('should create feature with one route', () => {
@@ -26,24 +26,53 @@ describe('createFeature', () => {
     expect(getSlice('map')).toEqual(result);
   });
 
-  it('should create feature with one route with different name options', () => {
+  it('should create root and feature with different route name options', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    createRoot(appRoutes, { routeName: { root: 'rootRoute' } });
     const mapRoutes: Routes = [{ path: '' }];
     const mapSlice = createFeature(mapRoutes, { routeName: { root: 'home' } });
+    createRoot(appRoutes, { routeName: { root: 'rootRoute' } });
     connectFeatures('app', { map: mapSlice });
     const result = {
-      home: {
-        id: 3,
-        parentId: 2,
-        state: ['/', 'map'],
-        path: '',
-        name: 'home',
-        children: null
+      app: {
+        rootRoute: {
+          id: 0,
+          parentId: null,
+          state: ['/'],
+          path: '',
+          name: 'rootRoute',
+          children: null
+        },
+        wildcard: {
+          id: 1,
+          parentId: null,
+          state: ['**'],
+          path: '**',
+          name: 'wildcard',
+          children: null
+        },
+        map: {
+          id: 2,
+          parentId: null,
+          state: ['/', 'map'],
+          path: 'map',
+          name: 'map',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'app'
       },
-      [PRIVATE_HUB_KEY]: 'map'
+      map: {
+        home: {
+          id: 3,
+          parentId: 2,
+          state: ['/', 'map'],
+          path: '',
+          name: 'home',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'map'
+      }
     };
-    expect(getSlice('map')).toEqual(result);
+    expect(getHubSlices()).toEqual(result);
   });
 
   it('should create feature with a few routes', () => {

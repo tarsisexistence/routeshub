@@ -21,6 +21,24 @@ describe('createRoot', () => {
     expect(slice).toEqual(result);
   });
 
+  it('should create root with key', () => {
+    const routes: Routes = [{ path: '' }];
+    const ROOT_HUB_KEY = Symbol();
+    const slice = createRoot(routes, { key: ROOT_HUB_KEY });
+    const result = {
+      root: {
+        id: 0,
+        parentId: null,
+        state: ['/'],
+        path: '',
+        name: 'root',
+        children: null
+      },
+      [PRIVATE_HUB_KEY]: ROOT_HUB_KEY
+    };
+    expect(slice).toEqual(result);
+  });
+
   it('should create root with a few routes', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const slice = createRoot(routes);
@@ -74,6 +92,44 @@ describe('createRoot', () => {
         state: ['/', 'about'],
         path: 'about',
         name: 'about',
+        children: null
+      },
+      [PRIVATE_HUB_KEY]: 'app'
+    };
+    expect(slice).toEqual(result);
+  });
+
+  it('should create root slice with wildcard and root with children and routeName option', () => {
+    const routes: Routes = [
+      { path: '', children: [{ path: '' }, { path: 'about' }] },
+      { path: '**' }
+    ];
+    const slice = createRoot(routes, {
+      routeName: { root: 'home', wildcard: 'notFound' }
+    });
+    const result = {
+      home: {
+        id: 1,
+        parentId: null,
+        state: ['/'],
+        path: '',
+        name: 'home',
+        children: null
+      },
+      about: {
+        id: 2,
+        parentId: 1,
+        state: ['/', 'about'],
+        path: 'about',
+        name: 'about',
+        children: null
+      },
+      notFound: {
+        id: 3,
+        parentId: null,
+        state: ['**'],
+        path: '**',
+        name: 'notFound',
         children: null
       },
       [PRIVATE_HUB_KEY]: 'app'
