@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { getHubSlices } from './get-slice';
 import { createFeature, createRoot } from '../creators';
@@ -149,6 +150,53 @@ describe('connectDetached', () => {
           state: ['/', 'map'],
           path: '',
           name: 'root',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'map'
+      }
+    };
+    expect(getHubSlices()).toEqual(result);
+  });
+
+  it('should contain root and detached feature in another detached feature', () => {
+    const appRoutes: Routes = [{ path: '' }];
+    const aboutRoutes: Routes = [{ path: 'about' }];
+    const mapRoutes: Routes = [{ path: 'map' }];
+    const mapSlice = createFeature(mapRoutes);
+    const aboutSlice = createFeature(aboutRoutes, {
+      detached: { map: mapSlice }
+    });
+    createRoot(appRoutes, { detached: { about: aboutSlice } });
+    const result = {
+      app: {
+        root: {
+          id: 0,
+          parentId: null,
+          state: ['/'],
+          path: '',
+          name: 'root',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'app'
+      },
+      about: {
+        about: {
+          id: 1,
+          parentId: null,
+          state: ['/', 'about'],
+          path: 'about',
+          name: 'about',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'about'
+      },
+      map: {
+        map: {
+          id: 2,
+          parentId: null,
+          state: ['/', 'map'],
+          path: 'map',
+          name: 'map',
           children: null
         },
         [PRIVATE_HUB_KEY]: 'map'
