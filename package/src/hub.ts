@@ -11,7 +11,7 @@ export const hub = new BehaviorSubject<Slices>(null);
 /**
  * Returns the next hubs value
  */
-export function updateHub<R, C = {}>(
+export function updateHub<R, C>(
   routes: Slice<R, C>,
   name: string,
   key: symbol | string

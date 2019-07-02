@@ -6,15 +6,15 @@ import { getState } from '../utils/state';
  * Could be plain Slice or internal Hub
  * with unprocessed children routes
  */
-type Enhanced<R, C> = Slice<R> | InternalSlice<R, C>;
+type Enhanced<R, C> = Slice<R, C> | InternalSlice<R, C>;
 
 /**
  * Serializes routes
  * to enhance capabilities
  */
-export function createSlice<R, C = {}>(
+export function createSlice<R, C>(
   parentStructure: Structure | null,
-  routes: Notes<R, C | {}>
+  routes: Notes<R, C>
 ): Enhanced<R, C> {
   return Object.keys(routes).reduce(
     (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {

@@ -20,9 +20,9 @@ export function createRoot<R = any, C = any>({
   }
 
   const defaultRootName = 'app';
-  const notes: Notes<R> = createNote<R>(routes, routeNames);
-  const rootSlice: Slice<R> = createSlice<R, C>(null, notes);
-  const initialRoutesState: Slices<Slice<R, C | {}>> = updateHub<R>(
+  const notes: Notes<R, C> = createNote<R, C>(routes, routeNames);
+  const rootSlice: Slice<R, C> = createSlice<R, C>(null, notes);
+  const initialRoutesState: Slices<Slice<R, C>> = updateHub<R, C>(
     rootSlice,
     defaultRootName,
     key

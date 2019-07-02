@@ -15,7 +15,7 @@ import { connectDetached } from '../functions';
 /**
  * Creates a feature route
  */
-export function createFeature<R = any, C = {}>({
+export function createFeature<R = any, C = any>({
   routes,
   key,
   detachedFeatures,
@@ -26,9 +26,9 @@ export function createFeature<R = any, C = {}>({
     alternativeName?: string
   ): Slice<R, C> => {
     const name = alternativeName ? alternativeName : parentStructure.name;
-    const notes: Notes<R> = createNote<R>(routes, routeNames);
-    const feature: Slice<R> = createSlice<R, C>(parentStructure, notes);
-    const updatedRouteState: Slices<Slice<R, C | {}>> = updateHub<R>(
+    const notes: Notes<R, C> = createNote<R, C>(routes, routeNames);
+    const feature: Slice<R, C> = createSlice<R, C>(parentStructure, notes);
+    const updatedRouteState: Slices<Slice<R, C>> = updateHub<R, C>(
       feature,
       name,
       key || name

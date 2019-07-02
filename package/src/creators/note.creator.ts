@@ -5,10 +5,10 @@ import { setRouteName } from '../utils/name';
 /**
  * creates a route note
  */
-export const createNote = <R = any>(
+export const createNote = <R = any, C = any>(
   routes: Route[],
   nameOptions: DefaultNameOptions = {}
-): Notes<R> =>
+): Notes<R, C> =>
   routes.reduce(
     (acc: Notes<R>, route: Route): Notes<R> => {
       const note: Note = {
