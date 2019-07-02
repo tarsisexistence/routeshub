@@ -1,12 +1,12 @@
 module.exports = {
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/package/configs/tsconfig.spec.json'
+      tsConfig: '<rootDir>/configs/tsconfig.spec.json'
     }
   },
   moduleNameMapper: {
-    '^lib$': '<rootDir>/package/index',
-    '^lib(.*)': '<rootDir>/package/src/$1'
+    '^lib$': '<rootDir>/index',
+    '^lib(.*)': '<rootDir>/src/$1'
   },
   setupFilesAfterEnv: [`${__dirname}/jest/setup.ts`]
 };

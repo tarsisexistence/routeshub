@@ -44,7 +44,7 @@ export const routes: Routes = [
 /**
  * Creates stateful named App routes
  */
-const appSlice = createRoot<AppNotes, AppChildNotes>(routes, {
+createRoot<AppNotes, AppChildNotes>(routes, {
   key: APP_HUB_KEY,
   detached: {
     home: homeSlice,
@@ -52,7 +52,7 @@ const appSlice = createRoot<AppNotes, AppChildNotes>(routes, {
   }
 });
 
-connectFeatures<AppNotes, AppChildNotes>(appSlice, {
+connectFeatures<AppNotes, AppChildNotes>(APP_HUB_KEY, {
   about: aboutSlice,
   car: carSlice
 });

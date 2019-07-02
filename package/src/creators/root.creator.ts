@@ -1,4 +1,4 @@
-import { Route, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { hub, updateHub } from '../hub';
 import { CreatorOptionArgs, Notes, Slice, Slices } from '../interfaces';
 import { createSlice } from './slice.creator';

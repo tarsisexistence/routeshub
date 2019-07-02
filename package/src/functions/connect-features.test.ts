@@ -1,13 +1,53 @@
 import { Routes } from '@angular/router';
-import { connectFeatures, createFeature, createRoot } from 'lib';
+import { connectFeatures } from './connect-features';
+import { getHubSlices, getSlice } from './get-slice';
+import { createFeature, createRoot } from '../creators';
 import { PRIVATE_HUB_KEY } from '../constants';
-import { getSlice } from './get-slice';
 
 describe('connectFeatures', () => {
   const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
   const mapRoutes: Routes = [{ path: '' }];
 
-  it('should invoke connectFeatures by name', () => {
+  it('should contain root and feature', () => {
+    createRoot(appRoutes);
+    const mapSlice = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapSlice });
+    const result = {
+      app: {
+        root: {
+          id: 0,
+          parentId: null,
+          state: ['/'],
+          path: '',
+          name: 'root',
+          children: null
+        },
+        map: {
+          id: 1,
+          parentId: null,
+          state: ['/', 'map'],
+          path: 'map',
+          name: 'map',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'app'
+      },
+      map: {
+        root: {
+          id: 2,
+          parentId: 1,
+          state: ['/', 'map'],
+          path: '',
+          name: 'root',
+          children: null
+        },
+        [PRIVATE_HUB_KEY]: 'map'
+      }
+    };
+    expect(getHubSlices()).toEqual(result);
+  });
+
+  it('should invoke connectFeatures by route name', () => {
     createRoot(appRoutes);
     const mapSlice = createFeature(mapRoutes);
     connectFeatures('app', { map: mapSlice });
@@ -30,42 +70,6 @@ describe('connectFeatures', () => {
     createRoot(appRoutes, { key: APP_HUB_KEY });
     const mapSlice = createFeature(mapRoutes);
     connectFeatures(APP_HUB_KEY, { map: mapSlice });
-    const result = {
-      root: {
-        id: 2,
-        parentId: 1,
-        state: ['/', 'map'],
-        path: '',
-        name: 'root',
-        children: null
-      },
-      [PRIVATE_HUB_KEY]: 'map'
-    };
-    expect(getSlice('map')).toEqual(result);
-  });
-
-  it('should invoke connectFeatures by slice', () => {
-    const appSlice = createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures(appSlice, { map: mapSlice });
-    const result = {
-      root: {
-        id: 2,
-        parentId: 1,
-        state: ['/', 'map'],
-        path: '',
-        name: 'root',
-        children: null
-      },
-      [PRIVATE_HUB_KEY]: 'map'
-    };
-    expect(getSlice('map')).toEqual(result);
-  });
-
-  it('should invoke connectFeatures by hidden key prop', () => {
-    const appSlice = createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures(appSlice[PRIVATE_HUB_KEY], { map: mapSlice });
     const result = {
       root: {
         id: 2,
