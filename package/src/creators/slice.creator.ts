@@ -1,12 +1,12 @@
 import { indexer } from '../utils/indexer';
-import { InternalSlice, Notes, Slice, Structure } from '../interfaces';
+import {
+  InternalSlice,
+  InternalStructure,
+  Notes,
+  Slice,
+  Structure
+} from '../interfaces';
 import { getState } from '../utils/state';
-
-/**
- * Could be plain Slice or internal Hub
- * with unprocessed children routes
- */
-type Enhanced<R, C> = Slice<R, C> | InternalSlice<R, C>;
 
 /**
  * Serializes routes
@@ -15,11 +15,11 @@ type Enhanced<R, C> = Slice<R, C> | InternalSlice<R, C>;
 export function createSlice<R, C>(
   parentStructure: Structure | null,
   routes: Notes<R, C>
-): Enhanced<R, C> {
+): InternalSlice<R, C> {
   return Object.keys(routes).reduce(
-    (acc: Enhanced<R, C>, key: string): Enhanced<R, C> => {
+    (acc: InternalSlice<R, C>, key: string): InternalSlice<R, C> => {
       const { children, path, name } = routes[key];
-      const route = {
+      const route: InternalStructure = {
         parentId: parentStructure && parentStructure.id,
         state: getState(parentStructure, path),
         id: indexer.next().value,
@@ -27,13 +27,12 @@ export function createSlice<R, C>(
         name
       };
 
-      return Object.assign(acc, {
-        [name]: {
-          ...route,
-          children: children !== undefined ? createSlice(route, children) : null
-        }
-      });
+      if (children !== undefined) {
+        route.children = createSlice(route, children);
+      }
+
+      return Object.assign(acc, { [name]: route });
     },
-    {} as Enhanced<R, C>
+    {} as InternalSlice<R, C>
   );
 }

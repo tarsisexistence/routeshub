@@ -19,16 +19,14 @@ describe('connectFeatures', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         map: {
           id: 1,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'app'
       },
@@ -38,8 +36,7 @@ describe('connectFeatures', () => {
           parentId: 1,
           state: ['/', 'map'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'map'
       }
@@ -57,8 +54,7 @@ describe('connectFeatures', () => {
         parentId: 1,
         state: ['/', 'map'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: 'map'
     };
@@ -76,8 +72,7 @@ describe('connectFeatures', () => {
         parentId: 1,
         state: ['/', 'map'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: 'map'
     };

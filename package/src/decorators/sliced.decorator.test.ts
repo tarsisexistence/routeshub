@@ -15,8 +15,7 @@ describe('Sliced decorator', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: identifier
     });
@@ -54,8 +53,7 @@ describe('Sliced decorator', () => {
         parentId: 2,
         state: ['/', 'map'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: identifier
     });

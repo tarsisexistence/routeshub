@@ -18,8 +18,7 @@ describe('createFeature', () => {
         parentId: 2,
         state: ['/', 'map'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: 'map'
     };
@@ -39,24 +38,21 @@ describe('createFeature', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'rootRoute',
-          children: null
+          name: 'rootRoute'
         },
         wildcard: {
           id: 1,
           parentId: null,
           state: ['**'],
           path: '**',
-          name: 'wildcard',
-          children: null
+          name: 'wildcard'
         },
         map: {
           id: 2,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'app'
       },
@@ -66,8 +62,7 @@ describe('createFeature', () => {
           parentId: 2,
           state: ['/', 'map'],
           path: '',
-          name: 'home',
-          children: null
+          name: 'home'
         },
         [PRIVATE_HUB_KEY]: 'map'
       }
@@ -91,24 +86,21 @@ describe('createFeature', () => {
         parentId: 2,
         state: ['/', 'map'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       location: {
         id: 4,
         parentId: 2,
         state: ['/', 'map', 'location'],
         path: 'location',
-        name: 'location',
-        children: null
+        name: 'location'
       },
       profileId: {
         id: 5,
         parentId: 2,
         state: ['/', 'map', ':profileId'],
         path: ':profileId',
-        name: 'profileId',
-        children: null
+        name: 'profileId'
       },
       [PRIVATE_HUB_KEY]: 'map'
     };
@@ -130,8 +122,7 @@ describe('createFeature', () => {
         parentId: 4,
         state: ['/', 'map', 'location'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: 'location'
     };

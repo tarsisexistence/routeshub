@@ -18,24 +18,21 @@ describe('Slice Getters', () => {
             parentId: null,
             state: ['/'],
             path: '',
-            name: 'root',
-            children: null
+            name: 'root'
           },
           wildcard: {
             id: 1,
             parentId: null,
             state: ['**'],
             path: '**',
-            name: 'wildcard',
-            children: null
+            name: 'wildcard'
           },
           map: {
             id: 2,
             parentId: null,
             state: ['/', 'map'],
             path: 'map',
-            name: 'map',
-            children: null
+            name: 'map'
           },
           [PRIVATE_HUB_KEY]: 'app'
         }
@@ -54,24 +51,21 @@ describe('Slice Getters', () => {
             parentId: null,
             state: ['/'],
             path: '',
-            name: 'root',
-            children: null
+            name: 'root'
           },
           wildcard: {
             id: 1,
             parentId: null,
             state: ['**'],
             path: '**',
-            name: 'wildcard',
-            children: null
+            name: 'wildcard'
           },
           map: {
             id: 2,
             parentId: null,
             state: ['/', 'map'],
             path: 'map',
-            name: 'map',
-            children: null
+            name: 'map'
           },
           [PRIVATE_HUB_KEY]: 'app'
         },
@@ -81,8 +75,7 @@ describe('Slice Getters', () => {
             parentId: 2,
             state: ['/', 'map'],
             path: '',
-            name: 'root',
-            children: null
+            name: 'root'
           },
           [PRIVATE_HUB_KEY]: 'map'
         }
@@ -99,24 +92,21 @@ describe('Slice Getters', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         wildcard: {
           id: 1,
           parentId: null,
           state: ['**'],
           path: '**',
-          name: 'wildcard',
-          children: null
+          name: 'wildcard'
         },
         map: {
           id: 2,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'app'
       });
@@ -131,24 +121,21 @@ describe('Slice Getters', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         wildcard: {
           id: 1,
           parentId: null,
           state: ['**'],
           path: '**',
-          name: 'wildcard',
-          children: null
+          name: 'wildcard'
         },
         map: {
           id: 2,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: APP_HUB_KEY
       });
@@ -165,8 +152,7 @@ describe('Slice Getters', () => {
           parentId: 2,
           state: ['/', 'map'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'map'
       });

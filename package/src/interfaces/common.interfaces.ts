@@ -1,4 +1,4 @@
-import { LazySlices, Slice } from './slice.interfaces';
+import { InternalSlice, LazySlices } from './slice.interfaces';
 import { PRIVATE_HUB_KEY } from '../constants';
 
 /**
@@ -33,7 +33,7 @@ export interface Hub<E> {
  * that has unprocessed children
  */
 export interface InternalStructure<C = any> extends Structure {
-  children?: Slice<C>;
+  children?: InternalSlice<C>;
 }
 
 /**

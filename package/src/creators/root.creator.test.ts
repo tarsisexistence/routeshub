@@ -13,8 +13,7 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -31,8 +30,7 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       [PRIVATE_HUB_KEY]: ROOT_HUB_KEY
     };
@@ -48,24 +46,21 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       wildcard: {
         id: 1,
         parentId: null,
         state: ['**'],
         path: '**',
-        name: 'wildcard',
-        children: null
+        name: 'wildcard'
       },
       map: {
         id: 2,
         parentId: null,
         state: ['/', 'map'],
         path: 'map',
-        name: 'map',
-        children: null
+        name: 'map'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -83,16 +78,14 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       about: {
         id: 2,
         parentId: 1,
         state: ['/', 'about'],
         path: 'about',
-        name: 'about',
-        children: null
+        name: 'about'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -113,24 +106,21 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'home',
-        children: null
+        name: 'home'
       },
       about: {
         id: 2,
         parentId: 1,
         state: ['/', 'about'],
         path: 'about',
-        name: 'about',
-        children: null
+        name: 'about'
       },
       notFound: {
         id: 3,
         parentId: null,
         state: ['**'],
         path: '**',
-        name: 'notFound',
-        children: null
+        name: 'notFound'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -151,32 +141,28 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       user: {
         id: 1,
         parentId: null,
         state: ['/', 'users', ':user'],
         path: 'users/:user',
-        name: 'user',
-        children: null
+        name: 'user'
       },
       country: {
         id: 2,
         parentId: null,
         state: ['/', ':country'],
         path: ':country',
-        name: 'country',
-        children: null
+        name: 'country'
       },
       road: {
         id: 3,
         parentId: null,
         state: ['/', 'place', 'road'],
         path: 'place/road',
-        name: 'road',
-        children: null
+        name: 'road'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -202,32 +188,28 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       user: {
         id: 2,
         parentId: 1,
         state: ['/', 'users', ':user'],
         path: 'users/:user',
-        name: 'user',
-        children: null
+        name: 'user'
       },
       country: {
         id: 3,
         parentId: 1,
         state: ['/', ':country'],
         path: ':country',
-        name: 'country',
-        children: null
+        name: 'country'
       },
       road: {
         id: 4,
         parentId: 1,
         state: ['/', 'place', 'road'],
         path: 'place/road',
-        name: 'road',
-        children: null
+        name: 'road'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -235,7 +217,6 @@ describe('createRoot', () => {
   });
 
   it('should create root with routes and children', () => {
-    // TODO: think about redundant children
     const routes: Routes = [
       {
         path: '',
@@ -255,48 +236,42 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/'],
         path: '',
-        name: 'root',
-        children: null
+        name: 'root'
       },
       about: {
         id: 2,
         parentId: 1,
         state: ['/', 'about'],
         path: 'about',
-        name: 'about',
-        children: null
+        name: 'about'
       },
       map: {
         id: 4,
         parentId: null,
         state: ['/', 'map'],
         path: '',
-        name: 'map',
-        children: null
+        name: 'map'
       },
       location: {
         id: 5,
         parentId: 4,
         state: ['/', 'map', 'location'],
         path: 'location',
-        name: 'location',
-        children: null
+        name: 'location'
       },
       info: {
         id: 6,
         parentId: null,
         state: ['/', 'info'],
         path: 'info',
-        name: 'info',
-        children: null
+        name: 'info'
       },
       wildcard: {
         id: 7,
         parentId: null,
         state: ['**'],
         path: '**',
-        name: 'wildcard',
-        children: null
+        name: 'wildcard'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };
@@ -316,24 +291,21 @@ describe('createRoot', () => {
         parentId: null,
         state: ['/', 'map'],
         path: 'map',
-        name: 'map',
-        children: null
+        name: 'map'
       },
       id: {
         id: 1,
         parentId: null,
         state: ['/', 'map', ':id'],
         path: 'map/:id',
-        name: 'id',
-        children: null
+        name: 'id'
       },
       profile: {
         id: 2,
         parentId: null,
         state: ['/', ':token', 'profile'],
         path: ':token/profile',
-        name: 'profile',
-        children: null
+        name: 'profile'
       },
       [PRIVATE_HUB_KEY]: 'app'
     };

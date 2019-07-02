@@ -18,16 +18,14 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         map: {
           id: 1,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'app'
       },
@@ -37,8 +35,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/', 'about'],
           path: 'about',
-          name: 'about',
-          children: null
+          name: 'about'
         },
         [PRIVATE_HUB_KEY]: 'about'
       }
@@ -65,16 +62,14 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         map: {
           id: 1,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: APP_HUB_KEY
       },
@@ -84,8 +79,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/', 'about'],
           path: 'about',
-          name: 'about',
-          children: null
+          name: 'about'
         },
         [PRIVATE_HUB_KEY]: 'about'
       },
@@ -95,8 +89,7 @@ describe('connectDetached', () => {
           parentId: 1,
           state: ['/', 'map'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'map'
       }
@@ -119,8 +112,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'app'
       },
@@ -130,16 +122,14 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/', 'about'],
           path: 'about',
-          name: 'about',
-          children: null
+          name: 'about'
         },
         map: {
           id: 2,
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'about'
       },
@@ -149,8 +139,7 @@ describe('connectDetached', () => {
           parentId: 2,
           state: ['/', 'map'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'map'
       }
@@ -174,8 +163,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/'],
           path: '',
-          name: 'root',
-          children: null
+          name: 'root'
         },
         [PRIVATE_HUB_KEY]: 'app'
       },
@@ -185,8 +173,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/', 'about'],
           path: 'about',
-          name: 'about',
-          children: null
+          name: 'about'
         },
         [PRIVATE_HUB_KEY]: 'about'
       },
@@ -196,8 +183,7 @@ describe('connectDetached', () => {
           parentId: null,
           state: ['/', 'map'],
           path: 'map',
-          name: 'map',
-          children: null
+          name: 'map'
         },
         [PRIVATE_HUB_KEY]: 'map'
       }
