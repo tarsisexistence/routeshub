@@ -22,7 +22,7 @@ describe('Sliced decorator', () => {
     });
 
     it('should get slice by name', () => {
-      createRoot({ routes });
+      createRoot(routes);
 
       class Example {
         @Sliced('app')
@@ -35,7 +35,7 @@ describe('Sliced decorator', () => {
 
     it('should get slice by key', () => {
       const APP_HUB_KEY = Symbol();
-      createRoot({ routes, key: APP_HUB_KEY });
+      createRoot(routes, { key: APP_HUB_KEY });
 
       class Example {
         @Sliced(APP_HUB_KEY)
@@ -63,8 +63,8 @@ describe('Sliced decorator', () => {
     const mapRoutes: Routes = [{ path: '' }];
 
     it('should get feature slice by name', () => {
-      createRoot({ routes: appRoutes });
-      const mapSlice = createFeature({ routes: mapRoutes });
+      createRoot(appRoutes);
+      const mapSlice = createFeature(mapRoutes);
       connectFeatures('app', { map: mapSlice });
 
       class Example {
@@ -80,8 +80,8 @@ describe('Sliced decorator', () => {
       const APP_HUB_KEY = Symbol();
       const MAP_HUB_KEY = Symbol();
 
-      createRoot({ routes: appRoutes, key: APP_HUB_KEY });
-      const mapSlice = createFeature({ routes: mapRoutes, key: MAP_HUB_KEY });
+      createRoot(appRoutes, { key: APP_HUB_KEY });
+      const mapSlice = createFeature(mapRoutes, { key: MAP_HUB_KEY });
       connectFeatures(APP_HUB_KEY, { map: mapSlice });
 
       class Example {

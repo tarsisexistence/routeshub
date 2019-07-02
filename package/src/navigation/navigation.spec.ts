@@ -62,7 +62,7 @@ describe('Navigation Link Directive', () => {
       imports: [NavigationModule, RouterTestingModule.withRoutes(routes)]
     }).compileComponents();
 
-    createRoot({ routes, key: APP_HUB_KEY });
+    createRoot(routes, { key: APP_HUB_KEY });
   }));
 
   beforeEach(() => {

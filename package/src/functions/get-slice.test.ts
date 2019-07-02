@@ -10,7 +10,7 @@ describe('Slice Getters', () => {
 
   describe('getHubSlices', () => {
     it('should return hub with root slice', () => {
-      createRoot({ routes: appRoutes });
+      createRoot(appRoutes);
       const result = {
         app: {
           root: {
@@ -44,8 +44,8 @@ describe('Slice Getters', () => {
     });
 
     it('should create hub with root and feature', () => {
-      createRoot({ routes: appRoutes });
-      const mapSlice = createFeature({ routes: mapRoutes });
+      createRoot(appRoutes);
+      const mapSlice = createFeature(mapRoutes);
       connectFeatures('app', { map: mapSlice });
       expect(getHubSlices()).toEqual({
         app: {
@@ -92,7 +92,7 @@ describe('Slice Getters', () => {
 
   describe('getSlice', () => {
     it('should get slice by name', () => {
-      createRoot({ routes: appRoutes });
+      createRoot(appRoutes);
       expect(getSlice('app')).toEqual({
         root: {
           id: 0,
@@ -124,7 +124,7 @@ describe('Slice Getters', () => {
 
     it('should get slice by key', () => {
       const APP_HUB_KEY = Symbol();
-      createRoot({ routes: appRoutes, key: APP_HUB_KEY });
+      createRoot(appRoutes, { key: APP_HUB_KEY });
       expect(getSlice(APP_HUB_KEY)).toEqual({
         root: {
           id: 0,
@@ -155,8 +155,8 @@ describe('Slice Getters', () => {
     });
 
     it('should get slice for feature creator and return created slice', () => {
-      createRoot({ routes: appRoutes });
-      const mapSlice = createFeature({ routes: mapRoutes });
+      createRoot(appRoutes);
+      const mapSlice = createFeature(mapRoutes);
       connectFeatures('app', { map: mapSlice });
 
       expect(getSlice('map')).toEqual({

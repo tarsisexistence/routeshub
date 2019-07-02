@@ -16,8 +16,7 @@ export const carRoutes = [
   }
 ];
 
-export const carSlice = createFeature<CarNotes>({
-  routes: carRoutes,
-  detachedFeatures: { details: detailsSlice },
+export const carSlice = createFeature<CarNotes>(carRoutes, {
+  detached: { details: detailsSlice },
   key: CAR_HUB_KEY
 });

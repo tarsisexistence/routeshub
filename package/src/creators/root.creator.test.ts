@@ -6,7 +6,7 @@ import { PRIVATE_HUB_KEY } from '../constants';
 describe('createRoot', () => {
   it('should create root', () => {
     const routes: Routes = [{ path: '' }];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -23,7 +23,7 @@ describe('createRoot', () => {
 
   it('should create root with a few routes', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -58,7 +58,7 @@ describe('createRoot', () => {
     const routes: Routes = [
       { path: '', children: [{ path: '' }, { path: 'about' }] }
     ];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -88,7 +88,7 @@ describe('createRoot', () => {
       { path: ':country' },
       { path: 'place/road' }
     ];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -139,7 +139,7 @@ describe('createRoot', () => {
         ]
       }
     ];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -192,7 +192,7 @@ describe('createRoot', () => {
       { path: 'info' },
       { path: '**' }
     ];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -253,7 +253,7 @@ describe('createRoot', () => {
       { path: 'map/:id' },
       { path: ':token/profile' }
     ];
-    const slice = createRoot({ routes });
+    const slice = createRoot(routes);
     const result = {
       map: {
         id: 0,

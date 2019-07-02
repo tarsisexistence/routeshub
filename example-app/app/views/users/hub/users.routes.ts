@@ -15,7 +15,7 @@ export const usersRoutes = [
   }
 ];
 
-export const usersSlice = createFeature<UsersNotes, UsersChildNotes>({
-  routes: usersRoutes,
-  key: USERS_HUB_KEY
-});
+export const usersSlice = createFeature<UsersNotes, UsersChildNotes>(
+  usersRoutes,
+  { key: USERS_HUB_KEY }
+);

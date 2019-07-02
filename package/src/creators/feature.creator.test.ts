@@ -8,9 +8,9 @@ import { connectFeatures, getSlice } from '../functions';
 describe('createFeature', () => {
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    createRoot({ routes: appRoutes });
+    createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }];
-    const mapSlice = createFeature({ routes: mapRoutes });
+    const mapSlice = createFeature(mapRoutes);
     connectFeatures('app', { map: mapSlice });
     const result = {
       root: {
@@ -28,12 +28,9 @@ describe('createFeature', () => {
 
   it('should create feature with one route with different name options', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    createRoot({ routes: appRoutes, routeNames: { root: 'rootRoute' } });
+    createRoot(appRoutes, { routeName: { root: 'rootRoute' } });
     const mapRoutes: Routes = [{ path: '' }];
-    const mapSlice = createFeature({
-      routes: mapRoutes,
-      routeNames: { root: 'home' }
-    });
+    const mapSlice = createFeature(mapRoutes, { routeName: { root: 'home' } });
     connectFeatures('app', { map: mapSlice });
     const result = {
       home: {
@@ -51,13 +48,13 @@ describe('createFeature', () => {
 
   it('should create feature with a few routes', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    createRoot({ routes: appRoutes });
+    createRoot(appRoutes);
     const mapRoutes: Routes = [
       { path: '' },
       { path: 'location' },
       { path: ':profileId' }
     ];
-    const mapSlice = createFeature({ routes: mapRoutes });
+    const mapSlice = createFeature(mapRoutes);
     connectFeatures('app', { map: mapSlice });
     const result = {
       root: {
@@ -91,12 +88,12 @@ describe('createFeature', () => {
 
   it('should create feature with a few another features', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    createRoot({ routes: appRoutes });
+    createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapSlice = createFeature({ routes: mapRoutes });
+    const mapSlice = createFeature(mapRoutes);
     connectFeatures('app', { map: mapSlice });
     const locationRoutes: Routes = [{ path: '' }];
-    const locationSlice = createFeature({ routes: locationRoutes });
+    const locationSlice = createFeature(locationRoutes);
     connectFeatures('map', { location: locationSlice });
     const result = {
       root: {
