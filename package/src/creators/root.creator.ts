@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { hub, updateHub } from '../hub';
-import { CreatorOptionArgs, Notes, Slice } from '../interfaces';
+import { CreatorOptionArgs, Notes, Slice, Slices } from '../interfaces';
 import { createSlice } from './slice.creator';
 import { createNote } from './note.creator';
 import { connectDetached } from '../functions';
@@ -14,7 +14,7 @@ export function createRoot<R = any, C = any>({
   key,
   detachedFeatures,
   routeNames
-}: { routes: Route[] } & Partial<CreatorOptionArgs>): Slice<R & C> {
+}: { routes: Route[] } & Partial<CreatorOptionArgs>): Slice<R, C> {
   if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
   }
@@ -22,7 +22,7 @@ export function createRoot<R = any, C = any>({
   const defaultRootName = 'app';
   const notes: Notes<R> = createNote<R>(routes, routeNames);
   const rootSlice: Slice<R> = createSlice<R, C>(null, notes);
-  const initialRoutesState: Slice<Slice<R, C | {}>> = updateHub<R>(
+  const initialRoutesState: Slices<Slice<R, C | {}>> = updateHub<R>(
     rootSlice,
     defaultRootName,
     key

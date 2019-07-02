@@ -10,9 +10,7 @@ export const getHubSlices = <T = any>(): Slices<T> => hub.getValue();
 /**
  * returns declared slice
  */
-export const getSlice = <T = any, C = {}, U = Slice<T, C>>(
-  arg: string | symbol
-): U =>
+export const getSlice = <T = any, C = {}>(arg: string | symbol): Slice<T, C> =>
   typeof arg === 'string'
     ? hub.value[arg]
     : Object.values((hub.value as Slices) || {}).find(

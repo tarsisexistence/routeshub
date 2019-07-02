@@ -26,8 +26,8 @@ export type Slices<R = any> = { [key in keyof R]: Slice<R[key]> };
 /**
  * Describes processed slices
  */
-export type LazySlice<R = any, C = {}> = (
-  parentSlice: Structure,
+export type LazySlice<R = any, C = any> = (
+  parentStructure: Structure,
   alternativeName?: string
 ) => Slice<R, C>;
 
@@ -36,6 +36,6 @@ export type LazySlices<R = any> = { [key in keyof R]: LazySlice<R[key]> };
 /**
  * gives optional keys from main and children routes of slice
  */
-export type partialFeatureRoutes<K> = {
-  [key in keyof Partial<K>]: (parentRoute: Structure) => Slice
+export type partialFeatureRoutes<R, C> = {
+  [key in keyof Partial<R & C>]: LazySlice
 };

@@ -1,5 +1,12 @@
 import { Route } from '@angular/router';
-import { CreatorOptionArgs, Notes, Slice, Structure } from '../interfaces';
+import {
+  CreatorOptionArgs,
+  LazySlice,
+  Notes,
+  Slice,
+  Slices,
+  Structure
+} from '../interfaces';
 import { hub, updateHub } from '../hub';
 import { createNote } from './note.creator';
 import { createSlice } from './slice.creator';
@@ -13,22 +20,22 @@ export function createFeature<R = any, C = {}>({
   key,
   detachedFeatures,
   routeNames
-}: { routes: Route[] } & Partial<CreatorOptionArgs>): (
-  parentRoute: Structure,
-  alternativeName?: string
-) => Slice<R & C> {
-  return (parentRoute: Structure, alternativeName?: string): Slice<R & C> => {
-    const name = alternativeName ? alternativeName : parentRoute.name;
+}: { routes: Route[] } & Partial<CreatorOptionArgs>): LazySlice<R, C> {
+  return (
+    parentStructure: Structure,
+    alternativeName?: string
+  ): Slice<R, C> => {
+    const name = alternativeName ? alternativeName : parentStructure.name;
     const notes: Notes<R> = createNote<R>(routes, routeNames);
-    const feature: Slice<R> = createSlice<R, C>(parentRoute, notes);
-    const updatedRouteState: Slice<Slice<R, C | {}>> = updateHub<R>(
+    const feature: Slice<R> = createSlice<R, C>(parentStructure, notes);
+    const updatedRouteState: Slices<Slice<R, C | {}>> = updateHub<R>(
       feature,
       name,
       key || name
     );
     hub.next(updatedRouteState);
 
-    connectDetached(detachedFeatures, parentRoute);
+    connectDetached(detachedFeatures, parentStructure);
 
     return hub.value[name];
   };

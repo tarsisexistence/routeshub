@@ -32,7 +32,7 @@ export interface Hub<E> {
  * describes a Hub's value
  * that has unprocessed children
  */
-export interface InternalStructure<C> extends Structure {
+export interface InternalStructure<C = any> extends Structure {
   children?: Slice<C>;
 }
 

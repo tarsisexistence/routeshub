@@ -1,17 +1,20 @@
-import { Params } from '../interfaces';
+import { Params, Structure } from '../interfaces';
 import { isWildcard, transformPathToState } from './path';
 
 /**
  * Assigns a value based on the parent's  state and a current path
  */
-export const setState = (parentSlice, path) => {
+export const getState = (
+  parentStructure: Structure,
+  path: string
+): string[] => {
   if (isWildcard(path)) {
     return [path];
   }
 
-  return parentSlice === null
+  return parentStructure === null
     ? transformPathToState(path)
-    : transformPathToState(path, parentSlice.state);
+    : transformPathToState(path, parentStructure.state);
 };
 
 const handleParamsPath = (path: string, params: Params): string => {

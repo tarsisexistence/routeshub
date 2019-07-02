@@ -8,7 +8,7 @@ import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
  * returns slice by key
  * from the second slices arg
  */
-const findSlice = (parentKey, slices: Slices): Slice | null =>
+const findSlice = (parentKey: string | symbol, slices: Slices): Slice | null =>
   Object.values(slices || {}).find(
     (slice: Slice) => slice[PRIVATE_HUB_KEY] === parentKey
   );
@@ -21,7 +21,7 @@ const findSlice = (parentKey, slices: Slices): Slice | null =>
  */
 export function connectFeatures<R = any, C = {}>(
   parentSliceOrKey: string | symbol | Slice,
-  features: partialFeatureRoutes<R & C>
+  features: partialFeatureRoutes<R, C>
 ): void {
   const parentKey =
     typeof parentSliceOrKey === 'object'

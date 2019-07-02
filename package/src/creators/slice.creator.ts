@@ -1,6 +1,6 @@
 import { indexer } from '../utils/indexer';
 import { InternalSlice, Notes, Slice, Structure } from '../interfaces';
-import { setState } from '../utils/state';
+import { getState } from '../utils/state';
 
 /**
  * Could be plain Slice or internal Hub
@@ -21,7 +21,7 @@ export function createSlice<R, C = {}>(
       const { children, path, name } = routes[key];
       const route = {
         parentId: parentStructure && parentStructure.id,
-        state: setState(parentStructure, path),
+        state: getState(parentStructure, path),
         id: indexer.next().value,
         path,
         name
