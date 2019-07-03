@@ -5,4 +5,4 @@ export interface CarNotes {
   year: Note;
 }
 
-export const CAR_HUB_KEY = Symbol();
+export const CAR_NOTES_KEY = Symbol();

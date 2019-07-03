@@ -1,5 +1,5 @@
 import { InternalSlice, LazySlices } from './slice.interfaces';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 
 /**
  * basic hubs structure
@@ -48,7 +48,7 @@ export interface DefaultNameOptions {
  * private local hubs identifier
  */
 export interface PrivateHubKey {
-  [PRIVATE_HUB_KEY]: string | symbol;
+  [PRIVATE_NOTES_KEY]: string | symbol;
 }
 
 /**

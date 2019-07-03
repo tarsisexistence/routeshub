@@ -11,9 +11,9 @@ import {
 } from 'lib';
 
 import { Hub } from '../../../routing/routing.hub';
-import { APP_HUB_KEY, AppChildNotes, AppNotes } from '../../../routing/hub';
+import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../routing/hub';
 import { AboutNotes } from '../../../views/about/hub';
-import { CAR_HUB_KEY, CarNotes } from '../../../views/car/hub';
+import { CAR_NOTES_KEY, CarNotes } from '../../../views/car/hub';
 
 @Component({
   selector: 'app-header',
@@ -28,10 +28,10 @@ export class HeaderComponent implements OnInit {
   public hub: Slices<Hub>;
 
   // getting slice from function by key (slice name is available too)
-  public car = getSlice<CarNotes>(CAR_HUB_KEY);
+  public car = getSlice<CarNotes>(CAR_NOTES_KEY);
 
   // getting slice by key
-  @Sliced(APP_HUB_KEY)
+  @Sliced(APP_NOTES_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
 
   // getting slice by slice name

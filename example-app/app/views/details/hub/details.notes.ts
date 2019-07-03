@@ -5,4 +5,4 @@ export interface DetailsNotes {
   info: Note;
 }
 
-export const DETAILS_HUB_KEY = Symbol();
+export const DETAILS_NOTES_KEY = Symbol();

@@ -4,4 +4,4 @@ export interface InfoNotes {
   root: Note;
 }
 
-export const INFO_HUB_KEY = Symbol();
+export const INFO_NOTES_KEY = Symbol();

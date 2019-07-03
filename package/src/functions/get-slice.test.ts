@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 import { connectFeatures } from './connect-features';
 import { getHubSlices, getSlice } from './get-slice';
 import { createFeature, createRoot } from '../creators';
@@ -34,7 +34,7 @@ describe('Slice Getters', () => {
             path: 'map',
             name: 'map'
           },
-          [PRIVATE_HUB_KEY]: 'app'
+          [PRIVATE_NOTES_KEY]: 'app'
         }
       };
       expect(getHubSlices()).toEqual(result);
@@ -67,7 +67,7 @@ describe('Slice Getters', () => {
             path: 'map',
             name: 'map'
           },
-          [PRIVATE_HUB_KEY]: 'app'
+          [PRIVATE_NOTES_KEY]: 'app'
         },
         map: {
           root: {
@@ -77,7 +77,7 @@ describe('Slice Getters', () => {
             path: '',
             name: 'root'
           },
-          [PRIVATE_HUB_KEY]: 'map'
+          [PRIVATE_NOTES_KEY]: 'map'
         }
       });
     });
@@ -108,14 +108,14 @@ describe('Slice Getters', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       });
     });
 
     it('should get slice by key', () => {
-      const APP_HUB_KEY = Symbol();
-      createRoot(appRoutes, { key: APP_HUB_KEY });
-      expect(getSlice(APP_HUB_KEY)).toEqual({
+      const APP_NOTES_KEY = Symbol();
+      createRoot(appRoutes, { key: APP_NOTES_KEY });
+      expect(getSlice(APP_NOTES_KEY)).toEqual({
         root: {
           id: 0,
           parentId: null,
@@ -137,7 +137,7 @@ describe('Slice Getters', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: APP_HUB_KEY
+        [PRIVATE_NOTES_KEY]: APP_NOTES_KEY
       });
     });
 
@@ -154,7 +154,7 @@ describe('Slice Getters', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       });
     });
   });

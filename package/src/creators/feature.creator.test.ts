@@ -2,7 +2,7 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 import { connectFeatures, getHubSlices, getSlice } from '../functions';
 
 describe('createFeature', () => {
@@ -20,7 +20,7 @@ describe('createFeature', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: 'map'
+      [PRIVATE_NOTES_KEY]: 'map'
     };
     expect(getSlice('map')).toEqual(result);
   });
@@ -54,7 +54,7 @@ describe('createFeature', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       },
       map: {
         home: {
@@ -64,7 +64,7 @@ describe('createFeature', () => {
           path: '',
           name: 'home'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       }
     };
     expect(getHubSlices()).toEqual(result);
@@ -102,7 +102,7 @@ describe('createFeature', () => {
         path: ':profileId',
         name: 'profileId'
       },
-      [PRIVATE_HUB_KEY]: 'map'
+      [PRIVATE_NOTES_KEY]: 'map'
     };
     expect(getSlice('map')).toEqual(result);
   });
@@ -124,7 +124,7 @@ describe('createFeature', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: 'location'
+      [PRIVATE_NOTES_KEY]: 'location'
     };
     expect(getSlice('location')).toEqual(result);
   });

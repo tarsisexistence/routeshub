@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
@@ -15,15 +15,15 @@ describe('createRoot', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
 
   it('should create root with key', () => {
     const routes: Routes = [{ path: '' }];
-    const ROOT_HUB_KEY = Symbol();
-    const slice = createRoot(routes, { key: ROOT_HUB_KEY });
+    const ROOT_NOTES_KEY = Symbol();
+    const slice = createRoot(routes, { key: ROOT_NOTES_KEY });
     const result = {
       root: {
         id: 0,
@@ -32,7 +32,7 @@ describe('createRoot', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: ROOT_HUB_KEY
+      [PRIVATE_NOTES_KEY]: ROOT_NOTES_KEY
     };
     expect(slice).toEqual(result);
   });
@@ -62,7 +62,7 @@ describe('createRoot', () => {
         path: 'map',
         name: 'map'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -87,7 +87,7 @@ describe('createRoot', () => {
         path: 'about',
         name: 'about'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -122,7 +122,7 @@ describe('createRoot', () => {
         path: '**',
         name: 'notFound'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -164,7 +164,7 @@ describe('createRoot', () => {
         path: 'place/road',
         name: 'road'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -211,7 +211,7 @@ describe('createRoot', () => {
         path: 'place/road',
         name: 'road'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -273,7 +273,7 @@ describe('createRoot', () => {
         path: '**',
         name: 'wildcard'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });
@@ -307,7 +307,7 @@ describe('createRoot', () => {
         path: ':token/profile',
         name: 'profile'
       },
-      [PRIVATE_HUB_KEY]: 'app'
+      [PRIVATE_NOTES_KEY]: 'app'
     };
     expect(slice).toEqual(result);
   });

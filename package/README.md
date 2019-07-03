@@ -26,7 +26,7 @@ npm install routeshub
 ```typescript
 ...
 
-import { APP_HUB_KEY, AppNotes } from './app.notes';
+import { APP_NOTES_KEY, AppNotes } from './app.notes';
 
 export const routes: Routes = [
   {
@@ -45,7 +45,7 @@ export const routes: Routes = [
 ];
 
 // creating the root slice
-export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
+export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_NOTES_KEY);
 ```
 
 #### Getting interface and unique slice key in **[module]**.notes.ts
@@ -63,14 +63,14 @@ export interface AppNote {
 * Provides opportunity to get slice in decorator
 * instead of slice name (string)
 */
-export const APP_HUB_KEY = Symbol();
+export const APP_NOTES_KEY = Symbol();
 ```
 
 #### Component
 ```typescript
 ... 
 import { getSlice, Slice, Sliced } from 'routeshub';
-import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
+import { AppNotes, APP_NOTES_KEY } from '../hub/app.notes';
 
 @Component({
   selector: 'app-header',
@@ -83,7 +83,7 @@ import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
 })
 export class HeaderComponent {
   // getting slice by key
-  @Sliced(APP_HUB_KEY)
+  @Sliced(APP_NOTES_KEY)
   public app: Slice<AppNotes>;
   
   //or
@@ -94,7 +94,7 @@ export class HeaderComponent {
    
    // getting slice from fn
    @Sliced('app')
-   public app = getSlice<AppNotes>(APP_HUB_KEY);
+   public app = getSlice<AppNotes>(APP_NOTES_KEY);
 }
 ```
 
@@ -226,11 +226,11 @@ export const appSlice =
 
 // or
 export const appSlice = 
-    createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' }, APP_HUB_KEY);
+    createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' }, APP_NOTES_KEY);
 
 // or
 export const appSlice = 
-    createRoot<AppNotes, AppChildNotes>(routes, APP_HUB_KEY);
+    createRoot<AppNotes, AppChildNotes>(routes, APP_NOTES_KEY);
 ```
 
 In turn, the **feature** creator is responsible for relations between parent and child nodes
@@ -260,7 +260,7 @@ There are several ways to get a slice:
 
 -  **Slice const** - this came from create function and you can import this one into component.
 ```typescript
-export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
+export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_NOTES_KEY);
 ```
 
 -  **@Sliced decorator**. Apply this decorator on the component's prop. You should pass the key or slice name.
@@ -270,7 +270,7 @@ export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KE
 })
 export class HeaderComponent {
   // getting slice by key
-  @Sliced(APP_HUB_KEY)
+  @Sliced(APP_NOTES_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
 
   // getting slice by slice name
@@ -286,7 +286,7 @@ export class HeaderComponent {
 })
 export class HeaderComponent {
   // getting slice by key
-  private app = getSlice<AppNotes, AppChildNotes>(APP_HUB_KEY);
+  private app = getSlice<AppNotes, AppChildNotes>(APP_NOTES_KEY);
 
   // getting slice by slice name
   private about = getSlice<AboutNotes>('about');

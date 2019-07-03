@@ -9,4 +9,4 @@ export interface UsersNotes {
   users: Note;
 }
 
-export const USERS_HUB_KEY = Symbol();
+export const USERS_NOTES_KEY = Symbol();

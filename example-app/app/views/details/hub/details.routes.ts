@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { connectFeatures, createFeature } from 'lib';
-import { DETAILS_HUB_KEY, DetailsNotes } from './details.notes';
+import { DETAILS_NOTES_KEY, DetailsNotes } from './details.notes';
 import { DetailsComponent } from '../components/details.component';
 import { infoSlice } from '../../info/hub';
 
@@ -17,9 +17,9 @@ export const detailsRoutes: Routes = [
 ];
 
 export const detailsSlice = createFeature<DetailsNotes>(detailsRoutes, {
-  key: DETAILS_HUB_KEY
+  key: DETAILS_NOTES_KEY
 });
 
-connectFeatures<DetailsNotes, {}>(DETAILS_HUB_KEY, {
+connectFeatures<DetailsNotes, {}>(DETAILS_NOTES_KEY, {
   info: infoSlice
 });

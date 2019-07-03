@@ -1,6 +1,6 @@
 import { createFeature } from 'lib';
 import { CarComponent } from '../components/carComponent';
-import { CAR_HUB_KEY, CarNotes } from './car.notes';
+import { CAR_NOTES_KEY, CarNotes } from './car.notes';
 import { detailsSlice } from '../../details/hub';
 
 export const carRoutes = [
@@ -18,5 +18,5 @@ export const carRoutes = [
 
 export const carSlice = createFeature<CarNotes>(carRoutes, {
   detached: { details: detailsSlice },
-  key: CAR_HUB_KEY
+  key: CAR_NOTES_KEY
 });

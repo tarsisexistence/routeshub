@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { connectFeatures } from './connect-features';
 import { getHubSlices, getSlice } from './get-slice';
 import { createFeature, createRoot } from '../creators';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 
 describe('connectFeatures', () => {
   const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
@@ -28,7 +28,7 @@ describe('connectFeatures', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       },
       map: {
         root: {
@@ -38,7 +38,7 @@ describe('connectFeatures', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       }
     };
     expect(getHubSlices()).toEqual(result);
@@ -56,16 +56,16 @@ describe('connectFeatures', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: 'map'
+      [PRIVATE_NOTES_KEY]: 'map'
     };
     expect(getSlice('map')).toEqual(result);
   });
 
   it('should invoke connectFeatures by key', () => {
-    const APP_HUB_KEY = Symbol();
-    createRoot(appRoutes, { key: APP_HUB_KEY });
+    const APP_NOTES_KEY = Symbol();
+    createRoot(appRoutes, { key: APP_NOTES_KEY });
     const mapSlice = createFeature(mapRoutes);
-    connectFeatures(APP_HUB_KEY, { map: mapSlice });
+    connectFeatures(APP_NOTES_KEY, { map: mapSlice });
     const result = {
       root: {
         id: 2,
@@ -74,7 +74,7 @@ describe('connectFeatures', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: 'map'
+      [PRIVATE_NOTES_KEY]: 'map'
     };
     expect(getSlice('map')).toEqual(result);
   });

@@ -3,7 +3,7 @@
 import { Routes } from '@angular/router';
 import { Sliced } from './sliced.decorator';
 import { createFeature, createRoot } from '../creators';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 import { connectFeatures } from '../functions/connect-features';
 
 describe('Sliced decorator', () => {
@@ -17,7 +17,7 @@ describe('Sliced decorator', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: identifier
+      [PRIVATE_NOTES_KEY]: identifier
     });
 
     it('should get slice by name', () => {
@@ -33,16 +33,16 @@ describe('Sliced decorator', () => {
     });
 
     it('should get slice by key', () => {
-      const APP_HUB_KEY = Symbol();
-      createRoot(routes, { key: APP_HUB_KEY });
+      const APP_NOTES_KEY = Symbol();
+      createRoot(routes, { key: APP_NOTES_KEY });
 
       class Example {
-        @Sliced(APP_HUB_KEY)
+        @Sliced(APP_NOTES_KEY)
         prop;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult(APP_HUB_KEY));
+      expect(instance.prop).toEqual(getResult(APP_NOTES_KEY));
     });
   });
 
@@ -55,7 +55,7 @@ describe('Sliced decorator', () => {
         path: '',
         name: 'root'
       },
-      [PRIVATE_HUB_KEY]: identifier
+      [PRIVATE_NOTES_KEY]: identifier
     });
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
@@ -75,20 +75,20 @@ describe('Sliced decorator', () => {
     });
 
     it('should get feature slice by key', () => {
-      const APP_HUB_KEY = Symbol();
-      const MAP_HUB_KEY = Symbol();
+      const APP_NOTES_KEY = Symbol();
+      const MAP_NOTES_KEY = Symbol();
 
-      createRoot(appRoutes, { key: APP_HUB_KEY });
-      const mapSlice = createFeature(mapRoutes, { key: MAP_HUB_KEY });
-      connectFeatures(APP_HUB_KEY, { map: mapSlice });
+      createRoot(appRoutes, { key: APP_NOTES_KEY });
+      const mapSlice = createFeature(mapRoutes, { key: MAP_NOTES_KEY });
+      connectFeatures(APP_NOTES_KEY, { map: mapSlice });
 
       class Example {
-        @Sliced(MAP_HUB_KEY)
+        @Sliced(MAP_NOTES_KEY)
         prop;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult(MAP_HUB_KEY));
+      expect(instance.prop).toEqual(getResult(MAP_NOTES_KEY));
     });
   });
 });

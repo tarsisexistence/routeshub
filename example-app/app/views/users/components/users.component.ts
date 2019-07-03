@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getSlice } from 'lib';
-import { USERS_HUB_KEY } from '../hub/users.notes';
+import { USERS_NOTES_KEY } from '../hub/users.notes';
 
 @Component({
   selector: 'app-users',
@@ -20,7 +20,7 @@ import { USERS_HUB_KEY } from '../hub/users.notes';
   `
 })
 export class UsersComponent implements OnInit {
-  public usersSlice = getSlice(USERS_HUB_KEY);
+  public usersSlice = getSlice(USERS_NOTES_KEY);
   public users: string[];
 
   public ngOnInit(): void {

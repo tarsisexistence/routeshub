@@ -14,7 +14,7 @@ import { NavigationModule } from './navigation.module';
 import { createRoot } from '../creators/root.creator';
 import { Routes } from '@angular/router';
 
-const APP_HUB_KEY = Symbol();
+const APP_NOTES_KEY = Symbol();
 
 @Component({
   selector: 'app-header',
@@ -27,7 +27,7 @@ const APP_HUB_KEY = Symbol();
   `
 })
 class TestComponent {
-  public app = getSlice(APP_HUB_KEY);
+  public app = getSlice(APP_NOTES_KEY);
 }
 
 describe('Navigation Link Directive', () => {
@@ -62,7 +62,7 @@ describe('Navigation Link Directive', () => {
       imports: [NavigationModule, RouterTestingModule.withRoutes(routes)]
     }).compileComponents();
 
-    createRoot(routes, { key: APP_HUB_KEY });
+    createRoot(routes, { key: APP_NOTES_KEY });
   }));
 
   beforeEach(() => {

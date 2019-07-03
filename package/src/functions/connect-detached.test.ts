@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { getHubSlices } from './get-slice';
 import { createFeature, createRoot } from '../creators';
 import { connectFeatures } from './connect-features';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 
 describe('connectDetached', () => {
   it('should contain root and detached feature', () => {
@@ -27,7 +27,7 @@ describe('connectDetached', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       },
       about: {
         about: {
@@ -37,7 +37,7 @@ describe('connectDetached', () => {
           path: 'about',
           name: 'about'
         },
-        [PRIVATE_HUB_KEY]: 'about'
+        [PRIVATE_NOTES_KEY]: 'about'
       }
     };
     expect(getHubSlices()).toEqual(result);
@@ -49,12 +49,12 @@ describe('connectDetached', () => {
     const aboutRoutes: Routes = [{ path: 'about' }];
     const aboutSlice = createFeature(aboutRoutes);
     const mapSlice = createFeature(mapRoutes);
-    const APP_HUB_KEY = Symbol();
+    const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, {
-      key: APP_HUB_KEY,
+      key: APP_NOTES_KEY,
       detached: { about: aboutSlice }
     });
-    connectFeatures(APP_HUB_KEY, { map: mapSlice });
+    connectFeatures(APP_NOTES_KEY, { map: mapSlice });
     const result = {
       app: {
         root: {
@@ -71,7 +71,7 @@ describe('connectDetached', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: APP_HUB_KEY
+        [PRIVATE_NOTES_KEY]: APP_NOTES_KEY
       },
       about: {
         about: {
@@ -81,7 +81,7 @@ describe('connectDetached', () => {
           path: 'about',
           name: 'about'
         },
-        [PRIVATE_HUB_KEY]: 'about'
+        [PRIVATE_NOTES_KEY]: 'about'
       },
       map: {
         root: {
@@ -91,7 +91,7 @@ describe('connectDetached', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       }
     };
     expect(getHubSlices()).toEqual(result);
@@ -114,7 +114,7 @@ describe('connectDetached', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       },
       about: {
         about: {
@@ -131,7 +131,7 @@ describe('connectDetached', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'about'
+        [PRIVATE_NOTES_KEY]: 'about'
       },
       map: {
         root: {
@@ -141,7 +141,7 @@ describe('connectDetached', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       }
     };
     expect(getHubSlices()).toEqual(result);
@@ -165,7 +165,7 @@ describe('connectDetached', () => {
           path: '',
           name: 'root'
         },
-        [PRIVATE_HUB_KEY]: 'app'
+        [PRIVATE_NOTES_KEY]: 'app'
       },
       about: {
         about: {
@@ -175,7 +175,7 @@ describe('connectDetached', () => {
           path: 'about',
           name: 'about'
         },
-        [PRIVATE_HUB_KEY]: 'about'
+        [PRIVATE_NOTES_KEY]: 'about'
       },
       map: {
         map: {
@@ -185,7 +185,7 @@ describe('connectDetached', () => {
           path: 'map',
           name: 'map'
         },
-        [PRIVATE_HUB_KEY]: 'map'
+        [PRIVATE_NOTES_KEY]: 'map'
       }
     };
     expect(getHubSlices()).toEqual(result);

@@ -1,7 +1,7 @@
 import { finalize, find } from 'rxjs/operators';
 import { Slice, Slices } from '../interfaces';
 import { hub } from '../hub';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
 
 /**
@@ -10,7 +10,7 @@ import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
  */
 const findSlice = (parentKey: string | symbol, slices: Slices): Slice | null =>
   Object.values(slices || {}).find(
-    (slice: Slice) => slice[PRIVATE_HUB_KEY] === parentKey
+    (slice: Slice) => slice[PRIVATE_NOTES_KEY] === parentKey
   );
 
 /**

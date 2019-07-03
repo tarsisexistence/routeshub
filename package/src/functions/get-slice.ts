@@ -1,5 +1,5 @@
 import { Slice, Slices } from '../interfaces';
-import { PRIVATE_HUB_KEY } from '../constants';
+import { PRIVATE_NOTES_KEY } from '../constants';
 import { hub } from '../hub';
 
 /**
@@ -14,5 +14,5 @@ export const getSlice = <T = any, C = {}>(arg: string | symbol): Slice<T, C> =>
   typeof arg === 'string'
     ? hub.value[arg]
     : Object.values((hub.value as Slices) || {}).find(
-        (slice: Slice) => slice[PRIVATE_HUB_KEY] === arg
+        (slice: Slice) => slice[PRIVATE_NOTES_KEY] === arg
       );

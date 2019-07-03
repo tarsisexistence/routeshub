@@ -18,4 +18,4 @@ export interface AppNotes {
 /**
  * Declares identifier of module routes
  */
-export const APP_HUB_KEY = Symbol();
+export const APP_NOTES_KEY = Symbol();

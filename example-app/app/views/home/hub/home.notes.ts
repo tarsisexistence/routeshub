@@ -4,4 +4,4 @@ export interface HomeNotes {
   home: Note;
 }
 
-export const HOME_HUB_KEY = Symbol();
+export const HOME_NOTES_KEY = Symbol();
