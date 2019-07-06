@@ -17,11 +17,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "package/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "tsConfig": "package/configs/tsconfig.spec.json"
+            "configPath": "./configs/jest.config.js"
           }
         },
         "lint": {
@@ -45,8 +43,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss",
-          "changeDetection": "OnPush"
+          "styleext": "scss"
         }
       },
       "architect": {
@@ -67,8 +64,7 @@
               }
             ],
             "styles": [
-              "example-app/styles.scss",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+              "example-app/styles.scss"
             ],
             "scripts": []
           },
@@ -117,33 +113,14 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "example-app/test.ts",
-            "tsConfig": "example-app/tsconfig.spec.json",
-            "karmaConfig": "./karma.conf.js",
-            "styles": [
-              "example-app/styles.scss",
-              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
-            ],
-            "scripts": [],
-            "assets": [
-              "example-app/favicon.ico",
-              "example-app/assets",
-              {
-                "glob": "**/*",
-                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
-                "output": "/assets/"
-              }
-            ]
-          }
+          "builder": "@angular-builders/jest:run",
+          "options": {}
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "example-app/tsconfig.app.json",
-              "example-app/tsconfig.spec.json"
+              "example-app/tsconfig.app.json"
             ],
             "exclude": [
               "**/node_modules/**"

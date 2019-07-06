@@ -11,4 +11,4 @@ export interface AboutNotes {
 /**
  * unique local hubs key
  */
-export const ABOUT_HUB_KEY = Symbol();
+export const ABOUT_NOTES_KEY = Symbol();

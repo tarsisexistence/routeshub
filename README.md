@@ -22,11 +22,9 @@ npm install routeshub
 
 ## Usage
 
-#### Simple **[module]**.routes.ts with slice declaration in the end
+#### Declare a simple **[module]**.routes.ts file
 ```typescript
 ...
-
-import { APP_HUB_KEY, AppNotes } from './app.notes';
 
 export const routes: Routes = [
   {
@@ -43,34 +41,69 @@ export const routes: Routes = [
     redirectTo: ''
   }
 ];
-
-// creating the root slice
-export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
 ```
 
-#### Getting interface and unique slice key in **[module]**.notes.ts
+#### Getting interface based on our routes and unique slice key (as symbol) in **[module]**.notes.ts
 ```typescript
 import { Note } from 'routeshub';
 
-export interface AppNote {
+export interface AppNotes {
   root: Note; // === ''
-  about: Note;
+  about: Note; // === 'about'
   wildcard: Note; // === '**'
 }
 
-/** 
-* Optional
-* Provides opportunity to get slice in decorator
-* instead of slice name (string)
-*/
-export const APP_HUB_KEY = Symbol();
+export const APP_NOTES_KEY = Symbol();
 ```
+
+#### Creating a hub **[module]**.hub.ts file
+```typescript
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NavigationModule, connectFeatures, createRoot } from 'lib';
+import { routes } from './app.routes';
+import { APP_NOTES_KEY, AppNotes } from './app.notes';
+import { aboutSlice } from '../views/about/hub/about.hub';
+
+/**
+ * Creates stateful named App routes
+ */
+createRoot<AppNotes>(routes, { key: APP_NOTES_KEY });
+
+/**
+ * connects features which have attached relation
+ * for this module
+ *
+ * {
+ *  path: 'about'
+ *  loadChildren: loadChildren: () => import('app/views/about/about.module').then(m => m.AboutModule)
+ * }
+ */
+connectFeatures<AppNotes>(APP_NOTES_KEY, {
+  about: aboutSlice
+});
+
+/**
+ * Routing module contains its configuration
+ * and providers (resolvers, guard, interceptors etc)
+ * 
+ * Exports RouterModule
+ * and NavigationModule for navLink directives
+ */
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule, NavigationModule]
+})
+export class AppHub {}
+```
+
 
 #### Component
 ```typescript
-... 
+...
+
 import { getSlice, Slice, Sliced } from 'routeshub';
-import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
+import { AppNotes, APP_NOTES_KEY } from '../hub/app.notes';
 
 @Component({
   selector: 'app-header',
@@ -83,7 +116,7 @@ import { AppNotes, APP_HUB_KEY } from '../hub/app.notes';
 })
 export class HeaderComponent {
   // getting slice by key
-  @Sliced(APP_HUB_KEY)
+  @Sliced(APP_NOTES_KEY)
   public app: Slice<AppNotes>;
   
   //or
@@ -92,9 +125,10 @@ export class HeaderComponent {
    @Sliced('app')
    public app: Slice<AppNotes>;
    
-   // getting slice from fn
-   @Sliced('app')
-   public app = getSlice<AppNotes>(APP_HUB_KEY);
+   //or
+   
+   // getting slice from getSlice function
+   public app = getSlice<AppNotes>(APP_NOTES_KEY);
 }
 ```
 
@@ -106,23 +140,63 @@ You can find a more complex example in this [repo](https://github.com/maktarsis/
 <br/>
 
 # Hub
-Routeshub offers an approach (pattern) to structure routing in the application. You can see it in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app).
+Routeshub offers an approach (pattern) to structure routing in the application. You can explore it in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app).
 
-This application should have directory app/routing that declares a starting configuration of the application via the routing module.
-
-There you should have:
-- routing module file
-- routing hub file (optional) - declare the whole project hub with one nesting level of all slices
-- other routing configuration folders (resolvers, guards, strategies) - manage other angular/routing api
-- hub folder - an entry point of the hub, declare app.routes as usual + 1 line of code and app.notes (interfaces and key) files.
-
-Feature modules of the application should also contain a hub folder that has **[featureName].notes** for interfaces and key/name and **[featureName].routes** files.
-
+**Guideline**:
+- Each module in application has a hub directory
+- hub directory contains three files that configure routing of the current module
+1. hub - sets routing configuration (forRoot/forFeature) and exports RoutingModule and NavigationModule
+2. notes - describes module's routes and creates a unique key
+3. routes - declares routes of current module
 <br/>
 
 # Concepts
 
+## Slice
+`Slice` is a modular entity that contains stateful module routes.
+
+There are two ways to create the `slice`:
+- **createRoot**
+- **createFeature**
+
+Each function takes the `routes: Routes` and an object of options 
+- key - accepts string or symbol
+- routeNames - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
+- detached - accepts _lazy slice_ which produces **feature creator**. Detached option uses only when one or more features are eager modules which connect to some module and those eager module has its own paths.
+
+**Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
+
+**Usage example**:
+```typescript
+ createRoot<AppNotes, AppChildNotes>(routes, {
+   key: APP_NOTES_KEY,
+   routeNames: { root: 'home', wildcard: 'notFound' }
+ });
+```
+
+In turn, the **feature** creator is responsible for creating lazy slices which should be connected to parent slice
+
+```typescript
+export const routes: Routes = [
+  { path: '', component: AboutComponent }
+];
+
+/** 
+  * when module has only one root ('') path
+  * you can declare short type
+*/
+export type AboutNotes = Root;
+
+const ABOUT_NOTES_KEY = Symbol();
+
+export const aboutSlice: LazySlice<AboutNotes> = createFeature<AboutNotes>(aboutNote, { key: ABOUT_NOTES_KEY });
+```
+
+<br/>
+
 ## Note
+This section is optional to understand how routes transform into the keys.
+
 The `Note` is input to reproduce the slice. Each `Note` represents one route and each module collects the route in the `Notes` bunch.
 
 The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened to three dots.
@@ -151,7 +225,7 @@ export const routes: Routes = [
   {
     path: 'person/:person-age', // name => personAge
     ...
-  }
+  },
   {
     path: '**',  // name => wildcard (by default with possibility to customize). In example we'll rename to 'notFound'
     redirectTo: ''
@@ -200,101 +274,9 @@ export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 
 
 <br/>
 
-## Slice
-`Slice` is a modular entity that contains stateful module routes.
-
-There are two ways to create the `slice`:
-- **createRoot**
-- **createFeature**
-
-Each function takes the `routes: Routes` and list of options ({ root: 'NAME OF EMPTY PATH, wildcard: 'NAME OF ** PATH'}) to provide route name options as you have seen above (where we customized the route name by path) and local hub key as you have seen in the example. It provides an opportunity to fetch slice by key instead of slice name.
-
-**Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` and produces a `slice` which will be used for subsequent feature creators to connect each other as a single tree.
-
-```typescript
-// possible records
-
-export const appSlice = createRoot(routes);
-
-// or
-export const appSlice: Slice<AppNotes, AppChildNotes> = 
-    createRoot<AppNotes,AppChildNotes>(routes);
-
-// or 
-export const appSlice = 
-    createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' });
-
-// or
-export const appSlice = 
-    createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' }, APP_HUB_KEY);
-
-// or
-export const appSlice = 
-    createRoot<AppNotes, AppChildNotes>(routes, APP_HUB_KEY);
-```
-
-In turn, the **feature** creator is responsible for relations between parent and child nodes
-
-```typescript
-export const routes: Routes = [
-  { path: '', component: AboutComponent }
-];
-
-/** 
-  * when module has only one root ('') path
-  * you can declare short type
-*/
-export type AboutNote = Root;
-
-export const aboutSlice: Slice<AboutNote> = createFeature<AboutNote>(
-  appSlice.about,
-  aboutNote
-);
-```
-
-<br/>
-
-## Union
-`Union` is an entity that connects several selected slices. It takes an object of keys-values. 
-Key - route name. Value - its slice.
-
-It allows performing flexible development steps:
-```typescript
-export const exampleUnion = createUnion({
-  app: appSlice,
-  about: aboutSlice,
-});
-```
-
-```typescript
-...
-
-@Component({
-  ...
-})
-export class ExampleComponent {
-  ...
-  
-  // or even declare in the straightforward way
-  public union = createUnion({ 
-    app: appSlice, 
-    about: aboutSlice
-   });
-   
-   ...
-}
-```
-
-<br/>
-
 ## Get Slice
 Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
 There are several ways to get a slice:
-
--  **Slice const** - this came from create function and you can import this one into component.
-```typescript
-export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KEY);
-```
 
 -  **@Sliced decorator**. Apply this decorator on the component's prop. You should pass the key or slice name.
 ```typescript
@@ -303,7 +285,7 @@ export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(routes, APP_HUB_KE
 })
 export class HeaderComponent {
   // getting slice by key
-  @Sliced(APP_HUB_KEY)
+  @Sliced(APP_NOTES_KEY)
   private app: Slice<AppNotes, AppChildNotes>;
 
   // getting slice by slice name
@@ -319,29 +301,13 @@ export class HeaderComponent {
 })
 export class HeaderComponent {
   // getting slice by key
-  private app = getSlice<AppNotes, AppChildNotes>(APP_HUB_KEY);
+  private app = getSlice<AppNotes, AppChildNotes>(APP_NOTES_KEY);
 
   // getting slice by slice name
   private about = getSlice<AboutNotes>('about');
 }
 ```
 
--  **Union** - This is similar to slice const way, but creates a union from any quantity of slices.
-```typescript
-@Component({
-  ...
-})
-export class HeaderComponent {
-    public union = createUnion({
-      app: appSlice,
-      about: aboutSlice,
-      automobiles: automobileSlice,
-      bikes: bikeSlice,
-      bolids: bolidSlice
-    });
-}
-
-```
 -  **getHubSlices** - This is a function that returns all declared slices in the project.
 ```typescript
 @Component({
@@ -357,18 +323,9 @@ export class HeaderComponent {
 ## Navigation
 **Routeshub** provides directives and functions to make your experience with navigation better.
 
-Before you start, don't forget to import **NavigationModule**:
-```typescript
-import { NavigationModule } from 'routeshub';
+Before you start, don't forget to import **NavigationModule**.
+It's a good practice importing NavigationModule into the **[module]**.hub.ts file
 
-@NgModule({
-  imports: [
-    NavigationModule
-  ],
-})
-export class AppModule {
-}
-```
 
 ### navLink
 ```html
@@ -395,7 +352,6 @@ export class AppModule {
 
 ### forwardParams
 A function that inserts parameters into route's state and outputs a ready-made dynamic state. 
-It allows you to forward as many object parameters as you like which means that you can pass more than one object with parameters. 
 
 ```typescript
 ...

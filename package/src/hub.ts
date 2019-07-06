@@ -1,25 +1,25 @@
 import { BehaviorSubject } from 'rxjs';
-import { Slice } from './interfaces/slice.interfaces';
+import { Slice, Slices } from './interfaces/slice.interfaces';
 import { entitify } from './utils/entityfy';
-import { PRIVATE_HUB_KEY } from './constants';
+import { PRIVATE_NOTES_KEY } from './constants';
 
 /**
  * stores routes states at the same level
  */
-export const hub = new BehaviorSubject(null);
+export const hub = new BehaviorSubject<Slices>(null);
 
 /**
  * Returns the next hubs value
  */
-export function nextHubValue<R, C = {}>(
-  routes: Slice<R>,
+export function updateHub<R, C>(
+  routes: Slice<R, C>,
   name: string,
   key: symbol | string
-): Slice<Slice<R, C>> {
+): Slices<Slice<R, C>> {
   const slice: Slice<R> = entitify<R, C>(routes);
-  slice[PRIVATE_HUB_KEY] = key;
+  slice[PRIVATE_NOTES_KEY] = key || name;
 
   return Object.assign({}, hub.value, {
     [name]: slice
-  }) as Slice<Slice<R, C>>;
+  }) as Slices<Slice<R, C>>;
 }

@@ -1,20 +1,16 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import en from '@angular/common/locales/en';
-import { NavigationModule } from 'lib';
 
-import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
-
-import { RoutingModule } from '../routing/routing.module';
+import { HomeModule } from '../views/home/home.module';
+import { UsersModule } from '../views/users/users.module';
+import { AppHub } from '../hub/app.hub';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
-import { ViewComponent } from './containers/view/view.component';
-
-registerLocaleData(en);
+import { ViewComponent } from './components/view/view.component';
 
 const components = [
   HeaderComponent,
@@ -36,13 +32,12 @@ const components = [
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgZorroAntdModule,
-    RoutingModule,
-    NavigationModule
+    AppHub,
+    HomeModule,
+    UsersModule
   ],
   declarations: components,
-  exports: [RoutingModule, ...components],
-  providers: [{ provide: NZ_I18N, useValue: en_US }]
+  exports: [AppHub, ...components]
 })
 export class CoreModule {
   constructor(

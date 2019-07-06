@@ -1,4 +1,5 @@
-import { DefaultRouteName } from '../interfaces';
+import { DefaultNameOptions } from '../interfaces';
+import { isWildcard } from './path';
 
 function fixPathName(path: string): string {
   let newPath = '';
@@ -33,33 +34,13 @@ function fixPathName(path: string): string {
  */
 export function setRouteName(
   path: string,
-  nameOptions: DefaultRouteName = {}
+  nameOptions: DefaultNameOptions = {}
 ): string {
   if (path === '') {
     return nameOptions.root || 'root';
-  } else if (path === '**') {
+  } else if (isWildcard(path)) {
     return nameOptions.wildcard || 'wildcard';
   } else {
     return fixPathName(path);
   }
-}
-
-export function assignCreatorArgs<R>(
-  args: (symbol | DefaultRouteName)[],
-  name: string
-): { key: symbol | string; options: DefaultRouteName } {
-  const res = {} as { key: symbol | string; options: DefaultRouteName };
-
-  args.forEach(arg => {
-    if (typeof arg === 'symbol') {
-      res.key = arg;
-    } else if (typeof arg === 'object') {
-      res.options = arg;
-    }
-  });
-
-  return {
-    key: res.key || name,
-    options: res.options || {}
-  };
 }

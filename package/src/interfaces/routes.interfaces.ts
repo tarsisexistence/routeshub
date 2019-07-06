@@ -27,4 +27,6 @@ export interface Note<C = {}> {
 /**
  * Describes a bunch of Note
  */
-export type Notes<R, C = {}> = { [key in keyof R]: Note<C> | RootNote<C> };
+export type Notes<R = any, C = any> = {
+  [key in keyof R]: Note<C> | RootNote<C>
+};

@@ -1,9 +1,24 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  template: `
+    <footer class="footer">Routeshub</footer>
+  `,
+  styles: [
+    `
+      :host {
+        position: absolute;
+        bottom: 20px;
+        left: 47%;
+      }
+
+      .footer {
+        display: block;
+        margin: 0 auto;
+        width: 30px;
+      }
+    `
+  ]
 })
 export class FooterComponent {}

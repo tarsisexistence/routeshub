@@ -1,23 +1,8 @@
-.ant-layout-header {
+.header {
   display: flex;
   justify-content: space-between;
-}
-
-.ant-layout-header, .ant-menu-dark {
   background: #434245;
-}
-
-.ant-menu.ant-menu-dark .ant-menu-item-selected {
-  background: initial;
-}
-
-.ant-menu-item {
-  color: #00c984;
-
-  &:hover {
-    color: #00c984;
-    transform: scale(1.05);
-  }
+  padding: 0 50px;
 }
 
 .logo {
@@ -33,8 +18,30 @@
 
 .menu {
   line-height: 64px;
+  background: #434245;
+
+  a {
+    color: #00c984;
+    text-decoration: none;
+  }
+
+  a:not(:last-of-type)::after {
+    content: '|';
+    color: white;
+    margin: 0 7px;
+    transform: scaleY(6);
+    display: inline-block;
+  }
+
+  a:hover {
+    transform: scale(1.05);
+  }
 }
 
-.my-active-class {
+
+
+
+
+.active {
   font-weight: 900;
 }

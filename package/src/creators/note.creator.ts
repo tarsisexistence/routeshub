@@ -1,19 +1,19 @@
 import { Route } from '@angular/router';
-import { DefaultRouteName, Note } from '../interfaces';
+import { DefaultNameOptions, Note, Notes } from '../interfaces';
 import { setRouteName } from '../utils/name';
 
 /**
  * creates a route note
  */
-export const createNote = <R = {}>(
+export const createNote = <R = any, C = any>(
   routes: Route[],
-  nameOptions: DefaultRouteName = {}
-): R =>
+  nameOptions: DefaultNameOptions = {}
+): Notes<R, C> =>
   routes.reduce(
-    (acc: R, route: Route): R => {
+    (acc: Notes<R>, route: Route): Notes<R> => {
       const note: Note = {
         path: route.path,
-        name: route['name'] || setRouteName(route.path, nameOptions)
+        name: setRouteName(route.path, nameOptions)
       };
 
       if (route.children) {
@@ -22,5 +22,5 @@ export const createNote = <R = {}>(
 
       return { ...acc, [note.name]: note };
     },
-    {} as R
+    {} as Notes<R>
   );

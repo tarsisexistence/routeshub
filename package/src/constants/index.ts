@@ -1,1 +1,1 @@
-export const PRIVATE_HUB_KEY = '_key';
+export const PRIVATE_NOTES_KEY = '_key';
