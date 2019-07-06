@@ -161,7 +161,7 @@ There are two ways to create the `slice`:
 
 Each function takes the `routes: Routes` and an object of options 
 - key - accepts string or symbol
-- routeNames - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
+- routeName - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
 - detached - accepts _lazy slice_ which produces **feature creator**. Detached option uses only when one or more features are eager modules which connect to some module and those eager module has its own paths.
 
 **Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
@@ -170,7 +170,7 @@ Each function takes the `routes: Routes` and an object of options
 ```typescript
  createRoot<AppNotes, AppChildNotes>(routes, {
    key: APP_NOTES_KEY,
-   routeNames: { root: 'home', wildcard: 'notFound' }
+   routeName: { root: 'home', wildcard: 'notFound' }
  });
 ```
 
@@ -269,7 +269,7 @@ export interface AppNotes extends Root<AppChildNotes> {
 
 
 
-export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { wildcard: 'notFound' });
+export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { routeName: { wildcard: 'notFound' }});
 ```
 
 <br/>
