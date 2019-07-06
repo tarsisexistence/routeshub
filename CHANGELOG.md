@@ -1,3 +1,12 @@
+# 3.0.0 2019-06-21
+
+- changed a way of slice connection [BREAKING CHANGE]
+- fixed detached connection
+- createFeature now returns LazySlice
+- changed style guide
+- raised the test cover
+- updated documentation
+
 # 2.1.3 2019-06-21
 
 - insignificant api changes
