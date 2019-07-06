@@ -7,14 +7,14 @@ import { connectFeatures, createRoot } from 'lib';
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
 import { AboutNotes } from '../views/about/hub/about.notes';
-import { aboutSlice } from '../views/about/hub/about-routing.module';
-import { carSlice } from '../views/car/hub/car-routing.module';
+import { aboutSlice } from '../views/about/hub/about.hub';
+import { carSlice } from '../views/car/hub/car.hub';
 import { CarNotes } from '../views/car/hub/car.notes';
 import { DetailsNotes } from '../views/details/hub/details.notes';
-import { homeSlice } from '../views/home/hub/home-routing.module';
+import { homeSlice } from '../views/home/hub/home.hub';
 import { HomeNotes } from '../views/home/hub/home.notes';
 import { InfoNotes } from '../views/info/hub/info.notes';
-import { usersSlice } from '../views/users/hub/users-routing.module';
+import { usersSlice } from '../views/users/hub/users.hub';
 
 /**
  * Creates stateful named App routes

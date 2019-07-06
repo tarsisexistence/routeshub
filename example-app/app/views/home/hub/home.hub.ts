@@ -12,4 +12,4 @@ export const homeSlice = createFeature<HomeNotes>(homeRoutes, {
   imports: [RouterModule.forChild(homeRoutes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class HomeHub {}

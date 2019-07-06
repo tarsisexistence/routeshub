@@ -12,4 +12,4 @@ export const aboutSlice = createFeature<AboutNotes>(aboutRoutes, {
   imports: [RouterModule.forChild(aboutRoutes)],
   exports: [RouterModule]
 })
-export class AboutRoutingModule {}
+export class AboutHub {}

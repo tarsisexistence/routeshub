@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { connectFeatures, createFeature } from 'lib';
 import { DETAILS_NOTES_KEY, DetailsNotes } from './details.notes';
-import { infoSlice } from '../../info/hub/info-routing.module';
+import { infoSlice } from '../../info/hub/info.hub';
 import { detailsRoutes } from './details.routes';
 
 export const detailsSlice = createFeature<DetailsNotes>(detailsRoutes, {
@@ -17,4 +17,4 @@ connectFeatures<DetailsNotes, {}>(DETAILS_NOTES_KEY, {
   imports: [RouterModule.forChild(detailsRoutes)],
   exports: [RouterModule]
 })
-export class DetailsRoutingModule {}
+export class DetailsHub {}

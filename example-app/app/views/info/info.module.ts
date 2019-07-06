@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InfoComponent } from './components/info.component';
-import { InfoRoutingModule } from './hub/info-routing.module';
+import { InfoHub } from './hub/info.hub';
 
 @NgModule({
-  imports: [CommonModule, InfoRoutingModule],
+  imports: [CommonModule, InfoHub],
   declarations: [InfoComponent]
 })
 export class InfoModule {}
