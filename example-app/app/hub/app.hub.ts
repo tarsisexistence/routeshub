@@ -2,7 +2,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { connectFeatures, createRoot } from 'lib';
+import { connectFeatures, createRoot, NavigationModule } from 'lib';
 
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
@@ -70,6 +70,6 @@ export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
  */
 @NgModule({
   imports: [routing],
-  exports: [RouterModule]
+  exports: [RouterModule, NavigationModule]
 })
-export class RoutingModule {}
+export class AppHub {}

@@ -10,7 +10,7 @@ import {
   Slices
 } from 'lib';
 
-import { Hub } from '../../../hub/routing.module';
+import { Hub } from '../../../hub/app.hub';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../hub/app.notes';
 import { AboutNotes } from '../../../views/about/hub/about.notes';
 import { CAR_NOTES_KEY, CarNotes } from '../../../views/car/hub/car.notes';

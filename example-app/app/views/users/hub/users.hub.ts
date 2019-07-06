@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { createFeature } from 'lib';
+import { createFeature, NavigationModule } from 'lib';
 import { USERS_NOTES_KEY, UsersChildNotes, UsersNotes } from './users.notes';
 import { usersRoutes } from './users.routes';
 
@@ -11,6 +11,6 @@ export const usersSlice = createFeature<UsersNotes, UsersChildNotes>(
 
 @NgModule({
   imports: [RouterModule.forChild(usersRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule, NavigationModule]
 })
 export class UsersHub {}
