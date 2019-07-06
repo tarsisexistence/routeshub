@@ -1,10 +1,9 @@
 {
-  "linters": {
-    "*.{ts,js}": [
-      "prettier --write",
-      "tslint",
-      "git add"
-    ],
-    ".*{rc,json}": "jsonlint"
-  }
+  "*.{ts,js}": [
+    "prettier --write",
+    "tslint",
+    "git add"
+  ],
+  ".*{rc,json}": "jsonlint"
 }
+
