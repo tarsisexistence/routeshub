@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { DetailsModule } from '../details/details.module';
-import { carRoutes } from './hub';
 import { CarComponent } from './components/carComponent';
+import { CarRoutingModule } from './hub/car-routing.module';
 
 @NgModule({
   declarations: [CarComponent],
-  imports: [CommonModule, DetailsModule, RouterModule.forChild(carRoutes)]
+  imports: [CommonModule, DetailsModule, CarRoutingModule]
 })
 export class CarModule {}

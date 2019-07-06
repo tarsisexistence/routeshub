@@ -1,13 +1,5 @@
 import { Routes } from '@angular/router';
-
-import { connectFeatures, createRoot } from 'lib';
-
-import { ViewComponent } from '../../core/components/view/view.component';
-import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
-import { aboutSlice } from '../../views/about/hub';
-import { carSlice } from '../../views/car/hub';
-import { homeSlice } from '../../views/home/hub';
-import { usersSlice } from '../../views/users/hub';
+import { ViewComponent } from '../core/components/view/view.component';
 
 /**
  * Declares routes on App level
@@ -40,19 +32,3 @@ export const routes: Routes = [
     ]
   }
 ];
-
-/**
- * Creates stateful named App routes
- */
-createRoot<AppNotes, AppChildNotes>(routes, {
-  key: APP_NOTES_KEY,
-  detached: {
-    home: homeSlice,
-    users: usersSlice
-  }
-});
-
-connectFeatures<AppNotes, AppChildNotes>(APP_NOTES_KEY, {
-  about: aboutSlice,
-  car: carSlice
-});

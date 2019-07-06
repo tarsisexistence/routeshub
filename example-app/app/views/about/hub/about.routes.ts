@@ -12,7 +12,3 @@ export const aboutRoutes: Routes = [
     component: AboutComponent
   }
 ];
-
-export const aboutSlice = createFeature<AboutNotes>(aboutRoutes, {
-  key: ABOUT_NOTES_KEY
-});

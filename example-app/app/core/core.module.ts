@@ -8,7 +8,7 @@ import { NavigationModule } from 'lib';
 
 import { HomeModule } from '../views/home/home.module';
 import { UsersModule } from '../views/users/users.module';
-import { RoutingModule } from '../routing/routing.module';
+import { RoutingModule } from '../hub/routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
