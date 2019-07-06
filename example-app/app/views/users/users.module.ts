@@ -4,10 +4,10 @@ import { UsersComponent } from './components/users.component';
 import { UserComponent } from './components/user.component';
 import { ProfileComponent } from './components/profile.component';
 import { NavigationModule } from 'routeshub';
-import { UsersRoutingModule } from './hub/users-routing.module';
+import { UsersHub } from './hub/users.hub';
 
 @NgModule({
-  imports: [CommonModule, NavigationModule, UsersRoutingModule],
+  imports: [CommonModule, NavigationModule, UsersHub],
   declarations: [UsersComponent, UserComponent, ProfileComponent]
 })
 export class UsersModule {}

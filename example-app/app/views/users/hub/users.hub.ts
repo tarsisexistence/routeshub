@@ -13,4 +13,4 @@ export const usersSlice = createFeature<UsersNotes, UsersChildNotes>(
   imports: [RouterModule.forChild(usersRoutes)],
   exports: [RouterModule]
 })
-export class UsersRoutingModule {}
+export class UsersHub {}

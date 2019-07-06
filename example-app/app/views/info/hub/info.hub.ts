@@ -12,4 +12,4 @@ export const infoSlice = createFeature<InfoNotes>(infoRoutes, {
   imports: [RouterModule.forChild(infoRoutes)],
   exports: [RouterModule]
 })
-export class InfoRoutingModule {}
+export class InfoHub {}
