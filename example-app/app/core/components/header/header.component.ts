@@ -10,10 +10,10 @@ import {
   Slices
 } from 'lib';
 
-import { Hub } from '../../../routing/routing.hub';
-import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../routing/hub';
-import { AboutNotes } from '../../../views/about/hub';
-import { CAR_NOTES_KEY, CarNotes } from '../../../views/car/hub';
+import { Hub } from '../../../hub/routing.module';
+import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../hub/app.notes';
+import { AboutNotes } from '../../../views/about/hub/about.notes';
+import { CAR_NOTES_KEY, CarNotes } from '../../../views/car/hub/car.notes';
 
 @Component({
   selector: 'app-header',
