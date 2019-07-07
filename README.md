@@ -148,6 +148,7 @@ Routeshub offers an approach (pattern) to structure routing in the application. 
 1. hub - sets routing configuration (forRoot/forFeature) and exports RoutingModule and NavigationModule
 2. notes - describes module's routes and creates a unique key
 3. routes - declares routes of current module
+
 <br/>
 
 # Concepts
