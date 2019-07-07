@@ -1,4 +1,11 @@
-# 🌹 Feature
+---
+name: "\U0001F339 Feature"
+about: Suggest an idea for Routeshub
+title: ''
+labels: enhancement
+assignees: ''
+
+---
 
 ### What is this feature?
 Feature details

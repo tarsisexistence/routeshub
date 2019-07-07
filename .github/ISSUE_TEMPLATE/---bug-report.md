@@ -1,4 +1,11 @@
-# 🐛 Bug Report
+---
+name: "\U0001F41B Bug Report"
+about: Create a report to help improve Routeshub
+title: ''
+labels: bug
+assignees: ''
+
+---
 
 ### Description of the problem
 A clear and concise description of what the bug is.
