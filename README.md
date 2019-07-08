@@ -399,6 +399,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/maktarsis"><img src="https://avatars1.githubusercontent.com/u/21989873?v=4" width="100px;" alt="Max Tarsis"/><br /><sub><b>Max Tarsis</b></sub></a><br /><a href="https://github.com/maktarsis/routeshub/commits?author=maktarsis" title="Code">💻</a> <a href="#projectManagement-maktarsis" title="Project Management">📆</a> <a href="https://github.com/maktarsis/routeshub/commits?author=maktarsis" title="Documentation">📖</a> <a href="#ideas-maktarsis" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://medium.com/@LayZeeDK"><img src="https://avatars1.githubusercontent.com/u/6364586?v=4" width="100px;" alt="Lars Gyrup Brink Nielsen"/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/maktarsis/routeshub/commits?author=LayZeeDK" title="Code">💻</a> <a href="#ideas-LayZeeDK" title="Ideas, Planning, & Feedback">🤔</a> <a href="#tool-LayZeeDK" title="Tools">🔧</a></td>
+  </tr>
+</table>
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
