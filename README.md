@@ -1,4 +1,5 @@
 # Routeshub
+[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 
 <a href="https://routeshub.gitbook.io/docs"><img src="https://github.com/maktarsis/routeshub/raw/master/docs/assets/logo.png" align="right" alt=""></a>
 
@@ -375,13 +376,6 @@ export class ExampleComponent {
 
 <br/>
 
-## Contributing
-Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-If you made a PR, make sure to update tests as appropriate and keep the examples consistent.
-
-<br/>
-
 ## Changelog
 
 Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md).
@@ -390,3 +384,20 @@ Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/C
 
 ## License
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+
+## Contributing
+Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+If you made a PR, make sure to update tests as appropriate and keep the examples consistent.
+
+<br/>
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

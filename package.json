@@ -19,7 +19,10 @@
     "prettier": "prettier",
     "// - EXAMPLE-APP DOC - //": "------------------------------",
     "doc:build": "npx compodoc -p example-app/tsconfig.app.json --theme=readthedocs -n \\\"example-app\\\"",
-    "doc:serve": "npx compodoc -s"
+    "doc:serve": "npx compodoc -s",
+    "// - CONTRIBUTORS - //": "------------------------------",
+    "contributors:add": "npx all-contributors add",
+    "contributors:generate": "npx all-contributors generate"
   },
   "dependencies": {
     "@angular/animations": "8.1.0",
@@ -49,6 +52,7 @@
     "@types/jasminewd2": "2.0.6",
     "@types/jest": "24.0.15",
     "@types/node": "8.10.46",
+    "all-contributors-cli": "6.7.0",
     "codelyzer": "5.1.0",
     "husky": "3.0.0",
     "jasmine-core": "3.4.0",

@@ -1,0 +1,13 @@
+{
+  "projectName": "routeshub",
+  "projectOwner": "maktarsis",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md",
+    "package/README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": []
+}
