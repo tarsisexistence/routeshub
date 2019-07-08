@@ -1,5 +1,4 @@
 # Routeshub
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 
 <a href="https://routeshub.gitbook.io/docs"><img src="https://github.com/maktarsis/routeshub/raw/master/docs/assets/logo.png" align="right" alt=""></a>
 
@@ -384,6 +383,8 @@ Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/C
 
 ## License
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
+
+<br/>
 
 ## Contributing
 Contributions are welcome. For major changes, please open an issue first to discuss what you would like to change.
