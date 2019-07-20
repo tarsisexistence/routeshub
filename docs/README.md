@@ -4,11 +4,11 @@
 
 **Routeshub** is a route management library and pattern for **Angular.** 
 
-Acts as a hub, which brings more control, stable and predictable interaction with project code base through declarative design
+It acts as a hub, which brings more control, stable and predictable interaction with project code base through declarative design.
 
 ## What is it
 
-⚙ A route manager. Designed to improve improve reliability and speed of development
+⚙ A route manager. Designed to improve improve reliability and speed of development.
 
 🔩 Engineered as a plugin. It was designed to be added at any time during the development process, even for separate complicated project parts.
 
@@ -16,9 +16,7 @@ Acts as a hub, which brings more control, stable and predictable interaction wit
 
 ## Support
 
-Originally it was invented for **@angular/router.**
-
-Support for other routing libraries is the goal**.**
+Originally it was invented for **@angular/router**, but support for other routing libraries is the goal**.**
 
 ## **Contributing**
 

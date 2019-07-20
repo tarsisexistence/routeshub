@@ -49,7 +49,7 @@ export const routes: Routes = [
 // note of those routes generates under the hood of createRoot/createFeature functions
 export const appSlice = createRoot(routes);
 
-// it will produce an object equals to
+// now, appSlice is equal to
 {
   root: { path: '', name: 'root', children: [
     {
@@ -69,7 +69,7 @@ First, routeshub converts paths into camelCase keys.
 
 Variables in paths are recognizable. 
 
-Notes interfaces could have shortcuts for reusable reason. Root interface just adds `root: Note`  to common interface. Also, root path can have children routes. If so, then just pass generic children `Root<Childnotee>` as illustrated above.
+Notes interfaces could have shortcuts for reusable reason. Root interface just adds `root: Note`  to common interface. Also, root path can have children routes. If so, then just pass generic children `Root<Childnote>` as illustrated above.
 
 If you want to know more, then make sure to read **API** section 
 

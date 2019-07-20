@@ -1,22 +1,22 @@
 # Navigating
 
-First, we need to import **NavigationModule**
+First, make sure you have already exported **NavigationModule** in the hub file.
 
 {% code-tabs %}
-{% code-tabs-item title="app.module.ts" %}
+{% code-tabs-item title="any.hub.ts" %}
 ```typescript
 ...
 import { NavigationModule } from 'routeshub';
 ...
 
 @NgModule({
-  imports: [
+  exports: [
     ...
     NavigationModule
   ],
   ...
 })
-export class AppModule {
+export class AnyHub {
 }
 ```
 {% endcode-tabs-item %}
@@ -28,8 +28,7 @@ As was mentioned previously, there are some different approaches of how you can 
 
 * decorator @Sliced - apply the decorator on component property  \(preferable\)
 * getSlice - function that works as well as @Sliced decorator.
-* separately - get access for each slice
-* hub - declare and get access for all slices
+* getHubSlices - returns all declared slices
 
 ### @Sliced decorator
 
@@ -102,42 +101,7 @@ export class HeaderComponent {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-### Separate 
-
-{% code-tabs %}
-{% code-tabs-item title="header.component.ts" %}
-```typescript
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Slice } from 'routeshub';
-import { appSlice } from '../../routing/hub/app.routes';
-import { AppNotes } from '../../routing/hub/app.notes';
-
-@Component({
-  selector: 'app-header',
-  template: `
-  <nav>
-    <a navLink="{{ app.root.state }}">Home</a>
-    <a [navLink]="app.auth.state">Auth</a>
-    <button (click)=profile()>Profile</button>
-  </nav>
-`
-})
-export class HeaderComponent {
-  public app: Slice<AppNotes> = appSlice;
-  
-  constructor(private router: Router) {}
-  
-  profile(): void {
-    const url = forwardParams(this.app.id.state, { id: 0 });
-    this.router.navigate(url).catch(console.error);
-  }
-}
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-### Hub
+### getHubSlices
 
 {% code-tabs %}
 {% code-tabs-item title="header.component.ts" %}

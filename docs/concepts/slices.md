@@ -1,80 +1,64 @@
 # Slices
 
-Slice is a modular entity that contains stateful module routes
+Slice is a modular entity. It contains the stateful module routes
 
-**There are two ways to create the slice:**
+There are two create functions:
 
-* createRoot
-* createFeature
+* **createRoot** - creates a root \(app\) / tree base
+* **createFeature** - creates a lazy slice which connects one by one to parent slice \(root slice or lazy slice\)
 
-**Root creator** _****_invokes only once to initialize the _hub_ in application. It takes initial \(app\) routes, name options\(optional\) and key\(optional\) and produces the slice which will be used for subsequent feature creators.
+**Root creator** _****_invokes only once to initialize the _hub_ of application. It takes initial \(app\) routes and options. 
 
 In turn the **feature creator** is responsible for relations between parent and child nodes \(slices\).
 
-## Creating Root
+As mentioned above, creator functions have the second argument of options which is object of:
 
-Usage example:
+* **key** - slice identifier
+* **routeName** - accepts an object with optional custom names for wildcard path \('\*\*'\) and root path \(''\)
+* **detached** - routes of eager modules which were imported into the parent module, but have own routes file, that's why they have no direct relations with paths of parent module.  
 
-{% code-tabs %}
-{% code-tabs-item title="app.routes.ts" %}
-```typescript
-import { createRoot } from 'routeshub';
-import { AppNotes, APP_HUB_KEY } from './app.notes';
-import { ViewComponent } from '../view/view.component';
-
-export const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    component: ViewComponent,
-  {
-    path: 'auth'
-    pathMatch: 'full',
-    loadChildren: 'app/views/auth/auth.module#AuthModule'
-  }
-  {
-    path: '**',
-    redirectTo: ''
-  }
-];
-
-export const appSlice: Slice<AppNotes> = createRoot<AppNotes>(
-  routes,
-  { root: 'home', // path '' will be named as 'home' instead of default 'root'
-    wildcard: 'notFound' // path '**' (any mismatch) will be named as 'notFound' instead of default 'wildcard'
-  },
-  APP_HUB_KEY
-);
-```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
-
-## Creating Feature
-
-Takes two required arguments and two generic types \(the second is optional for children\). The first argument is a prop of parent slice that links to this module. The second one are routes of the current module. Last argument is optional for hub key. 
-
-Usage example:
+### Creating Root
 
 ```typescript
-import { createFeature, createNote, Root, Slice } from 'routeshub';
-import { appSlice } from '../../../routing/hub/app.routes';
-import { AboutNotes, ABOUT_HUB_KEY } from './about.notes';
-import { AboutComponent } from './about.component';
-
-export const aboutRoutes: Routes = [
+createRoot<AppNotes, AppChildNotes>(
+  appRoutes, 
   {
-    path: ''
-    component: AboutComponent
+      /**
+      * key prop is familiar for all of us
+      * it provides a possibility to identify the slice
+      */
+      key: APP_NOTES_KEY,
+      /**
+      * you may be confused about routeName property of options
+      * by default route path '' transforms into property 'root'
+      * and '**' transforms into property 'wildcard'
+      */
+      routeName: { root: 'home', wildcard: 'notFound' },
+      /**
+      * detached prop are routes which were imported into the module
+      * but have own routes file and have no direct relations with
+      * paths in module they were imported
+      */
+      detached: {
+          location: locationSlice
+      }
   }
-];
-
-export const aboutSlice: Slice<AboutNotes> = createFeature<AboutNotes>(
-  appSlice.about,
-  aboutRoutes,
-  ABOUT_HUB_KEY
 );
-
 ```
 
-As we noticed earlier,  **feature creator** needs the parent slice to connect it with with its note entity.
+### Creating Feature
+
+```typescript
+export const locationSlice: LazySlice<
+    AboutNotes, AboutChildNotes
+> = createFeature<LocationNotes>(
+    locationRoutes, 
+    { 
+        key: LOCATION_NOTES_KEY,
+        detached: {
+            map: mapSlice
+        }
+    } 
+);
+```
 

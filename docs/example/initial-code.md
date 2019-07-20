@@ -2,10 +2,11 @@
 
 Let's imagine, we have such routes:
 
-* App 
-* About \(App's child\)
-* Auth
-* NotFound
+* **App** - root
+* **About** - App's child
+* **Auth** - lazy module that has direct connection to App
+* **Location** - detached eager module that imported into App and has own routes
+* **NotFound** - wildcard, default behavior for not matched paths
 
 ## Initial Code
 
@@ -85,7 +86,20 @@ export const authRoutes: Routes = [
 ];
 ```
 {% endcode-tabs-item %}
+
+{% code-tabs-item title="location.routes.ts" %}
+```typescript
+import { LocationComponent  } from './location.component';
+
+export const locationRoutes: Routes = [
+  {
+    path: ''
+    component: LocationComponent
+  }
+];
+```
+{% endcode-tabs-item %}
 {% endcode-tabs %}
 
-Now we're going to integrate **routeshub** into the project
+Now we're going to integrate **routeshub** into the project.
 
