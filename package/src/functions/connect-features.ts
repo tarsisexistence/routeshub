@@ -3,12 +3,13 @@ import { Slice, Slices } from '../interfaces';
 import { hub } from '../hub';
 import { PRIVATE_NOTES_KEY } from '../constants';
 import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
+import { privateNotesKey } from '../interfaces/common.interfaces';
 
 /**
  * returns slice by key
  * from the second slices arg
  */
-const findSlice = (parentKey: string | symbol, slices: Slices): Slice | null =>
+const findSlice = (parentKey: privateNotesKey, slices: Slices): Slice | null =>
   Object.values(slices || {}).find(
     (slice: Slice) => slice[PRIVATE_NOTES_KEY] === parentKey
   );
@@ -16,11 +17,11 @@ const findSlice = (parentKey: string | symbol, slices: Slices): Slice | null =>
 /**
  * connects feature slices
  * to parent slice
- * which route paths described
+ * which route paths are described
  * directly in the parent routes
  */
 export function connectFeatures<R = any, C = {}>(
-  key: string | symbol,
+  key: privateNotesKey,
   features: partialFeatureRoutes<R, C>
 ): void {
   hub

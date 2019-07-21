@@ -1,22 +1,21 @@
 import {
   InternalStructure,
-  PrivateHubKey,
+  PrivateNotesKey,
   Structure
 } from './common.interfaces';
+
+type StructureKeys<R, C, S> = { [key in keyof (R & C)]: S };
 
 /**
  * Describes unprocessed slices
  */
-export type InternalSlice<R, C = {}> = {
-  [key in keyof (R & C)]: InternalStructure<any>
-};
+export type InternalSlice<R, C = {}> = StructureKeys<R, C, InternalStructure>;
 
 /**
  * Describes processed slices
  */
-export type Slice<R = any, C = {}> = {
-  [key in keyof (R & C)]: Structure & (PrivateHubKey | any)
-};
+export type Slice<R = any, C = {}> = StructureKeys<R, C, Structure> &
+  PrivateNotesKey;
 
 /**
  * Describes a bunch of slices
@@ -24,13 +23,16 @@ export type Slice<R = any, C = {}> = {
 export type Slices<R = any> = { [key in keyof R]: Slice<R[key]> };
 
 /**
- * Describes processed slices
+ * Describes unprocessed feature (lazy) slice
  */
 export type LazySlice<R = any, C = any> = (
   parentStructure: Structure,
   alternativeName?: string
 ) => Slice<R, C>;
 
+/**
+ * Describes a bunch of lazy slices
+ */
 export type LazySlices<R = any> = { [key in keyof R]: LazySlice<R[key]> };
 
 /**
