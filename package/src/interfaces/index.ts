@@ -4,7 +4,7 @@ export {
   Params,
   Hub,
   DefaultNameOptions,
-  PrivateHubKey,
+  PrivateNotesKey,
   CreatorOptionArgs
 } from './common.interfaces';
 

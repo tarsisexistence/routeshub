@@ -10,7 +10,7 @@ export const createNote = <R = any, C = any>(
   nameOptions: DefaultNameOptions = {}
 ): Notes<R, C> =>
   routes.reduce(
-    (acc: Notes<R>, route: Route): Notes<R> => {
+    (acc: Notes<R, C>, route: Route): Notes<R, C> => {
       const note: Note = {
         path: route.path,
         name: setRouteName(route.path, nameOptions)
@@ -22,5 +22,5 @@ export const createNote = <R = any, C = any>(
 
       return { ...acc, [note.name]: note };
     },
-    {} as Notes<R>
+    {} as Notes<R, C>
   );

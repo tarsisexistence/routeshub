@@ -37,18 +37,20 @@ export interface InternalStructure<C = any> extends Structure {
 }
 
 /**
- * describes Route Name options
+ * describes route name options
  */
 export interface DefaultNameOptions {
   root?: string;
   wildcard?: string;
 }
 
+export type privateNotesKey = string | symbol;
+
 /**
  * private local hubs identifier
  */
-export interface PrivateHubKey {
-  [PRIVATE_NOTES_KEY]: string | symbol;
+export interface PrivateNotesKey {
+  [PRIVATE_NOTES_KEY]?: privateNotesKey;
 }
 
 /**
@@ -56,7 +58,7 @@ export interface PrivateHubKey {
  * in root/feature creators
  */
 export interface CreatorOptionArgs {
-  key: symbol | string;
+  key: privateNotesKey;
   routeName: DefaultNameOptions;
   detached: LazySlices;
 }

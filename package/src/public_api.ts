@@ -13,13 +13,4 @@ export { hub } from './hub';
 
 export { NavigationModule } from './navigation/navigation.module';
 
-export {
-  Root,
-  Note,
-  Notes,
-  Slice,
-  Slices,
-  LazySlice,
-  LazySlices,
-  Params
-} from './interfaces';
+export { Root, Note, Slice, Slices, LazySlice, Params } from './interfaces';

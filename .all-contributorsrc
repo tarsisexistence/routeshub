@@ -1,0 +1,38 @@
+{
+  "projectName": "routeshub",
+  "projectOwner": "maktarsis",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md",
+    "package/README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "maktarsis",
+      "name": "Max Tarsis",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/21989873?v=4",
+      "profile": "https://github.com/maktarsis",
+      "contributions": [
+        "code",
+        "projectManagement",
+        "doc",
+        "ideas"
+      ]
+    },
+    {
+      "login": "LayZeeDK",
+      "name": "Lars Gyrup Brink Nielsen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6364586?v=4",
+      "profile": "https://medium.com/@LayZeeDK",
+      "contributions": [
+        "code",
+        "ideas",
+        "tool"
+      ]
+    }
+  ],
+  "commitConvention": "Angular"
+}

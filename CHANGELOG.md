@@ -1,3 +1,11 @@
+# 3.0.1 2019-07-21
+
+- updated documentation
+- refactored and reduced api
+- added contributors board
+- added test commit check
+
+
 # 3.0.0 2019-06-21
 
 - changed a way of slice connection [BREAKING CHANGE]
@@ -6,6 +14,7 @@
 - changed style guide
 - raised the test cover
 - updated documentation
+
 
 # 2.1.3 2019-06-21
 
