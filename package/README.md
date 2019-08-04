@@ -4,11 +4,11 @@
 
 A **route manager** and pattern for **[Angular]**
 
-* **Manages.** Introduces a new route management experience leading to better application control.
+* **Manager.** Introduces a new route management experience leading to better application control.
 * **Navigation.** Provides declarative experience of navigation.
 * **Fast.** In addition to speeding up development, it works as fast as it does without it.
 * **Pluggable.** Engineered as a plug-in. Designed to be added at any time during the development process.
-* **Pattern.** Provides unified approach to manage the routing of the entire application.
+* **Pattern.** Provides a unified approach managing the routing of the entire application.
 * **Small.** ~3.5kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
 
 Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
@@ -409,3 +409,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+<br/>
