@@ -50,7 +50,7 @@
     "@compodoc/compodoc": "1.1.10",
     "@types/jasmine": "3.3.13",
     "@types/jasminewd2": "2.0.6",
-    "@types/jest": "24.0.16",
+    "@types/jest": "24.0.17",
     "@types/node": "8.10.46",
     "all-contributors-cli": "6.8.1",
     "codelyzer": "5.1.0",
