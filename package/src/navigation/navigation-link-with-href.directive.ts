@@ -12,9 +12,9 @@ import { forwardParams } from '../functions/forward-params';
 })
 export class NavigationLinkWithHref {
   @HostBinding('attr.target') @Input() target!: string;
-  @Input() queryParams!: { [k: string]: any };
+  @Input() queryParams: { [k: string]: any } = {};
+  @Input() queryParamsHandling: QueryParamsHandling = '';
   @Input() fragment!: string;
-  @Input() queryParamsHandling!: QueryParamsHandling;
   @Input() preserveFragment!: boolean;
   @Input() skipLocationChange!: boolean;
   @Input() replaceUrl!: boolean;
@@ -59,6 +59,8 @@ export class NavigationLinkWithHref {
     const extras = {
       skipLocationChange: checkAttrActivity(this.skipLocationChange),
       replaceUrl: checkAttrActivity(this.replaceUrl),
+      queryParams: this.queryParams,
+      queryParamsHandling: this.queryParamsHandling,
       state: this.state
     };
     const link = this.params

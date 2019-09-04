@@ -12,9 +12,10 @@
       Car
     </a>
     <a [navLink]="hub.car.year.state"
+       [queryParams]="{ color: 'black'}"
        [navParams]="{year: 2018}"
        [navLinkActive]="['myActiveClass', 'myActiveClass2']">
-      Car (navLink)
+      Car (navLink + queryParams)
     </a>
 
     <a (click)="freshCar()">
