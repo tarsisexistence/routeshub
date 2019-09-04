@@ -52,7 +52,7 @@
     "@types/jasminewd2": "2.0.6",
     "@types/jest": "24.0.18",
     "@types/node": "8.10.46",
-    "all-contributors-cli": "6.8.2",
+    "all-contributors-cli": "6.9.0",
     "codelyzer": "5.1.0",
     "husky": "3.0.5",
     "jasmine-core": "3.4.0",
