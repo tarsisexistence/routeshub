@@ -34,7 +34,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent
+    loadChildren: () => import('example-app/app/views/about/about.module').then(m => m.AboutModule)
   },
   {
     path: '**',
@@ -71,13 +71,9 @@ import { aboutSlice } from '../views/about/hub/about.hub';
 createRoot<AppNotes>(routes, { key: APP_NOTES_KEY });
 
 /**
- * connects features which have attached relation
- * for this module
+ * connects features which have attached relation to parent module
  *
- * {
- *  path: 'about'
- *  loadChildren: loadChildren: () => import('app/views/about/about.module').then(m => m.AboutModule)
- * }
+ * about module has its own routes which we wanna connect
  */
 connectFeatures<AppNotes>(APP_NOTES_KEY, {
   about: aboutSlice
