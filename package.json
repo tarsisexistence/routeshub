@@ -48,7 +48,7 @@
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
     "@compodoc/compodoc": "1.1.10",
-    "@types/jasmine": "3.3.13",
+    "@types/jasmine": "3.4.0",
     "@types/jasminewd2": "2.0.6",
     "@types/jest": "24.0.18",
     "@types/node": "8.10.46",
