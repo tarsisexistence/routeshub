@@ -4,7 +4,7 @@ import { indexer } from './indexer';
 /*
  * util for internal usage
  */
-export const reset = (): void => {
+export const resetPackage = (): void => {
   hub.next(null);
   indexer.next({ reset: true });
 };
@@ -12,9 +12,7 @@ export const reset = (): void => {
 /**
  * checks attribute presence and activity
  */
-export function checkAttrActivity(attr): boolean {
-  return attr === '' || !!attr;
-}
+export const checkAttrActivity = (attr: boolean): boolean => Boolean(attr);
 
 /**
  * gets string | string[] and returns valid format in string []
@@ -22,4 +20,11 @@ export function checkAttrActivity(attr): boolean {
 export const getClassNames = (input: string | string[]): string[] => {
   const classNames = input instanceof Array ? input : input.split(' ');
   return classNames.filter((className: string) => className.length > 0);
+};
+
+/**
+ * hides a way to flush an error message
+ */
+export const showError = (...errorMessages: any[]): void => {
+  console.error(...errorMessages);
 };
