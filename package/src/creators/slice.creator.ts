@@ -9,16 +9,15 @@ import {
 import { getState } from '../utils/state';
 
 /**
- * Serializes routes
- * to enhance capabilities
+ * serializes routes to enhance capabilities
  */
-export function createSlice<R, C>(
+export const createSlice = <R, C>(
   parentStructure: Structure | null,
-  routes: Notes<R, C>
-): InternalSlice<R, C> {
-  return Object.keys(routes).reduce(
+  notes: Notes<R, C>
+): InternalSlice<R, C> =>
+  Object.keys(notes).reduce(
     (acc: InternalSlice<R, C>, key: string): InternalSlice<R, C> => {
-      const { children, path, name } = routes[key];
+      const { children, path, name } = notes[key];
       const route: InternalStructure = {
         parentId: parentStructure && parentStructure.id,
         state: getState(parentStructure, path),
@@ -35,4 +34,3 @@ export function createSlice<R, C>(
     },
     {} as InternalSlice<R, C>
   );
-}

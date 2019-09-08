@@ -1,7 +1,7 @@
 /**
  * generator that keeps and generates unique identifiers
  */
-function* idfy(): IterableIterator<number> {
+function* makeResettableIterator(): IterableIterator<number> {
   let index = 0;
   while (true) {
     const options = yield index++;
@@ -16,4 +16,4 @@ function* idfy(): IterableIterator<number> {
 /**
  * provides ordered ids
  */
-export const indexer = idfy();
+export const indexer = makeResettableIterator();

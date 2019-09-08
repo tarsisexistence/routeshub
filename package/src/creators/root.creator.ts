@@ -16,6 +16,7 @@ export function createRoot<R = any, C = any>(
   if (hub.value !== null) {
     throw new Error('Routeshub is already declared');
   }
+
   const defaultRootName = 'app';
   const notes: Notes<R, C> = createNote<R, C>(routes, routeName);
   const rootSlice: Slice<R, C> = createSlice<R, C>(null, notes);
