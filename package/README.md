@@ -11,8 +11,11 @@ A **route manager** and pattern for **[Angular]**
 * **Pattern.** Provides a unified approach managing the routing of the entire application.
 * **Small.** ~3.5kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
 
+In short, this is an add-on to the **@angular/router** which provides state based routing for medium to large-size applications.
+
 Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 
+<br/>
 
 ## Install
 
