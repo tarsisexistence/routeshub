@@ -33,7 +33,7 @@ createRoot<AppNotes, AppChildNotes>(routes, {
  *
  * {
  *  path: 'about'
- *  loadChildren: loadChildren: () => import('example-app/app/views/about/about.module').then(m => m.AboutModule)
+ *  loadChildren: () => import('example-app/app/views/about/about.module').then(m => m.AboutModule)
  * }
  */
 connectFeatures<AppNotes, AppChildNotes>(APP_NOTES_KEY, {

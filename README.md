@@ -4,15 +4,18 @@
 
 A **route manager** and pattern for **[Angular]**
 
-* **Manages.** Introduces a new route management experience leading to better application control.
+* **Manager.** Introduces a new route management experience leading to better application control.
 * **Navigation.** Provides declarative experience of navigation.
 * **Fast.** In addition to speeding up development, it works as fast as it does without it.
 * **Pluggable.** Engineered as a plug-in. Designed to be added at any time during the development process.
-* **Pattern.** Provides unified approach to manage the routing of the entire application.
+* **Pattern.** Provides a unified approach managing the routing of the entire application.
 * **Small.** ~3.5kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
+
+In short, this is an add-on to the **@angular/router** which provides state-based routing for medium to large-size applications.
 
 Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 
+<br/>
 
 ## Install
 
@@ -34,7 +37,7 @@ export const routes: Routes = [
   },
   {
     path: 'about',
-    component: AboutComponent
+    loadChildren: () => import('example-app/app/views/about/about.module').then(m => m.AboutModule)
   },
   {
     path: '**',
@@ -71,13 +74,9 @@ import { aboutSlice } from '../views/about/hub/about.hub';
 createRoot<AppNotes>(routes, { key: APP_NOTES_KEY });
 
 /**
- * connects features which have attached relation
- * for this module
+ * connects features which have attached relation to parent module
  *
- * {
- *  path: 'about'
- *  loadChildren: loadChildren: () => import('app/views/about/about.module').then(m => m.AboutModule)
- * }
+ * about module has its own routes which we wanna connect
  */
 connectFeatures<AppNotes>(APP_NOTES_KEY, {
   about: aboutSlice
@@ -409,3 +408,5 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+<br/>

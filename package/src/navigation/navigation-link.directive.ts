@@ -17,9 +17,9 @@ import { forwardParams } from '../functions/forward-params';
   selector: `:not(a):not(area)[${ATTRS.LINK}]`
 })
 export class NavigationLink {
-  @Input() queryParams!: { [k: string]: any };
+  @Input() queryParams: { [k: string]: any } = {};
+  @Input() queryParamsHandling: QueryParamsHandling = '';
   @Input() fragment!: string;
-  @Input() queryParamsHandling!: QueryParamsHandling;
   @Input() preserveFragment!: boolean;
   @Input() skipLocationChange!: boolean;
   @Input() replaceUrl!: boolean;
@@ -52,7 +52,9 @@ export class NavigationLink {
   @HostListener('click') onClick(): boolean {
     const extras = {
       skipLocationChange: checkAttrActivity(this.skipLocationChange),
-      replaceUrl: checkAttrActivity(this.replaceUrl)
+      replaceUrl: checkAttrActivity(this.replaceUrl),
+      queryParams: this.queryParams,
+      queryParamsHandling: this.queryParamsHandling
     };
     const link = this.params
       ? forwardParams(this.link, this.params)

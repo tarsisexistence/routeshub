@@ -13,8 +13,9 @@
     </a>
     <a [navLink]="hub.car.year.state"
        [navParams]="{year: 2018}"
+       [queryParams]="{ color: 'black'}"
        [navLinkActive]="['myActiveClass', 'myActiveClass2']">
-      Car (navLink)
+      Car (navLink + queryParams)
     </a>
 
     <a (click)="freshCar()">
@@ -25,10 +26,10 @@
       Details
     </a>
 
-    <a [navLink]="hub.home.home.state" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+    <a [navLink]="hub.home.home.state">
       Home
     </a>
-    <a [navLink]="hub.users.users.state" [routerLinkActive]="['router-link-active']">
+    <a [navLink]="hub.users.users.state">
       Users
     </a>
   </nav>

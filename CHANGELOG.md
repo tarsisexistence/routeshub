@@ -1,3 +1,8 @@
+# 3.0.2 2019-09-08
+
+- fixed queryParams issue
+- updated documentation and deps
+
 # 3.0.1 2019-07-21
 
 - updated documentation
