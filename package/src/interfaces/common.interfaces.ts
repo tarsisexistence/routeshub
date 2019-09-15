@@ -60,5 +60,5 @@ export interface PrivateNotesKey {
 export interface CreatorOptionArgs {
   key: privateNotesKey;
   routeName: DefaultNameOptions;
-  detached: LazyUnits;
+  nearby: LazyUnits;
 }

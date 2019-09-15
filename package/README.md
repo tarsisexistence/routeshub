@@ -162,7 +162,7 @@ There are two ways to create the `unit`:
 Each function takes the `routes: Routes` and an object of options 
 - key - accepts string or symbol
 - routeName - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
-- detached - accepts _lazy unit_ which produces **feature creator**. Detached option uses only when one or more features are eager modules which connect to some module and those eager module has its own paths.
+- nearby - accepts _lazy unit_ which produces **feature creator**. Nearby option should be used only when one or more features are eager modules which connect to some module and those eager module has its own paths.
 
 **Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
 

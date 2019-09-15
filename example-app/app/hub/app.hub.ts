@@ -21,7 +21,7 @@ import { InfoNotes } from '../views/info/hub/info.notes';
  */
 createRoot<AppNotes, AppChildNotes>(routes, {
   key: APP_NOTES_KEY,
-  detached: {
+  nearby: {
     home: homeUnit,
     users: usersUnit
   }

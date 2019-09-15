@@ -10,14 +10,14 @@ import {
 import { hub, updateHub } from '../hub';
 import { createNote } from './note.creator';
 import { createUnit } from './unit.creator';
-import { connectDetached } from '../functions';
+import { connectNearby } from '../functions';
 
 /**
  * Creates a feature route
  */
 export const createFeature = <R = any, C = any>(
   routes: Routes,
-  { key, detached, routeName }: Partial<CreatorOptionArgs> = {}
+  { key, nearby, routeName }: Partial<CreatorOptionArgs> = {}
 ): LazyUnit<R, C> => (
   parentSpot: Spot,
   alternativeName?: string
@@ -32,7 +32,7 @@ export const createFeature = <R = any, C = any>(
   );
   hub.next(updatedRouteState);
 
-  connectDetached(detached, parentSpot);
+  connectNearby(nearby, parentSpot);
 
   return hub.value[name];
 };

@@ -5,12 +5,12 @@ import { createFeature, createRoot } from '../creators';
 import { connectFeatures } from './connect-features';
 import { PRIVATE_NOTES_KEY } from '../constants';
 
-describe('connectDetached', () => {
-  it('should contain root and detached feature', () => {
+describe('connectNearby', () => {
+  it('should contain root and nearby feature', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
     const aboutUnit = createFeature(aboutRoutes);
-    createRoot(appRoutes, { detached: { about: aboutUnit } });
+    createRoot(appRoutes, { nearby: { about: aboutUnit } });
     const result = {
       app: {
         root: {
@@ -43,7 +43,7 @@ describe('connectDetached', () => {
     expect(getRegisteredUnits()).toEqual(result);
   });
 
-  it('should contain root with attached and detached features', () => {
+  it('should contain root with attached and nearby features', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
@@ -52,7 +52,7 @@ describe('connectDetached', () => {
     const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, {
       key: APP_NOTES_KEY,
-      detached: { about: aboutUnit }
+      nearby: { about: aboutUnit }
     });
     connectFeatures(APP_NOTES_KEY, { map: mapUnit });
     const result = {
@@ -97,14 +97,14 @@ describe('connectDetached', () => {
     expect(getRegisteredUnits()).toEqual(result);
   });
 
-  it('should contain root, detached feature with attached inside', () => {
+  it('should contain root, nearby feature with attached inside', () => {
     const appRoutes: Routes = [{ path: '' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }, { path: 'map' }];
     const aboutUnit = createFeature(aboutRoutes);
     const mapUnit = createFeature(mapRoutes);
     connectFeatures('about', { map: mapUnit });
-    createRoot(appRoutes, { detached: { about: aboutUnit } });
+    createRoot(appRoutes, { nearby: { about: aboutUnit } });
     const result = {
       app: {
         root: {
@@ -147,15 +147,15 @@ describe('connectDetached', () => {
     expect(getRegisteredUnits()).toEqual(result);
   });
 
-  it('should contain root and detached feature in another detached feature', () => {
+  it('should contain root and nearby feature in another nearby feature', () => {
     const appRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
     const mapRoutes: Routes = [{ path: 'map' }];
     const mapUnit = createFeature(mapRoutes);
     const aboutUnit = createFeature(aboutRoutes, {
-      detached: { map: mapUnit }
+      nearby: { map: mapUnit }
     });
-    createRoot(appRoutes, { detached: { about: aboutUnit } });
+    createRoot(appRoutes, { nearby: { about: aboutUnit } });
     const result = {
       app: {
         root: {

@@ -6,7 +6,7 @@ import { carRoutes } from './car.routes';
 import { detailsUnit } from '../../details/hub/details.hub';
 
 export const carUnit = createFeature<CarNotes>(carRoutes, {
-  detached: { details: detailsUnit },
+  nearby: { details: detailsUnit },
   key: CAR_NOTES_KEY
 });
 
