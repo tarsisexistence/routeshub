@@ -1,13 +1,13 @@
 // tslint:disable:max-classes-per-file
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { Sliced } from './sliced.decorator';
+import { Secluded } from './secluded.decorator';
 import { createFeature, createRoot } from '../creators';
 import { PRIVATE_NOTES_KEY } from '../constants';
 import { connectFeatures } from '../functions/connect-features';
 
-describe('Sliced decorator', () => {
-  describe('when create simple slice', () => {
+describe('[DECORATOR]: Secluded', () => {
+  describe('when create simple unit', () => {
     const routes: Routes = [{ path: '' }];
     const getResult = identifier => ({
       root: {
@@ -20,11 +20,11 @@ describe('Sliced decorator', () => {
       [PRIVATE_NOTES_KEY]: identifier
     });
 
-    it('should get slice by name', () => {
+    it('should get unit by name', () => {
       createRoot(routes);
 
       class Example {
-        @Sliced('app')
+        @Secluded('app')
         prop;
       }
 
@@ -32,12 +32,12 @@ describe('Sliced decorator', () => {
       expect(instance.prop).toEqual(getResult('app'));
     });
 
-    it('should get slice by key', () => {
+    it('should get unit by key', () => {
       const APP_NOTES_KEY = Symbol();
       createRoot(routes, { key: APP_NOTES_KEY });
 
       class Example {
-        @Sliced(APP_NOTES_KEY)
+        @Secluded(APP_NOTES_KEY)
         prop;
       }
 
@@ -46,7 +46,7 @@ describe('Sliced decorator', () => {
     });
   });
 
-  describe('when create feature slices', () => {
+  describe('when create feature units', () => {
     const getResult = identifier => ({
       root: {
         id: 3,
@@ -60,13 +60,13 @@ describe('Sliced decorator', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
 
-    it('should get feature slice by name', () => {
+    it('should get feature unit by name', () => {
       createRoot(appRoutes);
-      const mapSlice = createFeature(mapRoutes);
-      connectFeatures('app', { map: mapSlice });
+      const mapUnit = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapUnit });
 
       class Example {
-        @Sliced('map')
+        @Secluded('map')
         prop;
       }
 
@@ -74,16 +74,16 @@ describe('Sliced decorator', () => {
       expect(instance.prop).toEqual(getResult('map'));
     });
 
-    it('should get feature slice by key', () => {
+    it('should get feature unit by key', () => {
       const APP_NOTES_KEY = Symbol();
       const MAP_NOTES_KEY = Symbol();
 
       createRoot(appRoutes, { key: APP_NOTES_KEY });
-      const mapSlice = createFeature(mapRoutes, { key: MAP_NOTES_KEY });
-      connectFeatures(APP_NOTES_KEY, { map: mapSlice });
+      const mapUnit = createFeature(mapRoutes, { key: MAP_NOTES_KEY });
+      connectFeatures(APP_NOTES_KEY, { map: mapUnit });
 
       class Example {
-        @Sliced(MAP_NOTES_KEY)
+        @Secluded(MAP_NOTES_KEY)
         prop;
       }
 

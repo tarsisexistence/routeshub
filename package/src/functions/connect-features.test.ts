@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { connectFeatures } from './connect-features';
-import { getHubSlices, getSlice } from './get-slice';
+import { getRegisteredUnits, getUnit } from './get-unit';
 import { createFeature, createRoot } from '../creators';
 import { PRIVATE_NOTES_KEY } from '../constants';
 
@@ -10,8 +10,8 @@ describe('connectFeatures', () => {
 
   it('should contain root and feature', () => {
     createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapSlice });
+    const mapUnit = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapUnit });
     const result = {
       app: {
         root: {
@@ -41,13 +41,13 @@ describe('connectFeatures', () => {
         [PRIVATE_NOTES_KEY]: 'map'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 
   it('should invoke connectFeatures by route name', () => {
     createRoot(appRoutes);
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapSlice });
+    const mapUnit = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapUnit });
     const result = {
       root: {
         id: 2,
@@ -58,14 +58,14 @@ describe('connectFeatures', () => {
       },
       [PRIVATE_NOTES_KEY]: 'map'
     };
-    expect(getSlice('map')).toEqual(result);
+    expect(getUnit('map')).toEqual(result);
   });
 
   it('should invoke connectFeatures by key', () => {
     const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, { key: APP_NOTES_KEY });
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures(APP_NOTES_KEY, { map: mapSlice });
+    const mapUnit = createFeature(mapRoutes);
+    connectFeatures(APP_NOTES_KEY, { map: mapUnit });
     const result = {
       root: {
         id: 2,
@@ -76,6 +76,6 @@ describe('connectFeatures', () => {
       },
       [PRIVATE_NOTES_KEY]: 'map'
     };
-    expect(getSlice('map')).toEqual(result);
+    expect(getUnit('map')).toEqual(result);
   });
 });

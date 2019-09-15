@@ -1,4 +1,4 @@
-import { Structure } from '../interfaces';
+import { Spot } from '../interfaces';
 import { transformPathToState } from './path';
 import { showError } from './helpers';
 
@@ -25,9 +25,7 @@ export function correctStringLink(value: string): string {
  * get route link from
  * string literal, route node, or route link
  */
-export const getRouteLink = (
-  input: string | string[] | Structure
-): string[] => {
+export const getRouteLink = (input: string | string[] | Spot): string[] => {
   if (typeof input === 'string') {
     const link = correctStringLink(input);
     return transformPathToState(link);

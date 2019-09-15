@@ -1,6 +1,6 @@
 export {
-  InternalStructure,
-  Structure,
+  InternalSpot,
+  Spot,
   Params,
   Hub,
   DefaultNameOptions,
@@ -11,9 +11,9 @@ export {
 export { Root, RootNote, Note, Notes } from './routes.interfaces';
 
 export {
-  InternalSlice,
-  Slice,
-  Slices,
-  LazySlice,
-  LazySlices
-} from './slice.interfaces';
+  InternalUnit,
+  Unit,
+  Units,
+  LazyUnit,
+  LazyUnits
+} from './unit.interfaces';

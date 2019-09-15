@@ -4,7 +4,7 @@ import { createFeature } from 'lib';
 import { HOME_NOTES_KEY, HomeNotes } from './home.notes';
 import { homeRoutes } from './home.routes';
 
-export const homeSlice = createFeature<HomeNotes>(homeRoutes, {
+export const homeUnit = createFeature<HomeNotes>(homeRoutes, {
   key: HOME_NOTES_KEY
 });
 

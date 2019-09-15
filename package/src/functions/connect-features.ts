@@ -1,22 +1,22 @@
 import { finalize, find } from 'rxjs/operators';
-import { Slice, Slices } from '../interfaces';
+import { Unit, Units } from '../interfaces';
 import { hub } from '../hub';
 import { PRIVATE_NOTES_KEY } from '../constants';
-import { partialFeatureRoutes } from '../interfaces/slice.interfaces';
+import { partialFeatureRoutes } from '../interfaces/unit.interfaces';
 import { privateNotesKey } from '../interfaces/common.interfaces';
 
 /**
- * returns slice by key
- * from the second slices arg
+ * returns unit by key
+ * from the second units arg
  */
-const findSlice = (parentKey: privateNotesKey, slices: Slices): Slice | null =>
-  Object.values(slices || {}).find(
-    (slice: Slice) => slice[PRIVATE_NOTES_KEY] === parentKey
+const findUnit = (parentKey: privateNotesKey, units: Units): Unit | null =>
+  Object.values(units || {}).find(
+    (unit: Unit) => unit[PRIVATE_NOTES_KEY] === parentKey
   );
 
 /**
- * connects feature slices
- * to parent slice
+ * connects feature units
+ * to parent unit
  * which route paths are described
  * directly in the parent routes
  */
@@ -27,13 +27,13 @@ export function connectFeatures<R = any, C = {}>(
   hub
     .asObservable()
     .pipe(
-      find((slices: Slices) => Boolean(findSlice(key, slices))),
+      find((units: Units) => Boolean(findUnit(key, units))),
       finalize(() => {
-        const slice: Slice = findSlice(key, hub.value);
+        const unit: Unit = findUnit(key, hub.value);
 
         for (const route of Object.keys(features)) {
           const feature = features[route];
-          const featureParent = slice[route];
+          const featureParent = unit[route];
           feature(featureParent);
         }
       })

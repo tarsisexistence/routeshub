@@ -1,4 +1,4 @@
 export * from './connect-detached';
 export * from './connect-features';
 export * from './forward-params';
-export * from './get-slice';
+export * from './get-unit';

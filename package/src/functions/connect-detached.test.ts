@@ -1,6 +1,6 @@
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { getHubSlices } from './get-slice';
+import { getRegisteredUnits } from './get-unit';
 import { createFeature, createRoot } from '../creators';
 import { connectFeatures } from './connect-features';
 import { PRIVATE_NOTES_KEY } from '../constants';
@@ -9,8 +9,8 @@ describe('connectDetached', () => {
   it('should contain root and detached feature', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
-    const aboutSlice = createFeature(aboutRoutes);
-    createRoot(appRoutes, { detached: { about: aboutSlice } });
+    const aboutUnit = createFeature(aboutRoutes);
+    createRoot(appRoutes, { detached: { about: aboutUnit } });
     const result = {
       app: {
         root: {
@@ -40,21 +40,21 @@ describe('connectDetached', () => {
         [PRIVATE_NOTES_KEY]: 'about'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 
   it('should contain root with attached and detached features', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
-    const aboutSlice = createFeature(aboutRoutes);
-    const mapSlice = createFeature(mapRoutes);
+    const aboutUnit = createFeature(aboutRoutes);
+    const mapUnit = createFeature(mapRoutes);
     const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, {
       key: APP_NOTES_KEY,
-      detached: { about: aboutSlice }
+      detached: { about: aboutUnit }
     });
-    connectFeatures(APP_NOTES_KEY, { map: mapSlice });
+    connectFeatures(APP_NOTES_KEY, { map: mapUnit });
     const result = {
       app: {
         root: {
@@ -94,17 +94,17 @@ describe('connectDetached', () => {
         [PRIVATE_NOTES_KEY]: 'map'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 
   it('should contain root, detached feature with attached inside', () => {
     const appRoutes: Routes = [{ path: '' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }, { path: 'map' }];
-    const aboutSlice = createFeature(aboutRoutes);
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('about', { map: mapSlice });
-    createRoot(appRoutes, { detached: { about: aboutSlice } });
+    const aboutUnit = createFeature(aboutRoutes);
+    const mapUnit = createFeature(mapRoutes);
+    connectFeatures('about', { map: mapUnit });
+    createRoot(appRoutes, { detached: { about: aboutUnit } });
     const result = {
       app: {
         root: {
@@ -144,18 +144,18 @@ describe('connectDetached', () => {
         [PRIVATE_NOTES_KEY]: 'map'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 
   it('should contain root and detached feature in another detached feature', () => {
     const appRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
     const mapRoutes: Routes = [{ path: 'map' }];
-    const mapSlice = createFeature(mapRoutes);
-    const aboutSlice = createFeature(aboutRoutes, {
-      detached: { map: mapSlice }
+    const mapUnit = createFeature(mapRoutes);
+    const aboutUnit = createFeature(aboutRoutes, {
+      detached: { map: mapUnit }
     });
-    createRoot(appRoutes, { detached: { about: aboutSlice } });
+    createRoot(appRoutes, { detached: { about: aboutUnit } });
     const result = {
       app: {
         root: {
@@ -188,6 +188,6 @@ describe('connectDetached', () => {
         [PRIVATE_NOTES_KEY]: 'map'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 });
