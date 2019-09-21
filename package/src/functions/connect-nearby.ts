@@ -6,8 +6,11 @@ import { LazyUnits, Spot } from '../interfaces';
  * which route paths described
  * indirectly of parent routes
  */
-export function connectNearby(nearby: LazyUnits, parent: Spot = null): void {
+export function connectNearby(
+  nearby: LazyUnits,
+  parentSpot: Spot = null
+): void {
   Object.keys(nearby || {}).forEach((featureName: string) => {
-    nearby[featureName](parent, featureName);
+    nearby[featureName](parentSpot, featureName);
   });
 }
