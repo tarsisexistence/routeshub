@@ -144,9 +144,11 @@ Routeshub offers an approach (pattern) to structure routing in the application. 
 **Guideline**:
 - Each module in application has a hub directory
 - hub directory contains three files that configure routing of the current module
-1. hub - sets routing configuration (forRoot/forFeature) and exports RoutingModule and NavigationModule
-2. notes - describes module's routes and creates a unique key
-3. routes - declares routes of current module
+1. hub - sets routing configuration, exports RoutingModule and NavigationModule, connects feature units.
+2. notes - place for interfaces and unique key of the unit.
+3. routes - simple routes file as is without any changes.
+
+![diagram](http://i.piccy.info/i9/baf248d94b1260e13d5bff6acb6e6727/1569138770/128577/1338898/2019_09_22_10_51_00.jpg)
 
 <br/>
 
@@ -154,6 +156,8 @@ Routeshub offers an approach (pattern) to structure routing in the application. 
 
 ## Unit
 `Unit` is a modular entity that contains stateful module routes.
+
+![unit diagram](http://i.piccy.info/i9/395309194dfc663ad7c07dad3c482d15/1569140574/118208/1338898/unit.jpg)
 
 There are two ways to create the `unit`:
 - **createRoot**
@@ -195,41 +199,26 @@ export const aboutUnit: LazyUnit<AboutNotes> = createFeature<AboutNotes>(aboutNo
 <br/>
 
 ## Note
-This section is optional to understand how routes transform into the keys.
+You need understand how routeshub transforms routes into the keys. Actually, all notes related things routeshub handles internally.
 
-The `Note` is input to reproduce the unit. Each `Note` represents one route and each module collects the route in the `Notes` bunch.
+The `Note` is input to reproduce the unit. Each `Note` represents one route.
 
-The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened to three dots.
+**In short, it assigns the names to the 'spots'**
 
-Now you do not need to create `Notes` by yourself, because this handles under the hood. Here is an example of how routes transform depending on the route path:
+The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened.
+
 ```typescript
 export const routes: Routes = [
   {
-    path: '', // name => root
-    ...
+    path: '', // name => 'root' by default (customizable)
     children: [
-      {
-        path: '', // name => root
-        redirectTo: 'about',
-      },
-      {
-        path: 'about', // about => about
-        loadChildren: () => import('app/views/about/about.module').then(m => m.AboutModule)
-      }
+      { path: '' }, // name => 'root' by default (customizable)
+      { path: 'about' } // name => about 
     ]
   },
-  {
-    path: ':first_name', // name => firstName
-    ...
-  },
-  {
-    path: 'person/:person-age', // name => personAge
-    ...
-  },
-  {
-    path: '**',  // name => wildcard (by default with possibility to customize). In example we'll rename to 'notFound'
-    redirectTo: ''
-  }
+  { path: ':first_name'}, // name => firstName
+  { path: 'person/:person-age' }, // name => personAge
+  { path: '**'} // name => 'wildcard' by default (customizable). In example we'll rename it to 'notFound'
 ];
 
 // Root interface helps to short frequently repeated actions
@@ -247,8 +236,7 @@ export interface AppChildNotes extends Root {
 */
 
 /**
-  * also, it provides opportunity to describe 
-  * root children entity
+  * btw, this shorthand provides opportunity to describe root children interface through generics
 */
 export interface AppNotes extends Root<AppChildNotes> {
   firstName: Note;
@@ -266,7 +254,6 @@ export interface AppNotes extends Root<AppChildNotes> {
     wildcard: Note;
   }
 */
-
 
 
 export const appUnit = createRoot<AppNotes, AppChildNotes>(routes, { routeName: { wildcard: 'notFound' }});

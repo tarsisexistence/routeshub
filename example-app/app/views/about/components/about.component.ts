@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <h1>Routeshub</h1>
 
-    <img class="image" src="/assets/logo/origin.svg" alt="routeshub logo" />
+    <img class="image" src="/assets/logo/routeshub.svg" alt="routeshub logo" />
 
     <h4>
       A minimal unit is made to simplify developers routes business
