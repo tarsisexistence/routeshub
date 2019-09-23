@@ -17,9 +17,6 @@
     "// - COMMIT - //": "------------------------------",
     "lint-staged": "lint-staged",
     "prettier": "prettier",
-    "// - EXAMPLE-APP DOC - //": "------------------------------",
-    "doc:build": "npx compodoc -p example-app/tsconfig.app.json --theme=readthedocs -n \\\"example-app\\\"",
-    "doc:serve": "npx compodoc -s",
     "// - CONTRIBUTORS - //": "------------------------------",
     "contributors:add": "npx all-contributors add",
     "contributors:generate": "npx all-contributors generate"
@@ -47,7 +44,6 @@
     "@angular/language-service": "8.2.7",
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
-    "@compodoc/compodoc": "1.1.10",
     "@types/jest": "24.0.18",
     "@types/node": "8.10.46",
     "all-contributors-cli": "6.9.1",
