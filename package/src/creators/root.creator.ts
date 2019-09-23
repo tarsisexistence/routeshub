@@ -14,7 +14,7 @@ export function createRoot<R = any, C = any>(
   { key, nearby, routeName }: Partial<CreatorOptionArgs> = {}
 ): Unit<R, C> {
   if (hub.value !== null) {
-    throw new Error('Routeshub is already declared');
+    throw new Error('Routeshub is already declared.');
   }
 
   const defaultRootName = 'app';

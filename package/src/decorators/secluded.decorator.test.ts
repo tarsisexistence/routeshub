@@ -25,11 +25,11 @@ describe('[DECORATOR]: Secluded', () => {
 
       class Example {
         @Secluded('app')
-        prop;
+        unit;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult('app'));
+      expect(instance.unit).toEqual(getResult('app'));
     });
 
     it('should get unit by key', () => {
@@ -38,11 +38,11 @@ describe('[DECORATOR]: Secluded', () => {
 
       class Example {
         @Secluded(APP_NOTES_KEY)
-        prop;
+        unit;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult(APP_NOTES_KEY));
+      expect(instance.unit).toEqual(getResult(APP_NOTES_KEY));
     });
   });
 
@@ -62,16 +62,17 @@ describe('[DECORATOR]: Secluded', () => {
 
     it('should get feature unit by name', () => {
       createRoot(appRoutes);
-      const mapUnit = createFeature(mapRoutes);
-      connectFeatures('app', { map: mapUnit });
+      connectFeatures('app', {
+        map: createFeature(mapRoutes)
+      });
 
       class Example {
         @Secluded('map')
-        prop;
+        unit;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult('map'));
+      expect(instance.unit).toEqual(getResult('map'));
     });
 
     it('should get feature unit by key', () => {
@@ -79,16 +80,17 @@ describe('[DECORATOR]: Secluded', () => {
       const MAP_NOTES_KEY = Symbol();
 
       createRoot(appRoutes, { key: APP_NOTES_KEY });
-      const mapUnit = createFeature(mapRoutes, { key: MAP_NOTES_KEY });
-      connectFeatures(APP_NOTES_KEY, { map: mapUnit });
+      connectFeatures(APP_NOTES_KEY, {
+        map: createFeature(mapRoutes, { key: MAP_NOTES_KEY })
+      });
 
       class Example {
         @Secluded(MAP_NOTES_KEY)
-        prop;
+        unit;
       }
 
       const instance = new Example();
-      expect(instance.prop).toEqual(getResult(MAP_NOTES_KEY));
+      expect(instance.unit).toEqual(getResult(MAP_NOTES_KEY));
     });
   });
 });

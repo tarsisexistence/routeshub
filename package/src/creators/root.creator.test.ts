@@ -20,6 +20,14 @@ describe('createRoot', () => {
     expect(unit).toEqual(result);
   });
 
+  it('should occur an error when double attempt to create root', () => {
+    const routes: Routes = [{ path: '' }];
+    expect(() => {
+      createRoot(routes);
+      createRoot(routes);
+    }).toThrow('Routeshub is already declared.');
+  });
+
   it('should create root with key', () => {
     const routes: Routes = [{ path: '' }];
     const ROOT_NOTES_KEY = Symbol();
