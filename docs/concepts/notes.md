@@ -47,9 +47,9 @@ export const routes: Routes = [
 ];
 
 // note of those routes generates under the hood of createRoot/createFeature functions
-export const appSlice = createRoot(routes);
+export const appUnit = createRoot(routes);
 
-// now, appSlice is equal to
+// now, appUnit is equal to
 {
   root: { path: '', name: 'root', children: [
     {

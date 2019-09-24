@@ -2,7 +2,7 @@
 
 ![](.gitbook/assets/icon_origin_225x225.png)
 
-**Routeshub** is a route management library and pattern for **Angular.** 
+**Routeshub** is a route management library and pattern for **Angular.**
 
 It acts as a hub which brings more control, stable and predictable interaction with project code base through declarative design.
 
@@ -12,7 +12,7 @@ It acts as a hub which brings more control, stable and predictable interaction w
 
 🔩 Engineered as a plugin. It was designed to be added at any time during the development process, even for separate complicated project parts.
 
-🔧 Modeled after a tree data structure. 
+🔧 Modeled after a tree data structure as a hierarchical tree of states. 
 
 ## Support
 

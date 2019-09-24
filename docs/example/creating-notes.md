@@ -1,6 +1,6 @@
 # Creating Notes
 
-Let's create the notes and slices
+Let's create the notes and units.
 
 {% code-tabs %}
 {% code-tabs-item title="app.notes.ts" %}

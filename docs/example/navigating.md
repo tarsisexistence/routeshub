@@ -22,22 +22,22 @@ export class AnyHub {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-Before we finished, we should get access for slices in the component and then use them for navigation
+Before we finished, we should get access for units in the component and then use them for navigation
 
-As was mentioned previously, there are some different approaches of how you can use slices:
+As was mentioned previously, there are some different approaches of how you can get units:
 
-* decorator @Sliced - apply the decorator on component property  \(preferable\)
-* getSlice - function that works as well as @Sliced decorator.
-* getHubSlices - returns all declared slices
+* decorator @Secluded - apply the decorator on component property.
+* getUnit - function that works as well as @Secluded decorator.
+* getRegisteredUnits - returns all declared units.
 
-### @Sliced decorator
+### @Secluded decorator
 
 {% code-tabs %}
 {% code-tabs-item title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Slice, Sliced } from 'routeshub';
+import { Unit, Secluded } from 'routeshub';
 import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
 
 @Component({
@@ -52,8 +52,8 @@ import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
 `
 })
 export class HeaderComponent {
-  @Sliced(APP_HUB_KEY)
-  public app: Slice<AppNotes>;
+  @Secluded(APP_HUB_KEY)
+  public app: Unit<AppNotes>;
   
   constructor(private router: Router) {}
 
@@ -66,14 +66,14 @@ export class HeaderComponent {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-### getSlice
+### getUnit
 
 {% code-tabs %}
 {% code-tabs-item title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { getSlice, Slice } from 'routeshub';
+import { getUnit, Unit } from 'routeshub';
 import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
 
 @Component({
@@ -88,7 +88,7 @@ import { AppNotes, APP_HUB_KEY } from '../../routing/hub/app.notes';
 `
 })
 export class HeaderComponent {
-  public app = getSlice<AppNotes>(APP_HUB_KEY);
+  public app = getUnit<AppNotes>(APP_HUB_KEY);
   
   constructor(private router: Router) {}
 
@@ -101,14 +101,14 @@ export class HeaderComponent {
 {% endcode-tabs-item %}
 {% endcode-tabs %}
 
-### getHubSlices
+### getRegisteredUnits
 
 {% code-tabs %}
 {% code-tabs-item title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Slices, getHubSlices } from 'routeshub';
+import { Units, getRegisteredUnits } from 'routeshub';
 import { Hub } from '../../routing/hub';
 
 @Component({
@@ -122,7 +122,7 @@ import { Hub } from '../../routing/hub';
 `
 })
 export class HeaderComponent {
-  public hub: Slices<Hub> = getHubSlices<Hub>();
+  public hub: Units<Hub> = getRegisteredUnits<Hub>();
   
   constructor(private router: Router) {}
   

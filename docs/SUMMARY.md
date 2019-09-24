@@ -10,7 +10,7 @@
 * [Concepts](concepts/README.md)
   * [Introduction](concepts/introduction.md)
   * [Notes](concepts/notes.md)
-  * [Slices](concepts/slices.md)
+  * [Units](concepts/units.md)
 * [API](api/README.md)
   * [Interfaces](api/interfaces.md)
   * [Creators](api/creators.md)

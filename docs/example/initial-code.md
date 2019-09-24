@@ -5,7 +5,7 @@ Let's imagine, we have such routes:
 * **App** - root
 * **About** - App's child
 * **Auth** - lazy module that has direct connection to App
-* **Location** - detached eager module that imported into App and has own routes
+* **Location** - detached \(nearby\) eager module that imported into App and has own routes
 * **NotFound** - wildcard, default behavior for not matched paths
 
 ## Initial Code
