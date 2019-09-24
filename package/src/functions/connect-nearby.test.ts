@@ -9,8 +9,8 @@ describe('connectNearby', () => {
   it('should contain root and nearby feature', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
-    const aboutUnit = createFeature(aboutRoutes);
-    createRoot(appRoutes, { nearby: { about: aboutUnit } });
+    const aboutConnector = createFeature(aboutRoutes);
+    createRoot(appRoutes, { nearby: { about: aboutConnector } });
     const result = {
       app: {
         root: {
@@ -47,14 +47,14 @@ describe('connectNearby', () => {
     const appRoutes: Routes = [{ path: '' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
-    const aboutUnit = createFeature(aboutRoutes);
-    const mapUnit = createFeature(mapRoutes);
+    const aboutConnector = createFeature(aboutRoutes);
+    const mapConnector = createFeature(mapRoutes);
     const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, {
       key: APP_NOTES_KEY,
-      nearby: { about: aboutUnit }
+      nearby: { about: aboutConnector }
     });
-    connectFeatures(APP_NOTES_KEY, { map: mapUnit });
+    connectFeatures(APP_NOTES_KEY, { map: mapConnector });
     const result = {
       app: {
         root: {
@@ -101,10 +101,10 @@ describe('connectNearby', () => {
     const appRoutes: Routes = [{ path: '' }];
     const mapRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }, { path: 'map' }];
-    const aboutUnit = createFeature(aboutRoutes);
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('about', { map: mapUnit });
-    createRoot(appRoutes, { nearby: { about: aboutUnit } });
+    const aboutConnector = createFeature(aboutRoutes);
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('about', { map: mapConnector });
+    createRoot(appRoutes, { nearby: { about: aboutConnector } });
     const result = {
       app: {
         root: {
@@ -151,11 +151,11 @@ describe('connectNearby', () => {
     const appRoutes: Routes = [{ path: '' }];
     const aboutRoutes: Routes = [{ path: 'about' }];
     const mapRoutes: Routes = [{ path: 'map' }];
-    const mapUnit = createFeature(mapRoutes);
-    const aboutUnit = createFeature(aboutRoutes, {
-      nearby: { map: mapUnit }
+    const mapConnector = createFeature(mapRoutes);
+    const aboutConnector = createFeature(aboutRoutes, {
+      nearby: { map: mapConnector }
     });
-    createRoot(appRoutes, { nearby: { about: aboutUnit } });
+    createRoot(appRoutes, { nearby: { about: aboutConnector } });
     const result = {
       app: {
         root: {

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { connectFeatures, createFeature } from 'lib';
 import { DETAILS_NOTES_KEY, DetailsNotes } from './details.notes';
-import { infoUnit } from '../../info/hub/info.hub';
+import { infoConnector } from '../../info/hub/info.hub';
 import { detailsRoutes } from './details.routes';
 
 export const detailsUnit = createFeature<DetailsNotes>(detailsRoutes, {
@@ -10,7 +10,7 @@ export const detailsUnit = createFeature<DetailsNotes>(detailsRoutes, {
 });
 
 connectFeatures<DetailsNotes, {}>(DETAILS_NOTES_KEY, {
-  info: infoUnit
+  info: infoConnector
 });
 
 @NgModule({

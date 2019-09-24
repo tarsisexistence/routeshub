@@ -4,7 +4,7 @@ import { createFeature } from 'lib';
 import { INFO_NOTES_KEY, InfoNotes } from './info.notes';
 import { infoRoutes } from './info.routes';
 
-export const infoUnit = createFeature<InfoNotes>(infoRoutes, {
+export const infoConnector = createFeature<InfoNotes>(infoRoutes, {
   key: INFO_NOTES_KEY
 });
 

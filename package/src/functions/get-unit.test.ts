@@ -68,8 +68,8 @@ describe('[Getters]: Unit', () => {
 
     it('should get unit for feature creator and return created unit', () => {
       createRoot(appRoutes);
-      const mapUnit = createFeature(mapRoutes);
-      connectFeatures('app', { map: mapUnit });
+      const mapConnector = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapConnector });
 
       expect(getUnit('map')).toEqual({
         root: {
@@ -118,8 +118,8 @@ describe('[Getters]: Unit', () => {
 
     it('should create hub with root and feature', () => {
       createRoot(appRoutes);
-      const mapUnit = createFeature(mapRoutes);
-      connectFeatures('app', { map: mapUnit });
+      const mapConnector = createFeature(mapRoutes);
+      connectFeatures('app', { map: mapConnector });
       expect(getRegisteredUnits()).toEqual({
         app: {
           root: {

@@ -1,4 +1,4 @@
-import { InternalUnit, LazyUnits } from './unit.interfaces';
+import { Connectors, InternalUnit } from './unit.interfaces';
 import { PRIVATE_NOTES_KEY } from '../constants';
 
 /**
@@ -60,5 +60,5 @@ export interface PrivateNotesKey {
 export interface CreatorOptionArgs {
   key: privateNotesKey;
   routeName: DefaultNameOptions;
-  nearby: LazyUnits;
+  nearby: Connectors;
 }

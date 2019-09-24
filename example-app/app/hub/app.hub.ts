@@ -6,10 +6,10 @@ import { connectFeatures, createRoot, NavigationModule } from 'lib';
 
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
-import { aboutUnit } from '../views/about/hub/about.hub';
-import { carUnit } from '../views/car/hub/car.hub';
-import { homeUnit } from '../views/home/hub/home.hub';
-import { usersUnit } from '../views/users/hub/users.hub';
+import { aboutConnector } from '../views/about/hub/about.hub';
+import { carConnector } from '../views/car/hub/car.hub';
+import { homeConnector } from '../views/home/hub/home.hub';
+import { usersConnector } from '../views/users/hub/users.hub';
 import { AboutNotes } from '../views/about/hub/about.notes';
 import { CarNotes } from '../views/car/hub/car.notes';
 import { DetailsNotes } from '../views/details/hub/details.notes';
@@ -22,8 +22,8 @@ import { InfoNotes } from '../views/info/hub/info.notes';
 createRoot<AppNotes, AppChildNotes>(routes, {
   key: APP_NOTES_KEY,
   nearby: {
-    home: homeUnit,
-    users: usersUnit
+    home: homeConnector,
+    users: usersConnector
   }
 });
 
@@ -37,8 +37,8 @@ createRoot<AppNotes, AppChildNotes>(routes, {
  * }
  */
 connectFeatures<AppNotes, AppChildNotes>(APP_NOTES_KEY, {
-  about: aboutUnit,
-  car: carUnit
+  about: aboutConnector,
+  car: carConnector
 });
 
 /**

@@ -4,7 +4,7 @@ import { createFeature, NavigationModule } from 'lib';
 import { USERS_NOTES_KEY, UsersChildNotes, UsersNotes } from './users.notes';
 import { usersRoutes } from './users.routes';
 
-export const usersUnit = createFeature<UsersNotes, UsersChildNotes>(
+export const usersConnector = createFeature<UsersNotes, UsersChildNotes>(
   usersRoutes,
   { key: USERS_NOTES_KEY }
 );

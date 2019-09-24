@@ -10,8 +10,8 @@ describe('createFeature', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }];
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       root: {
         id: 3,
@@ -28,9 +28,11 @@ describe('createFeature', () => {
   it('should create root and feature with different route name options', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
-    const mapUnit = createFeature(mapRoutes, { routeName: { root: 'home' } });
+    const mapConnector = createFeature(mapRoutes, {
+      routeName: { root: 'home' }
+    });
     createRoot(appRoutes, { routeName: { root: 'rootRoute' } });
-    connectFeatures('app', { map: mapUnit });
+    connectFeatures('app', { map: mapConnector });
     const result = {
       app: {
         rootRoute: {
@@ -78,8 +80,8 @@ describe('createFeature', () => {
       { path: 'location' },
       { path: ':profileId' }
     ];
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       root: {
         id: 3,
@@ -111,11 +113,11 @@ describe('createFeature', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const locationRoutes: Routes = [{ path: '' }];
-    const locationUnit = createFeature(locationRoutes);
-    connectFeatures('map', { location: locationUnit });
+    const locationConnector = createFeature(locationRoutes);
+    connectFeatures('map', { location: locationConnector });
     const result = {
       root: {
         id: 5,

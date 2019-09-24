@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {
+  Connector,
   CreatorOptionArgs,
-  LazyUnit,
   Notes,
   Spot,
   Unit,
@@ -18,7 +18,7 @@ import { connectNearby } from '../functions';
 export const createFeature = <R = any, C = any>(
   routes: Routes,
   { key, nearby, routeName }: Partial<CreatorOptionArgs> = {}
-): LazyUnit<R, C> => (
+): Connector<R, C> => (
   parentSpot: Spot,
   alternativeName?: string
 ): Unit<R, C> => {

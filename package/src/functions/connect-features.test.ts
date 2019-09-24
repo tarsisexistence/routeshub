@@ -10,8 +10,8 @@ describe('connectFeatures', () => {
 
   it('should contain root and feature', () => {
     createRoot(appRoutes);
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       app: {
         root: {
@@ -46,8 +46,8 @@ describe('connectFeatures', () => {
 
   it('should invoke connectFeatures by route name', () => {
     createRoot(appRoutes);
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       root: {
         id: 2,
@@ -64,8 +64,8 @@ describe('connectFeatures', () => {
   it('should invoke connectFeatures by key', () => {
     const APP_NOTES_KEY = Symbol();
     createRoot(appRoutes, { key: APP_NOTES_KEY });
-    const mapUnit = createFeature(mapRoutes);
-    connectFeatures(APP_NOTES_KEY, { map: mapUnit });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures(APP_NOTES_KEY, { map: mapConnector });
     const result = {
       root: {
         id: 2,

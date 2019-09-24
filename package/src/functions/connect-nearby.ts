@@ -1,4 +1,4 @@
-import { LazyUnits, Spot } from '../interfaces';
+import { Connectors, Spot } from '../interfaces';
 
 /**
  * connects feature units
@@ -7,7 +7,7 @@ import { LazyUnits, Spot } from '../interfaces';
  * indirectly of parent routes
  */
 export function connectNearby(
-  nearby: LazyUnits,
+  nearby: Connectors,
   parentSpot: Spot = null
 ): void {
   Object.keys(nearby || {}).forEach((featureName: string) => {

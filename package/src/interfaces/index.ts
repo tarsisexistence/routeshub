@@ -14,6 +14,6 @@ export {
   InternalUnit,
   Unit,
   Units,
-  LazyUnit,
-  LazyUnits
+  Connector,
+  Connectors
 } from './unit.interfaces';

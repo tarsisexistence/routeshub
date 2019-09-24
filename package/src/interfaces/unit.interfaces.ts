@@ -20,7 +20,7 @@ export type Units<R = any> = { [key in keyof R]: Unit<R[key]> };
 /**
  * Describes unprocessed feature (lazy) unit
  */
-export type LazyUnit<R = any, C = any> = (
+export type Connector<R = any, C = any> = (
   parentSpot: Spot,
   alternativeName?: string
 ) => Unit<R, C>;
@@ -28,11 +28,11 @@ export type LazyUnit<R = any, C = any> = (
 /**
  * Describes a bunch of lazy units
  */
-export type LazyUnits<R = any> = { [key in keyof R]: LazyUnit<R[key]> };
+export type Connectors<R = any> = { [key in keyof R]: Connector<R[key]> };
 
 /**
  * gives optional keys from main and children routes of unit
  */
 export type partialFeatureRoutes<R, C> = {
-  [key in keyof Partial<R & C>]: LazyUnit;
+  [key in keyof Partial<R & C>]: Connector;
 };

@@ -13,4 +13,4 @@ export { hub } from './hub';
 
 export { NavigationModule } from './navigation/navigation.module';
 
-export { Root, Note, Unit, Units, LazyUnit, Params } from './interfaces';
+export { Root, Note, Unit, Units, Connector, Params } from './interfaces';
