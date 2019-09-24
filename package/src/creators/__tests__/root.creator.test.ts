@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { createRoot } from './root.creator';
-import { PRIVATE_NOTES_KEY } from '../constants';
+import { createRoot } from '../root.creator';
+import { PRIVATE_NOTES_KEY } from '../../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {
   it('should create root', () => {
     const routes: Routes = [{ path: '' }];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -17,13 +17,21 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
+  });
+
+  it('should occur an error when double attempt to create root', () => {
+    const routes: Routes = [{ path: '' }];
+    expect(() => {
+      createRoot(routes);
+      createRoot(routes);
+    }).toThrow('Routeshub is already declared.');
   });
 
   it('should create root with key', () => {
     const routes: Routes = [{ path: '' }];
     const ROOT_NOTES_KEY = Symbol();
-    const slice = createRoot(routes, { key: ROOT_NOTES_KEY });
+    const unit = createRoot(routes, { key: ROOT_NOTES_KEY });
     const result = {
       root: {
         id: 0,
@@ -34,12 +42,12 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: ROOT_NOTES_KEY
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root with a few routes', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -64,14 +72,14 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root with one route and children', () => {
     const routes: Routes = [
       { path: '', children: [{ path: '' }, { path: 'about' }] }
     ];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -89,15 +97,15 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
-  it('should create root slice with wildcard and root with children and routeName option', () => {
+  it('should create root unit with wildcard and root with children and routeName option', () => {
     const routes: Routes = [
       { path: '', children: [{ path: '' }, { path: 'about' }] },
       { path: '**' }
     ];
-    const slice = createRoot(routes, {
+    const unit = createRoot(routes, {
       routeName: { root: 'home', wildcard: 'notFound' }
     });
     const result = {
@@ -124,7 +132,7 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root with dynamic multi paths', () => {
@@ -134,7 +142,7 @@ describe('createRoot', () => {
       { path: ':country' },
       { path: 'place/road' }
     ];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 0,
@@ -166,7 +174,7 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root with dynamic multi paths in children', () => {
@@ -181,7 +189,7 @@ describe('createRoot', () => {
         ]
       }
     ];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -213,7 +221,7 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root with routes and children', () => {
@@ -229,7 +237,7 @@ describe('createRoot', () => {
       { path: 'info' },
       { path: '**' }
     ];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       root: {
         id: 1,
@@ -275,7 +283,7 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 
   it('should create root Hub with different dynamic paths', () => {
@@ -284,7 +292,7 @@ describe('createRoot', () => {
       { path: 'map/:id' },
       { path: ':token/profile' }
     ];
-    const slice = createRoot(routes);
+    const unit = createRoot(routes);
     const result = {
       map: {
         id: 0,
@@ -309,6 +317,6 @@ describe('createRoot', () => {
       },
       [PRIVATE_NOTES_KEY]: 'app'
     };
-    expect(slice).toEqual(result);
+    expect(unit).toEqual(result);
   });
 });

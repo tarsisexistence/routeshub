@@ -1,17 +1,17 @@
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { createRoot } from './root.creator';
-import { createFeature } from './feature.creator';
-import { PRIVATE_NOTES_KEY } from '../constants';
-import { connectFeatures, getHubSlices, getSlice } from '../functions';
+import { createRoot } from '../root.creator';
+import { createFeature } from '../feature.creator';
+import { PRIVATE_NOTES_KEY } from '../../constants';
+import { connectFeatures, getRegisteredUnits, getUnit } from '../../functions';
 
 describe('createFeature', () => {
   it('should create feature with one route', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }];
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapSlice });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       root: {
         id: 3,
@@ -22,15 +22,17 @@ describe('createFeature', () => {
       },
       [PRIVATE_NOTES_KEY]: 'map'
     };
-    expect(getSlice('map')).toEqual(result);
+    expect(getUnit('map')).toEqual(result);
   });
 
   it('should create root and feature with different route name options', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     const mapRoutes: Routes = [{ path: '' }];
-    const mapSlice = createFeature(mapRoutes, { routeName: { root: 'home' } });
+    const mapConnector = createFeature(mapRoutes, {
+      routeName: { root: 'home' }
+    });
     createRoot(appRoutes, { routeName: { root: 'rootRoute' } });
-    connectFeatures('app', { map: mapSlice });
+    connectFeatures('app', { map: mapConnector });
     const result = {
       app: {
         rootRoute: {
@@ -67,7 +69,7 @@ describe('createFeature', () => {
         [PRIVATE_NOTES_KEY]: 'map'
       }
     };
-    expect(getHubSlices()).toEqual(result);
+    expect(getRegisteredUnits()).toEqual(result);
   });
 
   it('should create feature with a few routes', () => {
@@ -78,8 +80,8 @@ describe('createFeature', () => {
       { path: 'location' },
       { path: ':profileId' }
     ];
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapSlice });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const result = {
       root: {
         id: 3,
@@ -104,18 +106,18 @@ describe('createFeature', () => {
       },
       [PRIVATE_NOTES_KEY]: 'map'
     };
-    expect(getSlice('map')).toEqual(result);
+    expect(getUnit('map')).toEqual(result);
   });
 
   it('should create feature with a few another features', () => {
     const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
     createRoot(appRoutes);
     const mapRoutes: Routes = [{ path: '' }, { path: 'location' }];
-    const mapSlice = createFeature(mapRoutes);
-    connectFeatures('app', { map: mapSlice });
+    const mapConnector = createFeature(mapRoutes);
+    connectFeatures('app', { map: mapConnector });
     const locationRoutes: Routes = [{ path: '' }];
-    const locationSlice = createFeature(locationRoutes);
-    connectFeatures('map', { location: locationSlice });
+    const locationConnector = createFeature(locationRoutes);
+    connectFeatures('map', { location: locationConnector });
     const result = {
       root: {
         id: 5,
@@ -126,6 +128,6 @@ describe('createFeature', () => {
       },
       [PRIVATE_NOTES_KEY]: 'location'
     };
-    expect(getSlice('location')).toEqual(result);
+    expect(getUnit('location')).toEqual(result);
   });
 });

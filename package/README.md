@@ -18,7 +18,7 @@ Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 <br/>
 
 ## Install
-
+To get started, you need install the package from npm
 ```sh
 npm install routeshub
 ```
@@ -46,7 +46,7 @@ export const routes: Routes = [
 ];
 ```
 
-#### Getting interface based on our routes and unique slice key (as symbol) in **[module]**.notes.ts
+#### Getting interface based on our routes and unique unit key (as symbol) in **[module]**.notes.ts
 ```typescript
 import { Note } from 'routeshub';
 
@@ -66,7 +66,7 @@ import { RouterModule } from '@angular/router';
 import { NavigationModule, connectFeatures, createRoot } from 'lib';
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppNotes } from './app.notes';
-import { aboutSlice } from '../views/about/hub/about.hub';
+import { aboutUnit } from '../views/about/hub/about.hub';
 
 /**
  * Creates stateful named App routes
@@ -79,7 +79,7 @@ createRoot<AppNotes>(routes, { key: APP_NOTES_KEY });
  * about module has its own routes which we wanna connect
  */
 connectFeatures<AppNotes>(APP_NOTES_KEY, {
-  about: aboutSlice
+  about: aboutUnit
 });
 
 /**
@@ -101,7 +101,7 @@ export class AppHub {}
 ```typescript
 ...
 
-import { getSlice, Slice, Sliced } from 'routeshub';
+import { getUnit, Unit, Secluded } from 'routeshub';
 import { AppNotes, APP_NOTES_KEY } from '../hub/app.notes';
 
 @Component({
@@ -114,20 +114,20 @@ import { AppNotes, APP_NOTES_KEY } from '../hub/app.notes';
 `
 })
 export class HeaderComponent {
-  // getting slice by key
-  @Sliced(APP_NOTES_KEY)
-  public app: Slice<AppNotes>;
+  // getting unit by key
+  @Secluded(APP_NOTES_KEY)
+  public app: Unit<AppNotes>;
   
   //or
   
-   // getting slice by name
-   @Sliced('app')
-   public app: Slice<AppNotes>;
+   // getting unit by name
+   @Secluded('app')
+   public app: Unit<AppNotes>;
    
    //or
    
-   // getting slice from getSlice function
-   public app = getSlice<AppNotes>(APP_NOTES_KEY);
+   // getting unit from getUnit function
+   public app = getUnit<AppNotes>(APP_NOTES_KEY);
 }
 ```
 
@@ -144,37 +144,42 @@ Routeshub offers an approach (pattern) to structure routing in the application. 
 **Guideline**:
 - Each module in application has a hub directory
 - hub directory contains three files that configure routing of the current module
-1. hub - sets routing configuration (forRoot/forFeature) and exports RoutingModule and NavigationModule
-2. notes - describes module's routes and creates a unique key
-3. routes - declares routes of current module
+1. hub - sets routing configuration, exports RoutingModule and NavigationModule, connects feature units.
+2. notes - place for interfaces and unique key of the unit.
+3. routes - simple routes file as is without any changes.
+
+![diagram](http://i.piccy.info/i9/baf248d94b1260e13d5bff6acb6e6727/1569138770/128577/1338898/2019_09_22_10_51_00.jpg)
 
 <br/>
 
 # Concepts
 
-## Slice
-`Slice` is a modular entity that contains stateful module routes.
+## Unit
+`Unit` is a modular entity which contains stateful module routes.
 
-There are two ways to create the `slice`:
+![unit diagram](http://i.piccy.info/i9/395309194dfc663ad7c07dad3c482d15/1569140574/118208/1338898/unit.jpg)
+
+There are two ways to create the `unit`:
 - **createRoot**
 - **createFeature**
 
-Each function takes the `routes: Routes` and an object of options 
-- key - accepts string or symbol
-- routeName - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
-- detached - accepts _lazy slice_ which produces **feature creator**. Detached option uses only when one or more features are eager modules which connect to some module and those eager module has its own paths.
+Each creator takes the `routes: Routes` and an object of options 
+- key - unit identifier and accepts string or symbol
+- routeName - accepts an object with optional custom names for wildcard ('**') and root ('') paths
+- nearby - accepts lazy units (**connectors**) which are outputs of  **feature creator**. Nearby option should be used when one or more connected features are eager modules with their own routes files.
 
 **Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
 
 **Usage example**:
 ```typescript
  createRoot<AppNotes, AppChildNotes>(routes, {
-   key: APP_NOTES_KEY,
-   routeName: { root: 'home', wildcard: 'notFound' }
+  key: APP_NOTES_KEY,
+  routeName: { root: 'home', wildcard: 'notFound' },
+  nearby: { map: mapUnit  }
  });
 ```
 
-In turn, the **feature** creator is responsible for creating lazy slices which should be connected to parent slice
+In turn, the **feature** creator is responsible for creating lazy units (**connectors**) which should be connected to the parent unit
 
 ```typescript
 export const routes: Routes = [
@@ -189,47 +194,32 @@ export type AboutNotes = Root;
 
 const ABOUT_NOTES_KEY = Symbol();
 
-export const aboutSlice: LazySlice<AboutNotes> = createFeature<AboutNotes>(aboutNote, { key: ABOUT_NOTES_KEY });
+export const aboutConnector: Connector<AboutNotes> = createFeature<AboutNotes>(aboutNote, { key: ABOUT_NOTES_KEY });
 ```
 
 <br/>
 
 ## Note
-This section is optional to understand how routes transform into the keys.
+You need understand how routeshub transforms routes into the keys. Actually, all notes related things routeshub handles internally.
 
-The `Note` is input to reproduce the slice. Each `Note` represents one route and each module collects the route in the `Notes` bunch.
+The `Note` is input to reproduce the unit. Each `Note` represents one route.
 
-The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened to three dots.
+**In short, it assigns the names to the 'spots'**
 
-Now you do not need to create `Notes` by yourself, because this handles under the hood. Here is an example of how routes transform depending on the route path:
+The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened.
+
 ```typescript
 export const routes: Routes = [
   {
-    path: '', // name => root
-    ...
+    path: '', // name => 'root' by default (customizable)
     children: [
-      {
-        path: '', // name => root
-        redirectTo: 'about',
-      },
-      {
-        path: 'about', // about => about
-        loadChildren: () => import('app/views/about/about.module').then(m => m.AboutModule)
-      }
+      { path: '' }, // name => 'root' by default (customizable)
+      { path: 'about' } // name => about 
     ]
   },
-  {
-    path: ':first_name', // name => firstName
-    ...
-  },
-  {
-    path: 'person/:person-age', // name => personAge
-    ...
-  },
-  {
-    path: '**',  // name => wildcard (by default with possibility to customize). In example we'll rename to 'notFound'
-    redirectTo: ''
-  }
+  { path: ':first_name'}, // name => firstName
+  { path: 'person/:person-age' }, // name => personAge
+  { path: '**'} // name => 'wildcard' by default (customizable). In example we'll rename it to 'notFound'
 ];
 
 // Root interface helps to short frequently repeated actions
@@ -247,8 +237,7 @@ export interface AppChildNotes extends Root {
 */
 
 /**
-  * also, it provides opportunity to describe 
-  * root children entity
+  * btw, this shorthand provides opportunity to describe root children interface through generics
 */
 export interface AppNotes extends Root<AppChildNotes> {
   firstName: Note;
@@ -268,53 +257,52 @@ export interface AppNotes extends Root<AppChildNotes> {
 */
 
 
-
-export const appSlice = createRoot<AppNotes, AppChildNotes>(routes, { routeName: { wildcard: 'notFound' }});
+export const appUnit = createRoot<AppNotes, AppChildNotes>(routes, { routeName: { wildcard: 'notFound' }});
 ```
 
 <br/>
 
-## Get Slice
-Essentially, you need the slice to pass it into directive/decorator for navigation purposes.
-There are several ways to get a slice:
+## Get Unit
+Essentially, you need the unit to pass it into directive/decorator for navigation purposes.
+There are several ways to get a unit:
 
--  **@Sliced decorator**. Apply this decorator on the component's prop. You should pass the key or slice name.
+-  **@United decorator**. Apply this decorator on the component's prop. You should pass the key or unit name.
 ```typescript
 @Component({
   ...
 })
 export class HeaderComponent {
-  // getting slice by key
-  @Sliced(APP_NOTES_KEY)
-  private app: Slice<AppNotes, AppChildNotes>;
+  // getting unit by key
+  @Seclude(APP_NOTES_KEY)
+  private app: Unit<AppNotes, AppChildNotes>;
 
-  // getting slice by slice name
-  @Sliced('about')
-  private about: Slice<AboutNotes>;
+  // getting unit by unit name
+  @Seclude('about')
+  private about: Unit<AboutNotes>;
 }
 ```
 
--  **getSlice** - This is a function that works as decorator. Essentially, it is created as an alternative to @Sliced decorator.
+-  **getUnit** - This is a function that works as decorator. Essentially, it is created as an alternative to @Secluded decorator.
 ```typescript
 @Component({
   ...
 })
 export class HeaderComponent {
-  // getting slice by key
-  private app = getSlice<AppNotes, AppChildNotes>(APP_NOTES_KEY);
+  // getting unit by key
+  private app = getUnit<AppNotes, AppChildNotes>(APP_NOTES_KEY);
 
-  // getting slice by slice name
-  private about = getSlice<AboutNotes>('about');
+  // getting unit by name
+  private about = getUnit<AboutNotes>('about');
 }
 ```
 
--  **getHubSlices** - This is a function that returns all declared slices in the project.
+-  **getRegisteredUnits** - This is a function that returns all declared units in the project.
 ```typescript
 @Component({
   ...
 })
 export class HeaderComponent {
-  public hub: Slices<Hub> = getHubSlices<Hub>();
+  public hub: Units<Hub> = getRegisteredUnits<Hub>();
 }
 ```
 
@@ -330,21 +318,21 @@ It's a good practice importing NavigationModule into the **[module]**.hub.ts fil
 ### navLink
 ```html
 <!--dynamic route where you deal with { path: ':id' }-->
-<li [navLink]="locationSlice.profile.state" 
+<li [navLink]="locationUnit.profile.state" 
     [navParams]="{id: USER_ID}">
     Profile
 </li>
 
 
 <!--with curly braces-->
-<li navLink="{{locationSlice.map.state}}">Map</li>
+<li navLink="{{locationUnit.map.state}}">Map</li>
 <!--with square brackets-->
-<li [navLink]="locationSlice.map.state">Map</li>
+<li [navLink]="locationUnit.map.state">Map</li>
 <!--with square brackets you can omit state props-->
-<li [navLink]="locationSlice.map">Map</li>
+<li [navLink]="locationUnit.map">Map</li>
 
 <!--with active link-->
-<li [navLink]="locationSlice.map.state" 
+<li [navLink]="locationUnit.map.state" 
     navLinkActive="my-active-class">
     Map
 </li>
@@ -365,7 +353,7 @@ export class ExampleComponent {
   constructor(private router: Router) {}
 
   public navigateToProfile(): void {
-    const toProfile = forwardParams(this.userSlice.profileId.state, { profileId: 77 })
+    const toProfile = forwardParams(this.userUnit.profileId.state, { profileId: 77 })
     this.router.navigate(toProfile);
   }
 }

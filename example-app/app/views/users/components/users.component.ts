@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getSlice } from 'lib';
+import { getUnit } from 'lib';
 import { USERS_NOTES_KEY } from '../hub/users.notes';
 
 @Component({
@@ -8,7 +8,7 @@ import { USERS_NOTES_KEY } from '../hub/users.notes';
     <nav>
       <a
         *ngFor="let user of users"
-        [navLink]="usersSlice.id"
+        [navLink]="usersUnit.id"
         [navParams]="{ id: user }"
         [routerLinkActive]="['router-link-active']"
         >{{ user }}</a
@@ -20,7 +20,7 @@ import { USERS_NOTES_KEY } from '../hub/users.notes';
   `
 })
 export class UsersComponent implements OnInit {
-  public usersSlice = getSlice(USERS_NOTES_KEY);
+  public usersUnit = getUnit(USERS_NOTES_KEY);
   public users: string[];
 
   public ngOnInit(): void {

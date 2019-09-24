@@ -1,12 +1,12 @@
-import { InternalSlice, LazySlices } from './slice.interfaces';
+import { Connectors, InternalUnit } from './unit.interfaces';
 import { PRIVATE_NOTES_KEY } from '../constants';
 
 /**
- * basic hubs structure
+ * basic hubs spot
  *
  * describes a Hub's value
  */
-export interface Structure {
+export interface Spot {
   id: number;
   parentId: number;
   state: string[];
@@ -32,8 +32,8 @@ export interface Hub<E> {
  * describes a Hub's value
  * that has unprocessed children
  */
-export interface InternalStructure<C = any> extends Structure {
-  children?: InternalSlice<C>;
+export interface InternalSpot<C = any> extends Spot {
+  children?: InternalUnit<C>;
 }
 
 /**
@@ -60,5 +60,5 @@ export interface PrivateNotesKey {
 export interface CreatorOptionArgs {
   key: privateNotesKey;
   routeName: DefaultNameOptions;
-  detached: LazySlices;
+  nearby: Connectors;
 }

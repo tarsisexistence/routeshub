@@ -28,10 +28,8 @@ Object.defineProperty(window, 'getComputedStyle', {
  * Workaround for JSDOM missing transform property
  */
 Object.defineProperty(document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true
-    };
-  }
+  value: () => ({
+    enumerable: true,
+    configurable: true
+  })
 });

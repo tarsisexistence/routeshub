@@ -1,12 +1,12 @@
-import { Slice } from '../interfaces';
+import { Unit } from '../interfaces/unit.interfaces';
 import { refreshChildren } from './refresh-children';
 
 /**
  * Detects and handles children routes
  */
-export const entitify = <R, C>(routes: Slice<R, C>): Slice<R, C> =>
+export const entitify = <R, C>(routes: Unit<R, C>): Unit<R, C> =>
   Object.keys(routes).reduce(
-    (acc: Slice<R, C>, key: string): Slice<R, C> => {
+    (acc: Unit<R, C>, key: string): Unit<R, C> => {
       const route = routes[key];
 
       if (!route.children) {
@@ -16,5 +16,5 @@ export const entitify = <R, C>(routes: Slice<R, C>): Slice<R, C> =>
       const refreshedChildren = refreshChildren<R, C>(route);
       return Object.assign({}, acc, refreshedChildren);
     },
-    {} as Slice<R, C>
+    {} as Unit<R, C>
   );

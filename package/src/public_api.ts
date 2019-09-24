@@ -1,16 +1,16 @@
 export { createRoot, createFeature } from './creators';
 
-export { Sliced } from './decorators';
+export { Secluded } from './decorators';
 
 export {
   connectFeatures,
   forwardParams,
-  getHubSlices,
-  getSlice
+  getUnit,
+  getRegisteredUnits
 } from './functions';
 
 export { hub } from './hub';
 
 export { NavigationModule } from './navigation/navigation.module';
 
-export { Root, Note, Slice, Slices, LazySlice, Params } from './interfaces';
+export { Root, Note, Unit, Units, Connector, Params } from './interfaces';

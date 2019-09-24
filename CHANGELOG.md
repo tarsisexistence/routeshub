@@ -1,3 +1,19 @@
+# 4.0.0 2019-09-24
+
+**Semantically redesigned API:**
+
+- Slice became Unit
+- LazySlice became Connector
+- Route (stateful) of slice became Spot
+- Detached unit became Nearby
+- Sliced decorator became Secluded
+
+**Other minor updates:**
+
+- increased useful test coverage
+- refactored code base
+- improved and updated documentation
+
 # 3.0.2 2019-09-08
 
 - fixed queryParams issue

@@ -1,40 +1,38 @@
 import { Routes } from '@angular/router';
 import {
+  Connector,
   CreatorOptionArgs,
-  LazySlice,
   Notes,
-  Slice,
-  Slices,
-  Structure
+  Spot,
+  Unit,
+  Units
 } from '../interfaces';
 import { hub, updateHub } from '../hub';
 import { createNote } from './note.creator';
-import { createSlice } from './slice.creator';
-import { connectDetached } from '../functions';
+import { createUnit } from './unit.creator';
+import { connectNearby } from '../functions';
 
 /**
  * Creates a feature route
  */
-export function createFeature<R = any, C = any>(
+export const createFeature = <R = any, C = any>(
   routes: Routes,
-  { key, detached, routeName }: Partial<CreatorOptionArgs> = {}
-): LazySlice<R, C> {
-  return (
-    parentStructure: Structure,
-    alternativeName?: string
-  ): Slice<R, C> => {
-    const name = alternativeName ? alternativeName : parentStructure.name;
-    const notes: Notes<R, C> = createNote<R, C>(routes, routeName);
-    const feature: Slice<R, C> = createSlice<R, C>(parentStructure, notes);
-    const updatedRouteState: Slices<Slice<R, C>> = updateHub<R, C>(
-      feature,
-      name,
-      key || name
-    );
-    hub.next(updatedRouteState);
+  { key, nearby, routeName }: Partial<CreatorOptionArgs> = {}
+): Connector<R, C> => (
+  parentSpot: Spot,
+  alternativeName?: string
+): Unit<R, C> => {
+  const name = alternativeName ? alternativeName : parentSpot.name;
+  const notes: Notes<R, C> = createNote<R, C>(routes, routeName);
+  const feature: Unit<R, C> = createUnit<R, C>(parentSpot, notes);
+  const updatedRouteState: Units<Unit<R, C>> = updateHub<R, C>(
+    feature,
+    name,
+    key || name
+  );
+  hub.next(updatedRouteState);
 
-    connectDetached(detached, parentStructure);
+  connectNearby(nearby, parentSpot);
 
-    return hub.value[name];
-  };
-}
+  return hub.value[name];
+};

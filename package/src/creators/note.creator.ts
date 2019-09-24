@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { DefaultNameOptions, Note, Notes } from '../interfaces';
-import { setRouteName } from '../utils/name';
+import { setRouteName } from '../utils/path';
 
 /**
  * creates a route note

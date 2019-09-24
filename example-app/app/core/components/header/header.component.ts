@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   forwardParams,
-  getHubSlices,
-  getSlice,
-  Slice,
-  Sliced,
-  Slices
+  getRegisteredUnits,
+  getUnit,
+  Secluded,
+  Unit,
+  Units
 } from 'lib';
 
 import { Hub } from '../../../hub/app.hub';
@@ -25,26 +25,26 @@ export class HeaderComponent implements OnInit {
    * Declares component property
    * for template access reason
    */
-  public hub: Slices<Hub>;
+  public hub: Units<Hub>;
 
-  // getting slice from function by key (slice name is available too)
-  public car = getSlice<CarNotes>(CAR_NOTES_KEY);
+  // getting unit from function by key (unit name is available too)
+  public car = getUnit<CarNotes>(CAR_NOTES_KEY);
 
-  // getting slice by key
-  @Sliced(APP_NOTES_KEY)
-  private app: Slice<AppNotes, AppChildNotes>;
+  // getting unit by key
+  @Secluded(APP_NOTES_KEY)
+  private app: Unit<AppNotes, AppChildNotes>;
 
-  // getting slice by slice name
-  @Sliced('about')
-  private about: Slice<AboutNotes>;
+  // getting unit by name
+  @Secluded('about')
+  private about: Unit<AboutNotes>;
 
   constructor(private router: Router) {}
 
   public ngOnInit(): void {
     /**
-     * Getting access to use slices in template
+     * Getting access to use units in template
      */
-    this.hub = getHubSlices<Hub>();
+    this.hub = getRegisteredUnits<Hub>();
   }
 
   /**

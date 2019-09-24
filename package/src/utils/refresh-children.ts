@@ -1,29 +1,29 @@
-import { InternalStructure, Slice } from '../interfaces';
+import { InternalSpot, Unit } from '../interfaces';
 
 /**
  * refreshes children parent target
  * because of replacing them with a parent node
  */
-export function refreshChildren<R, C>(parent: InternalStructure<C>): Slice<C> {
-  const children: Slice<C> = parent.children;
-  const inheritorId: number = parent.id + 1;
+export function refreshChildren<R, C>(parentSpot: InternalSpot<C>): Unit<C> {
+  const children: Unit<C> = parentSpot.children;
+  const inheritorId: number = parentSpot.id + 1;
   const inheritorName: string = Object.keys(children).find(
     (name: string) => children[name].id === inheritorId
   );
 
   return Object.keys(children).reduce(
-    (acc: Slice<C>, name: string): Slice<C> => {
+    (unit: Unit<C>, name: string): Unit<C> => {
       const parentId =
         children[name].id === inheritorId
-          ? parent.parentId
+          ? parentSpot.parentId
           : children[inheritorName].id;
       const routeName =
-        name === inheritorName && name === 'root' ? parent.name : name;
+        name === inheritorName && name === 'root' ? parentSpot.name : name;
       const route = { ...children[name], parentId, name: routeName };
 
       /* https://github.com/Microsoft/TypeScript/issues/10727 */
-      return { ...(acc as object), [routeName]: route } as Slice<C>;
+      return { ...(unit as object), [routeName]: route } as Unit<C>;
     },
-    {} as Slice<C>
+    {} as Unit<C>
   );
 }
