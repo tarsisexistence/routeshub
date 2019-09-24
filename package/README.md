@@ -155,7 +155,7 @@ Routeshub offers an approach (pattern) to structure routing in the application. 
 # Concepts
 
 ## Unit
-`Unit` is a modular entity that contains stateful module routes.
+`Unit` is a modular entity which contains stateful module routes.
 
 ![unit diagram](http://i.piccy.info/i9/395309194dfc663ad7c07dad3c482d15/1569140574/118208/1338898/unit.jpg)
 
@@ -163,22 +163,23 @@ There are two ways to create the `unit`:
 - **createRoot**
 - **createFeature**
 
-Each function takes the `routes: Routes` and an object of options 
-- key - accepts string or symbol
-- routeName - accepts object with optional custom values root: "NAME OF '' PATH", wildcard: "NAME OF ** PATH"}
-- nearby - accepts _lazy unit_ which produces **feature creator**. Nearby option should be used only when one or more features are eager modules which connect to some module and those eager module has its own paths.
+Each creator takes the `routes: Routes` and an object of options 
+- key - unit identifier and accepts string or symbol
+- routeName - accepts an object with optional custom names for wildcard ('**') and root ('') paths
+- nearby - accepts lazy units (**connectors**) which are outputs of  **feature creator**. Nearby option should be used when one or more connected features are eager modules with their own routes files.
 
 **Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
 
 **Usage example**:
 ```typescript
  createRoot<AppNotes, AppChildNotes>(routes, {
-   key: APP_NOTES_KEY,
-   routeName: { root: 'home', wildcard: 'notFound' }
+  key: APP_NOTES_KEY,
+  routeName: { root: 'home', wildcard: 'notFound' },
+  nearby: { map: mapUnit  }
  });
 ```
 
-In turn, the **feature** creator is responsible for creating lazy units which should be connected to parent unit
+In turn, the **feature** creator is responsible for creating lazy units (**connectors**) which should be connected to the parent unit
 
 ```typescript
 export const routes: Routes = [
@@ -193,7 +194,7 @@ export type AboutNotes = Root;
 
 const ABOUT_NOTES_KEY = Symbol();
 
-export const aboutUnit: LazyUnit<AboutNotes> = createFeature<AboutNotes>(aboutNote, { key: ABOUT_NOTES_KEY });
+export const aboutConnector: Connector<AboutNotes> = createFeature<AboutNotes>(aboutNote, { key: ABOUT_NOTES_KEY });
 ```
 
 <br/>
