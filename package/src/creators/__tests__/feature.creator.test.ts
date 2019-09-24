@@ -1,9 +1,9 @@
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { createRoot } from './root.creator';
-import { createFeature } from './feature.creator';
-import { PRIVATE_NOTES_KEY } from '../constants';
-import { connectFeatures, getRegisteredUnits, getUnit } from '../functions';
+import { createRoot } from '../root.creator';
+import { createFeature } from '../feature.creator';
+import { PRIVATE_NOTES_KEY } from '../../constants';
+import { connectFeatures, getRegisteredUnits, getUnit } from '../../functions';
 
 describe('createFeature', () => {
   it('should create feature with one route', () => {

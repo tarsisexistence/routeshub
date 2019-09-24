@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { createRoot } from './root.creator';
-import { PRIVATE_NOTES_KEY } from '../constants';
+import { createRoot } from '../root.creator';
+import { PRIVATE_NOTES_KEY } from '../../constants';
 
 // tslint:disable:max-line-length
 describe('createRoot', () => {

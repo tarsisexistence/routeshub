@@ -1,10 +1,10 @@
 // tslint:disable:max-classes-per-file
 // tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { Secluded } from './secluded.decorator';
-import { createFeature, createRoot } from '../creators';
-import { PRIVATE_NOTES_KEY } from '../constants';
-import { connectFeatures } from '../functions/connect-features';
+import { Secluded } from '../secluded.decorator';
+import { createFeature, createRoot } from '../../creators';
+import { PRIVATE_NOTES_KEY } from '../../constants';
+import { connectFeatures } from '../../functions/connect-features';
 
 describe('[DECORATOR]: Secluded', () => {
   describe('when create simple unit', () => {

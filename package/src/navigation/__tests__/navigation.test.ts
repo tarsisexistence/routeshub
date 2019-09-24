@@ -9,9 +9,9 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { getUnit } from '../functions';
-import { NavigationModule } from './navigation.module';
-import { createRoot } from '../creators/root.creator';
+import { getUnit } from '../../functions';
+import { NavigationModule } from '../navigation.module';
+import { createRoot } from '../../creators/root.creator';
 import { Routes } from '@angular/router';
 
 const APP_NOTES_KEY = Symbol();
