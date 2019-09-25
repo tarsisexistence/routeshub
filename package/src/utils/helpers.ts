@@ -1,11 +1,11 @@
-import { hub } from '../hub';
+import { recordNextHubValue } from '../hub';
 import { indexer } from './indexer';
 
 /*
  * util for internal usage
  */
 export const resetPackage = (): void => {
-  hub.next(null);
+  recordNextHubValue(null);
   indexer.next({ reset: true });
 };
 

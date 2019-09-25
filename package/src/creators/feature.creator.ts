@@ -7,7 +7,7 @@ import {
   Unit,
   Units
 } from '../interfaces';
-import { hub, updateHub } from '../hub';
+import { getUnitFromHubByName, recordNextHubValue, updateHub } from '../hub';
 import { createNote } from './note.creator';
 import { createUnit } from './unit.creator';
 import { connectNearby } from '../functions';
@@ -30,9 +30,10 @@ export const createFeature = <R = any, C = any>(
     name,
     key || name
   );
-  hub.next(updatedRouteState);
+
+  recordNextHubValue(updatedRouteState);
 
   connectNearby(nearby, parentSpot);
 
-  return hub.value[name];
+  return getUnitFromHubByName<R, C>(name);
 };
