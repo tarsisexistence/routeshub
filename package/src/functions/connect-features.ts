@@ -1,9 +1,10 @@
 import { finalize, find } from 'rxjs/operators';
 import { Unit, Units } from '../interfaces';
-import { getUnitsFromHub, hub } from '../hub';
 import { PRIVATE_NOTES_KEY } from '../constants';
 import { partialFeatureRoutes } from '../interfaces/unit.interfaces';
 import { privateNotesKey } from '../interfaces/common.interfaces';
+import { hub } from '../hub';
+import { getUnitsFromHub } from '../utils/hub';
 
 /**
  * returns unit by key

@@ -4,7 +4,7 @@ import {
   getUnitFromHubByIdentifier,
   getUnitFromHubByName,
   getUnitsFromHub
-} from '../hub';
+} from '../utils/hub';
 
 /**
  * returns aggregated hubs

@@ -7,10 +7,14 @@ import {
   Unit,
   Units
 } from '../interfaces';
-import { getUnitFromHubByName, recordNextHubValue, updateHub } from '../hub';
 import { createNote } from './note.creator';
 import { createUnit } from './unit.creator';
 import { connectNearby } from '../functions';
+import {
+  getUnitFromHubByName,
+  recordNextHubValue,
+  updateHub
+} from '../utils/hub';
 
 /**
  * Creates a feature route

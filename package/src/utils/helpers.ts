@@ -1,5 +1,5 @@
-import { recordNextHubValue } from '../hub';
 import { indexer } from './indexer';
+import { recordNextHubValue } from './hub';
 
 /*
  * util for internal usage

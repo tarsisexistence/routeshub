@@ -9,7 +9,7 @@ import {
   isHubCreated,
   recordNextHubValue,
   updateHub
-} from '../hub';
+} from '../utils/hub';
 
 /**
  * Creates main parent routes
