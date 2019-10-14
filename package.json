@@ -44,7 +44,7 @@
     "@angular/language-service": "8.2.10",
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
-    "@types/jest": "24.0.18",
+    "@types/jest": "24.0.19",
     "@types/node": "8.10.46",
     "all-contributors-cli": "6.9.1",
     "codelyzer": "5.1.0",
