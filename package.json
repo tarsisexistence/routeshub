@@ -47,7 +47,7 @@
     "@types/jest": "24.0.19",
     "@types/node": "8.10.46",
     "all-contributors-cli": "6.13.0",
-    "codelyzer": "5.1.0",
+    "codelyzer": "5.2.1",
     "husky": "3.1.0",
     "jest": "24.9.0",
     "jsonlint": "1.6.3",
