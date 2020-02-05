@@ -45,7 +45,7 @@
     "@commitlint/cli": "8.2.0",
     "@commitlint/config-conventional": "8.2.0",
     "@types/jest": "24.9.1",
-    "@types/node": "8.10.46",
+    "@types/node": "8.10.59",
     "all-contributors-cli": "6.13.0",
     "codelyzer": "5.2.1",
     "husky": "3.1.0",
