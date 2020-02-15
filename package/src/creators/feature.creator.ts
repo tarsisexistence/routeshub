@@ -34,5 +34,5 @@ export const createFeature = <R = any, C = any>(
 
   connectNearby(nearby, parentSpot);
 
-  return hub.value[name];
+  return hub.value[name] as Unit<R, C>;
 };

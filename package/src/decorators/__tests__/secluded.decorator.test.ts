@@ -37,7 +37,7 @@ describe('[DECORATOR]: Secluded', () => {
       createRoot(routes, { key: APP_NOTES_KEY });
 
       class Example {
-        @Secluded(APP_NOTES_KEY)
+        @Secluded('app')
         unit;
       }
 
@@ -85,7 +85,7 @@ describe('[DECORATOR]: Secluded', () => {
       });
 
       class Example {
-        @Secluded(MAP_NOTES_KEY)
+        @Secluded('map')
         unit;
       }
 

@@ -1,4 +1,4 @@
-import { Note } from 'lib';
+import { Note } from 'routeshub';
 
 export interface InfoNotes {
   root: Note;

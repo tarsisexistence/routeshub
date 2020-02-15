@@ -1,7 +1,7 @@
-import { Note } from 'lib';
+import { Note } from 'routeshub';
 
 export interface DetailsNotes {
-  root: Note;
+  details: Note;
   info: Note;
 }
 

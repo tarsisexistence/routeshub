@@ -63,7 +63,7 @@ export const APP_NOTES_KEY = Symbol();
 ```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavigationModule, connectFeatures, createRoot } from 'lib';
+import { NavigationModule, connectFeatures, createRoot } from 'routeshub';
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppNotes } from './app.notes';
 import { aboutUnit } from '../views/about/hub/about.hub';

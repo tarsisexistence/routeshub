@@ -144,7 +144,6 @@
       true,
       "allow-fast-null-checks"
     ],
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-dynamic-delete": true,
     "no-object-literal-type-assertion": false,

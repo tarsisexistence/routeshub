@@ -1,15 +1,15 @@
 /**
  * generator that keeps and generates unique identifiers
  */
-function* makeResettableIterator(): IterableIterator<number> {
+function* makeResettableIterator(): Generator<number> {
   let index = 0;
   while (true) {
-    const options = yield index++;
+    const options: { reset?: boolean } = yield index++;
 
-    if (!options) {
-      continue;
+    if (options) {
+      // @ts-ignore
+      index = options.reset ? -1 : index;
     }
-    index = options.reset ? -1 : index;
   }
 }
 

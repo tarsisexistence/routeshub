@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getUnit } from 'lib';
+import { getUnit } from 'routeshub';
 import { USERS_NOTES_KEY } from '../hub/users.notes';
 
 @Component({

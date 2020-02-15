@@ -13,7 +13,7 @@ export const getRegisteredUnits = <T = any>(): Units<T> => hub.getValue();
  */
 export const getUnit = <R = any, C = {}>(arg: privateNotesKey): Unit<R, C> =>
   typeof arg === 'string'
-    ? hub.value[arg]
-    : Object.values((hub.value as Units) || {}).find(
+    ? (hub.value[arg] as Unit<R, C>)
+    : (Object.values((hub.value as Units) || {}).find(
         (unit: Unit) => unit[PRIVATE_NOTES_KEY] === arg
-      );
+      ) as Unit<R, C>);

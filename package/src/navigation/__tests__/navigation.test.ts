@@ -69,7 +69,7 @@ describe('Navigation Link Directive', () => {
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    location = TestBed.get(Location);
+    location = TestBed.inject(Location);
   });
 
   it('should have root path', () => {

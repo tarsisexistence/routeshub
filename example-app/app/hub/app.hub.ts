@@ -2,7 +2,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { connectFeatures, createRoot, NavigationModule } from 'lib';
+import { connectFeatures, createRoot, NavigationModule } from 'routeshub';
 
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
@@ -15,6 +15,7 @@ import { CarNotes } from '../views/car/hub/car.notes';
 import { DetailsNotes } from '../views/details/hub/details.notes';
 import { HomeNotes } from '../views/home/hub/home.notes';
 import { InfoNotes } from '../views/info/hub/info.notes';
+import { UsersChildNotes, UsersNotes } from '../views/users/hub/users.notes';
 
 /**
  * Creates stateful named App routes
@@ -51,6 +52,7 @@ export interface Hub {
   details: DetailsNotes;
   home: HomeNotes;
   info: InfoNotes;
+  users: UsersNotes & UsersChildNotes;
 }
 
 /**
