@@ -1,14 +1,14 @@
 {
   "name": "routeshub-workspace",
   "description": "A route management library and pattern for Angular",
-  "version": "4.1.0-beta.1",
+  "version": "4.1.0-beta.2",
   "license": "MIT",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "private": true,
   "scripts": {
     "// - NG - //": "------------------------------",
     "start": "ng serve --port 3000",
-    "build": "ng build routeshub",
+    "build": "ng build routeshub --prod",
     "test": "ng test routeshub",
     "lint": "ng lint routeshub",
     "// - SNYK - //": "------------------------------",
