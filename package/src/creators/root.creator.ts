@@ -30,5 +30,5 @@ export function createRoot<R = any, C = any>(
 
   connectNearby(nearby);
 
-  return hub.value[defaultRootName];
+  return hub.value[defaultRootName] as Unit<R, C>;
 }
