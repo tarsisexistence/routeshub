@@ -2,7 +2,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { connectFeatures, createRoot, NavigationModule } from 'lib';
+import { connectFeatures, createRoot, NavigationModule } from 'routeshub';
 
 import { routes } from './app.routes';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';

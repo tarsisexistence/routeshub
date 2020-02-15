@@ -1,4 +1,4 @@
-import { Note, Root } from 'lib';
+import { Note, Root } from 'routeshub';
 
 /**
  * Describes App children routes

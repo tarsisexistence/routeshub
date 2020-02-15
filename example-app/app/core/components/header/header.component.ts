@@ -8,7 +8,7 @@ import {
   Secluded,
   Unit,
   Units
-} from 'lib';
+} from 'routeshub';
 
 import { Hub } from '../../../hub/app.hub';
 import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../hub/app.notes';

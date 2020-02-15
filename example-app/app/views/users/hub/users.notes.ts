@@ -1,4 +1,4 @@
-import { Note, Root } from 'lib';
+import { Note, Root } from 'routeshub';
 
 export interface UsersChildNotes extends Root {
   id: Note;
