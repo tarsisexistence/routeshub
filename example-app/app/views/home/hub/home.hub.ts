@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { createFeature } from 'lib';
+import { createFeature } from 'routeshub';
 import { HOME_NOTES_KEY, HomeNotes } from './home.notes';
 import { homeRoutes } from './home.routes';
 

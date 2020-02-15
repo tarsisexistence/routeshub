@@ -14,6 +14,11 @@
           "options": {
             "tsConfig": "package/configs/tsconfig.lib.json",
             "project": "package/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "package/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -43,17 +48,19 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/example-app",
             "index": "example-app/index.html",
             "main": "example-app/main.ts",
             "tsConfig": "example-app/tsconfig.app.json",
+            "polyfills": "example-app/polyfills.ts",
             "assets": [
               "example-app/favicon.ico",
               "example-app/assets",
@@ -90,6 +97,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
