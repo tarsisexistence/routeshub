@@ -32,11 +32,11 @@ export class HeaderComponent implements OnInit {
 
   // getting unit by key
   @Secluded(APP_NOTES_KEY)
-  private app: Unit<AppNotes, AppChildNotes>;
+  public app: Unit<AppNotes, AppChildNotes>;
 
   // getting unit by name
   @Secluded('about')
-  private about: Unit<AboutNotes>;
+  public about: Unit<AboutNotes>;
 
   constructor(private router: Router) {}
 

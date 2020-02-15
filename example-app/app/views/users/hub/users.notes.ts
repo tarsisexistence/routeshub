@@ -1,6 +1,6 @@
-import { Note, Root } from 'routeshub';
+import { Note } from 'routeshub';
 
-export interface UsersChildNotes extends Root {
+export interface UsersChildNotes {
   id: Note;
   profile: Note;
 }
