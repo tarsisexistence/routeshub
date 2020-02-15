@@ -20,7 +20,11 @@ Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 ## Install
 To get started, you need install the package from npm
 ```sh
-npm install routeshub
+// if angular version is <= 8
+npm install routeshub@4.0.0
+
+// if angular version is 9
+npm install routeshub@latest
 ```
 
 ## Usage
