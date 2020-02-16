@@ -1,14 +1,14 @@
 {
   "name": "routeshub-workspace",
   "description": "A route management library and pattern for Angular",
-  "version": "4.1.0-beta.2",
+  "version": "4.1.0-beta.4",
   "license": "MIT",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "private": true,
   "scripts": {
     "// - NG - //": "------------------------------",
     "start": "ng serve --port 3000",
-    "build": "ng build routeshub --prod",
+    "build": "ng build routeshub",
     "test": "ng test routeshub",
     "lint": "ng lint routeshub",
     "// - SNYK - //": "------------------------------",
@@ -19,7 +19,11 @@
     "prettier": "prettier",
     "// - CONTRIBUTORS - //": "------------------------------",
     "contributors:add": "npx all-contributors add",
-    "contributors:generate": "npx all-contributors generate"
+    "contributors:generate": "npx all-contributors generate",
+    "// - PUBLICATION - //": "------------------------------",
+    "publication:prepare": "npm run build && npx downlevel-dts . ts3.5 && move ts3.5 dist/routeshub",
+    "publication:publish": "cd dist/routeshub && npm publish",
+    "publication:all": "npm run publication:prepare && npm run publication:publish"
   },
   "dependencies": {
     "@angular/animations": "9.0.1",

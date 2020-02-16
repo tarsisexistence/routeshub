@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "package/configs/tsconfig.lib.json",
+            "tsConfig": "package/tsconfig.lib.json",
             "project": "package/ng-package.json"
           },
           "configurations": {
@@ -31,8 +31,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "package/configs/tsconfig.lib.json",
-              "package/configs/tsconfig.spec.json"
+              "package/tsconfig.lib.json",
+              "package/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
