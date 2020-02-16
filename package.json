@@ -21,7 +21,9 @@
     "contributors:add": "npx all-contributors add",
     "contributors:generate": "npx all-contributors generate",
     "// - PUBLICATION - //": "------------------------------",
-    "publication:prepare": "npm run build && npx downlevel-dts . ts3.5 && move ts3.5 dist/routeshub",
+    "d": "npx downlevel-dts . ts3.5",
+    "m": "move ts3.5/dist/routeshub dist/routeshub /Y",
+    "publication:prepare": "npm run build && npm run d && npm run m",
     "publication:publish": "cd dist/routeshub && npm publish",
     "publication:all": "npm run publication:prepare && npm run publication:publish"
   },
