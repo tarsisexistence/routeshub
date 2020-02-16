@@ -1,9 +1,6 @@
 <header class="header">
-  <a class="logo"
-     [navLink]="app.root.state">
-    <img class="image"
-         src="/assets/logo/white.png"
-         alt="logo"/>
+  <a class="logo" [navLink]="app.root.state">
+    <img class="image" src="/assets/logo/white.png" alt="logo" />
   </a>
 
   <nav class="menu">
@@ -11,10 +8,12 @@
     <a [navLink]="hub.car.root" [navLinkActive]="['active']">
       Car
     </a>
-    <a [navLink]="hub.car.year.state"
-       [navParams]="{year: 2018}"
-       [queryParams]="{ color: 'black'}"
-       [navLinkActive]="['myActiveClass', 'myActiveClass2']">
+    <a
+      [navLink]="hub.car.year.state"
+      [navParams]="{ year: 2018 }"
+      [queryParams]="{ color: 'black' }"
+      [navLinkActive]="['myActiveClass', 'myActiveClass2']"
+    >
       Car (navLink + queryParams)
     </a>
 
