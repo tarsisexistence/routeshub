@@ -1,7 +1,7 @@
 {
   "name": "routeshub-workspace",
   "description": "A route management library and pattern for Angular",
-  "version": "4.1.0-beta.7",
+  "version": "4.1.0-next.0",
   "license": "MIT",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "private": true,
@@ -21,10 +21,10 @@
     "contributors:add": "npx all-contributors add",
     "contributors:generate": "npx all-contributors generate",
     "// - PUBLICATION - //": "------------------------------",
-    "downlevel": "npx downlevel-dts dist/routeshub dist/routeshub",
     "move:separate": "move ts3.5 dist/routeshub",
     "copy:separate": "copy tsconfig.json ts3.5",
     "downlevel:separate": "npx downlevel-dts . ts3.5 && npm run copy:separate && npm run move:separate",
+    "downlevel": "npx downlevel-dts dist/routeshub dist/routeshub",
     "publication:prepare": "npm run build && npm run downlevel",
     "publication:publish": "cd dist/routeshub && npm publish",
     "publication:all": "npm run publication:prepare && npm run publication:publish"
