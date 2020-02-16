@@ -23,7 +23,7 @@
       "dom"
     ],
     "paths": {
-      "lib": [
+      "routeshub": [
         "./package"
       ]
     }
