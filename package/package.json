@@ -1,7 +1,7 @@
 {
   "name": "routeshub",
   "description": "A route management library and pattern for Angular",
-  "version": "4.1.0-beta.4",
+  "version": "4.1.0-beta.5",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
   "typesVersions": {
     "<=3.5.0": {
       "*": [
-        "ts3.5/*"
+        "ts3.5/dist/routeshub/*"
       ]
     }
   }
