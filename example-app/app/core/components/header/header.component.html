@@ -11,10 +11,17 @@
     <a
       [navLink]="hub.car.year.state"
       [navParams]="{ year: 2018 }"
-      [queryParams]="{ color: 'black' }"
       [navLinkActive]="['myActiveClass', 'myActiveClass2']"
     >
-      Car (navLink + queryParams)
+      Car (navLink + navParams)
+    </a>
+
+    <a
+      [navParams]="{ year: 2368 }"
+      [navLink]="hub.car.year.state"
+      [navLinkActive]="['myActiveClass', 'myActiveClass2']"
+    >
+      Car (navLink + navParams (reversed)
     </a>
 
     <a (click)="freshCar()">
@@ -28,8 +35,8 @@
     <a [navLink]="hub.home.home.state">
       Home
     </a>
-    <a [navLink]="hub.users.users.state">
+    <span class="link" [navLink]="hub.users.users.state">
       Users
-    </a>
+    </span>
   </nav>
 </header>

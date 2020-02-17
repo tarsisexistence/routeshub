@@ -2,6 +2,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Routes } from '@angular/router';
 import {
   async,
   ComponentFixture,
@@ -12,7 +13,6 @@ import {
 import { getUnit } from '../../functions';
 import { NavigationModule } from '../navigation.module';
 import { createRoot } from '../../creators/root.creator';
-import { Routes } from '@angular/router';
 
 const APP_NOTES_KEY = Symbol();
 
@@ -24,6 +24,7 @@ const APP_NOTES_KEY = Symbol();
     <a [navLink]="app.map">Map</a>
     <a [navLink]="app.user" [navParams]="{ user: 'maktarsis' }">User</a>
     <a [navLink]="app.id" [navParams]="{ id: '123' }">User</a>
+    <a [navParams]="{ id: '123' }" [navLink]="app.id">User</a>
   `
 })
 class TestComponent {
@@ -118,5 +119,12 @@ describe('Navigation Link Directive', () => {
     link.click();
     tick();
     expect(location.path()).toBe('/users/123');
+  }));
+
+  it('should the same href regardless of order ', fakeAsync(() => {
+    const link = fixture.debugElement.nativeElement.querySelectorAll('a')[4];
+    const link2 = fixture.debugElement.nativeElement.querySelectorAll('a')[5];
+    console.log(link.href, link2.href);
+    expect(link.href).toBe(link2.href);
   }));
 });
