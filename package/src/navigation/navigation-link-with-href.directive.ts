@@ -1,8 +1,15 @@
-import { Directive, HostBinding, HostListener, Input } from '@angular/core';
+import {
+  Directive,
+  HostBinding,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ATTRS, QueryParamsHandling } from './helpers';
-import { Params } from '../interfaces';
-import { insertHrefParams } from '../utils/state';
+import { Params } from '../interfaces/common.interfaces';
 import { getRouteHref, getRouteLink } from '../utils/link';
 import { checkAttrActivity } from '../utils/helpers';
 import { forwardParams } from '../functions/forward-params';
@@ -10,7 +17,8 @@ import { forwardParams } from '../functions/forward-params';
 @Directive({
   selector: `a[${ATTRS.LINK}],area[${ATTRS.LINK}]`
 })
-export class NavigationLinkWithHref {
+export class NavigationLinkWithHref implements OnInit, OnChanges {
+  @HostBinding() public href: string;
   @HostBinding('attr.target') @Input() target!: string;
   @Input() queryParams: { [k: string]: any } = {};
   @Input() queryParamsHandling: QueryParamsHandling = '';
@@ -20,20 +28,26 @@ export class NavigationLinkWithHref {
   @Input() replaceUrl!: boolean;
   @Input() state?: { [k: string]: any };
   @Input(ATTRS.PARAMS) params: Params;
-
-  @Input() set navLink(value: string | string[]) {
-    this.link = getRouteLink(value);
-    const originalHref = getRouteHref(this.link);
-    this.href = insertHrefParams(originalHref, this.params);
-  }
-
-  @HostBinding()
-  public href: string;
-  public link: string[];
+  @Input(ATTRS.LINK) link: string[];
 
   constructor(private router: Router) {}
 
-  // tslint:disable:max-line-length
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.link) {
+      this.link = getRouteLink(changes.link.currentValue);
+    }
+
+    if (changes.params) {
+      this.href = getRouteHref(this.link, this.params);
+    }
+  }
+
+  public ngOnInit(): void {
+    if (this.params === undefined) {
+      this.href = getRouteHref(this.link, this.params);
+    }
+  }
+
   @HostListener('click', [
     '$event.button',
     '$event.ctrlKey',

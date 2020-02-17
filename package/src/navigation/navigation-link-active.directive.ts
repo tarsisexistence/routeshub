@@ -13,11 +13,10 @@ import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NavigationLink } from './navigation-link.directive';
 import { NavigationLinkWithHref } from './navigation-link-with-href.directive';
-import { getRouteHref } from '../utils/link';
 import { getClassNames } from '../utils/helpers';
-import { insertHrefParams } from '../utils/state';
 import { ATTRS } from './helpers';
 import { Params } from '../interfaces';
+import { getRouteHref } from '../utils/link';
 
 @Directive({
   selector: '[navLinkActive]',
@@ -29,8 +28,8 @@ export class NavigationLinkActive
   public links!: QueryList<NavigationLink>;
   @ContentChildren(NavigationLinkWithHref, { descendants: true })
   public linksWithHrefs!: QueryList<NavigationLinkWithHref>;
-  @Input(ATTRS.PARAMS) params: Params;
 
+  @Input(ATTRS.PARAMS) params: Params;
   @Input() navLinkActiveOptions: { exact: boolean } = { exact: false };
 
   @Input() set navLinkActive(input: string | string[]) {
@@ -103,7 +102,7 @@ export class NavigationLinkActive
     const { exact } = this.navLinkActiveOptions;
     const href = instance.href
       ? instance.href
-      : insertHrefParams(getRouteHref(instance.link), instance.params);
+      : getRouteHref(instance.link, instance.params);
     return exact ? url === href : url.includes(href);
   }
 }
