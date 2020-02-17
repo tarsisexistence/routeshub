@@ -1,4 +1,4 @@
-import { Spot } from '../interfaces';
+import { Params, Spot } from '../interfaces';
 import { transformPathToState } from './path';
 import { showError } from './helpers';
 
@@ -42,9 +42,48 @@ export const getRouteLink = (input: string | string[] | Spot): string[] => {
 /**
  * converts an array-like link into href
  */
-export const getRouteHref = (link: string[]): string => {
+const parseRouteHref = (link: string[]): string => {
   const paths = link.filter(
     (value: string) => value.length > 0 && value !== '/'
   );
   return `/${paths.join('/')}`;
+};
+
+const handleParamsPath = (path: string, params: Params): string => {
+  const param = path.slice(1);
+  return path[0] === ':' && Boolean(params[param]) ? params[param] : path;
+};
+
+/**
+ * Replaces original dynamic path with params
+ * Generates dynamic-ready links
+ */
+// TODO: think about semantics
+export const insertLinkParams = (paths: string[], params: Params): string[] =>
+  paths.map((path: string): string => handleParamsPath(path, params));
+
+/**
+ * Replaces original href with params
+ * Generates dynamic-ready href
+ */
+const insertHrefParams = (href: string, params: Params): string =>
+  href.split('/').reduce((acc: string, path: string): string => {
+    if (path.length === 0 || path === '/') {
+      return acc;
+    }
+
+    const paramsVerifiedPath = handleParamsPath(path, params);
+    return `${acc}/${paramsVerifiedPath}`;
+  }, '');
+
+/**
+ * defines href of the link
+ * based on link data and parameters
+ */
+export const getRouteHref = (
+  link: string[],
+  params: Record<string, string>
+): string => {
+  const originalHref = parseRouteHref(link);
+  return insertHrefParams(originalHref, params);
 };

@@ -1,5 +1,5 @@
 import { Params } from '../interfaces';
-import { insertLinkParams } from '../utils/state';
+import { insertLinkParams } from '../utils/link';
 
 /**
  * Supports dynamic paths for array-like links
