@@ -124,7 +124,6 @@ describe('Navigation Link Directive', () => {
   it('should the same href regardless of order ', fakeAsync(() => {
     const link = fixture.debugElement.nativeElement.querySelectorAll('a')[4];
     const link2 = fixture.debugElement.nativeElement.querySelectorAll('a')[5];
-    console.log(link.href, link2.href);
     expect(link.href).toBe(link2.href);
   }));
 });
