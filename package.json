@@ -1,7 +1,7 @@
 {
   "name": "routeshub-workspace",
   "description": "A route management library and pattern for Angular",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "license": "MIT",
   "author": "Max Tarsis (https://github.com/maktarsis)",
   "private": true,
