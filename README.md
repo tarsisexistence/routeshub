@@ -20,7 +20,7 @@ Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 ## Install
 To get started, you need install the package from npm
 ```sh
-npm install routeshub@4.0.0
+npm install routeshub
 ```
 
 ## Usage
