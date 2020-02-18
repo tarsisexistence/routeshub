@@ -23,8 +23,6 @@ To get started, you need install the package from npm
 npm install routeshub@4.0.0
 ```
 
-**It doesn't support Angular 9 at the moment.**
-
 ## Usage
 
 #### Declare a simple **[module]**.routes.ts file

@@ -1,3 +1,12 @@
+# 4.1.0 2020-02-17
+
+- Turn off Ivy (with Angular 9)
+- Fixed secluded decorator
+- Fixed navLink (href) directive due to attribute order dependency
+- Fixed internal data structures to support modern decorator rules
+- Added downlevel-ts to support older typescript in apps
+- Updated dependencies, tests, UI examples
+
 # 4.0.0 2019-09-24
 
 **Semantically redesigned API:**
