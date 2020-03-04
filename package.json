@@ -60,7 +60,7 @@
     "jest": "24.9.0",
     "jsonlint": "1.6.3",
     "lint-staged": "9.5.0",
-    "ng-packagr": "9.0.0",
+    "ng-packagr": "9.0.2",
     "prettier": "1.19.1",
     "protractor": "6.0.0",
     "snyk": "1.290.2",
