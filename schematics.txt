@@ -1,0 +1,6 @@
+https://www.softwarearchitekt.at/aktuelles/automatically-updating-angular-modules-with-schematics-and-the-cli/
+
+https://medium.com/@martzcodes/writing-an-angular-schematic-to-add-a-lazy-loaded-feature-route-c8b211804fa5
+
+https://github.com/rangle/schematics-angular/blob/master/src/ast/add-route-to-routing-module/add-route-to-routing-module.ts
+
