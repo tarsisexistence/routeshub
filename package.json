@@ -59,7 +59,7 @@
     "husky": "4.2.3",
     "jest": "25.1.0",
     "jsonlint": "1.6.3",
-    "lint-staged": "10.0.9",
+    "lint-staged": "10.1.1",
     "ng-packagr": "9.1.0",
     "prettier": "2.0.0",
     "protractor": "6.0.0",
