@@ -1,3 +1,8 @@
+# 4.1.1 2020-04-04
+
+- Updated dependencies
+- Fixed package vulnerabilities
+
 # 4.1.0 2020-02-17
 
 - Turn off Ivy (with Angular 9)
