@@ -57,7 +57,7 @@
     "all-contributors-cli": "6.14.0",
     "codelyzer": "5.2.2",
     "husky": "4.2.5",
-    "jest": "25.2.6",
+    "jest": "25.5.4",
     "jsonlint": "1.6.3",
     "lint-staged": "10.1.1",
     "ng-packagr": "9.1.5",
