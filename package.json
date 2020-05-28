@@ -27,7 +27,7 @@
     "downlevel": "npx downlevel-dts dist/routeshub dist/routeshub",
     "publication:prepare": "npm run build && npm run downlevel",
     "publication:publish": "cd dist/routeshub && npm publish",
-    "publication:all": "npm run publication:prepare && npm run publication:publish"
+    "publication": "npm run publication:prepare && npm run publication:publish"
   },
   "dependencies": {
     "@angular/animations": "9.1.0",
