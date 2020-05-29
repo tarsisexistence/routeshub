@@ -1,9 +1,9 @@
 {
   "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
-    "routeshub-parse": {
+    "parse": {
       "description": "Parse routes and generate interface",
-      "factory": "./routeshub-parse/index#routeshubParse"
+      "factory": "./parse/index#parse"
     }
   }
 }

@@ -27,7 +27,7 @@ const getProgram = (tsConfigContent: string): ts.Program => {
   return ts.createProgram(config.fileNames, config.options, host);
 };
 
-export function routeshubParse(_options: any): Rule {
+export function parse(_options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const config = tree.get('./tsconfig.json');
     if (!config) {
