@@ -89,7 +89,7 @@ export const getRouterDefinitonFile = (program: ts.Program): ts.SourceFile => {
   }
 };
 
-// todo rename
+// todo refactor
 export const getRouterDeclarations = (program: ts.Program): ts.Identifier => {
   const routerDefinitions = getRouterDefinitonFile(program);
 
@@ -115,7 +115,10 @@ export const getRouterDeclarations = (program: ts.Program): ts.Identifier => {
         if (nodeSybmol) {
           const nodeType = typeChecker.getDeclaredTypeOfSymbol(nodeSybmol);
           if (nodeType === type) {
-            console.log(node.text);
+            const parent = node.parent;
+            if (parent && ts.isPropertyAccessExpression(parent)) {
+              console.log(parent.name);
+            }
           }
         }
       } else {
