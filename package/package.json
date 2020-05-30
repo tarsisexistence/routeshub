@@ -17,6 +17,7 @@
     "rxjs": ">=6.0.0 || ^5.6.0-forward-compat.4"
   },
   "scripts": {
+    "build-watch": "../node_modules/.bin/tsc -p tsconfig.schematics.json --watch",
     "build": "../node_modules/.bin/tsc -p tsconfig.schematics.json",
     "copy:collection": "cp schematics/collection.json ../dist/routeshub/schematics/collection.json",
     "postbuild": "npm run copy:collection"
