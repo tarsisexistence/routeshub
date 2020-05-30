@@ -76,12 +76,70 @@ const tryFindMainModule = (
   return mainPath;
 };
 
+export const getRouterDefinitonFile = (program: ts.Program): ts.SourceFile => {
+  const routerDefinitions = program
+    .getSourceFiles()
+    .filter(file => file.fileName.includes('angular/router'))
+    .find(file => file.fileName.includes('router.d.ts'));
+
+  if (routerDefinitions) {
+    return routerDefinitions;
+  } else {
+    throw new Error("Angular router didn't find");
+  }
+};
+
+// todo rename
+export const getRouterDeclarations = (program: ts.Program): ts.Identifier => {
+  const routerDefinitions = getRouterDefinitonFile(program);
+
+  let routerModule: null | ts.Identifier = null;
+  routerDefinitions.forEachChild(node => {
+    if (ts.isClassDeclaration(node) && node?.name?.text === 'RouterModule') {
+      routerModule = node.name;
+    }
+  });
+
+  if (!routerModule) {
+    throw new Error("Router module doesn't exist");
+  }
+
+  const typeChecker = program.getTypeChecker();
+  const symbol = typeChecker.getTypeAtLocation(routerModule).getSymbol();
+  if (symbol) {
+    const type = typeChecker.getDeclaredTypeOfSymbol(symbol);
+
+    function isRouterModule(node: ts.Node): void {
+      if (ts.isIdentifier(node)) {
+        const nodeSybmol = typeChecker.getTypeAtLocation(node).getSymbol();
+        if (nodeSybmol) {
+          const nodeType = typeChecker.getDeclaredTypeOfSymbol(nodeSybmol);
+          if (nodeType === type) {
+            console.log(node.text);
+          }
+        }
+      } else {
+        node.forEachChild(isRouterModule);
+      }
+    }
+
+    program.getSourceFiles().filter(node => {
+      isRouterModule(node);
+    });
+  }
+
+  return routerModule;
+};
+
 export const findAppModule = ({
   tree,
   program,
   project
 }: FindMainModuleOptions): string => {
   const mainFile = findMainFile({ tree, program, project });
+
+  // todo change
+  getRouterDeclarations(program);
 
   const appModulePath = tryFindMainModule(mainFile, program);
   return appModulePath || '';
