@@ -2,6 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import * as ts from 'typescript';
 import { resolve } from 'path';
+import { FindMainModuleOptions } from './types';
 
 const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -17,11 +18,7 @@ const findMainFile = ({
   tree,
   program,
   project
-}: {
-  tree: Tree;
-  program: ts.Program;
-  project: string;
-}): ts.SourceFile => {
+}: FindMainModuleOptions): ts.SourceFile => {
   const angularJson = findAngularJSON(tree);
   const workspace = angularJson.projects[project];
   const relativeMainPath = workspace?.architect?.build?.options?.main || '';
@@ -38,53 +35,54 @@ const findMainFile = ({
   return mainFile;
 };
 
+const tryFindMainModule = (
+  node: ts.Node,
+  program: ts.Program
+): string | null => {
+  if (ts.isIdentifier(node) && node.text === 'bootstrapModule') {
+    const propAccess = node.parent;
+    if (!propAccess || !ts.isPropertyAccessExpression(propAccess)) {
+      return null;
+    }
+
+    const tempExpr = propAccess.parent;
+    if (!tempExpr || !ts.isCallExpression(tempExpr)) {
+      return null;
+    }
+
+    const module = tempExpr.arguments[0];
+    const typeChecker = program.getTypeChecker();
+    const symbol = typeChecker.getTypeAtLocation(module).getSymbol();
+    if (!symbol) {
+      return null;
+    }
+
+    const declarations = symbol.getDeclarations();
+    if (!declarations) {
+      return null;
+    }
+
+    return resolve(declarations[0].getSourceFile().fileName);
+  }
+
+  let mainPath: null | string = null;
+  node.forEachChild(nextNode => {
+    if (mainPath) {
+      return mainPath;
+    }
+    mainPath = tryFindMainModule(nextNode, program);
+  });
+
+  return mainPath;
+};
+
 export const findAppModule = ({
   tree,
   program,
   project
-}: {
-  tree: Tree;
-  program: ts.Program;
-  project: string;
-}): string => {
+}: FindMainModuleOptions): string => {
   const mainFile = findMainFile({ tree, program, project });
 
-  const tryFindMainModule = (node: ts.Node) => {
-    if (
-      ts.isIdentifier(node) &&
-      (node as ts.Identifier).text === 'bootstrapModule'
-    ) {
-      const propAccess = (node as ts.Identifier).parent;
-      if (!propAccess || !ts.isPropertyAccessExpression(propAccess)) {
-        return null;
-      }
-      const tempExpr = propAccess.parent;
-      if (!tempExpr || !ts.isCallExpression(tempExpr)) {
-        return null;
-      }
-      const expr = tempExpr as ts.CallExpression;
-      const module = expr.arguments[0];
-      const tc = program.getTypeChecker();
-      const symbol = tc.getTypeAtLocation(module).getSymbol();
-      if (!symbol) {
-        return null;
-      }
-      const decl = symbol.getDeclarations();
-      if (!decl) {
-        return null;
-      }
-      return resolve(decl[0].getSourceFile().fileName);
-    }
-    let mainPath: null | string = null;
-    node.forEachChild(c => {
-      if (mainPath) {
-        return mainPath;
-      }
-      mainPath = tryFindMainModule(c);
-    });
-    return mainPath;
-  };
-
-  const appModulePath = tryFindMainModule(mainFile);
+  const appModulePath = tryFindMainModule(mainFile, program);
   return appModulePath || '';
 };
