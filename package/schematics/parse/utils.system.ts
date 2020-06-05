@@ -3,7 +3,7 @@ import { dirname, resolve } from 'path';
 import * as ts from 'typescript';
 
 const getTsConfig = (content: any): ts.ParsedCommandLine => {
-  // todo maybe change optimize it
+  // todo maybe optimize it
   const parseConfigHost: ts.ParseConfigHost = {
     fileExists: existsSync,
     readDirectory: ts.sys.readDirectory,

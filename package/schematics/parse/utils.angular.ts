@@ -1,12 +1,8 @@
 import { Tree } from '@angular-devkit/schematics';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import * as ts from 'typescript';
-import { resolve } from 'path';
-import {
-  FindMainModuleOptions,
-  NodeWithFileName,
-  RouterExpression
-} from './types';
+import { dirname, resolve } from 'path';
+import { FindMainModuleOptions, NodeWithFile, RouterExpression } from './types';
 
 const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -139,21 +135,21 @@ const isRouterModule = (
 
 const getRouteModuleIdentifiers = (
   program: ts.Program
-): NodeWithFileName<ts.Identifier>[] => {
+): NodeWithFile<ts.Identifier>[] => {
   const typeChecker = program.getTypeChecker();
   const routerType = getRouterModuleType(program, typeChecker);
 
-  const routesUsage: NodeWithFileName<ts.Identifier>[] = [];
-  function routerVisitor(fileName: string, node: ts.Node): void {
+  const routesUsage: NodeWithFile<ts.Identifier>[] = [];
+  function routerVisitor(file: ts.SourceFile, node: ts.Node): void {
     if (isRouterModule(typeChecker, routerType, node)) {
-      routesUsage.push({ node: node as ts.Identifier, fileName });
+      routesUsage.push({ node: node as ts.Identifier, file });
     } else {
-      node.forEachChild(child => routerVisitor(fileName, child));
+      node.forEachChild(child => routerVisitor(file, child));
     }
   }
 
   program.getSourceFiles().forEach(sourceFile => {
-    sourceFile.forEachChild(node => routerVisitor(sourceFile.fileName, node));
+    sourceFile.forEachChild(node => routerVisitor(sourceFile, node));
   });
 
   return routesUsage;
@@ -182,41 +178,75 @@ function hasExpression(node: ts.Node, expression: RouterExpression): boolean {
 
 const getRouterCallExpressions = (
   expression: RouterExpression,
-  routeModules: NodeWithFileName<ts.Identifier>[]
-): NodeWithFileName<ts.CallExpression>[] => {
+  routeModules: NodeWithFile<ts.Identifier>[]
+): NodeWithFile<ts.CallExpression>[] => {
   return routeModules
     .filter(({ node }) => hasExpression(node, expression))
-    .map(({ node, fileName }) => ({
+    .map(({ node, file }) => ({
       node: findRouterCallExpression(node),
-      fileName
+      file
     }))
     .filter(({ node }) => !!node)
-    .map(node => node as NodeWithFileName<ts.CallExpression>);
+    .map(node => node as NodeWithFile<ts.CallExpression>);
+};
+
+export const getImportDeclarationForId = (
+  node: ts.Node
+): ts.ImportDeclaration | null => {
+  const { parent } = node;
+  if (parent) {
+    if (ts.isImportDeclaration(parent)) {
+      return parent;
+    } else {
+      return getImportDeclarationForId(parent);
+    }
+  }
+
+  return null;
+};
+
+export const getFileWithId = (
+  node: ts.ImportDeclaration,
+  program: ts.Program,
+  relativeFile: string
+): ts.SourceFile | null => {
+  const { moduleSpecifier } = node;
+  if (ts.isStringLiteral(moduleSpecifier)) {
+    const dir = dirname(relativeFile);
+    const relativePath = moduleSpecifier.text;
+    const absolutePath = resolve(dir, relativePath);
+
+    return (
+      program
+        .getSourceFiles()
+        .find(file => file.fileName.includes(absolutePath)) || null
+    );
+  }
+
+  return null;
 };
 
 const tryFindIdentifierValue = (
-  nodeWithFile: NodeWithFileName<ts.Identifier>,
-  program: ts.Program
+  program: ts.Program,
+  nodeWithFile: NodeWithFile<ts.Identifier>,
+  checkPosition: boolean = false
 ): ts.ArrayLiteralExpression | undefined => {
   const identifier = nodeWithFile.node;
-  const ids: NodeWithFileName<ts.Identifier>[] = [];
+  const ids: NodeWithFile<ts.Identifier>[] = [];
 
   function visitor(node: ts.Node): void {
     if (
       ts.isIdentifier(node) &&
       node.text === identifier.text &&
-      node.pos !== identifier.pos
+      (checkPosition ? node.pos !== identifier.pos : true)
     ) {
-      ids.push({ node, fileName: nodeWithFile.fileName });
+      ids.push({ node, file: nodeWithFile.file });
     } else {
       node.forEachChild(visitor);
     }
   }
 
-  const file = program
-    .getSourceFiles()
-    .find(sourceFile => sourceFile.fileName === nodeWithFile.fileName);
-  file?.forEachChild(visitor);
+  nodeWithFile.file?.forEachChild(visitor);
 
   return ids.map(({ node }) => {
     const { parent } = node;
@@ -225,13 +255,34 @@ const tryFindIdentifierValue = (
       if (initializer && ts.isArrayLiteralExpression(initializer)) {
         return initializer;
       }
+    } else if (ts.isImportSpecifier(parent)) {
+      // todo also need to see cases like import * as & import variable as
+      const importDecl = getImportDeclarationForId(parent);
+      if (importDecl) {
+        const fileWithDefinition = getFileWithId(
+          importDecl,
+          program,
+          nodeWithFile.file.fileName
+        );
+
+        if (fileWithDefinition) {
+          return tryFindIdentifierValue(
+            program,
+            {
+              node: identifier,
+              file: fileWithDefinition
+            },
+            false
+          );
+        }
+      }
     }
   })?.[0];
 };
 
 const getRoutes = (
   program: ts.Program,
-  routeModules: NodeWithFileName<ts.Identifier>[],
+  routeModules: NodeWithFile<ts.Identifier>[],
   forRoot: boolean
 ) => {
   const expression = forRoot ? 'forRoot' : 'forChild';
@@ -244,11 +295,12 @@ const getRoutes = (
     } else if (ts.isIdentifier(arg)) {
       console.log('try find: ', arg.text);
       return tryFindIdentifierValue(
+        program,
         {
           node: arg,
-          fileName: expr.fileName
+          file: expr.file
         },
-        program
+        true
       );
     }
   });

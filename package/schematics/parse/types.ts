@@ -3,9 +3,9 @@ import * as ts from 'typescript';
 
 export type RouterExpression = 'forRoot' | 'forChild';
 
-export interface NodeWithFileName<T extends ts.Node> {
+export interface NodeWithFile<T extends ts.Node> {
   node: T;
-  fileName: string;
+  file: ts.SourceFile;
 }
 
 export interface Options {
