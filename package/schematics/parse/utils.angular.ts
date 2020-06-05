@@ -2,7 +2,11 @@ import { Tree } from '@angular-devkit/schematics';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import * as ts from 'typescript';
 import { resolve } from 'path';
-import { FindMainModuleOptions, RouterExpression } from './types';
+import {
+  FindMainModuleOptions,
+  NodeWithFileName,
+  RouterExpression
+} from './types';
 
 const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -133,21 +137,23 @@ const isRouterModule = (
   return false;
 };
 
-const getRouteModuleIdentifiers = (program: ts.Program): ts.Identifier[] => {
+const getRouteModuleIdentifiers = (
+  program: ts.Program
+): NodeWithFileName<ts.Identifier>[] => {
   const typeChecker = program.getTypeChecker();
   const routerType = getRouterModuleType(program, typeChecker);
 
-  const routesUsage: ts.Identifier[] = [];
-  function routerVisitor(node: ts.Node): void {
+  const routesUsage: NodeWithFileName<ts.Identifier>[] = [];
+  function routerVisitor(fileName: string, node: ts.Node): void {
     if (isRouterModule(typeChecker, routerType, node)) {
-      routesUsage.push(node as ts.Identifier);
+      routesUsage.push({ node: node as ts.Identifier, fileName });
     } else {
-      node.forEachChild(routerVisitor);
+      node.forEachChild(child => routerVisitor(fileName, child));
     }
   }
 
   program.getSourceFiles().forEach(sourceFile => {
-    sourceFile.forEachChild(routerVisitor);
+    sourceFile.forEachChild(node => routerVisitor(sourceFile.fileName, node));
   });
 
   return routesUsage;
@@ -176,20 +182,76 @@ function hasExpression(node: ts.Node, expression: RouterExpression): boolean {
 
 const getRouterCallExpressions = (
   expression: RouterExpression,
-  routeModules: ts.Identifier[]
-): ts.CallExpression[] => {
+  routeModules: NodeWithFileName<ts.Identifier>[]
+): NodeWithFileName<ts.CallExpression>[] => {
   return routeModules
-    .filter(node => hasExpression(node, expression))
-    .map(node => findRouterCallExpression(node))
-    .filter(node => !!node)
-    .map(node => node as ts.CallExpression);
+    .filter(({ node }) => hasExpression(node, expression))
+    .map(({ node, fileName }) => ({
+      node: findRouterCallExpression(node),
+      fileName
+    }))
+    .filter(({ node }) => !!node)
+    .map(node => node as NodeWithFileName<ts.CallExpression>);
 };
 
-// todo routes
-const getRoutes = (routeModules: ts.Identifier[], forRoot: boolean) => {
+const tryFindIdentifierValue = (
+  nodeWithFile: NodeWithFileName<ts.Identifier>,
+  program: ts.Program
+): ts.ArrayLiteralExpression | undefined => {
+  const identifier = nodeWithFile.node;
+  const ids: NodeWithFileName<ts.Identifier>[] = [];
+
+  function visitor(node: ts.Node): void {
+    if (
+      ts.isIdentifier(node) &&
+      node.text === identifier.text &&
+      node.pos !== identifier.pos
+    ) {
+      ids.push({ node, fileName: nodeWithFile.fileName });
+    } else {
+      node.forEachChild(visitor);
+    }
+  }
+
+  const file = program
+    .getSourceFiles()
+    .find(sourceFile => sourceFile.fileName === nodeWithFile.fileName);
+  file?.forEachChild(visitor);
+
+  return ids.map(({ node }) => {
+    const { parent } = node;
+    if (ts.isVariableDeclaration(parent)) {
+      const { initializer } = parent;
+      if (initializer && ts.isArrayLiteralExpression(initializer)) {
+        return initializer;
+      }
+    }
+  })?.[0];
+};
+
+const getRoutes = (
+  program: ts.Program,
+  routeModules: NodeWithFileName<ts.Identifier>[],
+  forRoot: boolean
+) => {
   const expression = forRoot ? 'forRoot' : 'forChild';
   const expressions = getRouterCallExpressions(expression, routeModules);
-  return expressions.map(expr => expr.arguments[0]);
+
+  return expressions.map(expr => {
+    const arg = expr.node.arguments[0];
+    if (ts.isArrayLiteralExpression(arg)) {
+      return arg;
+    } else if (ts.isIdentifier(arg)) {
+      console.log('try find: ', arg.text);
+      return tryFindIdentifierValue(
+        {
+          node: arg,
+          fileName: expr.fileName
+        },
+        program
+      );
+    }
+  });
 };
 
 export const findAppModule = ({
@@ -201,8 +263,8 @@ export const findAppModule = ({
 
   // todo change
   const routesModules = getRouteModuleIdentifiers(program);
-  const args = getRoutes(routesModules, true);
-  console.log(args.map(arg => arg.getText()));
+  const routes = getRoutes(program, routesModules, true);
+  console.log(routes.map(route => route?.elements?.length));
 
   const appModulePath = tryFindMainModule(mainFile, program);
   return appModulePath || '';
