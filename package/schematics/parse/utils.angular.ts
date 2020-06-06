@@ -4,7 +4,7 @@ import * as ts from 'typescript';
 import { dirname, resolve } from 'path';
 import { FindMainModuleOptions, NodeWithFile, RouterExpression } from './types';
 
-const findAngularJSON = (tree: Tree): WorkspaceSchema => {
+export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
   if (!angularJson) {
     throw new Error("angular.json doesn't exist");
@@ -230,7 +230,7 @@ const tryFindIdentifierValue = (
   program: ts.Program,
   nodeWithFile: NodeWithFile<ts.Identifier>,
   checkPosition: boolean = false
-): ts.ArrayLiteralExpression | undefined => {
+): ts.ArrayLiteralExpression | null => {
   const identifier = nodeWithFile.node;
   const ids: NodeWithFile<ts.Identifier>[] = [];
 
@@ -248,7 +248,7 @@ const tryFindIdentifierValue = (
 
   nodeWithFile.file?.forEachChild(visitor);
 
-  return ids.map(({ node }) => {
+  const identifierValues = ids.map(({ node }) => {
     const { parent } = node;
     if (ts.isVariableDeclaration(parent)) {
       const { initializer } = parent;
@@ -277,7 +277,10 @@ const tryFindIdentifierValue = (
         }
       }
     }
-  })?.[0];
+  });
+
+  const { length } = identifierValues;
+  return (length && identifierValues[length - 1]) || null;
 };
 
 const getRoutes = (
@@ -293,7 +296,6 @@ const getRoutes = (
     if (ts.isArrayLiteralExpression(arg)) {
       return arg;
     } else if (ts.isIdentifier(arg)) {
-      console.log('try find: ', arg.text);
       return tryFindIdentifierValue(
         program,
         {

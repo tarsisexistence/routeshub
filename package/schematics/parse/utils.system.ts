@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import * as ts from 'typescript';
 
-const getTsConfig = (content: any): ts.ParsedCommandLine => {
+const getTsConfig = (content: any, path: string): ts.ParsedCommandLine => {
   // todo maybe optimize it
   const parseConfigHost: ts.ParseConfigHost = {
     fileExists: existsSync,
@@ -14,16 +14,18 @@ const getTsConfig = (content: any): ts.ParsedCommandLine => {
   return ts.parseJsonConfigFileContent(
     content,
     parseConfigHost,
-    resolve(dirname('tsconfig.json')),
+    resolve(dirname(path)),
     {
       noEmit: true
     }
   );
 };
 
-export const getProgram = (tsConfigContent: string): ts.Program => {
-  const config = getTsConfig(tsConfigContent);
-  // todo remove host
+export const getProgram = (
+  tsConfigContent: string,
+  path: string
+): ts.Program => {
+  const config = getTsConfig(tsConfigContent, path);
   const host = ts.createCompilerHost(config.options, true);
   return ts.createProgram(config.fileNames, config.options, host);
 };
