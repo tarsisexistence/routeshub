@@ -3,6 +3,7 @@ import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace
 import * as ts from 'typescript';
 import { dirname, resolve } from 'path';
 import { FindMainModuleOptions, NodeWithFile, RouterExpression } from './types';
+import { evaluate } from '@wessberg/ts-evaluator';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -308,6 +309,67 @@ const getRoutes = (
   });
 };
 
+export const parseRoutes = (
+  routes: ts.ArrayLiteralExpression,
+  typeChecker: ts.TypeChecker
+): (string | null)[] => {
+  const { elements } = routes;
+  return elements
+    .filter(node => ts.isObjectLiteralExpression(node))
+    .map(node => parseRoute(node as ts.ObjectLiteralExpression, typeChecker));
+};
+
+const parseRoute = (
+  route: ts.ObjectLiteralExpression,
+  typeChecker: ts.TypeChecker
+): string | null => {
+  return readPath(route, typeChecker);
+};
+
+const readPath = (
+  node: ts.ObjectLiteralExpression,
+  typeChecker: ts.TypeChecker
+): string | null => {
+  const expression = getPropertyValue(node, 'path');
+  if (expression) {
+    const path = evaluateExpression(expression, typeChecker);
+    return typeof path === 'string' ? path : '/';
+  }
+
+  return null;
+};
+
+const evaluateExpression = (
+  node: ts.Expression,
+  typeChecker: ts.TypeChecker
+): string | null => {
+  const result = evaluate({
+    node,
+    typeChecker
+  });
+
+  return result.success ? (result.value as string) : null;
+};
+
+const getPropertyValue = (
+  node: ts.ObjectLiteralExpression,
+  property: string
+): ts.Expression | null => {
+  for (const objectProperty of node.properties) {
+    if (ts.isPropertyAssignment(objectProperty)) {
+      const { name } = objectProperty;
+      if (ts.isIdentifier(name)) {
+        const { text } = name;
+        if (text === property) {
+          return objectProperty.initializer;
+        }
+      }
+    }
+  }
+
+  return null;
+};
+
 export const findAppModule = ({
   tree,
   program,
@@ -317,8 +379,11 @@ export const findAppModule = ({
 
   // todo change
   const routesModules = getRouteModuleIdentifiers(program);
-  const routes = getRoutes(program, routesModules, true);
-  console.log(routes.map(route => route?.elements?.length));
+  const routes = getRoutes(program, routesModules, true)?.[0];
+  if (routes) {
+    const paths = parseRoutes(routes, program.getTypeChecker());
+    console.log(paths);
+  }
 
   const appModulePath = tryFindMainModule(mainFile, program);
   return appModulePath || '';
