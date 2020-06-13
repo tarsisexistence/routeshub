@@ -330,10 +330,44 @@ const parseRoute = (
   const path = readPath(route, typeChecker);
   if (typeof path === 'string') {
     const children = readChildren(route, typeChecker);
-    return new ParsedRoute(path, children);
+    const loadChildren = readLoadChildren(route, typeChecker);
+    return new ParsedRoute(path, children, loadChildren);
   }
 
   return null;
+};
+
+export const readLoadChildren = (
+  node: ts.ObjectLiteralExpression,
+  typeChecker: ts.TypeChecker
+): string | null => {
+  const expression = getPropertyValue(node, 'loadChildren');
+  if (!expression) {
+    return null;
+  }
+  if (ts.isStringLiteral(expression)) {
+    return expression.text;
+  }
+
+  let result: string | null = null;
+  const visitor = (n: ts.Node) => {
+    if (n.kind === ts.SyntaxKind.ImportKeyword) {
+      const parent = n.parent as ts.CallExpression;
+      const arg = parent.arguments[0];
+      result = evaluateExpression(arg, typeChecker);
+    }
+    if (result) {
+      return;
+    }
+    n.forEachChild(visitor);
+  };
+  expression.forEachChild(visitor);
+
+  // loadChildren: 'foo' + '/' + 'bar'
+  if (!result) {
+    result = evaluateExpression(node, typeChecker);
+  }
+  return result;
 };
 
 const readChildren = (
@@ -407,6 +441,10 @@ export const findAppModule = ({
     function showRoutes(indent: number, route: ParsedRoute): void {
       const indentAsString = ' '.repeat(indent);
       console.log(`${indentAsString}path: ${route.path}`);
+
+      if (route.loadChildren) {
+        console.log(`${indentAsString}loadChildren: ${route.loadChildren}`);
+      }
 
       if (route.children.length) {
         console.log(`${indentAsString}children: `);
