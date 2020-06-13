@@ -2,7 +2,7 @@ import { Tree } from '@angular-devkit/schematics';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import * as ts from 'typescript';
 import { dirname, resolve } from 'path';
-import { FindMainModuleOptions, NodeWithFile, RouterExpression } from './types';
+import { LoadChildren, NodeWithFile, RouterExpression } from './types';
 import { evaluate } from '@wessberg/ts-evaluator';
 import { ParsedRoute } from './parsed-route';
 
@@ -14,68 +14,6 @@ export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
 
   const content = angularJson.toString();
   return JSON.parse(content) as WorkspaceSchema;
-};
-
-const findMainFile = ({
-  tree,
-  program,
-  project
-}: FindMainModuleOptions): ts.SourceFile => {
-  const angularJson = findAngularJSON(tree);
-  const workspace = angularJson.projects[project];
-  const relativeMainPath = workspace?.architect?.build?.options?.main || '';
-  const absoluteMainPath = resolve(relativeMainPath);
-
-  const mainFile = program
-    .getSourceFiles()
-    .find(sourceFile => sourceFile.fileName === absoluteMainPath);
-
-  if (!mainFile) {
-    throw new Error("Can't find main file");
-  }
-
-  return mainFile;
-};
-
-const tryFindMainModule = (
-  node: ts.Node,
-  program: ts.Program
-): string | null => {
-  if (ts.isIdentifier(node) && node.text === 'bootstrapModule') {
-    const propAccess = node.parent;
-    if (!propAccess || !ts.isPropertyAccessExpression(propAccess)) {
-      return null;
-    }
-
-    const tempExpr = propAccess.parent;
-    if (!tempExpr || !ts.isCallExpression(tempExpr)) {
-      return null;
-    }
-
-    const module = tempExpr.arguments[0];
-    const typeChecker = program.getTypeChecker();
-    const symbol = typeChecker.getTypeAtLocation(module).getSymbol();
-    if (!symbol) {
-      return null;
-    }
-
-    const declarations = symbol.getDeclarations();
-    if (!declarations) {
-      return null;
-    }
-
-    return resolve(declarations[0].getSourceFile().fileName);
-  }
-
-  let mainPath: null | string = null;
-  node.forEachChild(nextNode => {
-    if (mainPath) {
-      return mainPath;
-    }
-    mainPath = tryFindMainModule(nextNode, program);
-  });
-
-  return mainPath;
 };
 
 const getRouterDefinitionsFile = (program: ts.Program): ts.SourceFile => {
@@ -135,7 +73,7 @@ const isRouterModule = (
   return false;
 };
 
-const getRouteModuleIdentifiers = (
+export const getRouteModuleIdentifiers = (
   program: ts.Program
 ): NodeWithFile<ts.Identifier>[] => {
   const typeChecker = program.getTypeChecker();
@@ -287,7 +225,7 @@ const tryFindIdentifierValue = (
   return (length && identifierValues[length - 1]) || null;
 };
 
-const getRoutes = (
+export const getRoutes = (
   program: ts.Program,
   routeModules: NodeWithFile<ts.Identifier>[],
   forRoot: boolean
@@ -314,47 +252,58 @@ const getRoutes = (
 
 export const parseRoutes = (
   routes: ts.ArrayLiteralExpression,
-  typeChecker: ts.TypeChecker
+  program: ts.Program
 ): ParsedRoute[] => {
   const { elements } = routes;
   return elements
     .filter(node => ts.isObjectLiteralExpression(node))
-    .map(node => parseRoute(node as ts.ObjectLiteralExpression, typeChecker))
+    .map(node => parseRoute(node as ts.ObjectLiteralExpression, program))
     .filter(route => !!route) as ParsedRoute[];
 };
 
 const parseRoute = (
   route: ts.ObjectLiteralExpression,
-  typeChecker: ts.TypeChecker
+  program: ts.Program
 ): ParsedRoute | null => {
+  const typeChecker = program.getTypeChecker();
   const path = readPath(route, typeChecker);
   if (typeof path === 'string') {
-    const children = readChildren(route, typeChecker);
+    const children = readChildren(route, program);
     const loadChildren = readLoadChildren(route, typeChecker);
-    return new ParsedRoute(path, children, loadChildren);
+    return new ParsedRoute(path, children, loadChildren?.moduleName);
   }
 
   return null;
 };
 
+// todo check for old syntax: path#ModuleName
 export const readLoadChildren = (
   node: ts.ObjectLiteralExpression,
   typeChecker: ts.TypeChecker
-): string | null => {
+): LoadChildren | null => {
   const expression = getPropertyValue(node, 'loadChildren');
   if (!expression) {
     return null;
   }
+
   if (ts.isStringLiteral(expression)) {
-    return expression.text;
+    return {
+      childPath: expression.text,
+      moduleName: getModuleNameFromString(expression.text)
+    };
   }
 
-  let result: string | null = null;
+  let result: LoadChildren | null = null;
   const visitor = (n: ts.Node) => {
     if (n.kind === ts.SyntaxKind.ImportKeyword) {
       const parent = n.parent as ts.CallExpression;
       const arg = parent.arguments[0];
-      result = evaluateExpression(arg, typeChecker);
+      const childPath = evaluateExpression(arg, typeChecker);
+      const moduleName = getModuleNameFromImportExpression(parent);
+
+      if (childPath && moduleName) {
+        result = { childPath, moduleName };
+      }
     }
     if (result) {
       return;
@@ -365,18 +314,49 @@ export const readLoadChildren = (
 
   // loadChildren: 'foo' + '/' + 'bar'
   if (!result) {
-    result = evaluateExpression(node, typeChecker);
+    const childPath = evaluateExpression(node, typeChecker);
+    if (childPath) {
+      return {
+        childPath,
+        moduleName: getModuleNameFromString(childPath)
+      };
+    }
   }
+
   return result;
+};
+
+const getModuleNameFromImportExpression = (
+  importExpression: ts.CallExpression
+): string | null => {
+  const { parent } = importExpression;
+  const loadChildrenFnBody = parent.parent as ts.CallExpression;
+  const args = loadChildrenFnBody.arguments;
+  const moduleResolveFn = args[0];
+  if (ts.isArrowFunction(moduleResolveFn)) {
+    const { body } = moduleResolveFn;
+    if (ts.isPropertyAccessExpression(body)) {
+      const { name } = body;
+      if (ts.isIdentifier(name)) {
+        return name.text;
+      }
+    }
+  }
+
+  return null;
+};
+
+const getModuleNameFromString = (str: string): string => {
+  return str.split('#')[1];
 };
 
 const readChildren = (
   node: ts.ObjectLiteralExpression,
-  typeChecker: ts.TypeChecker
+  program: ts.Program
 ): ParsedRoute[] => {
   const expression = getPropertyValue(node, 'children');
   if (expression && ts.isArrayLiteralExpression(expression)) {
-    return parseRoutes(expression, typeChecker);
+    return parseRoutes(expression, program);
   }
 
   return [];
@@ -424,37 +404,4 @@ const getPropertyValue = (
   }
 
   return null;
-};
-
-export const findAppModule = ({
-  tree,
-  program,
-  project
-}: FindMainModuleOptions): string => {
-  const mainFile = findMainFile({ tree, program, project });
-
-  // todo change
-  const routesModules = getRouteModuleIdentifiers(program);
-  const routes = getRoutes(program, routesModules, true)?.[0];
-  if (routes) {
-    const paths = parseRoutes(routes, program.getTypeChecker());
-    function showRoutes(indent: number, route: ParsedRoute): void {
-      const indentAsString = ' '.repeat(indent);
-      console.log(`${indentAsString}path: ${route.path}`);
-
-      if (route.loadChildren) {
-        console.log(`${indentAsString}loadChildren: ${route.loadChildren}`);
-      }
-
-      if (route.children.length) {
-        console.log(`${indentAsString}children: `);
-        route.forEachChild(r => showRoutes(indent + 1, r));
-      }
-    }
-
-    paths.forEach(path => showRoutes(0, path));
-  }
-
-  const appModulePath = tryFindMainModule(mainFile, program);
-  return appModulePath || '';
 };

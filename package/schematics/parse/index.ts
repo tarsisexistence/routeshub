@@ -1,7 +1,13 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import { getProgram } from './utils.system';
 import { Options } from './types';
-import { findAngularJSON, findAppModule } from './utils.angular';
+import {
+  findAngularJSON,
+  getRouteModuleIdentifiers,
+  getRoutes,
+  parseRoutes
+} from './utils.angular';
+import { ParsedRoute } from './parsed-route';
 
 export function parse(options: Options): Rule {
   return (tree: Tree) => {
@@ -38,8 +44,27 @@ export function parse(options: Options): Rule {
 
     const content = config.content.toString();
     const program = getProgram(JSON.parse(content), configPath as string);
-    const appModule = findAppModule({ tree, program, project });
-    console.log(appModule);
+
+    const routesModules = getRouteModuleIdentifiers(program);
+    const routes = getRoutes(program, routesModules, true)?.[0];
+    if (routes) {
+      const paths = parseRoutes(routes, program);
+      function showRoutes(indent: number, route: ParsedRoute): void {
+        const indentAsString = ' '.repeat(indent);
+        console.log(`${indentAsString}path: ${route.path}`);
+
+        if (route.loadChildren) {
+          console.log(`${indentAsString}loadChildren: ${route.loadChildren}`);
+        }
+
+        if (route.children.length) {
+          console.log(`${indentAsString}children: `);
+          route.forEachChild(r => showRoutes(indent + 1, r));
+        }
+      }
+
+      paths.forEach(path => showRoutes(0, path));
+    }
 
     return tree;
   };
