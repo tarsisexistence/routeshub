@@ -249,36 +249,38 @@ const tryFindIdentifierValue = (
 
   nodeWithFile.file?.forEachChild(visitor);
 
-  const identifierValues = ids.map(({ node }) => {
-    const { parent } = node;
-    if (ts.isVariableDeclaration(parent)) {
-      const { initializer } = parent;
-      if (initializer && ts.isArrayLiteralExpression(initializer)) {
-        return initializer;
-      }
-    } else if (ts.isImportSpecifier(parent)) {
-      // todo also need to see cases like import * as & import variable as
-      const importDecl = getImportDeclarationForId(parent);
-      if (importDecl) {
-        const fileWithDefinition = getFileWithId(
-          importDecl,
-          program,
-          nodeWithFile.file.fileName
-        );
-
-        if (fileWithDefinition) {
-          return tryFindIdentifierValue(
+  const identifierValues = ids
+    .map(({ node }) => {
+      const { parent } = node;
+      if (ts.isVariableDeclaration(parent)) {
+        const { initializer } = parent;
+        if (initializer && ts.isArrayLiteralExpression(initializer)) {
+          return initializer;
+        }
+      } else if (ts.isImportSpecifier(parent)) {
+        // todo also need to see cases like import * as & import variable as
+        const importDecl = getImportDeclarationForId(parent);
+        if (importDecl) {
+          const fileWithDefinition = getFileWithId(
+            importDecl,
             program,
-            {
-              node: identifier,
-              file: fileWithDefinition
-            },
-            false
+            nodeWithFile.file.fileName
           );
+
+          if (fileWithDefinition) {
+            return tryFindIdentifierValue(
+              program,
+              {
+                node: identifier,
+                file: fileWithDefinition
+              },
+              false
+            );
+          }
         }
       }
-    }
-  });
+    })
+    .filter(value => !!value);
 
   const { length } = identifierValues;
   return (length && identifierValues[length - 1]) || null;
