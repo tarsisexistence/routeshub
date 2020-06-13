@@ -4,6 +4,7 @@ import * as ts from 'typescript';
 import { dirname, resolve } from 'path';
 import { FindMainModuleOptions, NodeWithFile, RouterExpression } from './types';
 import { evaluate } from '@wessberg/ts-evaluator';
+import { ParsedRoute } from './parsed-route';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -314,18 +315,37 @@ const getRoutes = (
 export const parseRoutes = (
   routes: ts.ArrayLiteralExpression,
   typeChecker: ts.TypeChecker
-): (string | null)[] => {
+): ParsedRoute[] => {
   const { elements } = routes;
   return elements
     .filter(node => ts.isObjectLiteralExpression(node))
-    .map(node => parseRoute(node as ts.ObjectLiteralExpression, typeChecker));
+    .map(node => parseRoute(node as ts.ObjectLiteralExpression, typeChecker))
+    .filter(route => !!route) as ParsedRoute[];
 };
 
 const parseRoute = (
   route: ts.ObjectLiteralExpression,
   typeChecker: ts.TypeChecker
-): string | null => {
-  return readPath(route, typeChecker);
+): ParsedRoute | null => {
+  const path = readPath(route, typeChecker);
+  if (typeof path === 'string') {
+    const children = readChildren(route, typeChecker);
+    return new ParsedRoute(path, children);
+  }
+
+  return null;
+};
+
+const readChildren = (
+  node: ts.ObjectLiteralExpression,
+  typeChecker: ts.TypeChecker
+): ParsedRoute[] => {
+  const expression = getPropertyValue(node, 'children');
+  if (expression && ts.isArrayLiteralExpression(expression)) {
+    return parseRoutes(expression, typeChecker);
+  }
+
+  return [];
 };
 
 const readPath = (
@@ -384,7 +404,17 @@ export const findAppModule = ({
   const routes = getRoutes(program, routesModules, true)?.[0];
   if (routes) {
     const paths = parseRoutes(routes, program.getTypeChecker());
-    console.log(paths);
+    function showRoutes(indent: number, route: ParsedRoute): void {
+      const indentAsString = ' '.repeat(indent);
+      console.log(`${indentAsString}path: ${route.path}`);
+
+      if (route.children.length) {
+        console.log(`${indentAsString}children: `);
+        route.forEachChild(r => showRoutes(indent + 1, r));
+      }
+    }
+
+    paths.forEach(path => showRoutes(0, path));
   }
 
   const appModulePath = tryFindMainModule(mainFile, program);
