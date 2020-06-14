@@ -288,7 +288,7 @@ export const readLoadChildren = (
 
   if (ts.isStringLiteral(expression)) {
     return {
-      childPath: expression.text,
+      childPath: getModulePath(expression.text),
       moduleName: getModuleNameFromString(expression.text)
     };
   }
@@ -317,13 +317,17 @@ export const readLoadChildren = (
     const childPath = evaluateExpression(node, typeChecker);
     if (childPath) {
       return {
-        childPath,
+        childPath: getModulePath(childPath),
         moduleName: getModuleNameFromString(childPath)
       };
     }
   }
 
   return result;
+};
+
+const getModulePath = (loadChildrenPath: string): string => {
+  return loadChildrenPath.split('#')[0];
 };
 
 const getModuleNameFromImportExpression = (
