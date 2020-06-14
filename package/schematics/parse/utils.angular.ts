@@ -5,6 +5,7 @@ import { dirname, resolve } from 'path';
 import { LoadChildren, NodeWithFile, RouterExpression } from './types';
 import { evaluate } from '@wessberg/ts-evaluator';
 import { ParsedRoute } from './parsed-route';
+import { findClassDeclaration } from './utils.ast';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -270,7 +271,91 @@ const parseRoute = (
   if (typeof path === 'string') {
     const children = readChildren(route, program);
     const loadChildren = readLoadChildren(route, typeChecker);
+
+    // todo for develop, remove after
+    if (loadChildren) {
+      console.log(
+        getModuleImports(loadChildren, program)
+          .map(imprt => imprt.text)
+          .join(' ')
+      );
+    }
+
     return new ParsedRoute(path, children, loadChildren?.moduleName);
+  }
+
+  return null;
+};
+
+const getModuleImports = (
+  loadChildren: LoadChildren,
+  program: ts.Program
+): ts.Identifier[] => {
+  const { moduleName, childPath } = loadChildren;
+  const sourceFile = program
+    .getSourceFiles()
+    .find(file => file.fileName.includes(childPath));
+  if (!sourceFile) {
+    throw new Error(`Can't find file ${childPath}`);
+  }
+
+  const classDeclaration = findClassDeclaration(moduleName, sourceFile);
+  if (!classDeclaration) {
+    throw new Error(
+      `Can't find module ${moduleName} in ${sourceFile.fileName}`
+    );
+  }
+
+  const imports = getImports(classDeclaration);
+  if (imports) {
+    return imports.elements.filter(element =>
+      ts.isIdentifier(element)
+    ) as ts.Identifier[];
+  } else {
+    return [];
+  }
+};
+
+const getImports = (
+  moduleDeclaration: ts.ClassDeclaration
+): ts.ArrayLiteralExpression | null => {
+  const decorators = moduleDeclaration.decorators;
+  const ngModule = decorators
+    ?.map(decorator => decorator.expression as ts.CallExpression)
+    .map(expression => expression.expression as ts.Identifier)
+    .find(id => id.text === 'NgModule');
+
+  if (!ngModule) {
+    throw new Error(
+      `NgModule decorator for ${moduleDeclaration?.name?.text} didn't find`
+    );
+  }
+
+  const ngModuleExpression = ngModule.parent as ts.CallExpression;
+  let imports: ts.Identifier | null = null;
+
+  function visitor(node: ts.Node): void {
+    if (imports) {
+      return;
+    }
+
+    if (ts.isIdentifier(node) && node.text === 'imports') {
+      imports = node;
+    } else {
+      node.forEachChild(visitor);
+    }
+  }
+
+  ngModuleExpression.forEachChild(visitor);
+
+  if (imports) {
+    const { parent } = imports;
+    if (ts.isPropertyAssignment(parent)) {
+      const { initializer } = parent;
+      if (ts.isArrayLiteralExpression(initializer)) {
+        return initializer;
+      }
+    }
   }
 
   return null;
