@@ -53,6 +53,10 @@ export function parse(options: Options): Rule {
         const indentAsString = ' '.repeat(indent);
         console.log(`${indentAsString}path: ${route.path}`);
 
+        if (route.redirectTo) {
+          console.log(`${indentAsString}redirectTo: ${route.redirectTo}`);
+        }
+
         if (route.loadChildren) {
           console.log(`${indentAsString}loadChildren: ${route.loadChildren}`);
         }
