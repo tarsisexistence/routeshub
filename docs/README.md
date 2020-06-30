@@ -4,15 +4,15 @@
 
 **Routeshub** is a route management library and pattern for **Angular.**
 
-It acts as a hub which brings more control, stable and predictable interaction with project code base through declarative design.
+It acts as a hub that brings more control, stable, and predictable interaction with project code base through declarative design.
 
 ## What is it
 
-⚙ A route manager. Designed to improve reliability and speed of development.
+⚙ A route manager. It designed to improve the reliability and speed of development.
 
-🔩 Engineered as a plugin. It was designed to be added at any time during the development process, even for separate complicated project parts.
+🔩 It engineered as a plugin. It designed to be added at any time during the development process, even for separate complicated project parts.
 
-🔧 Modeled after a tree data structure as a hierarchical tree of states. 
+🔧 It modeled after a tree data structure as a hierarchical tree of states. 
 
 ## Support
 
@@ -20,31 +20,31 @@ Originally it was invented for **@angular/router**, but support for other routin
 
 ## **Contributing**
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome. For significant changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate and keep the examples consistent.
 
 ## **Changelog**
 
-Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md) on GitHub
+Stay tuned with a [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md) on GitHub.
 
 ## Questions
 
-If you still have the questions or suggestions, then create an [issue](https://github.com/maktarsis/routeshub/issues)  or feel free to contact me on [twitter](https://twitter.com/maktarsis)
+If you still have the questions or suggestions, then create an [issue](https://github.com/maktarsis/routeshub/issues) or feel free to contact me on [twitter](https://twitter.com/maktarsis).
 
 ## Looking for the best
 
 This project is neither ideal nor final.
 
-Just a step for the better. A step to help engineers building applications better and faster.
+Just a step for better. A measure to help engineers building applications better and faster.
 
-That's why I'll be happy with any kind of involvement and I am opened to any suggestions.
+That's why I'll be happy with any kind of involvement, and I opened to any suggestions.
 
 {% hint style="info" %}
 **Essence**
 
 It is a slightly different concept from _state management._
 
-Routeshub collects and analyzes routes information to create manageable state of route_._ You can understand this concept as a **hub**.
+Routeshub collects and analyzes routes information to create a manageable state of routes_._ You can understand this concept as a **hub**.
 {% endhint %}
 

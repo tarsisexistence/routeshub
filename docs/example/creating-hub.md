@@ -1,9 +1,9 @@
 # Creating Hub
 
-So, in this step we have to create a router module that has connection purpose.
+So, in this step, we have to create a router module that has a connection purpose.
 
-{% code-tabs %}
-{% code-tabs-item title="app.hub.ts" %}
+{% tabs %}
+{% tab title="app.hub.ts" %}
 ```typescript
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -73,9 +73,9 @@ export class AppHub {
 }
 
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="about.hub.ts" %}
+{% tab title="about.hub.ts" %}
 ```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -97,9 +97,9 @@ export const aboutConnector: Connector<AboutNotes> = createFeature<AboutNotes>(
 export class AboutHub {}
 
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="auth.hub.ts" %}
+{% tab title="auth.hub.ts" %}
 ```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
@@ -121,9 +121,9 @@ export const authConnector: Connector<AuthNotes> = createFeature<AuthNotes>(
 export class AuthHub {}
 
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="location.hub.ts" %}
+{% tab title="location.hub.ts" %}
 ```typescript
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -144,8 +144,8 @@ export const locationConnector: Connector<LocationNotes> =
 export class LocationHub {}
 
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 
 
