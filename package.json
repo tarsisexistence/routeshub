@@ -66,7 +66,7 @@
     "snyk": "1.359.0",
     "ts-node": "8.10.1",
     "tsickle": "0.38.1",
-    "tslib": "1.13.0",
+    "tslib": "2.0.0",
     "tslint": "6.1.2",
     "tslint-angular": "3.0.2",
     "tslint-config-prettier": "1.18.0",
