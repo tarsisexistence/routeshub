@@ -1,13 +1,11 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
-import { getProgram } from './utils.system';
-import { Options } from './types';
 import {
   findAngularJSON,
-  getRouteModuleIdentifiers,
-  getRoutes,
-  parseRoutes
+  getRouteModuleExpressions
 } from './utils.angular';
-import { ParsedRoute } from './parsed-route';
+import { Project } from 'ts-morph';
+import { Options } from './types';
+import { resolve } from 'path';
 
 export function parse(options: Options): Rule {
   return (tree: Tree) => {
@@ -42,33 +40,14 @@ export function parse(options: Options): Rule {
       throw new Error("tsconfig didn't find");
     }
 
-    const content = config.content.toString();
-    const program = getProgram(JSON.parse(content), configPath as string);
+    const absoluteConfigPath = resolve(process.cwd(), configPath as string);
+    const projectInstance = new Project({
+      tsConfigFilePath: absoluteConfigPath,
+      addFilesFromTsConfig: true
+    });
 
-    const routesModules = getRouteModuleIdentifiers(program);
-    const routes = getRoutes(program, routesModules, true)?.[0];
-    if (routes) {
-      const paths = parseRoutes(routes, program);
-      function showRoutes(indent: number, route: ParsedRoute): void {
-        const indentAsString = ' '.repeat(indent);
-        console.log(`${indentAsString}path: ${route.path}`);
-
-        if (route.redirectTo) {
-          console.log(`${indentAsString}redirectTo: ${route.redirectTo}`);
-        }
-
-        if (route.loadChildren) {
-          console.log(`${indentAsString}loadChildren: ${route.loadChildren}`);
-        }
-
-        if (route.children.length) {
-          console.log(`${indentAsString}children: `);
-          route.forEachChild(r => showRoutes(indent + 1, r));
-        }
-      }
-
-      paths.forEach(path => showRoutes(0, path));
-    }
+    const expressions = getRouteModuleExpressions(projectInstance);
+    console.log(expressions);
 
     return tree;
   };
