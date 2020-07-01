@@ -7,6 +7,7 @@ import {
   Project,
   PropertyAccessExpression
 } from 'ts-morph';
+import { RouterExpression } from './types';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -47,16 +48,21 @@ export const getRouteModuleExpressions:
   const refs = routerModuleClass.findReferencesAsNodes();
 
   // todo add check for Router.RouterModule.for....
-  return refs.map(ref => ref.getParent() as PropertyAccessExpression)
-    .filter(node => Node.isPropertyAccessExpression(node))
-    .filter(node => {
-      if (Node.hasName(node)) {
-        const name = node.getName();
-        return name === 'forRoot' || name === 'forChild';
-      }
-
-      return false;
-    })
-    .map(node => node.getParent() as CallExpression)
-    .filter(node => Node.isCallExpression(node));
+  return getRouterModuleCallExpressions(refs, 'forRoot');
 };
+
+export const getRouterModuleCallExpressions:
+  (routeModules: Node[], expression: RouterExpression) => CallExpression[] =
+  (routeModules: Node[], expression: RouterExpression): CallExpression[] => {
+    return routeModules.map(ref => ref.getParent() as PropertyAccessExpression)
+      .filter(node => Node.isPropertyAccessExpression(node))
+      .filter(node => {
+        if (Node.hasName(node)) {
+          return node.getName()  === expression;
+        }
+
+        return false;
+      })
+      .map(node => node.getParent() as CallExpression)
+      .filter(node => Node.isCallExpression(node));
+}

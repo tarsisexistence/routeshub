@@ -34,12 +34,6 @@ export function parse(options: Options): Rule {
       );
     }
 
-    const config = tree.get(configPath as string);
-    console.log('Config: ', config);
-    if (!config) {
-      throw new Error("tsconfig didn't find");
-    }
-
     const absoluteConfigPath = resolve(process.cwd(), configPath as string);
     const projectInstance = new Project({
       tsConfigFilePath: absoluteConfigPath,
