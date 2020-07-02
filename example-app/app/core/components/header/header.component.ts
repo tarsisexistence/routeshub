@@ -11,9 +11,9 @@ import {
 } from 'routeshub';
 
 import { Hub } from '../../../hub/app.hub';
-import { APP_NOTES_KEY, AppChildNotes, AppNotes } from '../../../hub/app.notes';
+import { AppChildNotes, AppNotes, APP_NOTES_KEY } from '../../../hub/app.notes';
 import { AboutNotes } from '../../../views/about/hub/about.notes';
-import { CAR_NOTES_KEY, CarNotes } from '../../../views/car/hub/car.notes';
+import { CarNotes, CAR_NOTES_KEY } from '../../../views/car/hub/car.notes';
 
 @Component({
   selector: 'app-header',

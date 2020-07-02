@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { createFeature } from 'routeshub';
-import { INFO_NOTES_KEY, InfoNotes } from './info.notes';
+import { InfoNotes, INFO_NOTES_KEY } from './info.notes';
 import { infoRoutes } from './info.routes';
 
 export const infoConnector = createFeature<InfoNotes>(infoRoutes, {

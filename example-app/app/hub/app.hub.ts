@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { connectFeatures, createRoot, NavigationModule } from 'routeshub';
 
 import { routes } from './app.routes';
-import { APP_NOTES_KEY, AppChildNotes, AppNotes } from './app.notes';
+import { AppChildNotes, AppNotes, APP_NOTES_KEY } from './app.notes';
 import { aboutConnector } from '../views/about/hub/about.hub';
 import { carConnector } from '../views/car/hub/car.hub';
 import { homeConnector } from '../views/home/hub/home.hub';
@@ -58,12 +58,15 @@ export interface Hub {
 /**
  * Routing configuration
  */
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
-  enableTracing: false,
-  initialNavigation: 'enabled',
-  onSameUrlNavigation: 'reload',
-  scrollPositionRestoration: 'top'
-});
+export const routing: ModuleWithProviders<AppHub> = RouterModule.forRoot(
+  routes,
+  {
+    enableTracing: false,
+    initialNavigation: 'enabled',
+    onSameUrlNavigation: 'reload',
+    scrollPositionRestoration: 'top'
+  }
+);
 
 /**
  * Routing module contains its configuration

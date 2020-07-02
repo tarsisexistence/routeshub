@@ -1,5 +1,6 @@
 {
   "extends": [
+    "tslint:recommended",
     "tslint-angular",
     "tslint:latest",
     "tslint-config-prettier"
