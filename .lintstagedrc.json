@@ -3,7 +3,6 @@
     "prettier --write",
     "tslint",
     "git add"
-  ],
-  ".*{rc,json}": "jsonlint"
+  ]
 }
 

@@ -1,9 +1,10 @@
 import { finalize, find } from 'rxjs/operators';
 import { Unit, Units } from '../interfaces';
-import { hub } from '../hub';
 import { PRIVATE_NOTES_KEY } from '../constants';
 import { partialFeatureRoutes } from '../interfaces/unit.interfaces';
 import { privateNotesKey } from '../interfaces/common.interfaces';
+import { hub } from '../hub';
+import { getUnitsFromHub } from '../utils/hub';
 
 /**
  * returns unit by key
@@ -29,7 +30,7 @@ export function connectFeatures<R = any, C = {}>(
     .pipe(
       find((units: Units) => Boolean(findUnit(key, units))),
       finalize(() => {
-        const unit: Unit = findUnit(key, hub.value);
+        const unit: Unit = findUnit(key, getUnitsFromHub());
 
         for (const route of Object.keys(features)) {
           const feature = features[route];

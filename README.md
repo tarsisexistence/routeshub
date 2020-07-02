@@ -4,21 +4,21 @@
 
 A **route manager** and pattern for **[Angular]**
 
-* **Manager.** Introduces a new route management experience leading to better application control.
-* **Navigation.** Provides declarative experience of navigation.
+* **Manager.** Introduces a new route management experience that leads to better application control.
+* **Navigation.** It provides declarative navigation experience.
 * **Fast.** In addition to speeding up development, it works as fast as it does without it.
-* **Pluggable.** Engineered as a plug-in. Designed to be added at any time during the development process.
-* **Pattern.** Provides a unified approach managing the routing of the entire application.
-* **Small.** ~3.5kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
+* **Pluggable.** Engineered as a plug-in and designed to be added at any time during the development process.
+* **Pattern.** It provides a unified approach managing the routing of the entire application.
+* **Small.** ~3.5 kB (minified + gzipped). It uses [Angular] and [rxjs] as peerDependencies.
 
-In short, this is an add-on to the **@angular/router** which provides state based routing for medium to large-size applications.
+In short, this is an add-on to the **@angular/router**, which provides state-based routing for medium to large-size applications.
 
 Read more about Routeshub on the [docs site](https://routeshub.gitbook.io)
 
 <br/>
 
 ## Install
-To get started, you need install the package from npm
+To get started, you need to install the package from npm
 ```sh
 npm install routeshub
 ```
@@ -74,9 +74,9 @@ import { aboutUnit } from '../views/about/hub/about.hub';
 createRoot<AppNotes>(routes, { key: APP_NOTES_KEY });
 
 /**
- * connects features which have attached relation to parent module
+ * connects features which have attached relating to the parent module
  *
- * about module has its own routes which we wanna connect
+ * about module has its routes which we want to connect
  */
 connectFeatures<AppNotes>(APP_NOTES_KEY, {
   about: aboutUnit
@@ -84,7 +84,7 @@ connectFeatures<AppNotes>(APP_NOTES_KEY, {
 
 /**
  * Routing module contains its configuration
- * and providers (resolvers, guard, interceptors etc)
+ * and providers (resolvers, guard, interceptors, etc.)
  * 
  * Exports RouterModule
  * and NavigationModule for navLink directives
@@ -120,7 +120,7 @@ export class HeaderComponent {
   
   //or
   
-   // getting unit by name
+   // getting the unit by name
    @Secluded('app')
    public app: Unit<AppNotes>;
    
@@ -142,10 +142,10 @@ You can find a more complex example in this [repo](https://github.com/maktarsis/
 Routeshub offers an approach (pattern) to structure routing in the application. You can explore it in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app).
 
 **Guideline**:
-- Each module in application has a hub directory
-- hub directory contains three files that configure routing of the current module
-1. hub - sets routing configuration, exports RoutingModule and NavigationModule, connects feature units.
-2. notes - place for interfaces and unique key of the unit.
+- Each module in the application has a hub directory
+- hub directory contains three files that configure the routing of the current module.
+1. hub - sets routing configuration; exports RoutingModule and NavigationModule; connects feature units.
+2. notes - it is a place for interfaces and the unique key of the unit.
 3. routes - simple routes file as is without any changes.
 
 ![diagram](http://i.piccy.info/i9/baf248d94b1260e13d5bff6acb6e6727/1569138770/128577/1338898/2019_09_22_10_51_00.jpg)
@@ -165,10 +165,10 @@ There are two ways to create the `unit`:
 
 Each creator takes the `routes: Routes` and an object of options 
 - key - unit identifier and accepts string or symbol
-- routeName - accepts an object with optional custom names for wildcard ('**') and root ('') paths
-- nearby - accepts lazy units (**connectors**) which are outputs of  **feature creator**. Nearby option should be used when one or more connected features are eager modules with their own routes files.
+- routeName - accepts an object with optional custom names for a wildcard ('**') and root ('') paths
+- nearby - accepts lazy units (**connectors**), which are outputs of  **feature creator**. A nearby option should use when one or more connected features are eager modules with their own routes files.
 
-**Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes` 
+**Root** creator invokes only once to initialize the hub in the application. `createRoot` takes initial `appNotes`. 
 
 **Usage example**:
 ```typescript
@@ -179,7 +179,7 @@ Each creator takes the `routes: Routes` and an object of options
  });
 ```
 
-In turn, the **feature** creator is responsible for creating lazy units (**connectors**) which should be connected to the parent unit
+In turn, the **feature** creator is responsible for creating lazy units (**connectors**), which should connect to the parent unit.
 
 ```typescript
 export const routes: Routes = [
@@ -200,13 +200,13 @@ export const aboutConnector: Connector<AboutNotes> = createFeature<AboutNotes>(a
 <br/>
 
 ## Note
-You need understand how routeshub transforms routes into the keys. Actually, all notes related things routeshub handles internally.
+You need to understand how routeshub transforms routes into the keys. All notes related things routeshub handles internally.
 
 The `Note` is input to reproduce the unit. Each `Note` represents one route.
 
 **In short, it assigns the names to the 'spots'**
 
-The example below shows capabilities and illustrates how this actually works. Unnecessary route information is shortened.
+The example below shows capabilities and illustrates how this works. Unnecessary route information shortened.
 
 ```typescript
 export const routes: Routes = [
@@ -237,7 +237,7 @@ export interface AppChildNotes extends Root {
 */
 
 /**
-  * btw, this shorthand provides opportunity to describe root children interface through generics
+  * btw, this shorthand provides an opportunity to describe root children interface through generics
 */
 export interface AppNotes extends Root<AppChildNotes> {
   firstName: Note;
@@ -263,7 +263,7 @@ export const appUnit = createRoot<AppNotes, AppChildNotes>(routes, { routeName: 
 <br/>
 
 ## Get Unit
-Essentially, you need the unit to pass it into directive/decorator for navigation purposes.
+Essentially, you need the unit to pass it into a directive/decorator for navigation purposes.
 There are several ways to get a unit:
 
 -  **@United decorator**. Apply this decorator on the component's prop. You should pass the key or unit name.
@@ -282,7 +282,7 @@ export class HeaderComponent {
 }
 ```
 
--  **getUnit** - This is a function that works as decorator. Essentially, it is created as an alternative to @Secluded decorator.
+-  **get unit** - This is a function that works as a decorator. Primarily, it created as an alternative to @Secluded decorator.
 ```typescript
 @Component({
   ...
@@ -312,7 +312,7 @@ export class HeaderComponent {
 **Routeshub** provides directives and functions to make your experience with navigation better.
 
 Before you start, don't forget to import **NavigationModule**.
-It's a good practice importing NavigationModule into the **[module]**.hub.ts file
+It's a good practice importing NavigationModule into the **[module]**.hub.ts file.
 
 
 ### navLink
@@ -339,7 +339,7 @@ It's a good practice importing NavigationModule into the **[module]**.hub.ts fil
 ```
 
 ### forwardParams
-A function that inserts parameters into route's state and outputs a ready-made dynamic state. 
+A function that inserts parameters into the route's state and outputs a ready-made dynamic state. 
 
 ```typescript
 ...
@@ -382,7 +382,7 @@ If you made a PR, make sure to update tests as appropriate and keep the examples
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
