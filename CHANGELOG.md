@@ -1,3 +1,8 @@
+# 4.2.0 2020-07-02
+
+- Added compatibility with Angular 10
+- Updated dependencies
+
 # 4.1.1 2020-04-04
 
 - Updated dependencies
@@ -40,7 +45,6 @@
 - added contributors board
 - added test commit check
 
-
 # 3.0.0 2019-06-21
 
 - changed a way of slice connection [BREAKING CHANGE]
@@ -50,25 +54,21 @@
 - raised the test cover
 - updated documentation
 
-
 # 2.1.3 2019-06-21
 
 - insignificant api changes
 - fixed issues with typing of getter functions
 - covered with tests all api
 
-
 # 2.1.2 2019-06-17
 
 - improved documentation
 - refactored code
 
-
 # 2.1.1 2019-06-16
 
 - added new getSlice function (as an alternative to @Sliced decorator)
 - refactored code
-
 
 # 2.1.0 2019-06-14
 
@@ -77,7 +77,6 @@
 - refactored api
 - slightly refactored pattern
 - updated documentation
-
 
 # 2.0.0 2019-06-09
 
@@ -91,7 +90,6 @@
 - finish hub management pattern and improved semantics
 - updated dependencies
 
-
 # 1.3.0 2019-05-08
 
 - added new navLinkActive directive
@@ -99,7 +97,6 @@
 - fixed bugs and inaccuracies
 - updated documentation
 - updated dependencies
-
 
 # 1.2.0 2019-05-01
 
@@ -109,7 +106,6 @@
 - minor fixes and refactoring
 - updated documentation
 - updated dependencies
-
 
 # 1.1.1 2019-03-09
 
@@ -125,7 +121,6 @@
 - improved an explanation
 - updated and fixed readme
 - refactored and made functionality clearer
-
 
 # 1.0.0 2019-02-09
 
