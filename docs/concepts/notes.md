@@ -1,12 +1,12 @@
 # Notes
 
-Note is input to reproduce the slice.
+A note is an input to reproduce the slice.
 
 You won't deal with them directly in the application.
 
 ## What Does it Do?
 
-Let's take a look on example of routes file and see in what it transforms
+Let's take a look at the example of routes file and see in what it transforms.
 
 ```typescript
 import { createNote, Note } from 'routeshub';
@@ -69,9 +69,9 @@ First, routeshub converts paths into camelCase keys.
 
 Variables in paths are recognizable. 
 
-Notes interfaces could have shortcuts for reusable reason. Root interface just adds `root: Note`  to common interface. Also, root path can have children routes. If so, then just pass generic children `Root<Childnote>` as illustrated above.
+Notes interfaces could have shortcuts for reusability reasons. The root interface just adds `root: Note`  to the common interface. Also, the root path can have children routes. If so, then just pass generic children `Root<Childnote>` as illustrated above.
 
-If you want to know more, then make sure to read **API** section 
+If you want to know more, then make sure to read the **API** section 
 
 {% page-ref page="../api/" %}
 

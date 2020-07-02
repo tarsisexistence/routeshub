@@ -2,8 +2,7 @@
 
 First, make sure you have already exported **NavigationModule** in the hub file.
 
-{% code-tabs %}
-{% code-tabs-item title="any.hub.ts" %}
+{% code title="any.hub.ts" %}
 ```typescript
 ...
 import { NavigationModule } from 'routeshub';
@@ -19,21 +18,19 @@ import { NavigationModule } from 'routeshub';
 export class AnyHub {
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
-Before we finished, we should get access for units in the component and then use them for navigation
+Before we finished, we should get access to units in the component and then use them for navigation.
 
-As was mentioned previously, there are some different approaches of how you can get units:
+As was mentioned previously, there are some different approaches to how you can get units:
 
 * decorator @Secluded - apply the decorator on component property.
-* getUnit - function that works as well as @Secluded decorator.
+* getUnit - a function that works as well as @Secluded decorator.
 * getRegisteredUnits - returns all declared units.
 
 ### @Secluded decorator
 
-{% code-tabs %}
-{% code-tabs-item title="header.component.ts" %}
+{% code title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -63,13 +60,11 @@ export class HeaderComponent {
   }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### getUnit
 
-{% code-tabs %}
-{% code-tabs-item title="header.component.ts" %}
+{% code title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -98,13 +93,11 @@ export class HeaderComponent {
   }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 ### getRegisteredUnits
 
-{% code-tabs %}
-{% code-tabs-item title="header.component.ts" %}
+{% code title="header.component.ts" %}
 ```typescript
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
@@ -133,8 +126,7 @@ export class HeaderComponent {
   }
 }
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endcode %}
 
 That's it. Have fun ✌ 
 

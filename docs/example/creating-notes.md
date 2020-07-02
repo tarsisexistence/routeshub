@@ -2,8 +2,8 @@
 
 Let's create the notes and units.
 
-{% code-tabs %}
-{% code-tabs-item title="app.notes.ts" %}
+{% tabs %}
+{% tab title="app.notes.ts" %}
 ```typescript
 import { createRoot, createNote, Root, Note } from 'routeshub';
 
@@ -36,9 +36,9 @@ export interface AppNotes extends Root<AppChildNotes> {
 // unique key of app hub. It acts as a unique routes identifier
 export const APP_NOTES_KEY = Symbol();
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="about.notes.ts" %}
+{% tab title="about.notes.ts" %}
 ```typescript
 import { createFeature, Root } from 'routeshub';
 
@@ -46,9 +46,9 @@ export type AboutNotes = Root;
 
 export const ABOUT_NOTES_KEY = Symbol();
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="auth.notes.ts" %}
+{% tab title="auth.notes.ts" %}
 ```typescript
 import { createFeature, Root, Note } from 'routeshub';
 
@@ -60,9 +60,9 @@ export interface AuthNotes extends Root {
 
 export const AUTH_NOTES_KEY = Symbol();
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="location.notes.ts" %}
+{% tab title="location.notes.ts" %}
 ```typescript
 import { createFeature, Root } from 'routeshub';
 
@@ -70,8 +70,8 @@ export type LocationNotes = Root;
 
 export const LOCATION_NOTES_KEY = Symbol();
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 
 

@@ -1,19 +1,19 @@
 # Initial Code
 
-Let's imagine, we have such routes:
+Let's imagine. We have such routes:
 
 * **App** - root
 * **About** - App's child
-* **Auth** - lazy module that has direct connection to App
-* **Location** - detached \(nearby\) eager module that imported into App and has own routes
-* **NotFound** - wildcard, default behavior for not matched paths
+* **Auth** - lazy module that has a direct connection to App
+* **Location** - detached \(nearby\) eager module that imported into App and has its routes
+* **NotFound** - wildcard, the default behavior for not matched paths
 
 ## Initial Code
 
 Below is only the code of the routes files
 
-{% code-tabs %}
-{% code-tabs-item title="app.routes.ts" %}
+{% tabs %}
+{% tab title="app.routes.ts" %}
 ```typescript
 import { ViewComponent } from '../view.component';
 
@@ -45,9 +45,9 @@ export const routes: Routes = [
   }
 ];
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="about.routes.ts" %}
+{% tab title="about.routes.ts" %}
 ```typescript
 import { AboutComponent } from './about.component';
 
@@ -58,9 +58,9 @@ export const aboutRoutes: Routes = [
   }
 ];
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="auth.routes.ts" %}
+{% tab title="auth.routes.ts" %}
 ```typescript
 import { SignUpComponent } from './sign-up.component';
 import { SignInComponent } from './sign-in.component';
@@ -85,9 +85,9 @@ export const authRoutes: Routes = [
   },
 ];
 ```
-{% endcode-tabs-item %}
+{% endtab %}
 
-{% code-tabs-item title="location.routes.ts" %}
+{% tab title="location.routes.ts" %}
 ```typescript
 import { LocationComponent  } from './location.component';
 
@@ -98,8 +98,8 @@ export const locationRoutes: Routes = [
   }
 ];
 ```
-{% endcode-tabs-item %}
-{% endcode-tabs %}
+{% endtab %}
+{% endtabs %}
 
 Now we're going to integrate **routeshub** into the project.
 
