@@ -1,7 +1,9 @@
 # 4.2.0 2020-07-02
 
 - Added compatibility with Angular 10
+- Updated documentation documentation
 - Updated dependencies
+- Refactored internal utilities
 
 # 4.1.1 2020-04-04
 
