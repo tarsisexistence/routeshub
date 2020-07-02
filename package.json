@@ -52,7 +52,7 @@
     "@angular/language-service": "10.0.2",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@types/jest": "25.2.1",
+    "@types/jest": "25.2.3",
     "@types/node": "12.12.34",
     "all-contributors-cli": "6.16.1",
     "codelyzer": "5.2.2",
