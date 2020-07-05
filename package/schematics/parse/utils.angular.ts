@@ -12,7 +12,7 @@ import {
   PropertyAccessExpression,
   TypeChecker
 } from 'ts-morph';
-import { RouterExpression } from './types';
+import { ParsedRoute, RouterExpression } from './types';
 import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
@@ -149,7 +149,7 @@ export const getRouterModuleCallExpressions: (
 export const parseRoutes = (
   routes: ArrayLiteralExpression,
   typeChecker: TypeChecker
-): (string | null)[] => {
+): (ParsedRoute | null)[] => {
   const elements = routes.getElements();
   return elements
     .filter(node => Node.isObjectLiteralExpression(node))
@@ -159,21 +159,26 @@ export const parseRoutes = (
 const parseRoute = (
   route: ObjectLiteralExpression,
   typeChecker: TypeChecker
-): string | null => {
-  return readPath(route, typeChecker);
+): ParsedRoute | null => {
+  const path = readPath(route, typeChecker);
+
+  return {
+    path,
+    children: []
+  };
 };
 
 const readPath = (
   node: ObjectLiteralExpression,
   typeChecker: TypeChecker
-): string | null => {
+): string => {
   const expression = getPropertyValue(node, 'path');
   if (expression) {
     const path = evaluateExpression(expression, typeChecker);
     return typeof path === 'string' ? path : '/';
   }
 
-  return null;
+  return '/';
 };
 
 const evaluateExpression = (
