@@ -5,12 +5,11 @@ import {
   parseRoutes
 } from './utils.angular';
 import { Project } from 'ts-morph';
-import { Options } from './types';
+import { Options, ParsedRoute } from './types';
 import { resolve } from 'path';
 
 export function parse(options: Options): Rule {
   return (tree: Tree) => {
-    console.log('start');
     const { project } = options;
     if (!project) {
       throw new Error('Project name expected');
@@ -18,7 +17,6 @@ export function parse(options: Options): Rule {
 
     const angularJson = findAngularJSON(tree);
     const workspace = angularJson.projects[project];
-    console.log('workspace founded');
     const tsConfigs: string | string[] =
       workspace.architect?.build?.options?.tsConfig;
     let configPath: string | undefined;
@@ -50,9 +48,21 @@ export function parse(options: Options): Rule {
         exporession,
         projectInstance.getTypeChecker()
       );
-      console.log(parsedRoutes);
+      if (parsedRoutes) {
+        parsedRoutes.forEach(showRoutes.bind(null, 0));
+      }
     }
 
     return tree;
   };
+}
+
+function showRoutes(indent: number, route: ParsedRoute): void {
+  const indentAsString = ' '.repeat(indent);
+  console.log(`${indentAsString}path: ${route.path}`);
+
+  if (route.children.length) {
+    console.log(`${indentAsString}children: `);
+    route.children.forEach(showRoutes.bind(null, indent + 1));
+  }
 }
