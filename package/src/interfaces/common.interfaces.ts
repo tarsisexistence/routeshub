@@ -44,7 +44,15 @@ export interface DefaultNameOptions {
   wildcard?: string;
 }
 
-export type privateNotesKey = string | symbol;
+/**
+ * type of unique unit identifier
+ */
+export type unitIdentifier = symbol;
+
+/**
+ * type of possible types of unit identification
+ */
+export type privateNotesKey = string | unitIdentifier;
 
 /**
  * private local hubs identifier
