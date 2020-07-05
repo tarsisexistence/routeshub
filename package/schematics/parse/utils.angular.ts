@@ -12,7 +12,7 @@ import {
   PropertyAccessExpression,
   TypeChecker
 } from 'ts-morph';
-import { ParsedRoute, RouterExpression } from './types';
+import { LoadChildren, ParsedRoute, RouterExpression } from './types';
 import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
@@ -161,10 +161,12 @@ const parseRoute = (
   typeChecker: TypeChecker
 ): ParsedRoute | null => {
   const path = readPath(route, typeChecker);
+  const loadChildren = readLoadChildren(route, typeChecker);
 
   return {
     path,
-    children: []
+    children: [],
+    loadChildren
   };
 };
 
@@ -180,6 +182,45 @@ const readPath = (
 
   return '/';
 };
+
+export const readLoadChildren = (
+  node: ObjectLiteralExpression,
+  typeChecker: TypeChecker
+): LoadChildren | null => {
+  const expression = getPropertyValue(node, 'loadChildren');
+  if (!expression) {
+    return null;
+  }
+  if (Node.isStringLiteral(expression)) {
+    return expression.getText();
+  }
+
+  let result: string | null = null;
+  if (Node.isArrowFunction(expression)) {
+    const body = expression.getBody();
+    if (Node.isCallExpression(body)) {
+      return parseLoadChildrenFunction(body);
+    }
+  }
+
+  // loadChildren: 'foo' + '/' + 'bar'
+  if (!result) {
+    result = evaluateExpression(node, typeChecker);
+  }
+  return result;
+};
+
+const parseLoadChildrenFunction = (fnNode: CallExpression): string | null => {
+  const args = fnNode.getArguments()?.[0];
+  if (args && Node.isArrowFunction(args)) {
+    const body = args.getBody();
+    if (Node.isPropertyAccessExpression(body)) {
+      return body.getName();
+    }
+  }
+
+  return null;
+}
 
 const evaluateExpression = (
   node: Expression,

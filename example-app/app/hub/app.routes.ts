@@ -30,5 +30,10 @@ export const routes: Routes = [
           import('example-app/app/views/car/car.module').then(m => m.CarModule)
       }
     ]
+  },
+  {
+    path: 'test',
+    loadChildren: () =>
+      import('example-app/app/views/car/car.module').then(m => m.CarModule)
   }
 ];
