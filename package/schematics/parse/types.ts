@@ -4,7 +4,10 @@ export interface Options {
 
 export type RouterExpression = 'forRoot' | 'forChild';
 
-export type LoadChildren = string;
+export interface LoadChildren {
+  path: string;
+  module: string;
+}
 
 export interface ParsedRoute {
   path: string;

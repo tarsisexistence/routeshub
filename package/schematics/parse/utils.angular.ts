@@ -192,10 +192,9 @@ export const readLoadChildren = (
     return null;
   }
   if (Node.isStringLiteral(expression)) {
-    return expression.getText();
+    return getOldLoadChildrenSyntaxPath(expression.getText());
   }
 
-  let result: string | null = null;
   if (Node.isArrowFunction(expression)) {
     const body = expression.getBody();
     if (Node.isCallExpression(body)) {
@@ -204,23 +203,49 @@ export const readLoadChildren = (
   }
 
   // loadChildren: 'foo' + '/' + 'bar'
-  if (!result) {
-    result = evaluateExpression(node, typeChecker);
-  }
-  return result;
+  const path = evaluateExpression(node, typeChecker);
+  return path ? getOldLoadChildrenSyntaxPath(path) : null;
 };
 
-const parseLoadChildrenFunction = (fnNode: CallExpression): string | null => {
+const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
+  const [path, module] = str.split('#')[1];
+  if (typeof path === 'string' && module) {
+    return { path, module };
+  }
+
+  return null;
+};
+
+const parseLoadChildrenFunction =
+  (fnNode: CallExpression): LoadChildren | null => {
+  const parsedLoadChildren: Partial<LoadChildren> = {};
+  const accessExpression = fnNode.getExpression();
+  if (Node.isPropertyAccessExpression(accessExpression)) {
+    const impExpr = accessExpression.getExpression();
+    if (Node.isCallExpression(impExpr)) {
+      const impArg = impExpr.getArguments()?.[0];
+      if (Node.isStringLiteral(impArg)) {
+        parsedLoadChildren.path = impArg.getLiteralText();
+      }
+    }
+  }
+
   const args = fnNode.getArguments()?.[0];
   if (args && Node.isArrowFunction(args)) {
     const body = args.getBody();
     if (Node.isPropertyAccessExpression(body)) {
-      return body.getName();
+      parsedLoadChildren.module = body.getText();
     }
   }
 
+
+  const { path, module } = parsedLoadChildren;
+  if (typeof path === 'string' && module) {
+    return { path, module };
+  }
+
   return null;
-}
+};
 
 const evaluateExpression = (
   node: Expression,
