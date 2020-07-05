@@ -149,11 +149,12 @@ export const getRouterModuleCallExpressions: (
 export const parseRoutes = (
   routes: ArrayLiteralExpression,
   typeChecker: TypeChecker
-): (ParsedRoute | null)[] => {
+): ParsedRoute[] => {
   const elements = routes.getElements();
   return elements
     .filter(node => Node.isObjectLiteralExpression(node))
-    .map(node => parseRoute(node as ObjectLiteralExpression, typeChecker));
+    .map(node => parseRoute(node as ObjectLiteralExpression, typeChecker))
+    .filter(node => !!node) as ParsedRoute[];
 };
 
 const parseRoute = (
@@ -162,10 +163,11 @@ const parseRoute = (
 ): ParsedRoute | null => {
   const path = readPath(route, typeChecker);
   const loadChildren = readLoadChildren(route, typeChecker);
+  const children = readChildren(route, typeChecker);
 
   return {
     path,
-    children: [],
+    children,
     loadChildren
   };
 };
@@ -181,6 +183,18 @@ const readPath = (
   }
 
   return '/';
+};
+
+const readChildren = (
+  node: ObjectLiteralExpression,
+  typeChecker: TypeChecker
+): ParsedRoute[] => {
+  const expression = getPropertyValue(node, 'children');
+  if (expression && Node.isArrayLiteralExpression(expression)) {
+    return parseRoutes(expression, typeChecker);
+  }
+
+  return [];
 };
 
 export const readLoadChildren = (
