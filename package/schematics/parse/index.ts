@@ -61,6 +61,11 @@ function showRoutes(indent: number, route: ParsedRoute): void {
   const indentAsString = ' '.repeat(indent);
   console.log(`${indentAsString}path: ${route.path}`);
 
+  if (route.loadChildren) {
+    const { path, module } = route.loadChildren;
+    console.log(`loadChildren: ${path}#${module}`);
+  }
+
   if (route.children.length) {
     console.log(`${indentAsString}children: `);
     route.children.forEach(showRoutes.bind(null, indent + 1));
