@@ -248,10 +248,9 @@ const parseLoadChildrenFunction =
   if (args && Node.isArrowFunction(args)) {
     const body = args.getBody();
     if (Node.isPropertyAccessExpression(body)) {
-      parsedLoadChildren.module = body.getText();
+      parsedLoadChildren.module = body.getName();
     }
   }
-
 
   const { path, module } = parsedLoadChildren;
   if (typeof path === 'string' && module) {
