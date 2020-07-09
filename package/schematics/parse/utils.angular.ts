@@ -148,22 +148,28 @@ export const getRouterModuleCallExpressions: (
 
 export const parseRoutes = (
   routes: ArrayLiteralExpression,
-  typeChecker: TypeChecker
+  project: Project
 ): ParsedRoute[] => {
   const elements = routes.getElements();
   return elements
     .filter(node => Node.isObjectLiteralExpression(node))
-    .map(node => parseRoute(node as ObjectLiteralExpression, typeChecker))
+    .map(node => parseRoute(node as ObjectLiteralExpression, project))
     .filter(node => !!node) as ParsedRoute[];
 };
 
 const parseRoute = (
   route: ObjectLiteralExpression,
-  typeChecker: TypeChecker
+  project: Project
 ): ParsedRoute | null => {
+  const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const loadChildren = readLoadChildren(route, typeChecker);
-  const children = readChildren(route, typeChecker);
+  const children = readChildren(route, project);
+
+  if (loadChildren) {
+    const imports = getModuleImports(project, loadChildren);
+    console.log(imports?.getText());
+  }
 
   return {
     path,
@@ -187,11 +193,11 @@ const readPath = (
 
 const readChildren = (
   node: ObjectLiteralExpression,
-  typeChecker: TypeChecker
+  project: Project
 ): ParsedRoute[] => {
   const expression = getPropertyValue(node, 'children');
   if (expression && Node.isArrayLiteralExpression(expression)) {
-    return parseRoutes(expression, typeChecker);
+    return parseRoutes(expression, project);
   }
 
   return [];
@@ -230,8 +236,9 @@ const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
   return null;
 };
 
-const parseLoadChildrenFunction =
-  (fnNode: CallExpression): LoadChildren | null => {
+const parseLoadChildrenFunction = (
+  fnNode: CallExpression
+): LoadChildren | null => {
   const parsedLoadChildren: Partial<LoadChildren> = {};
   const accessExpression = fnNode.getExpression();
   if (Node.isPropertyAccessExpression(accessExpression)) {
@@ -255,6 +262,36 @@ const parseLoadChildrenFunction =
   const { path, module } = parsedLoadChildren;
   if (typeof path === 'string' && module) {
     return { path, module };
+  }
+
+  return null;
+};
+
+const getModuleImports = (
+  project: Project,
+  module: LoadChildren
+): ArrayLiteralExpression | null => {
+  const pathWithExtension = `${module.path}.ts`;
+  const sourceFile = project.getSourceFileOrThrow(pathWithExtension);
+  const classDecl = sourceFile.getClassOrThrow(module.module);
+  const decorator = classDecl.getDecoratorOrThrow('NgModule');
+
+  const arg = decorator.getArguments()?.[0];
+  if (!arg) {
+    return null;
+  }
+
+  if (Node.isObjectLiteralExpression(arg)) {
+    const imports = getPropertyValue(arg, 'imports');
+    if (!imports) {
+      return null;
+    }
+
+    if (Node.isIdentifier(imports)) {
+      return tryFindIdentifierValue(imports, project);
+    } else if (Node.isArrayLiteralExpression(imports)) {
+      return imports;
+    } // todo find other cases(destruction etc)
   }
 
   return null;

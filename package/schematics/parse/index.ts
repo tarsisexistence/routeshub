@@ -44,10 +44,7 @@ export function parse(options: Options): Rule {
 
     const exporession = getRouteModuleExpressions(projectInstance);
     if (exporession) {
-      const parsedRoutes = parseRoutes(
-        exporession,
-        projectInstance.getTypeChecker()
-      );
+      const parsedRoutes = parseRoutes(exporession, projectInstance);
       if (parsedRoutes) {
         parsedRoutes.forEach(showRoutes.bind(null, 0));
       }
