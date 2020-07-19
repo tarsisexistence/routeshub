@@ -207,7 +207,6 @@ export const findRouteChildren = (
   return routerModules;
 };
 
-/* eslint-disable */
 const divideRouterExpressionsAndModules = (modules: Node[]) => {
   const routerExpressions: CallExpression[] = [];
   const moduleDeclarations: ClassDeclaration[] = [];
