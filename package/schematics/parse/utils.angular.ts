@@ -10,6 +10,8 @@ import {
   ObjectLiteralExpression,
   Project,
   PropertyAccessExpression,
+  ts,
+  Type,
   TypeChecker
 } from 'ts-morph';
 import { LoadChildren, ParsedRoute, RouterExpression } from './types';
@@ -45,12 +47,13 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
   return routerModule;
 };
 
-export const getRouteModuleExpressions: (
-  project: Project
+export const getRouteModuleForRootExpressions: (
+  project: Project,
+  routerModuleClass: ClassDeclaration
 ) => ArrayLiteralExpression | null = (
-  project: Project
+  project: Project,
+  routerModuleClass: ClassDeclaration
 ): ArrayLiteralExpression | null => {
-  const routerModuleClass = getRouterModuleClass(project);
   const refs = routerModuleClass.findReferencesAsNodes();
 
   // todo add check for Router.RouterModule.for....
@@ -79,8 +82,7 @@ const findRouterModuleArgumentValue = (
   } else if (Node.isIdentifier(firstArg)) {
     return tryFindIdentifierValue(firstArg, project);
   }
-  // todo for destruction
-
+  // todo for spread forRoot(...array)
   return null;
 };
 
@@ -91,6 +93,7 @@ const tryFindIdentifierValue = (
   const refs = id.findReferencesAsNodes();
 
   for (const ref of refs) {
+    // expression.expression1.varName
     const parent = ref.getParent();
     if (parent && Node.isVariableDeclaration(parent)) {
       const initializer = parent.getInitializer();
@@ -148,34 +151,123 @@ export const getRouterModuleCallExpressions: (
 
 export const parseRoutes = (
   routes: ArrayLiteralExpression,
+  routerType: Type<ts.Type>,
   project: Project
 ): ParsedRoute[] => {
   const elements = routes.getElements();
   return elements
     .filter(node => Node.isObjectLiteralExpression(node))
-    .map(node => parseRoute(node as ObjectLiteralExpression, project))
+    .map(node =>
+      parseRoute(node as ObjectLiteralExpression, routerType, project)
+    )
     .filter(node => !!node) as ParsedRoute[];
 };
 
 const parseRoute = (
   route: ObjectLiteralExpression,
+  routerType: Type<ts.Type>,
   project: Project
 ): ParsedRoute | null => {
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const loadChildren = readLoadChildren(route, typeChecker);
-  const children = readChildren(route, project);
-
-  if (loadChildren) {
-    const imports = getModuleImports(project, loadChildren);
-    console.log(imports?.getText());
-  }
+  const children = readChildren(route, routerType, project);
 
   return {
     path,
     children,
     loadChildren
   };
+};
+
+/**
+ * Get Module Declaration, parse imports, find route modules
+ * and parse them
+ */
+export const findRouteChildren = (
+  project: Project,
+  module: ClassDeclaration
+) => {
+  const routerModules: CallExpression[] = [];
+  const modules = [module];
+
+  do {
+    const currentModule = modules.shift() as ClassDeclaration;
+    const imports = getImportsFromModuleDeclaration(project, currentModule);
+    const {
+      routerExpressions,
+      moduleExpressions
+    } = divideRouterExpressionsAndModules(imports);
+
+    routerModules.push(...routerExpressions);
+    modules.unshift(...moduleExpressions);
+    console.log(modules);
+  } while (modules.length);
+
+  return routerModules;
+};
+
+/* eslint-disable */
+const divideRouterExpressionsAndModules = (modules: Node[]) => {
+  const routerExpressions: CallExpression[] = [];
+  const moduleDeclarations: ClassDeclaration[] = [];
+
+  for (const module of modules) {
+    if (Node.isIdentifier(module)) {
+      // todo case when identifier is variable
+      // todo rewrite for universal method
+      const type = module.getType();
+      const symbol = type.getSymbol();
+      const decls = symbol?.getDeclarations() || [];
+      const clazz = decls
+        .filter(decl => Node.isClassDeclaration(decl))
+        .map(node => node as ClassDeclaration)?.[0];
+      if (clazz) {
+        moduleDeclarations.push(clazz);
+      }
+    } else if (Node.isCallExpression(module)) {
+      // handle case with CallExpression
+    }
+  }
+
+  return {
+    routerExpressions,
+    moduleExpressions: moduleDeclarations
+  };
+};
+
+const getImportsFromModuleDeclaration = (
+  project: Project,
+  module: ClassDeclaration
+): Node[] => {
+  const decorator = module.getDecoratorOrThrow('NgModule');
+
+  const arg = decorator.getArguments()?.[0];
+  if (!arg) {
+    return [];
+  }
+
+  return parseImports(arg, project)?.getElements() || [];
+};
+
+const parseImports = (
+  importsArg: Node,
+  project: Project
+): ArrayLiteralExpression | null => {
+  if (Node.isObjectLiteralExpression(importsArg)) {
+    const imports = getPropertyValue(importsArg, 'imports');
+    if (!imports) {
+      return null;
+    }
+
+    if (Node.isIdentifier(imports)) {
+      return tryFindIdentifierValue(imports, project);
+    } else if (Node.isArrayLiteralExpression(imports)) {
+      return imports;
+    } // todo find other cases (imports: [...imports]
+  }
+
+  return null;
 };
 
 const readPath = (
@@ -193,11 +285,12 @@ const readPath = (
 
 const readChildren = (
   node: ObjectLiteralExpression,
+  routerType: Type,
   project: Project
 ): ParsedRoute[] => {
   const expression = getPropertyValue(node, 'children');
   if (expression && Node.isArrayLiteralExpression(expression)) {
-    return parseRoutes(expression, project);
+    return parseRoutes(expression, routerType, project);
   }
 
   return [];
@@ -267,36 +360,6 @@ const parseLoadChildrenFunction = (
   return null;
 };
 
-const getModuleImports = (
-  project: Project,
-  module: LoadChildren
-): ArrayLiteralExpression | null => {
-  const pathWithExtension = `${module.path}.ts`;
-  const sourceFile = project.getSourceFileOrThrow(pathWithExtension);
-  const classDecl = sourceFile.getClassOrThrow(module.module);
-  const decorator = classDecl.getDecoratorOrThrow('NgModule');
-
-  const arg = decorator.getArguments()?.[0];
-  if (!arg) {
-    return null;
-  }
-
-  if (Node.isObjectLiteralExpression(arg)) {
-    const imports = getPropertyValue(arg, 'imports');
-    if (!imports) {
-      return null;
-    }
-
-    if (Node.isIdentifier(imports)) {
-      return tryFindIdentifierValue(imports, project);
-    } else if (Node.isArrayLiteralExpression(imports)) {
-      return imports;
-    } // todo find other cases(destruction etc)
-  }
-
-  return null;
-};
-
 const evaluateExpression = (
   node: Expression,
   morhpTypeChecker: TypeChecker
@@ -322,6 +385,58 @@ const getPropertyValue = (
         return objectProperty.getInitializer() || null;
       }
     }
+  }
+
+  return null;
+};
+
+export const getAppModule = (
+  project: Project,
+  path: string
+): ClassDeclaration => {
+  const sourceFile = project.getSourceFileOrThrow(path);
+
+  let bootstrapId: Identifier | undefined;
+
+  function findBootstrapModule(node: Node): void {
+    if (Node.isIdentifier(node) && node.getText() === 'bootstrapModule') {
+      bootstrapId = node;
+    } else {
+      node.forEachChild(findBootstrapModule);
+    }
+  }
+  sourceFile.forEachChild(findBootstrapModule);
+
+  if (!bootstrapId) {
+    throw new Error(`Can't find bootstrapModule expression in ${path}`);
+  }
+
+  const parent = bootstrapId?.getParentOrThrow();
+  const callExpresion = parent.getParentOrThrow();
+  if (Node.isCallExpression(callExpresion)) {
+    const module = callExpresion.getArguments()?.[0];
+    // todo when module is not class token
+    const declaration = findClassDeclarationByIdentifier(module as Identifier);
+    if (!declaration) {
+      throw new Error(`Cant't find AppModule!`);
+    }
+
+    return declaration;
+  }
+
+  throw new Error(`Cant't find AppModule!`);
+};
+
+const findClassDeclarationByIdentifier = (
+  id: Identifier
+): ClassDeclaration | null => {
+  const type = id.getType();
+  const symbol = type.getSymbol();
+  const decls = symbol?.getDeclarations() || [];
+  const classDeclarations = decls.filter(node => Node.isClassDeclaration(node));
+
+  if (classDeclarations.length) {
+    return classDeclarations[0] as ClassDeclaration;
   }
 
   return null;

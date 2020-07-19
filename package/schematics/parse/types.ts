@@ -14,3 +14,5 @@ export interface ParsedRoute {
   children: ParsedRoute[];
   loadChildren: LoadChildren | null;
 }
+
+export type RouteTree = Record<string, string>;

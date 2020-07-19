@@ -1,7 +1,10 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import {
   findAngularJSON,
-  getRouteModuleExpressions,
+  findRouteChildren,
+  getAppModule,
+  getRouteModuleForRootExpressions,
+  getRouterModuleClass,
   parseRoutes
 } from './utils.angular';
 import { Project } from 'ts-morph';
@@ -36,18 +39,35 @@ export function parse(options: Options): Rule {
     }
 
     const absoluteConfigPath = resolve(process.cwd(), configPath as string);
-    console.log('start project create', absoluteConfigPath);
     const projectInstance = new Project({
       tsConfigFilePath: absoluteConfigPath,
       addFilesFromTsConfig: true
     });
 
-    const exporession = getRouteModuleExpressions(projectInstance);
-    if (exporession) {
-      const parsedRoutes = parseRoutes(exporession, projectInstance);
+    const pathToMainFile = workspace.architect?.build?.options?.main as string;
+    if (!pathToMainFile) {
+      throw new Error("Can't find path to main.ts in angular.json");
+    }
+
+    const appModule = getAppModule(projectInstance, pathToMainFile);
+    const childrens = findRouteChildren(projectInstance, appModule);
+    console.log(childrens);
+
+    // todo rewrite this part
+    const routerModuleClass = getRouterModuleClass(projectInstance);
+    const expression = getRouteModuleForRootExpressions(
+      projectInstance,
+      routerModuleClass
+    );
+
+    if (expression) {
+      const routerType = routerModuleClass.getType();
+      const parsedRoutes = parseRoutes(expression, routerType, projectInstance);
       if (parsedRoutes) {
         parsedRoutes.forEach(showRoutes.bind(null, 0));
       }
+    } else {
+      throw new Error("RouterModule.forRoot expression did't find");
     }
 
     return tree;
