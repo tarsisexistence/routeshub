@@ -213,19 +213,15 @@ const divideRouterExpressionsAndModules = (modules: Node[]) => {
 
   for (const module of modules) {
     if (Node.isIdentifier(module)) {
-      // todo case when identifier is variable
-      // todo rewrite for universal method
-      const type = module.getType();
-      const symbol = type.getSymbol();
-      const decls = symbol?.getDeclarations() || [];
-      const clazz = decls
-        .filter(decl => Node.isClassDeclaration(decl))
-        .map(node => node as ClassDeclaration)?.[0];
-      if (clazz) {
-        moduleDeclarations.push(clazz);
+      const decl = findModuleDeclaration(module);
+      if (decl) {
+        moduleDeclarations.push(decl);
       }
     } else if (Node.isCallExpression(module)) {
-      // handle case with CallExpression
+      const decl = getModuleDeclarationFromExpression(module);
+      if (decl) {
+        moduleDeclarations.push(decl);
+      }
     }
   }
 
@@ -233,6 +229,34 @@ const divideRouterExpressionsAndModules = (modules: Node[]) => {
     routerExpressions,
     moduleExpressions: moduleDeclarations
   };
+};
+
+const findModuleDeclaration = (id: Identifier): ClassDeclaration => {
+  // todo rewrite for universal method
+  const type = id.getType();
+  const symbol = type.getSymbol();
+  const decls = symbol?.getDeclarations() || [];
+  return decls
+    .filter(decl => Node.isClassDeclaration(decl))
+    .map(node => node as ClassDeclaration)?.[0];
+};
+
+const getModuleDeclarationFromExpression = (
+  callExpr: CallExpression
+): ClassDeclaration | null => {
+  const expr = callExpr.getExpression();
+  if (Node.isPropertyAccessExpression(expr)) {
+    const name = expr.getName();
+    if (name === 'forRoot' || 'forChild') {
+      const moduleName = expr.getExpression();
+      if (Node.isIdentifier(moduleName)) {
+        return findModuleDeclaration(moduleName);
+      }
+    }
+  }
+
+  console.error(`Can't find module name in expression: ${callExpr.getText()}`);
+  return null;
 };
 
 const getImportsFromModuleDeclaration = (
