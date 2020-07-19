@@ -201,7 +201,7 @@ export const findRouteChildren = (
 
     routerModules.push(...routerExpressions);
     modules.unshift(...moduleExpressions);
-    console.log(modules);
+    console.log(modules.map(m => m.getName()));
   } while (modules.length);
 
   return routerModules;
@@ -240,7 +240,10 @@ const getImportsFromModuleDeclaration = (
   project: Project,
   module: ClassDeclaration
 ): Node[] => {
-  const decorator = module.getDecoratorOrThrow('NgModule');
+  const decorator = module.getDecorator('NgModule');
+  if (!decorator) {
+    return [];
+  }
 
   const arg = decorator.getArguments()?.[0];
   if (!arg) {
