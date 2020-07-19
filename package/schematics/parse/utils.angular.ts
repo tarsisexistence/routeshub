@@ -186,6 +186,7 @@ const parseRoute = (
  */
 export const findRouteChildren = (
   project: Project,
+  routerType: Type,
   module: ClassDeclaration
 ) => {
   const routerModules: CallExpression[] = [];
@@ -197,7 +198,7 @@ export const findRouteChildren = (
     const {
       routerExpressions,
       moduleExpressions
-    } = divideRouterExpressionsAndModules(imports);
+    } = divideRouterExpressionsAndModules(imports, routerType);
 
     routerModules.push(...routerExpressions);
     modules.unshift(...moduleExpressions);
@@ -207,7 +208,10 @@ export const findRouteChildren = (
   return routerModules;
 };
 
-const divideRouterExpressionsAndModules = (modules: Node[]) => {
+const divideRouterExpressionsAndModules = (
+  modules: Node[],
+  routerType: Type
+) => {
   const routerExpressions: CallExpression[] = [];
   const moduleDeclarations: ClassDeclaration[] = [];
 
@@ -220,7 +224,10 @@ const divideRouterExpressionsAndModules = (modules: Node[]) => {
     } else if (Node.isCallExpression(module)) {
       const decl = getModuleDeclarationFromExpression(module);
       if (decl) {
-        moduleDeclarations.push(decl);
+        const declType = decl.getType();
+        declType === routerType
+          ? routerExpressions.push(module)
+          : moduleDeclarations.push(decl);
       }
     }
   }

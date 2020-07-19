@@ -50,18 +50,19 @@ export function parse(options: Options): Rule {
     }
 
     const appModule = getAppModule(projectInstance, pathToMainFile);
-    const childrens = findRouteChildren(projectInstance, appModule);
-    console.log(childrens);
 
     // todo rewrite this part
     const routerModuleClass = getRouterModuleClass(projectInstance);
+    const routerType = routerModuleClass.getType();
+    const childrens = findRouteChildren(projectInstance, routerType, appModule);
+    console.log(childrens.map(ch => ch.getText()));
+
     const expression = getRouteModuleForRootExpressions(
       projectInstance,
       routerModuleClass
     );
 
     if (expression) {
-      const routerType = routerModuleClass.getType();
       const parsedRoutes = parseRoutes(expression, routerType, projectInstance);
       if (parsedRoutes) {
         parsedRoutes.forEach(showRoutes.bind(null, 0));
