@@ -192,7 +192,7 @@ export const findRouteChildren = (
   const routerModules: CallExpression[] = [];
   const modules = [module];
 
-  do {
+  while (modules.length) {
     const currentModule = modules.shift() as ClassDeclaration;
     const imports = getImportsFromModuleDeclaration(project, currentModule);
     const {
@@ -203,7 +203,7 @@ export const findRouteChildren = (
     routerModules.push(...routerExpressions);
     modules.unshift(...moduleExpressions);
     console.log(modules.map(m => m.getName()));
-  } while (modules.length);
+  }
 
   return routerModules;
 };
