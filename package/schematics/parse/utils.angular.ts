@@ -14,11 +14,7 @@ import {
   Type,
   TypeChecker
 } from 'ts-morph';
-import {
-  LoadChildren,
-  RouterExpression,
-  RouteTree
-} from './types';
+import { LoadChildren, RouterExpression, RouteTree } from './types';
 import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
@@ -184,8 +180,7 @@ const parseRoute = (
 
   const loadChildren = readLoadChildren(route, typeChecker);
   console.log(loadChildren);
-  const children = readChildren(route, routerType, project);
-  root[routeName] = children;
+  root[routeName] = readChildren(route, routerType, project);
 
   return root;
 };
