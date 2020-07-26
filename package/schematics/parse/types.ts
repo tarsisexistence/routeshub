@@ -6,7 +6,7 @@ export type RouterExpression = 'forRoot' | 'forChild';
 
 export interface LoadChildren {
   path: string;
-  module: string;
+  moduleName: string;
 }
 
 export interface ParsedRoute {

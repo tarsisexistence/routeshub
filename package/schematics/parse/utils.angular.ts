@@ -172,17 +172,33 @@ const parseRoute = (
   routerType: Type<ts.Type>,
   project: Project
 ): RouteTree | null => {
-  const root: RouteTree = {};
+  let root: RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const routeName = path === '' ? 'root' : path;
   root[routeName] = {};
 
   const loadChildren = readLoadChildren(route, typeChecker);
-  console.log(loadChildren);
+  if (loadChildren) {
+    const lazyModule = getLazyModuleDelcaration(project, loadChildren);
+    const lazyModuleRouteTree =
+      createModuleRouteTree(project, lazyModule, routerType);
+    root = {...root, ...lazyModuleRouteTree };
+  }
+
   root[routeName] = readChildren(route, routerType, project);
 
   return root;
+};
+
+const getLazyModuleDelcaration = (
+  project: Project,
+  loadChildren: LoadChildren
+): ClassDeclaration => {
+  const { path , moduleName } = loadChildren;
+  const pathWithExtension = `${path}.ts`;
+  const sourceFile = project.getSourceFileOrThrow(pathWithExtension);
+  return sourceFile.getClassOrThrow(moduleName);
 };
 
 export const createProjectRouteTree = (
@@ -395,7 +411,7 @@ export const readLoadChildren = (
 const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
   const [path, module] = str.split('#')[1];
   if (typeof path === 'string' && module) {
-    return { path, module };
+    return { path, moduleName: module };
   }
 
   return null;
@@ -420,13 +436,13 @@ const parseLoadChildrenFunction = (
   if (args && Node.isArrowFunction(args)) {
     const body = args.getBody();
     if (Node.isPropertyAccessExpression(body)) {
-      parsedLoadChildren.module = body.getName();
+      parsedLoadChildren.moduleName = body.getName();
     }
   }
 
-  const { path, module } = parsedLoadChildren;
-  if (typeof path === 'string' && module) {
-    return { path, module };
+  const { path, moduleName } = parsedLoadChildren;
+  if (typeof path === 'string' && moduleName) {
+    return { path, moduleName };
   }
 
   return null;
