@@ -196,19 +196,32 @@ export const createProjectRouteTree = (
   forRootExpr: ArrayLiteralExpression,
   routerType: Type
 ): RouteTree => {
-  const eagerRoutes = findRouteChildren(project, routerType, appModule);
   let root: RouteTree = {};
-  for (const forChildrenExpr of eagerRoutes) {
-    const routes = findRouterModuleArgumentValue(forChildrenExpr, project);
+  const eagersTree = createModuleRouteTree(project, appModule, routerType);
+  root = { ...root, ...eagersTree };
+
+  const parsedRoot = parseRoutes(forRootExpr, routerType, project);
+  return { ...root, ...parsedRoot };
+};
+
+const createModuleRouteTree = (
+  project: Project,
+  module: ClassDeclaration,
+  routerType: Type
+): RouteTree => {
+  let root: RouteTree = {};
+
+  const eagerForChildExpr = findRouteChildren(project, routerType, module);
+  for (const forChildExpr of eagerForChildExpr) {
+    const routes = findRouterModuleArgumentValue(forChildExpr, project);
     if (routes) {
       const parsed = parseRoutes(routes, routerType, project);
       root = { ...root, ...parsed };
     }
   }
 
-  const parsedRoot = parseRoutes(forRootExpr, routerType, project);
-  return { ...root, ...parsedRoot };
-};
+  return root;
+}
 
 /**
  * Get Module Declaration, parse imports, find route modules
