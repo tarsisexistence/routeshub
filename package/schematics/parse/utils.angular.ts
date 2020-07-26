@@ -190,7 +190,7 @@ const parseRoute = (
   return root;
 };
 
-export const createRouteTree = (
+export const createProjectRouteTree = (
   project: Project,
   appModule: ClassDeclaration,
   forRootExpr: ArrayLiteralExpression,

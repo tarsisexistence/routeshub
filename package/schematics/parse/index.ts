@@ -1,6 +1,6 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import {
-  createRouteTree,
+  createProjectRouteTree,
   findAngularJSON,
   getAppModule,
   getRouteModuleForRootExpressions,
@@ -69,7 +69,7 @@ export function parse(options: Options): Rule {
     );
 
     if (expression) {
-      const routeTree = createRouteTree(
+      const routeTree = createProjectRouteTree(
         projectInstance,
         appModule,
         expression,
