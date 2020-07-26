@@ -16,7 +16,6 @@ import {
 } from 'ts-morph';
 import {
   LoadChildren,
-  ParsedRoute,
   RouterExpression,
   RouteTree
 } from './types';
@@ -158,31 +157,37 @@ export const parseRoutes = (
   routes: ArrayLiteralExpression,
   routerType: Type<ts.Type>,
   project: Project
-): ParsedRoute[] => {
+): RouteTree => {
+  let root: RouteTree = {};
   const elements = routes.getElements();
-  return elements
-    .filter(node => Node.isObjectLiteralExpression(node))
-    .map(node =>
-      parseRoute(node as ObjectLiteralExpression, routerType, project)
-    )
-    .filter(node => !!node) as ParsedRoute[];
+
+  for (const el of elements) {
+    if (Node.isObjectLiteralExpression(el)) {
+      const parsedRoute = parseRoute(el, routerType, project);
+      root = { ...root, ...parsedRoute };
+    } // todo cases with variables like const routes = [ varRoute1, varRoute2 ]
+  }
+
+  return root;
 };
 
 const parseRoute = (
   route: ObjectLiteralExpression,
   routerType: Type<ts.Type>,
   project: Project
-): ParsedRoute | null => {
+): RouteTree | null => {
+  let root: RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
-  const loadChildren = readLoadChildren(route, typeChecker);
-  const children = readChildren(route, routerType, project);
+  const routeName = path === '' ? 'root' : path;
+  root[routeName] = {};
 
-  return {
-    path,
-    children,
-    loadChildren
-  };
+  const loadChildren = readLoadChildren(route, typeChecker);
+  console.log(loadChildren);
+  const children = readChildren(route, routerType, project);
+  root = { ...root, ...children };
+
+  return root;
 };
 
 export const createRouteTree = (
@@ -191,12 +196,9 @@ export const createRouteTree = (
   forRootExpr: ArrayLiteralExpression,
   routerType: Type
 ): RouteTree => {
-  const root: RouteTree = {};
   const eagerModules = findRouteChildren(project, routerType, appModule);
-  parseRoutes(forRootExpr, routerType, project);
   console.log(eagerModules.map(m => m.getText()));
-
-  return root;
+  return parseRoutes(forRootExpr, routerType, project);
 };
 
 /**
@@ -338,13 +340,15 @@ const readChildren = (
   node: ObjectLiteralExpression,
   routerType: Type,
   project: Project
-): ParsedRoute[] => {
+): RouteTree => {
+  let root: RouteTree = {};
   const expression = getPropertyValue(node, 'children');
   if (expression && Node.isArrayLiteralExpression(expression)) {
-    return parseRoutes(expression, routerType, project);
-  }
+    const routes = parseRoutes(expression, routerType, project);
+    root = { ...root, ...routes };
+  } // todo case, where children is a variable
 
-  return [];
+  return root;
 };
 
 export const readLoadChildren = (
