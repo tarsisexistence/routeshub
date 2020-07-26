@@ -176,7 +176,7 @@ const parseRoute = (
   routerType: Type<ts.Type>,
   project: Project
 ): RouteTree | null => {
-  let root: RouteTree = {};
+  const root: RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const routeName = path === '' ? 'root' : path;
@@ -185,7 +185,7 @@ const parseRoute = (
   const loadChildren = readLoadChildren(route, typeChecker);
   console.log(loadChildren);
   const children = readChildren(route, routerType, project);
-  root = { ...root, ...children };
+  root[routeName] = children;
 
   return root;
 };
@@ -196,9 +196,18 @@ export const createRouteTree = (
   forRootExpr: ArrayLiteralExpression,
   routerType: Type
 ): RouteTree => {
-  const eagerModules = findRouteChildren(project, routerType, appModule);
-  console.log(eagerModules.map(m => m.getText()));
-  return parseRoutes(forRootExpr, routerType, project);
+  const eagerRoutes = findRouteChildren(project, routerType, appModule);
+  let root: RouteTree = {};
+  for (const forChildrenExpr of eagerRoutes) {
+    const routes = findRouterModuleArgumentValue(forChildrenExpr, project);
+    if (routes) {
+      const parsed = parseRoutes(routes, routerType, project);
+      root = { ...root, ...parsed };
+    }
+  }
+
+  const parsedRoot = parseRoutes(forRootExpr, routerType, project);
+  return { ...root, ...parsedRoot };
 };
 
 /**
