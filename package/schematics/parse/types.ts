@@ -15,4 +15,4 @@ export interface ParsedRoute {
   loadChildren: LoadChildren | null;
 }
 
-export type RouteTree = Record<string, string>;
+export type RouteTree = Record<string, any>;

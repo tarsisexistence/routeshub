@@ -1,14 +1,13 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import {
+  createRouteTree,
   findAngularJSON,
-  findRouteChildren,
   getAppModule,
   getRouteModuleForRootExpressions,
-  getRouterModuleClass,
-  parseRoutes
+  getRouterModuleClass
 } from './utils.angular';
 import { Project } from 'ts-morph';
-import { Options, ParsedRoute } from './types';
+import { Options } from './types';
 import { resolve } from 'path';
 
 export function parse(options: Options): Rule {
@@ -54,8 +53,15 @@ export function parse(options: Options): Rule {
     // todo rewrite this part
     const routerModuleClass = getRouterModuleClass(projectInstance);
     const routerType = routerModuleClass.getType();
-    const childrens = findRouteChildren(projectInstance, routerType, appModule);
-    console.log(childrens.map(ch => ch.getText()));
+
+    // tree = {}
+    // forRoot || AppModule - first search
+    // tree = { root {} }
+    // tree = { root {
+    //   root: {},
+    //   about: {} => it adds AboutModule inside the queue [ AboutModule ]
+    //   car: {}it adds CarModule inside the queue [ AboutModule, CarModule ]
+    // } }
 
     const expression = getRouteModuleForRootExpressions(
       projectInstance,
@@ -63,29 +69,17 @@ export function parse(options: Options): Rule {
     );
 
     if (expression) {
-      const parsedRoutes = parseRoutes(expression, routerType, projectInstance);
-      if (parsedRoutes) {
-        parsedRoutes.forEach(showRoutes.bind(null, 0));
-      }
+      const routeTree = createRouteTree(
+        projectInstance,
+        appModule,
+        expression,
+        routerType
+      );
+      console.log(routeTree);
     } else {
       throw new Error("RouterModule.forRoot expression did't find");
     }
 
     return tree;
   };
-}
-
-function showRoutes(indent: number, route: ParsedRoute): void {
-  const indentAsString = ' '.repeat(indent);
-  console.log(`${indentAsString}path: ${route.path}`);
-
-  if (route.loadChildren) {
-    const { path, module } = route.loadChildren;
-    console.log(`loadChildren: ${path}#${module}`);
-  }
-
-  if (route.children.length) {
-    console.log(`${indentAsString}children: `);
-    route.children.forEach(showRoutes.bind(null, indent + 1));
-  }
 }

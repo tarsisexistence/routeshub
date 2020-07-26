@@ -14,7 +14,12 @@ import {
   Type,
   TypeChecker
 } from 'ts-morph';
-import { LoadChildren, ParsedRoute, RouterExpression } from './types';
+import {
+  LoadChildren,
+  ParsedRoute,
+  RouterExpression,
+  RouteTree
+} from './types';
 import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
@@ -180,6 +185,20 @@ const parseRoute = (
   };
 };
 
+export const createRouteTree = (
+  project: Project,
+  appModule: ClassDeclaration,
+  forRootExpr: ArrayLiteralExpression,
+  routerType: Type
+): RouteTree => {
+  const root: RouteTree = {};
+  const eagerModules = findRouteChildren(project, routerType, appModule);
+  parseRoutes(forRootExpr, routerType, project);
+  console.log(eagerModules.map(m => m.getText()));
+
+  return root;
+};
+
 /**
  * Get Module Declaration, parse imports, find route modules
  * and parse them
@@ -202,7 +221,6 @@ export const findRouteChildren = (
 
     routerModules.push(...routerExpressions);
     modules.unshift(...moduleExpressions);
-    console.log(modules.map(m => m.getName()));
   }
 
   return routerModules;
