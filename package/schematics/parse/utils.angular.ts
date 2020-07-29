@@ -90,23 +90,22 @@ const tryFindIdentifierValue = (
   id: Identifier,
   project: Project
 ): ArrayLiteralExpression | null => {
-  const refs = id.findReferencesAsNodes();
+  const defs = id.getDefinitionNodes();
 
-  for (const ref of refs) {
+  for (const def of defs) {
     // expression.expression1.varName
-    const parent = ref.getParent();
-    if (parent && Node.isVariableDeclaration(parent)) {
-      const initializer = parent.getInitializer();
+    if (def && Node.isVariableDeclaration(def)) {
+      const initializer = def.getInitializer();
       if (initializer && Node.isArrayLiteralExpression(initializer)) {
         return initializer;
       }
-    } else if (parent && Node.isImportSpecifier(parent)) {
-      const imp = parent.getImportDeclaration();
+    } else if (def && Node.isImportSpecifier(def)) {
+      const imp = def.getImportDeclaration();
       const modulePath = imp.getModuleSpecifier().getLiteralValue();
       const currentSourceFile = imp.getSourceFile().getFilePath();
       const absolutePath = getAbsolutePath(currentSourceFile, modulePath);
       const sourceFile = project.getSourceFileOrThrow(absolutePath);
-      const value = sourceFile.getVariableDeclaration(ref.getText());
+      const value = sourceFile.getVariableDeclaration(def.getText());
       const initializer = value?.getInitializer();
 
       if (initializer && Node.isArrayLiteralExpression(initializer)) {

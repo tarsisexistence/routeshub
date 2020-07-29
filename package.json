@@ -11,6 +11,7 @@
     "build": "ng build routeshub --prod",
     "test": "ng test routeshub",
     "lint": "ng lint routeshub",
+    "parse": "schematics ./dist/routeshub/schematics/collection.json:parse -- --project example-app",
     "// - SNYK - //": "------------------------------",
     "snyk:test": "snyk test",
     "snyk:wizard": "snyk wizard",
