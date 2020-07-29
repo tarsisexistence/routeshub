@@ -26,11 +26,11 @@ Please make sure to update tests as appropriate and keep the examples consistent
 
 ## **Changelog**
 
-Stay tuned with a [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md) on GitHub.
+Stay tuned with a [changelog](https://github.com/retarsis/routeshub/blob/master/CHANGELOG.md) on GitHub.
 
 ## Questions
 
-If you still have the questions or suggestions, then create an [issue](https://github.com/maktarsis/routeshub/issues) or feel free to contact me on [twitter](https://twitter.com/maktarsis).
+If you still have the questions or suggestions, then create an [issue](https://github.com/retarsis/routeshub/issues) or feel free to contact me on [twitter](https://twitter.com/retarsis).
 
 ## Looking for the best
 

@@ -1,6 +1,6 @@
 # Routeshub
 
-<a href="https://routeshub.gitbook.io/docs"><img src="https://github.com/maktarsis/routeshub/raw/master/docs/assets/logo.png" align="right" alt=""></a>
+<a href="https://routeshub.gitbook.io/docs"><img src="https://github.com/retarsis/routeshub/raw/master/docs/assets/logo.png" align="right" alt=""></a>
 
 A **route manager** and pattern for **[Angular]**
 
@@ -134,12 +134,12 @@ export class HeaderComponent {
 [Angular]: https://github.com/storeon/angular
 [rxjs]: https://github.com/ReactiveX/rxjs
 
-You can find a more complex example in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app)  here or on [GitBook](https://routeshub.gitbook.io/docs/example).
+You can find a more complex example in this [repo](https://github.com/retarsis/routeshub/tree/master/example-app)  here or on [GitBook](https://routeshub.gitbook.io/docs/example).
 
 <br/>
 
 # Hub
-Routeshub offers an approach (pattern) to structure routing in the application. You can explore it in this [repo](https://github.com/maktarsis/routeshub/tree/master/example-app).
+Routeshub offers an approach (pattern) to structure routing in the application. You can explore it in this [repo](https://github.com/retarsis/routeshub/tree/master/example-app).
 
 **Guideline**:
 - Each module in the application has a hub directory
@@ -364,7 +364,7 @@ export class ExampleComponent {
 
 ## Changelog
 
-Stay tuned with [changelog](https://github.com/maktarsis/routeshub/blob/master/CHANGELOG.md).
+Stay tuned with [changelog](https://github.com/retarsis/routeshub/blob/master/CHANGELOG.md).
 
 <br/>
 
@@ -388,8 +388,8 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 <!-- prettier-ignore -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/maktarsis"><img src="https://avatars1.githubusercontent.com/u/21989873?v=4" width="100px;" alt="Max Tarsis"/><br /><sub><b>Max Tarsis</b></sub></a><br /><a href="https://github.com/maktarsis/routeshub/commits?author=maktarsis" title="Code">💻</a> <a href="#projectManagement-maktarsis" title="Project Management">📆</a> <a href="https://github.com/maktarsis/routeshub/commits?author=maktarsis" title="Documentation">📖</a> <a href="#ideas-maktarsis" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://medium.com/@LayZeeDK"><img src="https://avatars1.githubusercontent.com/u/6364586?v=4" width="100px;" alt="Lars Gyrup Brink Nielsen"/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/maktarsis/routeshub/commits?author=LayZeeDK" title="Code">💻</a> <a href="#ideas-LayZeeDK" title="Ideas, Planning, & Feedback">🤔</a> <a href="#tool-LayZeeDK" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://github.com/retarsis"><img src="https://avatars1.githubusercontent.com/u/21989873?v=4" width="100px;" alt="Max Tarsis"/><br /><sub><b>Max Tarsis</b></sub></a><br /><a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Code">💻</a> <a href="#projectManagement-retarsis" title="Project Management">📆</a> <a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Documentation">📖</a> <a href="#ideas-retarsis" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://medium.com/@LayZeeDK"><img src="https://avatars1.githubusercontent.com/u/6364586?v=4" width="100px;" alt="Lars Gyrup Brink Nielsen"/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/retarsis/routeshub/commits?author=LayZeeDK" title="Code">💻</a> <a href="#ideas-LayZeeDK" title="Ideas, Planning, & Feedback">🤔</a> <a href="#tool-LayZeeDK" title="Tools">🔧</a></td>
   </tr>
 </table>
 

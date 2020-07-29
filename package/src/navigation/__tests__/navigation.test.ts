@@ -22,7 +22,7 @@ const APP_NOTES_KEY = Symbol();
     <a [navLink]="app.root.state" navLinkActive="active">Home</a>
     <a navLink="{{ app.about.state }}">About</a>
     <a [navLink]="app.map">Map</a>
-    <a [navLink]="app.user" [navParams]="{ user: 'maktarsis' }">User</a>
+    <a [navLink]="app.user" [navParams]="{ user: 'retarsis' }">User</a>
     <a [navLink]="app.id" [navParams]="{ id: '123' }">User</a>
     <a [navParams]="{ id: '123' }" [navLink]="app.id">User</a>
   `
@@ -111,7 +111,7 @@ describe('Navigation Link Directive', () => {
     const link = fixture.debugElement.nativeElement.querySelectorAll('a')[3];
     link.click();
     tick();
-    expect(location.path()).toBe('/maktarsis');
+    expect(location.path()).toBe('/retarsis');
   }));
 
   it('should navigate to route with dynamic double path', fakeAsync(() => {

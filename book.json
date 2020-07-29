@@ -1,7 +1,7 @@
 {
   "gitbook": "3.x.x",
   "title": "Routeshub",
-  "author": "Max Tarsis (https://github.com/maktarsis)",
+  "author": "Max Tarsis (https://github.com/retarsis)",
   "root": "/docs",
   "plugins": [
     "highlight",
@@ -13,7 +13,7 @@
   ],
   "pluginsConfig": {
     "github": {
-      "url": "https://github.com/maktarsis/routeshub/"
+      "url": "https://github.com/retarsis/routeshub/"
     },
     "versions": {
       "type": "branches"

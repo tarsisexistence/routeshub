@@ -3,7 +3,7 @@
   "description": "A route management library and pattern for Angular",
   "version": "0.0.0",
   "license": "MIT",
-  "author": "Max Tarsis (https://github.com/maktarsis)",
+  "author": "Max Tarsis (https://github.com/retarsis)",
   "private": true,
   "scripts": {
     "// - NG - //": "------------------------------",
@@ -50,7 +50,7 @@
     "@angular/cli": "10.0.1",
     "@angular/compiler-cli": "10.0.2",
     "@angular/language-service": "10.0.2",
-    "@commitlint/cli": "9.0.1",
+    "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "9.0.1",
     "@types/jest": "26.0.3",
     "@types/node": "13.13.12",
