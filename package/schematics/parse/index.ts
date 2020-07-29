@@ -54,15 +54,6 @@ export function parse(options: Options): Rule {
     const routerModuleClass = getRouterModuleClass(projectInstance);
     const routerType = routerModuleClass.getType();
 
-    // tree = {}
-    // forRoot || AppModule - first search
-    // tree = { root {} }
-    // tree = { root {
-    //   root: {},
-    //   about: {} => it adds AboutModule inside the queue [ AboutModule ]
-    //   car: {}it adds CarModule inside the queue [ AboutModule, CarModule ]
-    // } }
-
     const expression = getRouteModuleForRootExpressions(
       projectInstance,
       routerModuleClass
