@@ -15,7 +15,6 @@ import {
   TypeChecker
 } from 'ts-morph';
 import { LoadChildren, RouterExpression, RouteTree } from './types';
-import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
@@ -48,10 +47,8 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
 };
 
 export const getRouteModuleForRootExpressions: (
-  project: Project,
   routerModuleClass: ClassDeclaration
 ) => ArrayLiteralExpression | null = (
-  project: Project,
   routerModuleClass: ClassDeclaration
 ): ArrayLiteralExpression | null => {
   const refs = routerModuleClass.findReferencesAsNodes();
@@ -63,12 +60,11 @@ export const getRouteModuleForRootExpressions: (
   }
 
   const forRootExpression = forRootExpressions[0];
-  return findRouterModuleArgumentValue(forRootExpression, project);
+  return findRouterModuleArgumentValue(forRootExpression);
 };
 
 const findRouterModuleArgumentValue = (
-  routerExpr: CallExpression,
-  project: Project
+  routerExpr: CallExpression
 ): ArrayLiteralExpression | null => {
   const args = routerExpr.getArguments();
   if (args.length === 0) {
@@ -80,15 +76,14 @@ const findRouterModuleArgumentValue = (
   if (Node.isArrayLiteralExpression(firstArg)) {
     return firstArg;
   } else if (Node.isIdentifier(firstArg)) {
-    return tryFindIdentifierValue(firstArg, project);
+    return tryFindIdentifierValue(firstArg);
   }
   // todo for spread forRoot(...array)
   return null;
 };
 
 const tryFindIdentifierValue = (
-  id: Identifier,
-  project: Project
+  id: Identifier
 ): ArrayLiteralExpression | null => {
   const defs = id.getDefinitionNodes();
 
@@ -99,32 +94,10 @@ const tryFindIdentifierValue = (
       if (initializer && Node.isArrayLiteralExpression(initializer)) {
         return initializer;
       }
-    } else if (def && Node.isImportSpecifier(def)) {
-      const imp = def.getImportDeclaration();
-      const modulePath = imp.getModuleSpecifier().getLiteralValue();
-      const currentSourceFile = imp.getSourceFile().getFilePath();
-      const absolutePath = getAbsolutePath(currentSourceFile, modulePath);
-      const sourceFile = project.getSourceFileOrThrow(absolutePath);
-      const value = sourceFile.getVariableDeclaration(def.getText());
-      const initializer = value?.getInitializer();
-
-      if (initializer && Node.isArrayLiteralExpression(initializer)) {
-        return initializer;
-      }
     }
   }
 
   return null;
-};
-
-const getAbsolutePath = (
-  currentFilePath: string,
-  importPath: string
-): string => {
-  const splitted = currentFilePath.split(sep);
-  const currentDir = splitted.slice(0, splitted.length - 1).join(sep);
-
-  return resolve(currentDir, `${importPath}.ts`);
 };
 
 export const getRouterModuleCallExpressions: (
@@ -180,9 +153,12 @@ const parseRoute = (
   const loadChildren = readLoadChildren(route, typeChecker);
   if (loadChildren) {
     const lazyModule = getLazyModuleDelcaration(project, loadChildren);
-    const lazyModuleRouteTree =
-      createModuleRouteTree(project, lazyModule, routerType);
-    root = {...root, ...lazyModuleRouteTree };
+    const lazyModuleRouteTree = createModuleRouteTree(
+      project,
+      lazyModule,
+      routerType
+    );
+    root = { ...root, ...lazyModuleRouteTree };
   }
 
   root[routeName] = readChildren(route, routerType, project);
@@ -194,7 +170,7 @@ const getLazyModuleDelcaration = (
   project: Project,
   loadChildren: LoadChildren
 ): ClassDeclaration => {
-  const { path , moduleName } = loadChildren;
+  const { path, moduleName } = loadChildren;
   const pathWithExtension = `${path}.ts`;
   const sourceFile = project.getSourceFileOrThrow(pathWithExtension);
   return sourceFile.getClassOrThrow(moduleName);
@@ -221,9 +197,9 @@ const createModuleRouteTree = (
 ): RouteTree => {
   let root: RouteTree = {};
 
-  const eagerForChildExpr = findRouteChildren(project, routerType, module);
+  const eagerForChildExpr = findRouteChildren(routerType, module);
   for (const forChildExpr of eagerForChildExpr) {
-    const routes = findRouterModuleArgumentValue(forChildExpr, project);
+    const routes = findRouterModuleArgumentValue(forChildExpr);
     if (routes) {
       const parsed = parseRoutes(routes, routerType, project);
       root = { ...root, ...parsed };
@@ -231,14 +207,13 @@ const createModuleRouteTree = (
   }
 
   return root;
-}
+};
 
 /**
  * Get Module Declaration, parse imports, find route modules
  * and parse them
  */
 export const findRouteChildren = (
-  project: Project,
   routerType: Type,
   module: ClassDeclaration
 ) => {
@@ -247,7 +222,7 @@ export const findRouteChildren = (
 
   while (modules.length) {
     const currentModule = modules.shift() as ClassDeclaration;
-    const imports = getImportsFromModuleDeclaration(project, currentModule);
+    const imports = getImportsFromModuleDeclaration(currentModule);
     const {
       routerExpressions,
       moduleExpressions
@@ -318,10 +293,7 @@ const getModuleDeclarationFromExpression = (
   return null;
 };
 
-const getImportsFromModuleDeclaration = (
-  project: Project,
-  module: ClassDeclaration
-): Node[] => {
+const getImportsFromModuleDeclaration = (module: ClassDeclaration): Node[] => {
   const decorator = module.getDecorator('NgModule');
   if (!decorator) {
     return [];
@@ -332,13 +304,10 @@ const getImportsFromModuleDeclaration = (
     return [];
   }
 
-  return parseImports(arg, project)?.getElements() || [];
+  return parseImports(arg)?.getElements() || [];
 };
 
-const parseImports = (
-  importsArg: Node,
-  project: Project
-): ArrayLiteralExpression | null => {
+const parseImports = (importsArg: Node): ArrayLiteralExpression | null => {
   if (Node.isObjectLiteralExpression(importsArg)) {
     const imports = getPropertyValue(importsArg, 'imports');
     if (!imports) {
@@ -346,7 +315,7 @@ const parseImports = (
     }
 
     if (Node.isIdentifier(imports)) {
-      return tryFindIdentifierValue(imports, project);
+      return tryFindIdentifierValue(imports);
     } else if (Node.isArrayLiteralExpression(imports)) {
       return imports;
     } // todo find other cases (imports: [...imports]

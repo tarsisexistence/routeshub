@@ -54,10 +54,7 @@ export function parse(options: Options): Rule {
     const routerModuleClass = getRouterModuleClass(projectInstance);
     const routerType = routerModuleClass.getType();
 
-    const expression = getRouteModuleForRootExpressions(
-      projectInstance,
-      routerModuleClass
-    );
+    const expression = getRouteModuleForRootExpressions(routerModuleClass);
 
     if (expression) {
       const routeTree = createProjectRouteTree(
