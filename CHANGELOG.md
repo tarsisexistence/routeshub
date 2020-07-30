@@ -1,3 +1,9 @@
+# 4.2.1 2020-07-30
+
+- Fixed vulnerabilities
+- Updated dependencies
+- Updated project info
+
 # 4.2.0 2020-07-02
 
 - Added compatibility with Angular 10

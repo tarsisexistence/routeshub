@@ -1,14 +1,14 @@
 {
   "name": "routeshub",
   "description": "A route management library and pattern for Angular",
-  "version": "4.2.0",
-  "author": "Max Tarsis (https://github.com/maktarsis)",
+  "version": "4.2.1",
+  "author": "Max Tarsis (https://github.com/retarsis)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/maktarsis/routeshub.git"
+    "url": "https://github.com/retarsis/routeshub.git"
   },
-  "homepage": "https://github.com/maktarsis/routeshub#readme",
-  "bugs": "https://github.com/maktarsis/routeshub/issues",
+  "homepage": "https://github.com/retarsis/routeshub#readme",
+  "bugs": "https://github.com/retarsis/routeshub/issues",
   "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
