@@ -23,11 +23,11 @@
     "// - PUBLICATION - //": "------------------------------",
     "move:separate": "move ts3.5 dist/routeshub",
     "copy:separate": "copy tsconfig.json ts3.5",
-    "downlevel:separate": "npx downlevel-dts . ts3.5 && npm run copy:separate && npm run move:separate",
+    "downlevel:separate": "npx downlevel-dts . ts3.5 && yarn copy:separate && yarn move:separate",
     "downlevel": "npx downlevel-dts dist/routeshub dist/routeshub",
-    "publication:prepare": "npm run build && npm run downlevel",
+    "publication:prepare": "yarn build && yarn downlevel",
     "publication:publish": "cd dist/routeshub && npm publish",
-    "publication": "npm run publication:prepare && npm run publication:publish"
+    "publication": "yarn publication:prepare && yarn publication:publish"
   },
   "dependencies": {
     "@angular/animations": "10.0.6",
