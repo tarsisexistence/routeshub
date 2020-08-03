@@ -38,6 +38,16 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
     throw new Error("RouterModule import didn't find");
   }
 
+  const routerModuleSpec = moduleImport.getNamedImports()
+    .filter(imp => imp.getName() === 'RouterModule')?.[0];
+  if (routerModuleSpec) {
+    const id = routerModuleSpec.getNameNode();
+    const def = id.getDefinitionNodes()?.[0];
+    if (Node.isClassDeclaration(def)) {
+      return def;
+    }
+  }
+
   const routeDef = moduleImport.getModuleSpecifierSourceFileOrThrow();
   const routerModule = routeDef.getClass('RouterModule');
   if (!routerModule) {
