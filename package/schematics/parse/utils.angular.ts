@@ -443,10 +443,10 @@ const parseLoadChildrenFunction = (
 
 const evaluateExpression = (
   node: Expression,
-  morhpTypeChecker: TypeChecker
+  morphTypeChecker: TypeChecker
 ): string | null => {
   const compilerNode = node.compilerNode;
-  const typeChecker = morhpTypeChecker.compilerObject;
+  const typeChecker = morphTypeChecker.compilerObject;
   const result = evaluate({
     node: compilerNode,
     typeChecker
