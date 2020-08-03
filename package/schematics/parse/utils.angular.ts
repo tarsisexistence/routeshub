@@ -396,7 +396,7 @@ const readLoadChildren = (
     return null;
   }
   if (Node.isStringLiteral(expression)) {
-    return getOldLoadChildrenSyntaxPath(expression.getText());
+    return getOldLoadChildrenSyntaxPath(expression.getLiteralValue());
   }
 
   if (Node.isArrowFunction(expression)) {
@@ -412,7 +412,7 @@ const readLoadChildren = (
 };
 
 const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
-  const [path, module] = str.split('#')[1];
+  const [path, module] = str.split('#');
   if (typeof path === 'string' && module) {
     return { path, moduleName: module };
   }
