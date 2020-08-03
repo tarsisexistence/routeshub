@@ -9,13 +9,14 @@ import {
   Node,
   ObjectLiteralExpression,
   Project,
-  PropertyAccessExpression,
+  PropertyAccessExpression, SourceFile,
   ts,
   Type,
   TypeChecker
 } from 'ts-morph';
 import { LoadChildren, RouterExpression, RouteTree } from './types';
 import { evaluate } from '@wessberg/ts-evaluator';
+import { resolve, sep  } from 'path';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
@@ -150,7 +151,9 @@ const parseRoute = (
   const routeName = path === '' ? 'root' : path;
   root[routeName] = {};
 
-  const loadChildren = readLoadChildren(route, typeChecker);
+  const sourceFile = route.getSourceFile();
+  const loadChildren =
+    readLoadChildrenWithFullModulePath(route, sourceFile, typeChecker);
   if (loadChildren) {
     const lazyModule = getLazyModuleDelcaration(project, loadChildren);
     const lazyModuleRouteTree = createModuleRouteTree(
@@ -352,7 +355,29 @@ const readChildren = (
   return root;
 };
 
-export const readLoadChildren = (
+export const readLoadChildrenWithFullModulePath = (
+  node: ObjectLiteralExpression,
+  currentSourceFile: SourceFile,
+  typeChecker: TypeChecker
+): LoadChildren | null => {
+  const loadChildren = readLoadChildren(node, typeChecker);
+  if (!loadChildren) {
+    return null;
+  }
+
+  const { path } = loadChildren;
+  if (!path.startsWith(`.${sep}`)) {
+    return loadChildren;
+  }
+
+  const currentFilePath = currentSourceFile.getFilePath();
+  const reducedPath = currentFilePath.split(sep);
+  const currentDir = reducedPath.slice(0, reducedPath.length - 1).join(sep);
+  const fullPathToLazyModule = resolve(currentDir, path);
+  return { ...loadChildren, path: fullPathToLazyModule };
+};
+
+const readLoadChildren = (
   node: ObjectLiteralExpression,
   typeChecker: TypeChecker
 ): LoadChildren | null => {
