@@ -74,6 +74,7 @@
     "tslint-angular": "3.0.2",
     "tslint-config-prettier": "1.18.0",
     "ts-morph": "7.1.1",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "yarn": "1.22.4"
   }
 }
