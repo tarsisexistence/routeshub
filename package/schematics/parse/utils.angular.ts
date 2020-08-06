@@ -9,7 +9,8 @@ import {
   Node,
   ObjectLiteralExpression,
   Project,
-  PropertyAccessExpression, SourceFile,
+  PropertyAccessExpression,
+  SourceFile,
   ts,
   Type,
   TypeChecker
@@ -165,7 +166,7 @@ const parseRoute = (
   const loadChildren =
     readLoadChildrenWithFullModulePath(route, sourceFile, typeChecker);
   if (loadChildren) {
-    const lazyModule = getLazyModuleDelcaration(project, loadChildren);
+    const lazyModule = getLazyModuleDeclaration(project, loadChildren);
     const lazyModuleRouteTree = createModuleRouteTree(
       project,
       lazyModule,
@@ -179,7 +180,7 @@ const parseRoute = (
   return root;
 };
 
-const getLazyModuleDelcaration = (
+const getLazyModuleDeclaration = (
   project: Project,
   loadChildren: LoadChildren
 ): ClassDeclaration => {
