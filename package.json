@@ -47,11 +47,12 @@
     "zone.js": "0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/core": "10.0.5",
-    "@angular-devkit/schematics": "10.0.5",
     "@angular-builders/jest": "10.0.0",
     "@angular-devkit/build-angular": "0.1000.5",
     "@angular-devkit/build-ng-packagr": "0.1000.5",
+    "@angular-devkit/core": "10.0.5",
+    "@angular-devkit/schematics": "10.0.5",
+    "@angular-devkit/schematics-cli": "^0.1000.5",
     "@angular/cli": "10.0.5",
     "@angular/compiler-cli": "10.0.8",
     "@angular/language-service": "10.0.8",
@@ -68,13 +69,13 @@
     "prettier": "2.0.5",
     "protractor": "7.0.0",
     "snyk": "1.369.3",
+    "ts-morph": "7.1.1",
     "ts-node": "8.10.1",
     "tsickle": "0.39.1",
     "tslib": "2.0.0",
     "tslint": "6.1.2",
     "tslint-angular": "3.0.2",
     "tslint-config-prettier": "1.18.0",
-    "ts-morph": "7.1.1",
     "typescript": "3.9.7",
     "yarn": "1.22.4"
   }
