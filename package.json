@@ -9,6 +9,7 @@
     "// - NG - //": "------------------------------",
     "start": "ng serve --port 3000",
     "build": "ng build routeshub --prod",
+    "build:schematics": "yarn build && cd package && yarn build",
     "test": "ng test routeshub",
     "lint": "ng lint routeshub",
     "parse": "schematics ./dist/routeshub/schematics/collection.json:parse -- --project example-app",
