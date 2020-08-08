@@ -5,9 +5,9 @@ import {
   getAppModule,
   getRouteModuleForRootExpressions,
   getRouterModuleClass
-} from './utils.angular';
+} from './parse/utils.angular';
 import { Project } from 'ts-morph';
-import { Options } from './types';
+import { Options } from './parse/types';
 import { resolve } from 'path';
 
 export function parse(options: Options): Rule {
