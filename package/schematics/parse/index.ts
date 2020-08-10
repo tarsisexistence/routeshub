@@ -1,14 +1,13 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
-import {
-  createProjectRouteTree,
-  findAngularJSON,
-  getAppModule,
-  getRouteModuleForRootExpressions,
-  getRouterModuleClass
-} from './parse/utils.angular';
+import { findAngularJSON, getRouterModuleClass } from './parse/utils.angular';
 import { Project } from 'ts-morph';
 import { Options } from './parse/types';
 import { resolve } from 'path';
+import {
+  createProjectRouteTree,
+  getAppModule,
+  getRouteModuleForRootExpressions
+} from './parse/utils';
 
 export function parse(options: Options): Rule {
   return (tree: Tree) => {
