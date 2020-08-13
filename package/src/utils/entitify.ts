@@ -1,10 +1,10 @@
-import { Unit } from '../interfaces/unit.interfaces';
+import { InternalUnit, Unit } from '../interfaces/unit.interfaces';
 import { refreshChildren } from './refresh-children';
 
 /**
  * Detects and handles children routes
  */
-export const entitify = <R, C>(routes: Unit<R, C>): Unit<R, C> =>
+export const entitify = <R, C>(routes: InternalUnit<R, C>): Unit<R, C> =>
   Object.keys(routes).reduce((acc: Unit<R, C>, key: string): Unit<R, C> => {
     const route = routes[key];
 
