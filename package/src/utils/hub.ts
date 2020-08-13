@@ -5,7 +5,7 @@ import {
   unitIdentifier
 } from '../interfaces/common.interfaces';
 import { PRIVATE_NOTES_KEY } from '../constants';
-import { entitify } from './entitify';
+import { flatUnit } from './flatten-units';
 
 /**
  * checks is hub already created
@@ -52,7 +52,7 @@ export function updateHub<R, C>(
   key: privateNotesKey
 ): Units<Unit<R, C>> {
   debugger;
-  const unit: Unit<R> = entitify<R, C>(routes);
+  const unit: Unit<R> = flatUnit<R, C>(routes);
   unit[PRIVATE_NOTES_KEY] = key || name;
 
   return Object.assign({}, getUnitsFromHub(), {
