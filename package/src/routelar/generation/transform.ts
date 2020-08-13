@@ -7,7 +7,7 @@
 
  const route: routes = ['users', 'asd'];
  */
-import { flatRoutes } from './generation.utils';
+import { flatRoutes } from './flatRoutes';
 
 // TODO: don't forget to parse this case engine/:year for engine and nested :year
 export function transform(
