@@ -5,7 +5,7 @@ import {
   unitIdentifier
 } from '../interfaces/common.interfaces';
 import { PRIVATE_NOTES_KEY } from '../constants';
-import { entitify } from './entityfy';
+import { entitify } from './entitify';
 
 /**
  * checks is hub already created
@@ -51,6 +51,7 @@ export function updateHub<R, C>(
   name: string,
   key: privateNotesKey
 ): Units<Unit<R, C>> {
+  debugger;
   const unit: Unit<R> = entitify<R, C>(routes);
   unit[PRIVATE_NOTES_KEY] = key || name;
 

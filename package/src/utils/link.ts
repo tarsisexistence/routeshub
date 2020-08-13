@@ -58,7 +58,6 @@ const handleParamsPath = (path: string, params: Params): string => {
  * Replaces original dynamic path with params
  * Generates dynamic-ready links
  */
-// TODO: think about semantics
 export const insertLinkParams = (paths: string[], params: Params): string[] =>
   paths.map((path: string): string => handleParamsPath(path, params));
 
