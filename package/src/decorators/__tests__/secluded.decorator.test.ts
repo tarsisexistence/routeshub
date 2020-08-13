@@ -6,7 +6,7 @@ import { createFeature, createRoot } from '../../creators';
 import { PRIVATE_NOTES_KEY } from '../../constants';
 import { connectFeatures } from '../../functions/connect-features';
 
-describe('[DECORATOR]: Secluded', () => {
+describe('[decorators]: Secluded', () => {
   describe('when create simple unit', () => {
     const routes: Routes = [{ path: '' }];
     const getResult = identifier => ({
