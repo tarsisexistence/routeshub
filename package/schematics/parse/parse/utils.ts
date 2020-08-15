@@ -220,7 +220,7 @@ const divideRouterExpressionsAndModules = (
 
   for (const module of modules) {
     if (Node.isIdentifier(module)) {
-      const decl = findModuleDeclaration(module);
+      const decl = findClassDeclarationByIdentifier(module);
       if (decl) {
         moduleDeclarations.push(decl);
       }
@@ -241,17 +241,7 @@ const divideRouterExpressionsAndModules = (
   };
 };
 
-const findModuleDeclaration = (id: Identifier): ClassDeclaration => {
-  // todo rewrite for universal method
-  const type = id.getType();
-  const symbol = type.getSymbol();
-  const decls = symbol?.getDeclarations() || [];
-  return decls
-    .filter(decl => Node.isClassDeclaration(decl))
-    .map(node => node as ClassDeclaration)?.[0];
-};
-
-const getModuleDeclarationFromExpression = (
+export const getModuleDeclarationFromExpression = (
   callExpr: CallExpression
 ): ClassDeclaration | null => {
   const expr = callExpr.getExpression();
@@ -260,7 +250,7 @@ const getModuleDeclarationFromExpression = (
     if (name === 'forRoot' || 'forChild') {
       const moduleName = expr.getExpression();
       if (Node.isIdentifier(moduleName)) {
-        return findModuleDeclaration(moduleName);
+        return findClassDeclarationByIdentifier(moduleName);
       }
     }
   }
