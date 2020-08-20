@@ -474,9 +474,7 @@ export const getAppModule = (
 const findClassDeclarationByIdentifier = (
   id: Identifier
 ): ClassDeclaration | null => {
-  const type = id.getType();
-  const symbol = type.getSymbol();
-  const decls = symbol?.getDeclarations() || [];
+  const decls = id.getDefinitionNodes();
   const classDeclarations = decls.filter(node => Node.isClassDeclaration(node));
 
   if (classDeclarations.length) {
