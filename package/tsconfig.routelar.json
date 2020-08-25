@@ -11,7 +11,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "outDir": "../dist/routeshub/schematics",
+    "outDir": "../dist/routeshub",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -19,6 +19,6 @@
     "target": "es6",
     "types": ["node"]
   },
-  "include": ["schematics/**/*", "src/routelar/**/*"],
-  "exclude": ["schematics/*/files/**/*", "./**/*.spec.ts", "./**/*.test.ts"]
+  "include": ["src/routelar/**/*"],
+  "exclude": ["src/routelar/*/files/**/*", "src/routelar/**/*.spec.ts", "src/routelar/**/*.test.ts"]
 }
