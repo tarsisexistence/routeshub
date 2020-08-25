@@ -3,6 +3,8 @@ import { transformPathToState } from '../../utils/path';
 
 const normalizePath = (path: string) => (path[0] === ':' ? 'string' : path);
 
+const isLeaf = (node: any[] | Record<any, any>) => Array.isArray(node);
+
 export function transform(
   routes: any,
   vRoutes: any = {},
@@ -36,20 +38,22 @@ export function transform(
                   }
                 : nextTuple;
           } else {
+            vRoutesNested[separatePath] = vRoutesNested[separatePath] ?? {};
+
             const value = transform(
               flattenRoutes[path],
               vRoutesNested[separatePath],
               nextTuple
             );
-            if (Array.isArray(vRoutesNested[separatePath])) {
-              vRoutesNested.root = vRoutesNested[separatePath];
+            if (isLeaf(vRoutesNested[separatePath])) {
+              vRoutesNested[separatePath].root = vRoutesNested[separatePath];
             }
 
             for (const prop in value) {
-              vRoutesNested[prop] = value[prop];
+              vRoutesNested[separatePath][prop] = value[prop];
             }
           }
-        } else if (Array.isArray(vRoutesNested[separatePath])) {
+        } else if (isLeaf(vRoutesNested[separatePath])) {
           vRoutesNested[separatePath] = {
             root: vRoutesNested[separatePath]
           };
@@ -64,7 +68,7 @@ export function transform(
         path in vRoutes ? { ...vRoutes[path], root: nextTuple } : nextTuple;
     } else {
       const value = transform(flattenRoutes[path], vRoutes[path], nextTuple);
-      vRoutes[path] = Array.isArray(vRoutes[path])
+      vRoutes[path] = isLeaf(vRoutes[path])
         ? { root: vRoutes[path], ...value }
         : value;
     }
