@@ -1,7 +1,7 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
-import { findAngularJSON } from './parse/utils.angular';
+import { findAngularJSON, getProjectAST } from './parse/utils.angular';
 import { Options } from './parse/types';
-import { parseProject } from './parse/parse-project';
+import { parseRoutes } from './parse/parse-routes';
 
 export function parse(options: Options): Rule {
   return (tree: Tree) => {
@@ -11,7 +11,9 @@ export function parse(options: Options): Rule {
     }
 
     const angularJson = findAngularJSON(tree);
-    const routeTree = parseProject(angularJson, project);
+    const workspace = angularJson.projects[project];
+    const projectAST = getProjectAST(workspace, project);
+    const routeTree = parseRoutes(workspace, projectAST);
     console.log(routeTree);
 
     return tree;
