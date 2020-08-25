@@ -3,7 +3,6 @@ import { transformPathToState } from '../../utils/path';
 
 const normalizePath = (path: string) => (path[0] === ':' ? 'string' : path);
 
-// TODO: don't forget to parse this case engine/:year for engine and nested :year
 export function transform(
   routes: any,
   vRoutes: any = {},
@@ -63,7 +62,7 @@ export function transform(
       }
     } else if (isEndRoute) {
       vRoutes[path] =
-        path in vRoutes ? { ...vRoutes, root: nextTuple } : nextTuple;
+        path in vRoutes ? { ...vRoutes[path], root: nextTuple } : nextTuple;
     } else {
       const value = transform(flattenRoutes[path], vRoutes[path], nextTuple);
       vRoutes[path] = Array.isArray(vRoutes[path])
