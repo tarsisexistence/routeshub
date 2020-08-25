@@ -45,7 +45,6 @@ export function transform(
               vRoutesNested.root = vRoutesNested[separatePath];
             }
 
-            // TODO: deep merge
             for (const prop in value) {
               vRoutesNested[prop] = value[prop];
             }
