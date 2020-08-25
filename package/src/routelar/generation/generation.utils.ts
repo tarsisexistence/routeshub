@@ -1,13 +1,16 @@
 export const excludeRoot = (
   routes: Routelar.Generation.TransformRoutes
 ): Omit<Routelar.Generation.TransformRoutes, 'root'> =>
-  Object.keys(routes).reduce((acc, route) => {
-    if (route !== 'root') {
-      acc[route] = routes[route];
-    }
+  Object.keys(routes).reduce(
+    (acc: Omit<Routelar.Generation.TransformRoutes, 'root'>, route) => {
+      if (route !== 'root') {
+        acc[route] = routes[route];
+      }
 
-    return acc;
-  }, {});
+      return acc;
+    },
+    {}
+  );
 
 // TODO: 'string' signature possibly not safe
 export const normalizePath = (path: string): string =>
