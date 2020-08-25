@@ -125,8 +125,8 @@ describe('[generation] transform', () => {
     });
   });
 
-  describe('when deep comparison', () => {
-    test('should transform routes with deepness by asc', () => {
+  describe('when multipaths comparison', () => {
+    test('should transform multipaths by asc', () => {
       expect(
         transform({
           home: {},
@@ -162,7 +162,7 @@ describe('[generation] transform', () => {
       });
     });
 
-    test('should transform routes with deepness by desc', () => {
+    test('should transform multipaths by desc', () => {
       expect(
         transform({
           home: {},
@@ -198,7 +198,7 @@ describe('[generation] transform', () => {
       });
     });
 
-    test('should transform routes with deepness by asc with mixed paths', () => {
+    test('should transform nested multipaths by asc', () => {
       expect(
         transform({
           home: {},
@@ -238,7 +238,7 @@ describe('[generation] transform', () => {
       });
     });
 
-    test('should transform routes with deepness by desc with mixed paths', () => {
+    test('should transform nested multipaths by desc', () => {
       expect(
         transform({
           home: {},
@@ -277,5 +277,155 @@ describe('[generation] transform', () => {
         }
       });
     });
-  })
+  });
+
+  describe('when deep comparison', () => {
+    test('should transform deep routes by asc', () => {
+      expect(
+        transform({
+          home: {},
+          engine: {},
+          'engine/:year': {
+            'car/:type': {}
+          },
+          'engine/:year/car/:type/model/:id': {}
+        })
+      ).toEqual({
+        home: ['/', 'home'],
+        engine: {
+          root: ['/', 'engine'],
+          ':year': {
+            car: {
+              ':type': {
+                root: ['/', 'engine', 'string', 'car', 'string'],
+                model: {
+                  ':id': [
+                    '/',
+                    'engine',
+                    'string',
+                    'car',
+                    'string',
+                    'model',
+                    'string'
+                  ]
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
+    test('should transform deep routes by desc', () => {
+      expect(
+        transform({
+          home: {},
+          'engine/:year/car/:type/model/:id': {},
+          'engine/:year': {
+            'car/:type': {}
+          },
+          engine: {}
+        })
+      ).toEqual({
+        home: ['/', 'home'],
+        engine: {
+          root: ['/', 'engine'],
+          ':year': {
+            car: {
+              ':type': {
+                root: ['/', 'engine', 'string', 'car', 'string'],
+                model: {
+                  ':id': [
+                    '/',
+                    'engine',
+                    'string',
+                    'car',
+                    'string',
+                    'model',
+                    'string'
+                  ]
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
+    test('should transform destructured deep routes by asc', () => {
+      expect(
+        transform({
+          home: {},
+          engine: {},
+          'engine/:year': {
+            car: {
+              ':type': {}
+            }
+          },
+          'engine/:year/car/:type/model/:id': {}
+        })
+      ).toEqual({
+        home: ['/', 'home'],
+        engine: {
+          root: ['/', 'engine'],
+          ':year': {
+            car: {
+              ':type': {
+                root: ['/', 'engine', 'string', 'car', 'string'],
+                model: {
+                  ':id': [
+                    '/',
+                    'engine',
+                    'string',
+                    'car',
+                    'string',
+                    'model',
+                    'string'
+                  ]
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+
+    test('should transform destructured deep routes by desc', () => {
+      expect(
+        transform({
+          home: {},
+          'engine/:year/car/:type/model/:id': {},
+          'engine/:year': {
+            car: {
+              ':type': {}
+            }
+          },
+          engine: {}
+        })
+      ).toEqual({
+        home: ['/', 'home'],
+        engine: {
+          root: ['/', 'engine'],
+          ':year': {
+            car: {
+              ':type': {
+                root: ['/', 'engine', 'string', 'car', 'string'],
+                model: {
+                  ':id': [
+                    '/',
+                    'engine',
+                    'string',
+                    'car',
+                    'string',
+                    'model',
+                    'string'
+                  ]
+                }
+              }
+            }
+          }
+        }
+      });
+    });
+  });
 });
