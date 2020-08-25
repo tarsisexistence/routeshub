@@ -1,13 +1,7 @@
-/** tuples
- type routes =
-  | ['home']
-  | ['users', string, 'profile']
-  | ['location']
-  | ['location', 'map'];
-
- const route: routes = ['users', 'asd'];
- */
 import { flatRoutes } from './flatRoutes';
+import { transformPathToState } from '../../utils/path';
+
+const normalizePath = (path: string) => (path[0] === ':' ? 'string' : path);
 
 // TODO: don't forget to parse this case engine/:year for engine and nested :year
 export function transform(
@@ -18,16 +12,63 @@ export function transform(
   const flattenRoutes = flatRoutes(routes);
 
   Object.keys(flattenRoutes).forEach(path => {
-    const normalizedPath = path[0] === ':' ? 'string' : path;
+    const isEndRoute = Object.keys(flattenRoutes[path]).length === 0;
+    const isMultipath = path.includes('/');
     const nextTuple =
-      path === 'root'
+      path === 'root' || isMultipath
         ? currentTuple.slice()
-        : currentTuple.concat(normalizedPath);
+        : currentTuple.concat(normalizePath(path));
 
-    if (Object.keys(flattenRoutes[path]).length === 0) {
-      vRoutes[path] = nextTuple;
+    if (isMultipath) {
+      const multiPathState = transformPathToState(path, []);
+      let vRoutesNested = vRoutes;
+
+      for (let i = 0; i < multiPathState.length; i += 1) {
+        const separatePath = multiPathState[i];
+        nextTuple.push(normalizePath(separatePath));
+
+        if (i === multiPathState.length - 1) {
+          if (isEndRoute) {
+            vRoutesNested[separatePath] =
+              separatePath in vRoutesNested
+                ? {
+                    ...vRoutesNested[separatePath],
+                    root: nextTuple
+                  }
+                : nextTuple;
+          } else {
+            const value = transform(
+              flattenRoutes[path],
+              vRoutesNested[separatePath],
+              nextTuple
+            );
+            if (Array.isArray(vRoutesNested[separatePath])) {
+              vRoutesNested.root = vRoutesNested[separatePath];
+            }
+
+            // TODO: deep merge
+            for (const prop in value) {
+              vRoutesNested[prop] = value[prop];
+            }
+          }
+        } else if (Array.isArray(vRoutesNested[separatePath])) {
+          vRoutesNested[separatePath] = {
+            root: vRoutesNested[separatePath]
+          };
+          vRoutesNested = vRoutesNested[separatePath];
+        } else {
+          vRoutesNested[separatePath] = vRoutesNested[separatePath] ?? {};
+          vRoutesNested = vRoutesNested[separatePath];
+        }
+      }
+    } else if (isEndRoute) {
+      vRoutes[path] =
+        path in vRoutes ? { ...vRoutes, root: nextTuple } : nextTuple;
     } else {
-      vRoutes[path] = transform(flattenRoutes[path], vRoutes[path], nextTuple);
+      const value = transform(flattenRoutes[path], vRoutes[path], nextTuple);
+      vRoutes[path] = Array.isArray(vRoutes[path])
+        ? { root: vRoutes[path], ...value }
+        : value;
     }
   });
 
@@ -75,4 +116,14 @@ export function transform(
     [$year: string]: ['/', 'engine', string]
   };
 }
+ */
+
+/** tuples
+ type routes =
+ | ['home']
+ | ['users', string, 'profile']
+ | ['location']
+ | ['location', 'map'];
+
+ const route: routes = ['users', 'asd'];
  */
