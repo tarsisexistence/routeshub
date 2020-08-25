@@ -1,11 +1,10 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { findAngularJSON, getProjectAST } from './utils.angular';
-import { Options } from './types';
 import { parseRoutes } from './parse-routes';
 import { transform } from '../generation/transform';
 
-export function parse(options: Options): Rule {
+export function parse(options: Routelar.Parse.Options): Rule {
   return (tree: Tree) => {
     const { project } = options;
     if (!project) {

@@ -1,4 +1,3 @@
-import { RouteTree } from './types';
 import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 import { Project } from 'ts-morph';
 import {
@@ -11,7 +10,7 @@ import { getRouterModuleClass } from './utils.angular';
 export const parseRoutes = (
   workspace: WorkspaceProject,
   project: Project
-): RouteTree => {
+): Routelar.Parse.RouteTree => {
   const pathToMainFile = workspace.architect?.build?.options?.main as string;
   if (!pathToMainFile) {
     throw new Error("Can't find path to main.ts in angular.json");
