@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -14,22 +11,14 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "schematics",
-    "outDir": "../dist/routeshub/schematics",
+    "outDir": "../dist/routeshub",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es6",
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "schematics/**/*"
-  ],
-  "exclude": [
-    "schematics/*/files/**/*",
-    "schematics/tests/**/*"
-  ]
+  "include": ["src/routelar/**/*"],
+  "exclude": ["src/routelar/*/files/**/*", "src/routelar/**/*.spec.ts", "src/routelar/**/*.test.ts"]
 }

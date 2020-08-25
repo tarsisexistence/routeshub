@@ -13,7 +13,6 @@ import {
   Type,
   TypeChecker
 } from 'ts-morph';
-import { LoadChildren, RouterExpression, RouteTree } from './types';
 import { resolve, sep } from 'path';
 import { evaluate } from '@wessberg/ts-evaluator';
 
@@ -73,10 +72,10 @@ const tryFindIdentifierValue = (
 
 export const getRouterModuleCallExpressions: (
   routeModules: Node[],
-  expression: RouterExpression
+  expression: Routelar.Parse.RouterExpression
 ) => CallExpression[] = (
   routeModules: Node[],
-  expression: RouterExpression
+  expression: Routelar.Parse.RouterExpression
 ): CallExpression[] => {
   return routeModules
     .map(ref => ref.getParent() as PropertyAccessExpression)
@@ -96,8 +95,8 @@ export const parseRoutes = (
   routes: ArrayLiteralExpression,
   routerType: Type<ts.Type>,
   project: Project
-): RouteTree => {
-  let root: RouteTree = {};
+): Routelar.Parse.RouteTree => {
+  let root: Routelar.Parse.RouteTree = {};
   const elements = routes.getElements();
 
   for (const el of elements) {
@@ -114,8 +113,8 @@ const parseRoute = (
   route: ObjectLiteralExpression,
   routerType: Type<ts.Type>,
   project: Project
-): RouteTree | null => {
-  let root: RouteTree = {};
+): Routelar.Parse.RouteTree | null => {
+  let root: Routelar.Parse.RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const routeName = path === '' ? 'root' : path;
@@ -144,7 +143,7 @@ const parseRoute = (
 
 const getLazyModuleDeclaration = (
   project: Project,
-  loadChildren: LoadChildren
+  loadChildren: Routelar.Parse.LoadChildren
 ): ClassDeclaration => {
   const { path, moduleName } = loadChildren;
   const pathWithExtension = `${path}.ts`;
@@ -157,8 +156,8 @@ export const createProjectRouteTree = (
   appModule: ClassDeclaration,
   forRootExpr: ArrayLiteralExpression,
   routerType: Type
-): RouteTree => {
-  let root: RouteTree = {};
+): Routelar.Parse.RouteTree => {
+  let root: Routelar.Parse.RouteTree = {};
   const eagersTree = createModuleRouteTree(project, appModule, routerType);
   root = { ...root, ...eagersTree };
 
@@ -170,8 +169,8 @@ const createModuleRouteTree = (
   project: Project,
   module: ClassDeclaration,
   routerType: Type
-): RouteTree => {
-  let root: RouteTree = {};
+): Routelar.Parse.RouteTree => {
+  let root: Routelar.Parse.RouteTree = {};
 
   const eagerForChildExpr = findRouteChildren(routerType, module);
   for (const forChildExpr of eagerForChildExpr) {
@@ -307,8 +306,8 @@ const readChildren = (
   node: ObjectLiteralExpression,
   routerType: Type,
   project: Project
-): RouteTree => {
-  let root: RouteTree = {};
+): Routelar.Parse.RouteTree => {
+  let root: Routelar.Parse.RouteTree = {};
   const expression = getPropertyValue(node, 'children');
   if (expression && Node.isArrayLiteralExpression(expression)) {
     const routes = parseRoutes(expression, routerType, project);
@@ -322,7 +321,7 @@ export const readLoadChildrenWithFullModulePath = (
   node: ObjectLiteralExpression,
   currentSourceFile: SourceFile,
   typeChecker: TypeChecker
-): LoadChildren | null => {
+): Routelar.Parse.LoadChildren | null => {
   const loadChildren = readLoadChildren(node, typeChecker);
   if (!loadChildren) {
     return null;
@@ -343,7 +342,7 @@ export const readLoadChildrenWithFullModulePath = (
 const readLoadChildren = (
   node: ObjectLiteralExpression,
   typeChecker: TypeChecker
-): LoadChildren | null => {
+): Routelar.Parse.LoadChildren | null => {
   const expression = getPropertyValue(node, 'loadChildren');
   if (!expression) {
     return null;
@@ -364,7 +363,9 @@ const readLoadChildren = (
   return path ? getOldLoadChildrenSyntaxPath(path) : null;
 };
 
-const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
+const getOldLoadChildrenSyntaxPath = (
+  str: string
+): Routelar.Parse.LoadChildren | null => {
   const [path, module] = str.split('#');
   if (typeof path === 'string' && module) {
     return { path, moduleName: module };
@@ -375,8 +376,8 @@ const getOldLoadChildrenSyntaxPath = (str: string): LoadChildren | null => {
 
 const parseLoadChildrenFunction = (
   fnNode: CallExpression
-): LoadChildren | null => {
-  const parsedLoadChildren: Partial<LoadChildren> = {};
+): Routelar.Parse.LoadChildren | null => {
+  const parsedLoadChildren: Partial<Routelar.Parse.LoadChildren> = {};
   const accessExpression = fnNode.getExpression();
   if (Node.isPropertyAccessExpression(accessExpression)) {
     const impExpr = accessExpression.getExpression();

@@ -18,12 +18,12 @@
     "tslib": "2.0.0"
   },
   "scripts": {
-    "build-watch": "../node_modules/.bin/tsc -p tsconfig.schematics.json --watch",
-    "build": "../node_modules/.bin/tsc -p tsconfig.schematics.json",
-    "copy:collection": "cp schematics/collection.json ../dist/routeshub/schematics/collection.json",
+    "build-watch": "../node_modules/.bin/tsc -p tsconfig.routelar.json --watch",
+    "build": "../node_modules/.bin/tsc -p tsconfig.routelar.json",
+    "copy:collection": "cp src/routelar/collection.json ../dist/routeshub/routelar/collection.json",
     "postbuild": "npm run copy:collection"
   },
-  "schematics": "./schematics/collection.json",
+  "schematics": "./src/routelar/collection.json",
   "keywords": [
     "angular",
     "angular2",

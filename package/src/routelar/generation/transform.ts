@@ -51,7 +51,9 @@ export function transform(
             }
 
             for (const route in transformedNestedRoutes) {
-              vRoutesNested[separatePath][route] =
+              (vRoutesNested[
+                separatePath
+              ] as Routelar.Generation.VirtualRoutes)[route] =
                 transformedNestedRoutes[route];
             }
           }
@@ -59,10 +61,14 @@ export function transform(
           vRoutesNested[separatePath] = {
             root: vRoutesNested[separatePath]
           } as Routelar.Generation.VirtualRoutes;
-          vRoutesNested = vRoutesNested[separatePath] as Routelar.Generation.VirtualRoutes;
+          vRoutesNested = vRoutesNested[
+            separatePath
+          ] as Routelar.Generation.VirtualRoutes;
         } else {
           vRoutesNested[separatePath] = vRoutesNested[separatePath] ?? {};
-          vRoutesNested = vRoutesNested[separatePath] as Routelar.Generation.VirtualRoutes;
+          vRoutesNested = vRoutesNested[
+            separatePath
+          ] as Routelar.Generation.VirtualRoutes;
         }
       }
     } else if (isEndRoute) {
