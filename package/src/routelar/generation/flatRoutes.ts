@@ -1,6 +1,6 @@
 import { excludeRoot } from './generation.utils';
 
-export function flatRoutes(routes) {
+export function flatRoutes(routes: Routelar.TransformRoutes): Omit<Routelar.TransformRoutes, 'root'> {
   if (routes.root === undefined) {
     return routes;
   }

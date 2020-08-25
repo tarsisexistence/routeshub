@@ -1,15 +1,18 @@
 import { flatRoutes } from './flatRoutes';
 import { transformPathToState } from '../../utils/path';
 
-const normalizePath = (path: string) => (path[0] === ':' ? 'string' : path);
+// TODO: 'string' signature possibly not safe
+const normalizePath = (path: string): string =>
+  path[0] === ':' ? 'string' : path;
 
-const isLeaf = (node: any[] | Record<any, any>) => Array.isArray(node);
+const isLeaf = (node: string[] | Record<any, any>): boolean =>
+  Array.isArray(node);
 
 export function transform(
-  routes: any,
-  vRoutes: any = {},
+  routes: Routelar.TransformRoutes,
+  vRoutes: Routelar.VirtualRoutes = {},
   currentTuple = ['/']
-) {
+): Routelar.VirtualRoutes {
   const flattenRoutes = flatRoutes(routes);
 
   Object.keys(flattenRoutes).forEach(path => {
@@ -40,37 +43,49 @@ export function transform(
           } else {
             vRoutesNested[separatePath] = vRoutesNested[separatePath] ?? {};
 
-            const value = transform(
+            const transformedNestedRoutes = transform(
               flattenRoutes[path],
-              vRoutesNested[separatePath],
+              vRoutesNested[separatePath] as Routelar.VirtualRoutes,
               nextTuple
             );
             if (isLeaf(vRoutesNested[separatePath])) {
-              vRoutesNested[separatePath].root = vRoutesNested[separatePath];
+              (vRoutesNested[
+                separatePath
+              ] as Routelar.VirtualRoutes).root = vRoutesNested[
+                separatePath
+              ] as Routelar.VirtualRoutesLeaf;
             }
 
-            for (const prop in value) {
-              vRoutesNested[separatePath][prop] = value[prop];
+            for (const route in transformedNestedRoutes) {
+              vRoutesNested[separatePath][route] =
+                transformedNestedRoutes[route];
             }
           }
         } else if (isLeaf(vRoutesNested[separatePath])) {
           vRoutesNested[separatePath] = {
             root: vRoutesNested[separatePath]
-          };
-          vRoutesNested = vRoutesNested[separatePath];
+          } as Routelar.VirtualRoutes;
+          vRoutesNested = vRoutesNested[separatePath] as Routelar.VirtualRoutes;
         } else {
           vRoutesNested[separatePath] = vRoutesNested[separatePath] ?? {};
-          vRoutesNested = vRoutesNested[separatePath];
+          vRoutesNested = vRoutesNested[separatePath] as Routelar.VirtualRoutes;
         }
       }
     } else if (isEndRoute) {
       vRoutes[path] =
         path in vRoutes ? { ...vRoutes[path], root: nextTuple } : nextTuple;
     } else {
-      const value = transform(flattenRoutes[path], vRoutes[path], nextTuple);
+      const transformedNestedRoutes = transform(
+        flattenRoutes[path],
+        vRoutes[path] as Routelar.VirtualRoutes,
+        nextTuple
+      );
       vRoutes[path] = isLeaf(vRoutes[path])
-        ? { root: vRoutes[path], ...value }
-        : value;
+        ? ({
+            root: vRoutes[path],
+            ...transformedNestedRoutes
+          } as Routelar.VirtualRoutes)
+        : transformedNestedRoutes;
     }
   });
 
