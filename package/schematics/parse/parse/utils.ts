@@ -462,21 +462,19 @@ export const getAppModule = (
     // todo when module is not class token
     const declaration = findClassDeclarationByIdentifier(module as Identifier);
     if (!declaration) {
-      throw new Error(`Cant't find AppModule!`);
+      throw new Error(`Can't find AppModule!`);
     }
 
     return declaration;
   }
 
-  throw new Error(`Cant't find AppModule!`);
+  throw new Error(`Can't find AppModule!`);
 };
 
 const findClassDeclarationByIdentifier = (
   id: Identifier
 ): ClassDeclaration | null => {
-  const type = id.getType();
-  const symbol = type.getSymbol();
-  const decls = symbol?.getDeclarations() || [];
+  const decls = id.getDefinitionNodes();
   const classDeclarations = decls.filter(node => Node.isClassDeclaration(node));
 
   if (classDeclarations.length) {
