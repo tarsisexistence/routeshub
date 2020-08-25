@@ -1,6 +1,4 @@
-import VirtualRoutes = Routelar.VirtualRoutes;
-
-declare namespace Routelar {
+declare namespace Routelar.Generation {
   type TransformRoutesLeaf = {};
 
   interface TransformRoutes {
@@ -15,5 +13,3 @@ declare namespace Routelar {
     root?: VirtualRoutesLeaf;
   }
 }
-
-declare const x: VirtualRoutes;
