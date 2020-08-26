@@ -12,6 +12,7 @@ export const parseRoutes = (
   project: Project
 ): Routelar.Parse.RouteTree => {
   const pathToMainFile = workspace.architect?.build?.options?.main as string;
+
   if (!pathToMainFile) {
     throw new Error("Can't find path to main.ts in angular.json");
   }
@@ -21,7 +22,6 @@ export const parseRoutes = (
   // todo rewrite this part
   const routerModuleClass = getRouterModuleClass(project);
   const routerType = routerModuleClass.getType();
-
   const expression = getRouteModuleForRootExpressions(routerModuleClass);
 
   if (expression) {

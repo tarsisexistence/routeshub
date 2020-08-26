@@ -51,7 +51,6 @@ export function updateHub<R, C>(
   name: string,
   key: privateNotesKey
 ): Units<Unit<R, C>> {
-  debugger;
   const unit: Unit<R> = flatUnit<R, C>(routes);
   unit[PRIVATE_NOTES_KEY] = key || name;
 

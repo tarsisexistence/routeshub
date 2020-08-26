@@ -1,8 +1,8 @@
 import { Rule, Tree } from '@angular-devkit/schematics';
-import * as ts from 'typescript';
+
 import { findAngularJSON, getProjectAST } from './utils.angular';
 import { parseRoutes } from './parse-routes';
-import { transform } from '../generation/transform';
+import { generate } from '../generation/generate';
 
 export function parse(options: Routelar.Parse.Options): Rule {
   return (tree: Tree) => {
@@ -14,13 +14,10 @@ export function parse(options: Routelar.Parse.Options): Rule {
     const angularJson = findAngularJSON(tree);
     const workspace = angularJson.projects[project];
     const projectAST = getProjectAST(workspace, project);
-
-    const file = projectAST.createSourceFile('file.d.ts');
-    file.compilerNode.statements = ts.createNodeArray([]);
     const parsedRoutes = parseRoutes(workspace, projectAST);
     console.log({ parsedRoutes });
-    const transformedRoutes = transform(parsedRoutes);
-    console.log({ transformedRoutes });
+
+    generate(projectAST, parsedRoutes);
 
     return tree;
   };

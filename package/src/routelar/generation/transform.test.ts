@@ -125,6 +125,38 @@ describe('[generation] transform', () => {
     });
   });
 
+  test('should transform when route has few defined paths, root and dynamic variable', () => {
+    expect(
+      transform({
+        home: {},
+        users: { root: {}, ':id/settings': {}, ':id/profile': {} },
+        admin: { root: {}, collaborators: {}, ':id': {} },
+        pages: { root: {}, 'articles/today': {}, 'articles/:date': {} }
+      })
+    ).toEqual({
+      home: ['/', 'home'],
+      users: {
+        root: ['/', 'users'],
+        ':id': {
+          profile: ['/', 'users', 'string', 'profile'],
+          settings: ['/', 'users', 'string', 'settings']
+        }
+      },
+      admin: {
+        root: ['/', 'admin'],
+        collaborators: ['/', 'admin', 'collaborators'],
+        ':id': ['/', 'admin', 'string']
+      },
+      pages: {
+        root: ['/', 'pages'],
+        articles: {
+          today: ['/', 'pages', 'articles', 'today'],
+          ':date': ['/', 'pages', 'articles', 'string']
+        }
+      }
+    });
+  });
+
   describe('when multipaths comparison', () => {
     test('should transform multipaths by asc', () => {
       expect(
