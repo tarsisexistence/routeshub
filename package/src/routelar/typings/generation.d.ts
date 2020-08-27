@@ -12,4 +12,14 @@ declare namespace Routelar.Generation {
     [route: string]: VirtualRoutes | VirtualRoutesLeaf;
     root?: VirtualRoutesLeaf;
   }
+
+  type RouteVariable = {
+    name: string;
+    value: VirtualRoutesLeaf | VirtualRoutes;
+  };
+
+  interface RoutesWithVariable {
+    variable: Routelar.Generation.RouteVariable;
+    routesWithoutVariable: Routelar.Generation.VirtualRoutes;
+  }
 }

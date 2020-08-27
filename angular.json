@@ -34,9 +34,7 @@
               "package/tsconfig.lib.json",
               "package/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -70,9 +68,7 @@
                 "output": "/assets/"
               }
             ],
-            "styles": [
-              "example-app/styles.scss"
-            ],
+            "styles": ["example-app/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -130,12 +126,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "example-app/tsconfig.app.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["example-app/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
