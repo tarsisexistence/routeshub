@@ -1,4 +1,8 @@
-import { createType, createTypeTree } from './createTypeTree';
+import {
+  createIntersectionType,
+  createType,
+  createTypeTree
+} from './createTypeTree';
 
 describe('[generation] createTypeTree', () => {
   describe('createTypeTree', () => {
@@ -132,6 +136,25 @@ describe('[generation] createTypeTree', () => {
               }
             }
           }
+        })
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('createIntersectionType', () => {
+    test('should match intersection with TypeLiteralNode and Index type', () => {
+      expect(
+        createIntersectionType({
+          info: ['/', 'info'],
+          ':city': ['/', 'string']
+        })
+      ).toMatchSnapshot();
+    });
+
+    test('should match intersection with only index type inside', () => {
+      expect(
+        createIntersectionType({
+          ':city': ['/', 'string']
         })
       ).toMatchSnapshot();
     });

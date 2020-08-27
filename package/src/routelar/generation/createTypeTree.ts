@@ -38,7 +38,7 @@ const createIndexType = (
       : createType(variable.value)
   );
 
-const createIntersectionType = (
+export const createIntersectionType = (
   routes: Routelar.Generation.VirtualRoutes
 ): ts.IntersectionTypeNode => {
   const { variable, routesWithoutVariable } = handleRoutesWithVariable(routes);
