@@ -1,73 +1,61 @@
-import {
-  handleRoutesWithVariable,
-  hasRouteVariable
-} from './createTypeTree.utils';
+import { createTypeTree } from './createTypeTree';
 
 describe('[generation] createTypeTree', () => {
-  describe('hasRouteVariable', () => {
-    test('should return false when empty object', () => {
-      expect(hasRouteVariable({})).toBeFalsy();
+  describe('createTypeTree', () => {
+    test('should match for empty routes', () => {
+      expect(createTypeTree({})).toMatchSnapshot();
     });
 
-    test('should return false when object has not variables', () => {
+    test('should match for example routes', () => {
       expect(
-        hasRouteVariable({
+        createTypeTree({
+          root: ['/'],
+          home: ['/', 'home'],
+          about: ['/', 'about'],
+          car: ['/', 'car'],
+          details: ['/', 'details'],
           info: ['/', 'info'],
-          location: ['/', 'location']
+
+          engine: {
+            ':year': ['/', 'engine', 'string']
+          },
+
+          users: {
+            root: ['/', 'users'],
+            ':id': {
+              root: ['/', 'users', 'string'],
+              profile: ['/', 'users', 'string', 'profile']
+            }
+          }
         })
-      ).toBeFalsy();
+      ).toMatchSnapshot();
     });
 
-    test('should return false when object has not nested variables', () => {
+    test('should match for more difficult example routes', () => {
       expect(
-        hasRouteVariable({
-          root: ['/'],
-          location: { map: ['/', 'location', 'map'] }
+        createTypeTree({
+          home: ['/', 'home'],
+          users: {
+            root: ['/', 'users'],
+            ':id': {
+              profile: ['/', 'users', 'string', 'profile'],
+              settings: ['/', 'users', 'string', 'settings']
+            }
+          },
+          admin: {
+            root: ['/', 'admin'],
+            collaborators: ['/', 'admin', 'collaborators'],
+            ':id': ['/', 'admin', 'string']
+          },
+          pages: {
+            root: ['/', 'pages'],
+            articles: {
+              today: ['/', 'pages', 'articles', 'today'],
+              ':date': ['/', 'pages', 'articles', 'string']
+            }
+          }
         })
-      ).toBeFalsy();
-    });
-
-    test('should return false when object has nested variable', () => {
-      expect(
-        hasRouteVariable({
-          root: ['/'],
-          location: { ':city': ['/', 'location', 'string'] }
-        })
-      ).toBeFalsy();
-    });
-
-    test('should return true when object has variable', () => {
-      expect(
-        hasRouteVariable({
-          root: ['/'],
-          ':city': ['/', 'string']
-        })
-      ).toBeTruthy();
-    });
-  });
-
-  describe('handleRoutesWithVariable', () => {
-    test('should return both routes without variable and variable data', () => {
-      expect(
-        handleRoutesWithVariable({
-          info: ['/', 'info'],
-          ':city': ['/', 'string']
-        })
-      ).toEqual({
-        routesWithoutVariable: { info: ['/', 'info'] },
-        variable: { name: 'city', value: ['/', 'string'] }
-      });
-    });
-
-    test('should have empty routesWithoutVariable', () => {
-      expect(
-        handleRoutesWithVariable({
-          ':city': ['/', 'string']
-        })
-      ).toEqual({
-        routesWithoutVariable: {},
-        variable: { name: 'city', value: ['/', 'string'] }
-      });
+      ).toMatchSnapshot();
     });
   });
 });
