@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MainPageComponent } from './main-page.component';
 import { FirstChildrenComponent } from './first-children.component';
+import { SecondChildrenComponent } from './second-children.component';
 
 @NgModule({
-  declarations: [MainPageComponent, FirstChildrenComponent],
+  declarations: [MainPageComponent, FirstChildrenComponent, SecondChildrenComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -15,6 +16,10 @@ import { FirstChildrenComponent } from './first-children.component';
           {
             path: '',
             component: FirstChildrenComponent
+          },
+          {
+            path: 'second-child',
+            component: SecondChildrenComponent
           }
         ]
       },
