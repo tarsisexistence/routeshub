@@ -1,4 +1,5 @@
 import { Project } from 'ts-morph';
+import * as ts from 'typescript';
 
 import { transform } from './transform';
 import { createRoutesType } from './createType';
@@ -8,15 +9,29 @@ export const generate = (
   parsedRoutes: Routelar.Generation.TransformRoutes
 ): void => {
   const transformedRoutes = transform(parsedRoutes);
-  console.log({ transformedRoutes });
+  console.log({ transformedRoutes, project });
 
-  const file = project.createSourceFile('filename.d.ts');
+  const resultFile = ts.createSourceFile(
+    'variable.ts',
+    '',
+    ts.ScriptTarget.Latest,
+    /*setParentNodes*/ false,
+    ts.ScriptKind.TS
+  );
+  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
 
-  file.compilerNode.statements = createRoutesType(parsedRoutes);
+  const result = printer.printNode(
+    ts.EmitHint.Unspecified,
+    createRoutesType(transformedRoutes),
+    resultFile
+  );
+  console.log(result);
 
-  project.saveSync();
+  const sourceFile = project.createSourceFile('routelar.d.ts', result, {
+    overwrite: true
+  });
 
-  console.log(file.compilerNode.statements);
+  sourceFile.saveSync();
 };
 
 /**

@@ -27,7 +27,7 @@ const handleRoutesWithVariable = (
         acc.objectWithoutVariable[key] = routes[key];
       } else {
         acc.variable = {
-          name: key,
+          name: key.slice(1),
           value: routes[key]
         };
       }
@@ -74,26 +74,31 @@ const hasRouteVariable = (routes: Record<string, any>): boolean =>
   Object.keys(routes).some(route => route[0] === ':');
 
 const createType = (obj: Record<string, any>): any => {
-  const type = [];
+  const type: ts.TypeElement[] = [];
   const keys = Object.keys(obj);
 
   for (const prop of keys) {
     const typeValue = obj[prop];
+    const hasChildVariable = hasRouteVariable(typeValue);
+    let nextValue;
 
     if (Array.isArray(typeValue)) {
-      type.push(
-        ts.createPropertySignature(
-          undefined,
-          ts.createIdentifier(prop),
-          undefined,
-          createTupleType(typeValue),
-          undefined
-        )
-      );
+      nextValue = createTupleType(typeValue);
+    } else if (hasChildVariable) {
+      nextValue = createIntersectionType(typeValue);
     } else {
-      const innerTypeValue = createType(typeValue);
-      type.push(innerTypeValue);
+      nextValue = createType(typeValue);
     }
+
+    type.push(
+      ts.createPropertySignature(
+        undefined,
+        ts.createIdentifier(prop),
+        undefined,
+        nextValue,
+        undefined
+      )
+    );
   }
 
   return ts.createTypeLiteralNode(type);
