@@ -73,7 +73,7 @@ const createIntersectionType = (
 const hasRouteVariable = (routes: Record<string, any>): boolean =>
   Object.keys(routes).some(route => route[0] === ':');
 
-const createType = (obj: Record<string, any>): any => {
+const createType = (obj: Record<string, any>): ts.TypeLiteralNode => {
   const type: ts.TypeElement[] = [];
   const keys = Object.keys(obj);
 
@@ -104,7 +104,9 @@ const createType = (obj: Record<string, any>): any => {
   return ts.createTypeLiteralNode(type);
 };
 
-export const createRoutesType = (obj: any): any =>
+export const createRoutesType = (
+  obj: Record<string, any>
+): ts.TypeAliasDeclaration =>
   ts.createTypeAliasDeclaration(
     undefined,
     [ts.createModifier(ts.SyntaxKind.DeclareKeyword)],

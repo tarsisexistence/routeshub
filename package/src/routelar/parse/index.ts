@@ -7,6 +7,7 @@ import { generate } from '../generation/generate';
 export function parse(options: Routelar.Parse.Options): Rule {
   return (tree: Tree) => {
     const { project } = options;
+
     if (!project) {
       throw new Error('Project name expected');
     }
@@ -15,7 +16,6 @@ export function parse(options: Routelar.Parse.Options): Rule {
     const workspace = angularJson.projects[project];
     const projectAST = getProjectAST(workspace, project);
     const parsedRoutes = parseRoutes(workspace, projectAST);
-    console.log({ parsedRoutes });
 
     generate(projectAST, parsedRoutes);
 

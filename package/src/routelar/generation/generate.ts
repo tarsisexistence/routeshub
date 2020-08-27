@@ -9,29 +9,18 @@ export const generate = (
   parsedRoutes: Routelar.Generation.TransformRoutes
 ): void => {
   const transformedRoutes = transform(parsedRoutes);
-  console.log({ transformedRoutes, project });
-
-  const resultFile = ts.createSourceFile(
-    'variable.ts',
-    '',
-    ts.ScriptTarget.Latest,
-    /*setParentNodes*/ false,
-    ts.ScriptKind.TS
-  );
+  const filename = 'routelar.d.ts';
+  const resultFile = ts.createSourceFile(filename, '', ts.ScriptTarget.Latest);
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
-
   const result = printer.printNode(
     ts.EmitHint.Unspecified,
     createRoutesType(transformedRoutes),
     resultFile
   );
+
   console.log(result);
 
-  const sourceFile = project.createSourceFile('routelar.d.ts', result, {
-    overwrite: true
-  });
-
-  sourceFile.saveSync();
+  project.createSourceFile(filename, result, { overwrite: true }).saveSync();
 };
 
 /**
