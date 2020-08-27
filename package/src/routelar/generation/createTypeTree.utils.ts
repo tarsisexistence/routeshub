@@ -4,22 +4,22 @@ export const hasRouteVariable = (
 
 export const handleRoutesWithVariable = (
   routes: Routelar.Generation.VirtualRoutes
-): Routelar.Generation.VariableRemover =>
+): Routelar.Generation.RoutesWithVariable =>
   Object.keys(routes).reduce(
-    (acc: Routelar.Generation.VariableRemover, key) => {
-      if (key[0] !== ':') {
-        acc.routesWithoutVariable[key] = routes[key];
-      } else {
+    (acc: Routelar.Generation.RoutesWithVariable, key) => {
+      if (key[0] === ':') {
         acc.variable = {
           name: key.slice(1),
           value: routes[key]
         };
+      } else {
+        acc.routesWithoutVariable[key] = routes[key];
       }
 
       return acc;
     },
     {
-      variable: { name: '', value: null },
-      routesWithoutVariable: {}
+      variable: { name: '', value: [] },
+      routesWithoutVariable: {},
     }
   );

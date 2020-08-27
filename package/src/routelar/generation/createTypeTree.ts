@@ -16,34 +16,43 @@ const createTupleType = (
     )
   );
 
+const createIndexType = (
+  variable: Routelar.Generation.RouteVariable
+): ts.IndexSignatureDeclaration =>
+  ts.createIndexSignature(
+    undefined,
+    undefined,
+    [
+      ts.createParameter(
+        undefined,
+        undefined,
+        undefined,
+        ts.createIdentifier(variable.name),
+        undefined,
+        ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+        undefined
+      )
+    ],
+    Array.isArray(variable.value)
+      ? createTupleType(variable.value)
+      : createType(variable.value)
+  );
+
 const createIntersectionType = (
   routes: Routelar.Generation.VirtualRoutes
 ): ts.IntersectionTypeNode => {
   const { variable, routesWithoutVariable } = handleRoutesWithVariable(routes);
+  const onlyVariable = Object.keys(routesWithoutVariable).length === 0;
+  const typeNodes: ts.TypeNode[] = [
+    ts.createTypeLiteralNode([createIndexType(variable)])
+  ];
 
-  return ts.createIntersectionTypeNode([
-    createType(routesWithoutVariable),
-    ts.createTypeLiteralNode([
-      ts.createIndexSignature(
-        undefined,
-        undefined,
-        [
-          ts.createParameter(
-            undefined,
-            undefined,
-            undefined,
-            ts.createIdentifier(variable.name),
-            undefined,
-            ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-            undefined
-          )
-        ],
-        Array.isArray(variable.value)
-          ? createTupleType(variable.value)
-          : createType(variable.value)
-      )
-    ])
-  ]);
+  if (!onlyVariable) {
+    typeNodes.unshift(createType(routesWithoutVariable));
+  }
+
+  // TODO: it works but semantically wrong since if previous condition is false then there is no intersection, only index type
+  return ts.createIntersectionTypeNode(typeNodes);
 };
 
 const createType = (

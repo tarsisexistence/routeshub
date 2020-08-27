@@ -13,9 +13,12 @@ declare namespace Routelar.Generation {
     root?: VirtualRoutesLeaf;
   }
 
-  type RouteVariable = { name: string; value: any };
+  type RouteVariable = {
+    name: string;
+    value: VirtualRoutesLeaf | VirtualRoutes;
+  };
 
-  interface VariableRemover {
+  interface RoutesWithVariable {
     variable: Routelar.Generation.RouteVariable;
     routesWithoutVariable: Routelar.Generation.VirtualRoutes;
   }
