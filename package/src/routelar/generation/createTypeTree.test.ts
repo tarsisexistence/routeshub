@@ -1,9 +1,19 @@
-import { createTypeTree } from './createTypeTree';
+import { createType, createTypeTree } from './createTypeTree';
 
 describe('[generation] createTypeTree', () => {
   describe('createTypeTree', () => {
     test('should match for empty routes', () => {
       expect(createTypeTree({})).toMatchSnapshot();
+    });
+
+    test('should match for routes with intersection in front', () => {
+      // type Routes = { root: ['/'] } & { [city: string]: ['/', string] };
+      expect(
+        createTypeTree({
+          root: ['/'],
+          ':city': ['/', 'string']
+        })
+      ).toMatchSnapshot();
     });
 
     test('should match for example routes', () => {
@@ -52,6 +62,74 @@ describe('[generation] createTypeTree', () => {
             articles: {
               today: ['/', 'pages', 'articles', 'today'],
               ':date': ['/', 'pages', 'articles', 'string']
+            }
+          }
+        })
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('createType', () => {
+    test('should match empty routes', () => {
+      expect(createType({})).toMatchSnapshot();
+    });
+
+    test('should match regular routes', () => {
+      expect(
+        createType({
+          root: ['/'],
+          home: ['/', 'home'],
+          about: ['/', 'about'],
+          car: ['/', 'car'],
+          details: ['/', 'details'],
+          info: ['/', 'info']
+        })
+      ).toMatchSnapshot();
+    });
+
+    test('should match nested regular routes', () => {
+      expect(
+        createType({
+          root: ['/'],
+          home: {
+            place: ['/', 'home', 'place']
+          },
+          about: {
+            story: {
+              company: ['/', 'about', 'story', 'company'],
+              team: ['/', 'about', 'story', 'team']
+            }
+          },
+          location: {
+            map: {
+              city: {
+                street: ['/', 'location', 'map', 'city', 'street']
+              }
+            }
+          }
+        })
+      ).toMatchSnapshot();
+    });
+
+    test('should match routes with children intersection', () => {
+      expect(
+        createType({
+          root: ['/'],
+          home: {
+            ':place': ['/', 'home', 'string']
+          },
+          about: {
+            story: {
+              company: ['/', 'about', 'story', 'company'],
+              team: ['/', 'about', 'story', 'team']
+            }
+          },
+          location: {
+            map: {
+              ':city': {
+                info: ['/', 'location', 'map', 'string', 'info'],
+                ':street': ['/', 'location', 'map', 'string', 'string']
+              }
             }
           }
         })

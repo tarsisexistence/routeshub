@@ -55,7 +55,7 @@ const createIntersectionType = (
   return ts.createIntersectionTypeNode(typeNodes);
 };
 
-const createType = (
+export const createType = (
   routes: Routelar.Generation.VirtualRoutes
 ): ts.TypeLiteralNode => {
   const type: ts.TypeElement[] = [];
