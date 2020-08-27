@@ -2,7 +2,7 @@ import { Project } from 'ts-morph';
 import * as ts from 'typescript';
 
 import { transform } from './transform';
-import { createRoutesType } from './createType';
+import { createTypeTree } from './createTypeTree';
 
 export const generate = (
   project: Project,
@@ -14,7 +14,7 @@ export const generate = (
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   const result = printer.printNode(
     ts.EmitHint.Unspecified,
-    createRoutesType(transformedRoutes),
+    createTypeTree(transformedRoutes),
     resultFile
   );
 
