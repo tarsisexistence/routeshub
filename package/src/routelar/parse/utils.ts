@@ -251,12 +251,26 @@ export const getModuleDeclarationFromExpression = (
       const moduleName = expr.getExpression();
       if (Node.isIdentifier(moduleName)) {
         return findClassDeclarationByIdentifier(moduleName);
+      } else if (Node.isPropertyAccessExpression(moduleName)) {
+        return getClassIdentifierFromPropertyAccessExpression(moduleName);
       }
     }
   }
 
   console.error(`Can't find module name in expression: ${callExpr.getText()}`);
   return null;
+};
+
+const getClassIdentifierFromPropertyAccessExpression =
+  (node: PropertyAccessExpression): ClassDeclaration => {
+  const name = node.getNameNode();
+  if (Node.isIdentifier(name)) {
+    return findClassDeclarationByIdentifier(name);
+  } else {
+    throw new Error(
+      `Can't parse PropertyAccessExpression ${node.getText()}`
+    );
+  }
 };
 
 const getImportsFromModuleDeclaration = (module: ClassDeclaration): Node[] => {
