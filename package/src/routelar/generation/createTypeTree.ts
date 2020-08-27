@@ -16,7 +16,7 @@ const createTupleType = (
     )
   );
 
-const createIndexType = (
+export const createIndexType = (
   variable: Routelar.Generation.RouteVariable
 ): ts.IndexSignatureDeclaration =>
   ts.createIndexSignature(

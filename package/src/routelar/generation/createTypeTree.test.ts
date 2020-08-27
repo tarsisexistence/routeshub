@@ -1,4 +1,5 @@
 import {
+  createIndexType,
   createIntersectionType,
   createType,
   createTypeTree
@@ -155,6 +156,25 @@ describe('[generation] createTypeTree', () => {
       expect(
         createIntersectionType({
           ':city': ['/', 'string']
+        })
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('createIndexType', () => {
+    test('should match indexType of tuple', () => {
+      expect(
+        createIndexType({ name: 'city', value: ['/', 'string'] })
+      ).toMatchSnapshot();
+    });
+
+    test('should match indexType of typeNodes', () => {
+      expect(
+        createIndexType({
+          name: 'city',
+          value: {
+            street: ['/', 'string', 'street']
+          }
         })
       ).toMatchSnapshot();
     });
