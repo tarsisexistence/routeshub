@@ -13,7 +13,7 @@
     "build:all": "yarn build && yarn build:routelar",
     "test": "ng test routeshub",
     "lint": "ng lint routeshub",
-    "parse": "schematics ./dist/routeshub/routelar/collection.json:parse --project example-app",
+    "parse": "schematics ./dist/routeshub/routelar/collection.json:parse --project example-app --printOnly",
     "// - SNYK - //": "------------------------------",
     "snyk:test": "snyk test",
     "snyk:wizard": "snyk wizard",

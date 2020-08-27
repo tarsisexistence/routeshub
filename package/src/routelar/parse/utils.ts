@@ -114,7 +114,7 @@ const parseRoute = (
   routerType: Type<ts.Type>,
   project: Project
 ): Routelar.Parse.RouteTree | null => {
-  let root: Routelar.Parse.RouteTree = {};
+  const root: Routelar.Parse.RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const routeName = path === '' ? 'root' : path;
@@ -126,6 +126,7 @@ const parseRoute = (
     sourceFile,
     typeChecker
   );
+
   if (loadChildren) {
     const lazyModule = getLazyModuleDeclaration(project, loadChildren);
     const lazyModuleRouteTree = createModuleRouteTree(
@@ -133,10 +134,10 @@ const parseRoute = (
       lazyModule,
       routerType
     );
-    root = { ...root, ...lazyModuleRouteTree };
+    root[routeName] = { ...lazyModuleRouteTree };
+  } else {
+    root[routeName] = readChildren(route, routerType, project);
   }
-
-  root[routeName] = readChildren(route, routerType, project);
 
   return root;
 };
