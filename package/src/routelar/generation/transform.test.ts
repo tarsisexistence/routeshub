@@ -73,7 +73,7 @@ describe('[generation] transform', () => {
     });
   });
 
-  test('should transform multipath routes when there is duplicated path', () => {
+  test('should transform multipath routes when there is duplicated semipath', () => {
     expect(
       transform({
         home: {},
