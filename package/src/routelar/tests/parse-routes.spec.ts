@@ -18,7 +18,10 @@ describe('parseProject', () => {
     const expectedRouteMap: Routelar.Parse.RouteTree = {
       root: {
         root: {},
-        'second-child': {}
+        'second-child': {},
+        'third-child-module': {
+          root: {}
+        }
       },
       help: {},
       licenses: {

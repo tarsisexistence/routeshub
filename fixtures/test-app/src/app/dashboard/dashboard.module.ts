@@ -20,6 +20,12 @@ import { SecondChildComponent } from './second-child.component';
           {
             path: 'second-child',
             component: SecondChildComponent
+          },
+          {
+            path: 'third-child-module',
+            loadChildren: () =>
+              import('./third-lazy-child/third-lazy-child.module')
+                .then(m => m.ThirdLazyChildModule)
           }
         ]
       },
