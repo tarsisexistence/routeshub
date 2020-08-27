@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MainPageComponent } from './main-page.component';
-import { FirstChildrenComponent } from './first-children.component';
-import { SecondChildrenComponent } from './second-children.component';
+import { FirstChildComponent } from './first-child.component';
+import { SecondChildComponent } from './second-child.component';
 
 @NgModule({
-  declarations: [MainPageComponent, FirstChildrenComponent, SecondChildrenComponent],
+  declarations: [MainPageComponent, FirstChildComponent, SecondChildComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -15,11 +15,11 @@ import { SecondChildrenComponent } from './second-children.component';
         children: [
           {
             path: '',
-            component: FirstChildrenComponent
+            component: FirstChildComponent
           },
           {
             path: 'second-child',
-            component: SecondChildrenComponent
+            component: SecondChildComponent
           }
         ]
       },

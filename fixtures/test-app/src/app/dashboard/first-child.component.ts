@@ -10,4 +10,4 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class FirstChildrenComponent {}
+export class FirstChildComponent {}

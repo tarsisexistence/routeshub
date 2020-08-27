@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-second-children',
@@ -10,4 +10,4 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class SecondChildrenComponent {}
+export class SecondChildComponent {}
