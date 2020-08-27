@@ -8,39 +8,37 @@ import { resolve } from 'path';
 
 export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   const angularJson = tree.read('angular.json');
+
   if (!angularJson) {
     throw new Error("angular.json doesn't exist");
   }
 
+  // TODO: why toString then parse
   const content = angularJson.toString();
-  return JSON.parse(content) as WorkspaceSchema;
+  return JSON.parse(content);
 };
 
 export const getProjectAST = (
   workspace: WorkspaceProject,
   projectName: string
 ): Project => {
-  const tsConfigs: string | string[] =
+  const tsconfig: undefined | string | string[] =
     workspace.architect?.build?.options?.tsConfig;
-  let configPath: string | undefined;
-  if (Array.isArray(tsConfigs)) {
-    configPath = tsConfigs?.find(
-      conf =>
-        conf.includes('tsconfig.lib') ||
-        conf.includes('tsconfig.json') ||
-        conf.includes('tsconfig.app.json')
-    );
-  } else if (typeof tsConfigs === 'string') {
-    configPath = tsConfigs;
-  } else {
+  const tsconfigPath = Array.isArray(tsconfig)
+    ? tsconfig.find(
+        path => path.includes('tsconfig') && path.slice(-5) === '.json'
+      )
+    : tsconfig;
+
+  if (typeof tsconfigPath !== 'string') {
+    console.log(tsconfigPath)
     throw new Error(
-      `The config is not specified in angular.json for ${projectName} project`
+      `Can't find tsconfig inside angular.json for ${projectName} project. An appropriate config name should include 'tsconfig' and '.json'`
     );
   }
 
-  const absoluteConfigPath = resolve(process.cwd(), configPath as string);
   return new Project({
-    tsConfigFilePath: absoluteConfigPath,
+    tsConfigFilePath: resolve(process.cwd(), tsconfigPath),
     addFilesFromTsConfig: true
   });
 };
@@ -52,7 +50,7 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
     .filter(imp => !!imp)?.[0];
 
   if (!moduleImport) {
-    throw new Error("RouterModule import didn't find");
+    throw new Error("Can't find RouterModule");
   }
 
   const routerModuleSpec = moduleImport
@@ -61,6 +59,7 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
   if (routerModuleSpec) {
     const id = routerModuleSpec.getNameNode();
     const def = id.getDefinitionNodes()?.[0];
+
     if (Node.isClassDeclaration(def)) {
       return def;
     }
@@ -68,6 +67,7 @@ export const getRouterModuleClass = (project: Project): ClassDeclaration => {
 
   const routeDef = moduleImport.getModuleSpecifierSourceFileOrThrow();
   const routerModule = routeDef.getClass('RouterModule');
+
   if (!routerModule) {
     throw new Error(`Can't find RouterModule in ${routeDef.getFilePath()}`);
   }
