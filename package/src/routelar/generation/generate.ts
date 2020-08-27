@@ -1,16 +1,23 @@
-import { Project } from 'ts-morph';
 import * as ts from 'typescript';
+import { Project } from 'ts-morph';
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
 
 import { transform } from './transform';
 import { createTypeTree } from './createTypeTree';
+import { TYPES_FILENAME } from './constants';
 
 export const generate = (
   project: Project,
-  parsedRoutes: Routelar.Generation.TransformRoutes
+  parsedRoutes: Routelar.Generation.TransformRoutes,
+  scaffoldingPath: string
 ): void => {
   const transformedRoutes = transform(parsedRoutes);
-  const filename = 'routelar.d.ts';
-  const resultFile = ts.createSourceFile(filename, '', ts.ScriptTarget.Latest);
+  const resultFile = ts.createSourceFile(
+    TYPES_FILENAME,
+    '',
+    ts.ScriptTarget.Latest
+  );
   const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
   const result = printer.printNode(
     ts.EmitHint.Unspecified,
@@ -20,28 +27,23 @@ export const generate = (
 
   console.log(result);
 
-  project.createSourceFile(filename, result, { overwrite: true }).saveSync();
+  const path = resolve(scaffoldingPath, TYPES_FILENAME);
+  project.createSourceFile(path, result, { overwrite: true }).saveSync();
 };
 
-/**
- {
-    root: ['/'],
-    home: ['/', 'home'],
-    about: ['/', 'about'],
-    car: ['/', 'car'],
-    details: ['/', 'details'],
-    info: ['/', 'info'],
+export const includeRoutesTypeIntoTsconfig = (tsconfigPath: string): void => {
+  const tsconfigFile = readFileSync(tsconfigPath);
+  const tsconfigJson: { include?: string[] } = JSON.parse(
+    tsconfigFile.toString()
+  );
 
-    engine: {
-    ':year': ['/', 'engine', 'string']
-    },
-
-    users: {
-      root: ['/', 'users'],
-        ':id': {
-        root: ['/', 'users', 'string'],
-          profile: ['/', 'users', 'string', 'profile']
-        }
-    }
+  if (tsconfigJson.include === undefined) {
+    tsconfigJson.include = [];
   }
- */
+
+  if (!tsconfigJson.include.includes(TYPES_FILENAME)) {
+    tsconfigJson.include.push(TYPES_FILENAME);
+  }
+
+  writeFileSync(tsconfigPath, JSON.stringify(tsconfigJson, null, 2));
+};

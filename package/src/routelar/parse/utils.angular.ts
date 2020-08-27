@@ -18,10 +18,10 @@ export const findAngularJSON = (tree: Tree): WorkspaceSchema => {
   return JSON.parse(content);
 };
 
-export const getProjectAST = (
+export const getProjectTsconfigPath = (
   workspace: WorkspaceProject,
   projectName: string
-): Project => {
+): string => {
   const tsconfig: undefined | string | string[] =
     workspace.architect?.build?.options?.tsConfig;
   const tsconfigPath = Array.isArray(tsconfig)
@@ -31,17 +31,20 @@ export const getProjectAST = (
     : tsconfig;
 
   if (typeof tsconfigPath !== 'string') {
-    console.log(tsconfigPath)
+    console.log(tsconfigPath);
     throw new Error(
       `Can't find tsconfig inside angular.json for ${projectName} project. An appropriate config name should include 'tsconfig' and '.json'`
     );
   }
 
-  return new Project({
-    tsConfigFilePath: resolve(process.cwd(), tsconfigPath),
-    addFilesFromTsConfig: true
-  });
+  return resolve(process.cwd(), tsconfigPath);
 };
+
+export const getScaffoldingPath = (tsconfigPath: string): string =>
+  resolve(tsconfigPath, '..');
+
+export const getProjectAST = (tsConfigFilePath: string): Project =>
+  new Project({ tsConfigFilePath, addFilesFromTsConfig: true });
 
 export const getRouterModuleClass = (project: Project): ClassDeclaration => {
   const moduleImport = project
