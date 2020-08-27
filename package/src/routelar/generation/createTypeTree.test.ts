@@ -1,6 +1,7 @@
 import {
   createIndexType,
   createIntersectionType,
+  createTupleType,
   createType,
   createTypeTree
 } from './createTypeTree';
@@ -176,6 +177,24 @@ describe('[generation] createTypeTree', () => {
             street: ['/', 'string', 'street']
           }
         })
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('createTupleType', () => {
+    test('should match empty tuple', () => {
+      expect(createTupleType([])).toMatchSnapshot();
+    });
+
+    test('should match regular tuple', () => {
+      expect(
+        createTupleType(['/', 'location', 'map', 'general'])
+      ).toMatchSnapshot();
+    });
+
+    test('should match tuple with string keywords', () => {
+      expect(
+        createTupleType(['/', 'location', 'map', 'string'])
       ).toMatchSnapshot();
     });
   });

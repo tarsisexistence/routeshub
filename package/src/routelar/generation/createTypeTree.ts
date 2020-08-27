@@ -5,7 +5,7 @@ import {
   hasRouteVariable
 } from './createTypeTree.utils';
 
-const createTupleType = (
+export const createTupleType = (
   tuple: Routelar.Generation.VirtualRoutesLeaf
 ): ts.TupleTypeNode =>
   ts.createTupleTypeNode(
