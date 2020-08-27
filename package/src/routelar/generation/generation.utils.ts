@@ -1,3 +1,5 @@
+import { STRING_KEYWORD } from './constants';
+
 export const excludeRoot = (
   routes: Routelar.Generation.TransformRoutes
 ): Omit<Routelar.Generation.TransformRoutes, 'root'> =>
@@ -14,7 +16,7 @@ export const excludeRoot = (
 
 // TODO: 'string' signature possibly not safe
 export const normalizePath = (path: string): string =>
-  path[0] === ':' ? 'string' : path;
+  path[0] === ':' ? STRING_KEYWORD : path;
 
 export const isLeaf = (node: string[] | Record<any, any>): boolean =>
   Array.isArray(node);

@@ -4,13 +4,14 @@ import {
   handleRoutesWithVariable,
   hasRouteVariable
 } from './createTypeTree.utils';
+import { STRING_KEYWORD } from './constants';
 
 export const createTupleType = (
   tuple: Routelar.Generation.VirtualRoutesLeaf
 ): ts.TupleTypeNode =>
   ts.createTupleTypeNode(
     tuple.map(segment =>
-      segment === 'string'
+      segment === STRING_KEYWORD
         ? ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
         : ts.createLiteralTypeNode(ts.createStringLiteral(segment))
     )
