@@ -45,9 +45,9 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "10.0.0",
-    "@angular-devkit/build-angular": "0.1000.4",
-    "@angular-devkit/build-ng-packagr": "0.1000.4",
-    "@angular/cli": "10.0.4",
+    "@angular-devkit/build-angular": "0.1000.8",
+    "@angular-devkit/build-ng-packagr": "0.1000.8",
+    "@angular/cli": "10.0.8",
     "@angular/compiler-cli": "10.0.6",
     "@angular/language-service": "10.0.6",
     "@commitlint/cli": "9.0.1",
