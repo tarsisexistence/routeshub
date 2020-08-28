@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RootComponentComponent } from './root-component.component';
-import { RouterModule } from '@angular/router';
+import { Route, RouterModule } from '@angular/router';
+import { EagerComponent } from './eager.component';
+
+const eagerRoute: Route = { path: 'eager', component: EagerComponent };
 
 @NgModule({
-  declarations: [RootComponentComponent],
+  declarations: [RootComponentComponent, EagerComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: RootComponentComponent }
+      { path: '', component: RootComponentComponent },
+      eagerRoute
     ])
   ]
 })

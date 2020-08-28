@@ -103,7 +103,16 @@ export const parseRoutes = (
     if (Node.isObjectLiteralExpression(el)) {
       const parsedRoute = parseRoute(el, routerType, project);
       root = { ...root, ...parsedRoute };
-    } // todo cases with variables like const routes = [ varRoute1, varRoute2 ]
+    } else if (Node.isIdentifier(el)) {
+      const def = el.getDefinitionNodes()?.[0];
+      if (Node.isVariableDeclaration(def)) {
+        const initializer = def.getInitializer();
+        if (initializer && Node.isObjectLiteralExpression(initializer)) {
+          const parsedRoute = parseRoute(initializer, routerType, project);
+          root = { ...root, ...parsedRoute };
+        }
+      }
+    }
   }
 
   return root;
