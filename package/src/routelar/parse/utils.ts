@@ -262,7 +262,7 @@ export const getModuleDeclarationFromExpression = (
 };
 
 const getClassIdentifierFromPropertyAccessExpression =
-  (node: PropertyAccessExpression): ClassDeclaration => {
+  (node: PropertyAccessExpression): ClassDeclaration | null => {
   const name = node.getNameNode();
   if (Node.isIdentifier(name)) {
     return findClassDeclarationByIdentifier(name);
