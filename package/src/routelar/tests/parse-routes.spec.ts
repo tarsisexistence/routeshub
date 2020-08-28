@@ -20,7 +20,8 @@ describe('parseProject', () => {
         root: {},
         'second-child': {},
         'third-child-module': {
-          root: {}
+          root: {},
+          eager: {}
         }
       },
       help: {},
