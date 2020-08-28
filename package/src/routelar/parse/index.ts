@@ -28,12 +28,11 @@ export function parse(options: Routelar.Parse.Options): Rule {
 
     if (printOnly) {
       console.log(parsedRoutes);
-      return;
+    } else {
+      const scaffoldingPath = getScaffoldingPath(tsconfigPath);
+      generate(projectAST, parsedRoutes, scaffoldingPath);
+      includeRoutesTypeIntoTsconfig(tsconfigPath);
     }
-
-    const scaffoldingPath = getScaffoldingPath(tsconfigPath);
-    generate(projectAST, parsedRoutes, scaffoldingPath);
-    includeRoutesTypeIntoTsconfig(tsconfigPath);
 
     return tree;
   };
