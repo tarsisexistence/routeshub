@@ -107,7 +107,7 @@ export const parseRoutes = (
       const def = el.getDefinitionNodes()?.[0];
       if (Node.isVariableDeclaration(def)) {
         const initializer = def.getInitializer();
-        if (Node.isObjectLiteralExpression(initializer)) {
+        if (initializer && Node.isObjectLiteralExpression(initializer)) {
           const parsedRoute = parseRoute(initializer, routerType, project);
           root = { ...root, ...parsedRoute };
         }
