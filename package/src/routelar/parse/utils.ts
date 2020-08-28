@@ -114,7 +114,7 @@ const parseRoute = (
   routerType: Type<ts.Type>,
   project: Project
 ): Routelar.Parse.RouteTree | null => {
-  let root: Routelar.Parse.RouteTree = {};
+  const root: Routelar.Parse.RouteTree = {};
   const typeChecker = project.getTypeChecker();
   const path = readPath(route, typeChecker);
   const routeName = path === '' ? 'root' : path;
@@ -126,6 +126,7 @@ const parseRoute = (
     sourceFile,
     typeChecker
   );
+
   if (loadChildren) {
     const lazyModule = getLazyModuleDeclaration(project, loadChildren);
     const lazyModuleRouteTree = createModuleRouteTree(
@@ -133,10 +134,10 @@ const parseRoute = (
       lazyModule,
       routerType
     );
-    root = { ...root, ...lazyModuleRouteTree };
+    root[routeName] = { ...lazyModuleRouteTree };
+  } else {
+    root[routeName] = readChildren(route, routerType, project);
   }
-
-  root[routeName] = readChildren(route, routerType, project);
 
   return root;
 };
@@ -250,12 +251,26 @@ export const getModuleDeclarationFromExpression = (
       const moduleName = expr.getExpression();
       if (Node.isIdentifier(moduleName)) {
         return findClassDeclarationByIdentifier(moduleName);
+      } else if (Node.isPropertyAccessExpression(moduleName)) {
+        return getClassIdentifierFromPropertyAccessExpression(moduleName);
       }
     }
   }
 
   console.error(`Can't find module name in expression: ${callExpr.getText()}`);
   return null;
+};
+
+const getClassIdentifierFromPropertyAccessExpression =
+  (node: PropertyAccessExpression): ClassDeclaration => {
+  const name = node.getNameNode();
+  if (Node.isIdentifier(name)) {
+    return findClassDeclarationByIdentifier(name);
+  } else {
+    throw new Error(
+      `Can't parse PropertyAccessExpression ${node.getText()}`
+    );
+  }
 };
 
 const getImportsFromModuleDeclaration = (module: ClassDeclaration): Node[] => {
