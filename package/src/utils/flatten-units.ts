@@ -4,8 +4,8 @@ import { InternalSpot } from '../interfaces';
 /**
  * refreshes children parent target
  * since we do not want to have ''/'' path
- * so, it retrieves children and replaces instead of parent
- * and one of the children sibling unit (next by id) becomes "parent" parent-sibling unit
+ * so, it retrieves children and replaces instead of parent one of the children
+ * sibling unit (next by id) becomes "parent" parent-sibling unit
  */
 export function flatChildrenUnit<R, C>(
   parentSpot: InternalSpot<C> & { children: InternalUnit<C> }
