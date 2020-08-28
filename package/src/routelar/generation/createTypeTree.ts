@@ -52,7 +52,10 @@ export const createIntersectionType = (
     typeNodes.unshift(createType(routesWithoutVariable));
   }
 
-  // TODO: it works but semantically wrong since if previous condition is false then there is no intersection, only index type
+  /**
+   * TODO: it works but semantically wrong since if previous condition is false
+   * then there is no intersection, only index type
+   */
   return ts.createIntersectionTypeNode(typeNodes);
 };
 

@@ -50,12 +50,12 @@ export function transform(
               ] as Routelar.Generation.VirtualRoutesLeaf;
             }
 
-            for (const route in transformedNestedRoutes) {
+            Object.keys(transformedNestedRoutes).forEach(route => {
               (vRoutesNested[
                 separatePath
               ] as Routelar.Generation.VirtualRoutes)[route] =
                 transformedNestedRoutes[route];
-            }
+            });
           }
         } else if (isLeaf(vRoutesNested[separatePath])) {
           vRoutesNested[separatePath] = {
@@ -91,56 +91,3 @@ export function transform(
 
   return vRoutes;
 }
-
-/**desired v1
- interface Routes {
-  root: ['/'];
-  home: ['/', 'home'];
-  about: ['/', 'about'];
-  car: ['/', 'car'];
-  details: ['/', 'details'];
-  info: ['/', 'info'];
-
-  users: { root: ['/', 'users'] } & {
-    [$id: string]: {
-      profile: ['/', string, 'profile'];
-    };
-  };
-
-  engine: {
-    [$year: string]: ['/', 'engine', string]
-  };
-}
- */
-
-/**desired v2
- interface Routes {
-  root: ['/'];
-  home: ['/', 'home'];
-  about: ['/', 'about'];
-  car: ['/', 'car'];
-  details: ['/', 'details'];
-  info: ['/', 'info'];
-
-  users: { root: ['/', 'users'] } & {
-    [$id: string]: {
-      root: ['/', string];
-      profile: ['/', string, 'profile'];
-    };
-  };
-
-  engine: { root: ['/', 'engine'] } & {
-    [$year: string]: ['/', 'engine', string]
-  };
-}
- */
-
-/** tuples
- type routes =
- | ['home']
- | ['users', string, 'profile']
- | ['location']
- | ['location', 'map'];
-
- const route: routes = ['users', 'asd'];
- */

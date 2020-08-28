@@ -9,7 +9,7 @@ export const transformPathToState = (
 ): string[] => {
   const paths = path
     .split('/')
-    .filter((path: string) => path.length > 0 && path !== '/');
+    .filter((segment: string) => segment.length > 0 && segment !== '/');
   return state.concat(paths);
 };
 

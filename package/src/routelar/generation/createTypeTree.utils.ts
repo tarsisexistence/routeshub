@@ -20,6 +20,6 @@ export const handleRoutesWithVariable = (
     },
     {
       variable: { name: '', value: [] },
-      routesWithoutVariable: {},
+      routesWithoutVariable: {}
     }
   );
