@@ -223,6 +223,7 @@ export const findRouteChildren = (
   return routerModules;
 };
 
+// todo need refactoring
 const divideRouterExpressionsAndModules = (
   modules: Node[],
   routerType: Type
