@@ -1,4 +1,4 @@
-export const proxy: any = new Proxy([], {
+export const proxy: any = new Proxy(['/'], {
   get(target, path): any {
     if (path === Symbol.iterator) {
       return Array.prototype[Symbol.iterator].bind(target);
