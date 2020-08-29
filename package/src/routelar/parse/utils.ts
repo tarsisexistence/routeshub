@@ -100,18 +100,22 @@ export const parseRoutes = (
   const elements = routes.getElements();
 
   for (const el of elements) {
+    let parsedRoute: Routelar.Parse.RouteTree | null = null;
+
     if (Node.isObjectLiteralExpression(el)) {
-      const parsedRoute = parseRoute(el, routerType, project);
-      root = { ...root, ...parsedRoute };
+      parsedRoute = parseRoute(el, routerType, project);
     } else if (Node.isIdentifier(el)) {
       const def = el.getDefinitionNodes()?.[0];
       if (Node.isVariableDeclaration(def)) {
         const initializer = def.getInitializer();
         if (initializer && Node.isObjectLiteralExpression(initializer)) {
-          const parsedRoute = parseRoute(initializer, routerType, project);
-          root = { ...root, ...parsedRoute };
+          parsedRoute = parseRoute(initializer, routerType, project);
         }
       }
+    }
+
+    if (parsedRoute) {
+      root = { ...root, ...parsedRoute };
     }
   }
 
