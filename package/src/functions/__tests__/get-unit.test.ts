@@ -4,7 +4,7 @@ import { connectFeatures } from '../connect-features';
 import { getRegisteredUnits, getUnit } from '../get-unit';
 import { createFeature, createRoot } from '../../creators';
 
-describe('[Getters]: Unit', () => {
+describe('[get-unit] Unit', () => {
   const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
   const mapRoutes: Routes = [{ path: '' }];
 
