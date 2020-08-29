@@ -29,7 +29,11 @@ describe('parseProject', () => {
         root: {}
       },
       'redirect-to-root': {},
-      admin: {}
+      admin: {
+        root: {
+          root: {}
+        }
+      }
     };
 
     const project = new Project({

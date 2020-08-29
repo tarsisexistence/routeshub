@@ -232,9 +232,17 @@ const divideRouterExpressionsAndModules = (
 
   for (const module of modules) {
     if (Node.isIdentifier(module)) {
-      const decl = findClassDeclarationByIdentifier(module);
-      if (decl) {
+      const decl = findModuleDeclarationOrExpressionByIdentifier(module);
+      if (decl && Node.isClassDeclaration(decl)) {
         moduleDeclarations.push(decl);
+      } else if (decl && Node.isCallExpression(decl)) {
+        const expr = getModuleDeclarationFromExpression(decl);
+        if (expr) {
+          const declType = expr.getType();
+          declType === routerType
+            ? routerExpressions.push(decl)
+            : moduleDeclarations.push(expr);
+        }
       }
     } else if (Node.isCallExpression(module)) {
       const decl = getModuleDeclarationFromExpression(module);
@@ -253,6 +261,9 @@ const divideRouterExpressionsAndModules = (
   };
 };
 
+/*
+* return class from Module.forRoot/Module.forChild expressions
+*/
 export const getModuleDeclarationFromExpression = (
   callExpr: CallExpression
 ): ClassDeclaration | null => {
@@ -496,6 +507,30 @@ export const getAppModule = (
 
   throw new Error(`Can't find AppModule!`);
 };
+
+/*
+* return module declaration(class declarations) by id
+* example:
+* imports: [BrowserModule] => export class BrowserModule
+* or return module expression
+* example:
+* imports [ module ] => const module = ModuleName.forRoot/ModuleName.forChild
+*/
+const findModuleDeclarationOrExpressionByIdentifier = (
+  id: Identifier
+): ClassDeclaration | CallExpression | null => {
+  // todo decide what to do if there are more then one declaration
+  const decl = id.getDefinitionNodes()?.[0];
+  if (decl) {
+    if (Node.isClassDeclaration(decl)) {
+      return decl;
+    } else if (Node.isVariableDeclaration(decl)) {
+      return decl.getInitializer() as CallExpression;
+    }
+  }
+
+  return null;
+}
 
 const findClassDeclarationByIdentifier = (
   id: Identifier
