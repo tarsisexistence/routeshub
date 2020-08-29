@@ -27,7 +27,8 @@ describe('parseProject', () => {
       help: {},
       licenses: {
         root: {}
-      }
+      },
+      'redirect-to-root': {}
     };
 
     const project = new Project({
