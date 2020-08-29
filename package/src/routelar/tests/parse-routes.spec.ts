@@ -28,7 +28,8 @@ describe('parseProject', () => {
       licenses: {
         root: {}
       },
-      'redirect-to-root': {}
+      'redirect-to-root': {},
+      admin: {}
     };
 
     const project = new Project({
