@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-first-child',
@@ -8,4 +8,4 @@ import { Component, OnInit } from '@angular/core';
     </p>
   `
 })
-export class FirstChildComponent implements OnInit {}
+export class FirstChildComponent {}
