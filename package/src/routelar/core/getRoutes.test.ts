@@ -1,10 +1,10 @@
 // tslint:disable:max-line-length
-import { getRoutes } from './getRoutes';
+import { getRoute, getRoutes } from './getRoutes';
 
 const routes = getRoutes<any>();
 
 describe('core', () => {
-  describe('proxy', () => {
+  describe('getRoutes', () => {
     describe('for output', () => {
       test('should return default path', () => {
         expect(Array.from(routes)).toEqual(['/']);
@@ -66,6 +66,28 @@ describe('core', () => {
       test('should return nested prop of not Array.prototype.map result of array', () => {
         expect(Array.isArray(routes.map.someProp)).toBeTruthy();
       });
+    });
+  });
+
+  describe('getRoute', () => {
+    test('should return array from array', () => {
+      expect(getRoute(['/', 'a', 'b'])).toEqual(['/', 'a', 'b']);
+    });
+
+    test('should return array from empty getRoutes', () => {
+      expect(getRoute(getRoutes())).toEqual(['/']);
+    });
+
+    test('should return array from getRoutes', () => {
+      expect(getRoute(getRoutes<any>().a.b)).toEqual(['/', 'a', 'b']);
+    });
+
+    test('should return array from getRoutes with possible Array.prototype.map', () => {
+      expect(getRoute(getRoutes<any>().map.slice)).toEqual([
+        '/',
+        'map',
+        'slice'
+      ]);
     });
   });
 });
