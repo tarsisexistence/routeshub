@@ -199,8 +199,7 @@ const createModuleRouteTree = (
 };
 
 /**
- * Get Module Declaration, parse imports, find route modules
- * and parse them
+ * Get Module Declaration, parse imports, find route modules and parse them
  */
 export const findRouteChildren = (
   routerType: Type,
@@ -274,15 +273,14 @@ export const getModuleDeclarationFromExpression = (
   return null;
 };
 
-const getClassIdentifierFromPropertyAccessExpression =
-  (node: PropertyAccessExpression): ClassDeclaration | null => {
+const getClassIdentifierFromPropertyAccessExpression = (
+  node: PropertyAccessExpression
+): ClassDeclaration | null => {
   const name = node.getNameNode();
   if (Node.isIdentifier(name)) {
     return findClassDeclarationByIdentifier(name);
   } else {
-    throw new Error(
-      `Can't parse PropertyAccessExpression ${node.getText()}`
-    );
+    throw new Error(`Can't parse PropertyAccessExpression ${node.getText()}`);
   }
 };
 
@@ -385,7 +383,6 @@ const readLoadChildren = (
       return parseLoadChildrenFunction(body);
     }
   }
-
   // loadChildren: 'foo' + '/' + 'bar'
   const path = evaluateExpression(node, typeChecker);
   return path ? getOldLoadChildrenSyntaxPath(path) : null;

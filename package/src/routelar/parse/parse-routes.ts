@@ -1,5 +1,6 @@
 import { WorkspaceProject } from '@angular-devkit/core/src/experimental/workspace';
 import { Project } from 'ts-morph';
+
 import {
   createProjectRouteTree,
   getAppModule,
