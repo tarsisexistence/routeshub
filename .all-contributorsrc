@@ -16,10 +16,11 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/21989873?v=4",
       "profile": "https://github.com/retarsis",
       "contributions": [
+        "ideas",
         "code",
-        "projectManagement",
+        "infra",
         "doc",
-        "ideas"
+        "projectManagement"
       ]
     },
     {
@@ -28,9 +29,18 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/6364586?v=4",
       "profile": "https://medium.com/@LayZeeDK",
       "contributions": [
+        "infra",
+        "ideas"
+      ]
+    },
+    {
+      "login": "limitofzero",
+      "name": "Denis Makarov",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/16196664?v=4",
+      "profile": "https://github.com/limitofzero",
+      "contributions": [
         "code",
-        "ideas",
-        "tool"
+        "ideas"
       ]
     }
   ],

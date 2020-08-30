@@ -385,14 +385,18 @@ If you made a PR, make sure to update tests as appropriate and keep the examples
 Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/retarsis"><img src="https://avatars1.githubusercontent.com/u/21989873?v=4" width="100px;" alt="Max Tarsis"/><br /><sub><b>Max Tarsis</b></sub></a><br /><a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Code">💻</a> <a href="#projectManagement-retarsis" title="Project Management">📆</a> <a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Documentation">📖</a> <a href="#ideas-retarsis" title="Ideas, Planning, & Feedback">🤔</a></td>
-    <td align="center"><a href="https://medium.com/@LayZeeDK"><img src="https://avatars1.githubusercontent.com/u/6364586?v=4" width="100px;" alt="Lars Gyrup Brink Nielsen"/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="https://github.com/retarsis/routeshub/commits?author=LayZeeDK" title="Code">💻</a> <a href="#ideas-LayZeeDK" title="Ideas, Planning, & Feedback">🤔</a> <a href="#tool-LayZeeDK" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://github.com/retarsis"><img src="https://avatars1.githubusercontent.com/u/21989873?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Max Tarsis</b></sub></a><br /><a href="#ideas-retarsis" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Code">💻</a> <a href="#infra-retarsis" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/retarsis/routeshub/commits?author=retarsis" title="Documentation">📖</a> <a href="#projectManagement-retarsis" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://medium.com/@LayZeeDK"><img src="https://avatars1.githubusercontent.com/u/6364586?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lars Gyrup Brink Nielsen</b></sub></a><br /><a href="#infra-LayZeeDK" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-LayZeeDK" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/limitofzero"><img src="https://avatars1.githubusercontent.com/u/16196664?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Makarov</b></sub></a><br /><a href="https://github.com/retarsis/routeshub/commits?author=limitofzero" title="Code">💻</a> <a href="#ideas-limitofzero" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
