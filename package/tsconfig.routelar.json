@@ -20,5 +20,5 @@
     "types": ["node"]
   },
   "include": ["src/routelar/**/*"],
-  "exclude": ["src/routelar/*/files/**/*", "src/routelar/**/*.spec.ts", "src/routelar/**/*.test.ts"]
+  "exclude": ["src/routelar/**/*.spec.ts", "src/routelar/**/*.test.ts"]
 }
