@@ -18,8 +18,8 @@
     "tslib": "2.0.0"
   },
   "scripts": {
-    "build-watch": "../node_modules/.bin/tsc -p tsconfig.routelar.json --watch",
-    "build": "../node_modules/.bin/tsc -p tsconfig.routelar.json",
+    "build-watch": "../node_modules/.bin/tsc -p tsconfig.schematics.json --watch",
+    "build": "../node_modules/.bin/tsc -p tsconfig.schematics.json",
     "copy:collection": "cp src/routelar/collection.json ../dist/routeshub/routelar/collection.json",
     "postbuild": "npm run copy:collection"
   },
