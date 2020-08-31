@@ -1,3 +1,10 @@
+# 4.2.2 2020-08-31
+
+- Refactored internal utilities
+- Increased test coverage
+- Fixed vulnerabilities
+- Updated dependencies
+
 # 4.2.1 2020-07-30
 
 - Fixed vulnerabilities
