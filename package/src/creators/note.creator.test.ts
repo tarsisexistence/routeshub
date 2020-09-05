@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { createNote } from '../note.creator';
+import { createNote } from './note.creator';
 
 // tslint:disable:max-line-length
 describe('createNote', () => {

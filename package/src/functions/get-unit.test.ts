@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { PRIVATE_NOTES_KEY } from '../../constants';
-import { connectFeatures } from '../connect-features';
-import { getRegisteredUnits, getUnit } from '../get-unit';
-import { createFeature, createRoot } from '../../creators';
+import { PRIVATE_NOTES_KEY } from '../constants';
+import { connectFeatures } from './connect-features';
+import { getRegisteredUnits, getUnit } from './get-unit';
+import { createFeature, createRoot } from '../creators';
 
 describe('[get-unit] Unit', () => {
   const appRoutes: Routes = [{ path: '' }, { path: '**' }, { path: 'map' }];
