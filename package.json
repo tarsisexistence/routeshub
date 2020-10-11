@@ -55,7 +55,7 @@
     "@types/jest": "26.0.13",
     "@types/node": "14.6.4",
     "@routerkit/core": "0.1.2",
-    "all-contributors-cli": "6.17.2",
+    "all-contributors-cli": "6.19.0",
     "codelyzer": "5.2.2",
     "husky": "4.2.5",
     "jest": "26.4.2",
