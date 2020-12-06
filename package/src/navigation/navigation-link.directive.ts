@@ -30,13 +30,7 @@ export class NavigationLink {
     this.link = getRouteLink(value);
   }
 
-  @Input()
-  set preserveQueryParams(value: boolean) {
-    this.preserve = value;
-  }
-
   public link: string[];
-  private preserve!: boolean;
 
   constructor(
     private router: Router,

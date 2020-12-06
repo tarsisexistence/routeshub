@@ -8,7 +8,6 @@ import { privateNotesKey } from '../interfaces/common.interfaces';
  * decorator which provides possibility
  * to get units inside component
  */
-// tslint:disable:variable-name
 export function Secluded<T = any>(
   arg: privateNotesKey
 ): (target: any, propertyKey: PropertyKey) => void {

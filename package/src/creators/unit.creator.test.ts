@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { createNote } from '../note.creator';
-import { createUnit } from '../unit.creator';
-import { Spot } from '../../interfaces/common.interfaces';
+import { createNote } from './note.creator';
+import { createUnit } from './unit.creator';
+import { Spot } from '../interfaces/common.interfaces';
 
 describe('createUnit', () => {
   it('should create basic without parent', () => {

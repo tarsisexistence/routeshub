@@ -1,3 +1,9 @@
+# 4.3.0 2020-12-06
+
+- Support Angular 11
+- Deprecated preserveQueryParams
+- Updated dependencies
+
 # 4.2.2 2020-08-31
 
 - Refactored internal utilities

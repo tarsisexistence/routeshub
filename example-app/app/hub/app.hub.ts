@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -64,8 +63,9 @@ export const routing: ModuleWithProviders<AppHub> = RouterModule.forRoot(
     enableTracing: false,
     initialNavigation: 'enabled',
     onSameUrlNavigation: 'reload',
-    scrollPositionRestoration: 'top'
-  }
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy'
+}
 );
 
 /**

@@ -1,9 +1,8 @@
-// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
-import { getRegisteredUnits } from '../get-unit';
-import { createFeature, createRoot } from '../../creators';
-import { connectFeatures } from '../connect-features';
-import { PRIVATE_NOTES_KEY } from '../../constants';
+import { getRegisteredUnits } from './get-unit';
+import { createFeature, createRoot } from '../creators';
+import { connectFeatures } from './connect-features';
+import { PRIVATE_NOTES_KEY } from '../constants';
 
 describe('connectNearby', () => {
   it('should contain root and nearby feature', () => {
