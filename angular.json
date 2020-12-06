@@ -134,7 +134,7 @@
     }
   },
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "yarn"
   },
   "defaultProject": "routeshub"
 }
