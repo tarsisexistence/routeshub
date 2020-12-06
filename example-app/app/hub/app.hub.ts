@@ -64,8 +64,9 @@ export const routing: ModuleWithProviders<AppHub> = RouterModule.forRoot(
     enableTracing: false,
     initialNavigation: 'enabled',
     onSameUrlNavigation: 'reload',
-    scrollPositionRestoration: 'top'
-  }
+    scrollPositionRestoration: 'top',
+    relativeLinkResolution: 'legacy'
+}
 );
 
 /**
