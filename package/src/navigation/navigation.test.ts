@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';

@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { createNote } from './note.creator';
 
-// tslint:disable:max-line-length
 describe('createNote', () => {
   it('should create note with root and wildcard', () => {
     const routes: Routes = [{ path: '' }, { path: '**' }];

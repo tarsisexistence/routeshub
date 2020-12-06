@@ -1,5 +1,3 @@
-// tslint:disable:max-classes-per-file
-// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { Secluded } from './secluded.decorator';
 import { createFeature, createRoot } from '../creators';

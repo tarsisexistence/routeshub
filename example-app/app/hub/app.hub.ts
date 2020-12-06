@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 

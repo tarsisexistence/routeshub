@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { createRoot } from './root.creator';
 import { createFeature } from './feature.creator';

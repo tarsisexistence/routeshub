@@ -26,16 +26,6 @@
           "options": {
             "configPath": "./configs/jest.config.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "package/tsconfig.lib.json",
-              "package/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -121,13 +111,6 @@
         "test": {
           "builder": "@angular-builders/jest:run",
           "options": {}
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["example-app/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     }

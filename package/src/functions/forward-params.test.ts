@@ -1,4 +1,3 @@
-// tslint:disable:max-line-length
 import { Routes } from '@angular/router';
 import { forwardParams } from './forward-params';
 import { createRoot } from '../creators/root.creator';
