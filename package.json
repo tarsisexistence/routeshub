@@ -8,7 +8,7 @@
   "scripts": {
     "// - NG - //": "------------------------------",
     "start": "ng serve --port 3000",
-    "build": "ng build routeshub --prod",
+    "build": "ng build routeshub --configuration production",
     "test": "ng test routeshub",
     "// - SNYK - //": "------------------------------",
     "snyk:test": "snyk test",
