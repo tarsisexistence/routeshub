@@ -1,3 +1,8 @@
+# 4.4.0 2020-12-06
+
+- Support Angular 12
+- Support RxJS v7
+
 # 4.3.0 2020-12-06
 
 - Support Angular 11
