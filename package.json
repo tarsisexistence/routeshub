@@ -51,7 +51,7 @@
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@types/jest": "26.0.23",
-    "@types/node": "15.12.1",
+    "@types/node": "16.11.60",
     "@routerkit/core": "0.9.2",
     "all-contributors-cli": "6.20.0",
     "codelyzer": "6.0.2",
